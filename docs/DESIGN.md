@@ -245,7 +245,7 @@ Accepted by the owner after the M0 handoff.
 ### Carry-forward notes (bind M3/M4)
 
 - **N1** Oracle adapter uses calendar-aware freshness: the 0.5 % deviation is an irreducible price-error allowance; add an age-based haircut; distinguish scheduled (calendar) from unscheduled (outage) blindness.
-- **N2** Post-window observations are censored by the deviation/heartbeat rule; `recordPostWindow` must handle a late first update and record the lag; M2 quantifies it.
+- **N2** Post-window observations are censored by the deviation/heartbeat rule; `recordPostWindow` must handle a late first update and record the lag; M2 quantifies it. *M1 evidence (docs/CALENDAR_NOTES.md section 11): in 14 observed windows x 6 feeds the first update arrived 18-85 s after the window end, so censoring was not observed; it remains possible on a quiet open and must still be handled.*
 - **N3** No sequencer-uptime feed on Robinhood Chain: optional config; downtime = unscheduled blindness. Arbitrum One keeps the Chainlink feed.
 - **N4** Only the 32 feed-backed tokens are eligible collateral.
 - **N5** The flat-LLTV control uses the **real** in-the-wild parameters: Morpho on Robinhood (38.5 %, 62.5 %, 77 %, 86 % LLTV) and Aave's reported 65-79 % collateral factor with 5.5 % max bonus (**secondary-source**, label as such).

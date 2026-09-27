@@ -85,3 +85,80 @@ Library (all `internal`, NatSpec'd): `isTradingDay`, `tradingDayOpen`, `tradingD
 1. `research/calendar_oracle.py` (exchange_calendars XNYS + zoneinfo) -> `contracts/test/fixtures/calendar_cases.json`: every window 2024-2035 (start/end/class/id), trading-day opens/closes, DST transitions +/- 1 s, holidays, early closes, 20,000 random timestamps (isBlind, windowId, class, session). Foundry asserts equality on all.
 2. `research/observed_rounds.py` -> `contracts/test/fixtures/observed_feed_updates.json` (full proxy round history, all phases, `getRoundData`, 4 feeds on chain 4663); test: no update strictly inside a predicted window; report: lag from window end to first update; violations are findings.
 3. Named tests, property/fuzz tests, coverage >= 100 % line / > 95 % branch, gas per function.
+
+---
+
+# Findings (written after verification, 2026-10-02)
+
+## 10. Differential result (contract vs independent oracle)
+
+Oracle: `exchange_calendars` 4.13.2 (XNYS) + `zoneinfo`; window model derived from the oracle's *session list*, not from the Solidity algorithm.
+
+| Check | Cases | Result |
+|---|---|---|
+| Window chain via `nextBlindWindow` (start, end, class, id) | 661 windows 2024-2035 | all equal, no extra/missing windows |
+| `isTradingDay` for every calendar day | 4,383 days | all equal |
+| Trading-day open/close, regular open/close (incl. 13:00 early closes) | 3,012 sessions | all equal |
+| `isEarlyClose` | every session; 27 early closes | all equal |
+| Weekday closures | 119 (incl. 1 ad-hoc) | all closed |
+| DST offsets at transition -1 s / 0 / +1 s, 2020-2040 | 126 | all equal |
+| Random timestamps (isBlind, windowId, class, session) | 20,000 | all equal |
+| Window edges +/-1 s | 2,644 | all equal |
+| Rules-only API (no ad-hoc function) | 19k+ random rows away from 2025-01-09 | all equal |
+
+**Disagreements between contract and oracle: exactly one, a genuine ambiguity, not a bug.** 2025-01-09 (national day of mourning for President Carter) is in `exchange_calendars` as an ad-hoc holiday and cannot be derived from rules. Rules-only evaluation says "open" (asserted by `test_ruleOnlyCalendarMissesAdHocClosure`); the differential suite supplies it through the ad-hoc closure function, exactly as production would via `MarketCalendar`. No other date differs.
+
+**Primary-source cross-check.** The NYSE page <https://www.nyse.com/markets/hours-calendars> (fetched 2026-10-02) lists 29 holidays for 2026-2028 and early closes 2026-11-27, 2026-12-24, 2027-11-26, 2028-07-03, 2028-11-24; the fixture contains exactly those 29 holidays (no extras) and those 5 early closes, and Jan 1 2028 (Saturday) is *not* observed. Rules beyond 2028 rest on exchange_calendars and the stated NYSE rules, not on a NYSE-published list (unverified against a primary source for 2029-2040). Not done: a second library (`pandas_market_calendars`) cross-check.
+
+**A bug caught during M1** (before any test ran): while generating independent UTC constants I found the library's `MAX_TS` was `2_208_988_800` (2040-01-01) instead of `2_240_611_200` (2041-01-01). Fixed; `test_rangeBoundaries` now pins both bounds with Python-derived values.
+
+**Mutation sanity check** (scratch copy, not committed): 11 hand-made rule mutants (Juneteenth year gate, New Year Sunday observance, Saturday New Year observed, Thanksgiving early close, Good Friday/Easter constant, Christmas Saturday, Memorial Day, DST start week, DST end hour, class threshold, window-end off-by-one) were each **killed** by the suite; the unmutated baseline passed.
+
+## 11. Empirical consistency against real Chainlink feeds (decision D1 caveat)
+
+Method: `research/observed_rounds.py` walked every proxy phase with `getRoundData` (no archive) for **SPY, TSLA, NVDA, AAPL, QQQ, MSFT** on Robinhood mainnet (chain 4663), head block 78,504,251 (2026-10-02 20:06Z). Fixture: `contracts/test/fixtures/observed_feed_updates.json` (on-chain data). Test: `ObservedFeed.t.sol`; report: `research/feed_consistency_report.py`.
+
+| Feed | Rounds | Phases | Span (first -> last update) |
+|---|---|---|---|
+| SPY | 154 | 1 | 2026-06-22 00:00Z -> 2026-10-02 12:30Z |
+| TSLA | 1,446 | 1 | -> 2026-10-02 19:55Z |
+| NVDA | 1,162 | 1 | -> 17:07Z |
+| AAPL | 700 | 1 | -> 16:39Z |
+| QQQ | 401 | 1 | -> 12:57Z |
+| MSFT | 853 | 1 | -> 19:57Z |
+
+- (a) **Violations: 0.** Of 4,716 observed updates, none has `updatedAt` strictly inside a predicted blind window, and none sits exactly at a window start. The test is sensitive on the *end* side: first updates arrive 18-85 s after the predicted end, so a model whose end was late by a minute would be flagged.
+- (b) **Lag between window end and first update**: all 84 (window, feed) pairs: min 18 s, mean ~30-41 s per feed, max 85 s (TSLA). The 0.5 % deviation / 24 h heartbeat rule did **not** delay the first post-window update in any observed window: the feeds publish at the session open regardless of deviation. (Relevant to carry-forward note N2; the censoring concern is *not observed* in 14 windows x 6 feeds; it can still occur on a quiet opening, so the model must record the lag.)
+- **Coverage (be precise):** 14 windows have both a last-before and a first-after update: **12 Weekend + 2 Long holiday windows (Fri 2026-07-03 Independence Day observed; Mon 2026-09-07 Labor Day), 0 Short**. The feed history starts Mon 2026-06-22 00:00Z, i.e. *after* the Juneteenth window (Fri 2026-06-19), so Juneteenth is not covered. This is **not** the "~13 weekends + 2 holidays" assumed in D1; the fixtures show 12 + 2.
+- What the evidence does **not** constrain: (1) the window **start** is only bounded from one side. The last update before a window sits 0.25-19.5 h before the predicted start (median 4-9 h per feed), so the data show only that nothing is published *after* the predicted start, not that the feed actually stops at 20:00 ET. (2) All 14 windows lie in daylight time (EDT): **EST is unobserved** (first chance: Sun 2026-11-01 fall back, then Thanksgiving 2026-11-26). (3) **Early-close days: no observation** (first chance 2026-11-27, 2026-12-24). (4) No Short (mid-week holiday) window observed.
+- Findings reported, nothing patched: no violations were found.
+
+## 12. Verification summary
+
+- `forge test`: **60 passed, 0 failed**: 30 named, 8 differential (incl. rules-only), 7 property/fuzz (256 runs each, incl. the gas report), 13 wrapper (incl. 1 fuzz), 2 observed-feed. `forge fmt --check`, `forge build --sizes` and `ruff check` are clean; `.gas-snapshot` holds the 52 non-fuzz entries (CI checks it with `--no-match-test testFuzz`). Deployed sizes: `MarketCalendar` 6,855 B runtime (library is inlined).
+- Coverage (`forge coverage --ir-minimum`): `src/lib/UsMarketCalendar.sol` **100 % lines / 100 % statements / 100 % branches / 100 % functions**; `src/MarketCalendar.sol` **100 % / 100 % / 100 % / 100 %**. (Foundry's `--ir-minimum` mode, needed because the library hits "stack too deep" under unoptimised coverage builds, can mis-attribute lines; one such attribution glitch on `_classOf` was resolved by simplifying the function.)
+- Gas (from `test_gasReport`, includes ~2.6k external-call overhead from the harness). All lookups are O(1) apart from bounded scans.
+
+| Function | Gas (typical) | Worst case (12-day closed run) |
+|---|---|---|
+| `isTradingDay` | 11.7k | - |
+| `isEarlyClose` | 14.0k | - |
+| `tradingDayClose` | 19.0k | - |
+| `isBlind` (open / blind) | 19.4k / 44.1k | - |
+| `blindWindowAt` (blind) | 40.6k | 116.2k |
+| `sessionAt` | 36.1k | - |
+| `windowId` | 67.4k | 89.0k |
+| `nextBlindWindow` | 75.8k | - |
+| `secondsUntilBlind` | 80.2k | 151.4k |
+
+The hard bounds are `MAX_CLOSED_RUN = 14` days per direction (`ClosedRunTooLong`) and `MAX_SCAN = 21` days (`ScanExceeded`); both revert fail-closed and are covered by tests. Hot-path callers should cache `windowId`/window bounds rather than call `secondsUntilBlind` per action.
+
+## 13. Remaining unverified / assumptions
+
+1. **Early-close days do not move window boundaries (UNVERIFIED).** Config constant `EARLY_CLOSE_WINDOW_SOD`; flipped behavior is tested against hand-derived expectations. The NYSE page says late trading sessions on early-close days close at 17:00, so the feed may pause earlier.
+2. EST (winter) and early-close behavior of the real feeds: unobserved.
+3. Start-of-window behavior (when the feed actually stops): only a one-sided bound.
+4. Holiday rules 2029-2040 not checked against a NYSE-published list.
+5. `sessionAt` post-market on early-close days (from 13:00) is a display assumption; the display session is never used for risk.
+6. Chainlink `marketStatus` is not available in the push feeds; the mapping in section 6 is documentation only.
+7. Two-library cross-check (`pandas_market_calendars`) not performed.
