@@ -1,0 +1,13 @@
+{
+  "name": "sundown",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Session-aware credit-risk layer and isolated lending market for tokenized-stock collateral",
+  "packageManager": "pnpm@12.8.1",
+  "scripts": {
+    "contracts:build": "cd contracts && forge build --sizes",
+    "contracts:test": "cd contracts && forge test",
+    "contracts:fmt": "cd contracts && forge fmt --check",
+    "research:lint": "cd research && uv run --no-project --with ruff ruff check ."
+  }
+}
