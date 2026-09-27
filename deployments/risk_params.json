@@ -1,0 +1,1599 @@
+{
+  "schema_version": 1,
+  "generated_by": "research/run_backtest.py (outputs.py)",
+  "generated_utc": "2026-10-02T19:11:40+00:00",
+  "data_through": "2026-10-01",
+  "status": "RESEARCH OUTPUT. Calibrated on daily proxy gaps (conservative superset of the oracle-blind exposure); not an audited or governance-approved set.",
+  "split": {
+    "calibration_end": "2014-12-31",
+    "train_end": "2017-12-31",
+    "test_start": "2018-01-01",
+    "note": "structure selected on 2015-2017 validation; deployment fit below is refit on the full history; out-of-sample evidence in results/ uses the train-only fit."
+  },
+  "units": {
+    "gaps": "log bps, 1e4*ln(open/prev_close)",
+    "gap_var": "log bps, used as loss fraction (conservative: 1-exp(-v) < v)",
+    "wad": "1e18 fixed point"
+  },
+  "estimator": {
+    "name": "pooled-scaled EWMA, lambda=0.9",
+    "recurrence": "num' = lambda*num + (loss/k_c)^2 ; den' = lambda*den + 1 ; sigma2 = num/den (bps^2, weekend units)",
+    "forecast": "gapVaR_c = multiplier_c * z_q * k_c * sqrt(sigma2)  [round up]",
+    "min_prior_observations": 8,
+    "state_per_asset": "one (num, den) pair"
+  },
+  "global": {
+    "stress_rule": "maxBorrowLTV = min(LLTV, 1 - gapVaR_q - oracleBuffer - safetyBuffer)",
+    "quantile_default_bps": 9900,
+    "oracle_buffer_bps": 50,
+    "oracle_buffer_basis": "feed deviation threshold (irreducible allowance, N1)",
+    "safety_buffer_bps": 100,
+    "lookahead_hours": 24,
+    "early_close_shifts_window": false,
+    "early_close_label": "UNVERIFIED (D1)",
+    "multiplier_floor": 1.0,
+    "lltv_ceiling_bps": 8600
+  },
+  "assets": {
+    "AAPL": {
+      "deployed_market_candidate": true,
+      "chainlink_feed_listed_in_discovery": true,
+      "seed": {
+        "sigma2_bps2": 5554.86,
+        "sigma2_wad": 5554864308250920091648,
+        "pseudo_count": 10,
+        "n_obs_to_data_end": 914
+      },
+      "classes": {
+        "Short": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 0.7572,
+          "class_scale_k_wad": 757245552462656000,
+          "floor_bps_train95": 46.1,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.8266,
+              "multiplier_wad": 1826574741363172608,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 239.8,
+              "stress_ltv_cap_bps": 9610,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 1.7298,
+              "multiplier_wad": 1729766872627982592,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 251.5,
+              "stress_ltv_cap_bps": 9598,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        },
+        "Weekend": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 1.0,
+          "class_scale_k_wad": 1000000000000000000,
+          "floor_bps_train95": 95.6,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.5523,
+              "multiplier_wad": 1552316393949177856,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 269.1,
+              "stress_ltv_cap_bps": 9580,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 1.8463,
+              "multiplier_wad": 1846317733567314688,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 354.5,
+              "stress_ltv_cap_bps": 9495,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        },
+        "Long": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 0.9215,
+          "class_scale_k_wad": 921519914922494848,
+          "floor_bps_train95": 243.1,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.6132,
+              "multiplier_wad": 1613243781085670144,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 257.8,
+              "stress_ltv_cap_bps": 9592,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 2.2709,
+              "multiplier_wad": 2270884558486134016,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 401.7,
+              "stress_ltv_cap_bps": 9448,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        }
+      },
+      "base_lltv_bps_q9900": 8600
+    },
+    "NVDA": {
+      "deployed_market_candidate": true,
+      "chainlink_feed_listed_in_discovery": true,
+      "seed": {
+        "sigma2_bps2": 22195.0,
+        "sigma2_wad": 22194997760348120940544,
+        "pseudo_count": 10,
+        "n_obs_to_data_end": 914
+      },
+      "classes": {
+        "Short": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 0.7572,
+          "class_scale_k_wad": 757245552462656000,
+          "floor_bps_train95": 78.8,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.8266,
+              "multiplier_wad": 1826574741363172608,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 479.4,
+              "stress_ltv_cap_bps": 9370,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 1.7298,
+              "multiplier_wad": 1729766872627982592,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 502.7,
+              "stress_ltv_cap_bps": 9347,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        },
+        "Weekend": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 1.0,
+          "class_scale_k_wad": 1000000000000000000,
+          "floor_bps_train95": 162.1,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.5523,
+              "multiplier_wad": 1552316393949177856,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 538.0,
+              "stress_ltv_cap_bps": 9311,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 1.8463,
+              "multiplier_wad": 1846317733567314688,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 708.5,
+              "stress_ltv_cap_bps": 9141,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        },
+        "Long": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 0.9215,
+          "class_scale_k_wad": 921519914922494848,
+          "floor_bps_train95": 211.1,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.6132,
+              "multiplier_wad": 1613243781085670144,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 515.2,
+              "stress_ltv_cap_bps": 9334,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 2.2709,
+              "multiplier_wad": 2270884558486134016,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 803.1,
+              "stress_ltv_cap_bps": 9046,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        }
+      },
+      "base_lltv_bps_q9900": 8600
+    },
+    "TSLA": {
+      "deployed_market_candidate": true,
+      "chainlink_feed_listed_in_discovery": true,
+      "seed": {
+        "sigma2_bps2": 13722.51,
+        "sigma2_wad": 13722512376525743980544,
+        "pseudo_count": 10,
+        "n_obs_to_data_end": 889
+      },
+      "classes": {
+        "Short": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 0.7572,
+          "class_scale_k_wad": 757245552462656000,
+          "floor_bps_train95": 131.1,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.8266,
+              "multiplier_wad": 1826574741363172608,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 376.9,
+              "stress_ltv_cap_bps": 9473,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 1.7298,
+              "multiplier_wad": 1729766872627982592,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 395.2,
+              "stress_ltv_cap_bps": 9454,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        },
+        "Weekend": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 1.0,
+          "class_scale_k_wad": 1000000000000000000,
+          "floor_bps_train95": 204.7,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.5523,
+              "multiplier_wad": 1552316393949177856,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 423.0,
+              "stress_ltv_cap_bps": 9426,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 1.8463,
+              "multiplier_wad": 1846317733567314688,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 557.1,
+              "stress_ltv_cap_bps": 9292,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        },
+        "Long": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 0.9215,
+          "class_scale_k_wad": 921519914922494848,
+          "floor_bps_train95": 287.3,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.6132,
+              "multiplier_wad": 1613243781085670144,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 405.1,
+              "stress_ltv_cap_bps": 9444,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 2.2709,
+              "multiplier_wad": 2270884558486134016,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 631.4,
+              "stress_ltv_cap_bps": 9218,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        }
+      },
+      "base_lltv_bps_q9900": 8600
+    },
+    "SPY": {
+      "deployed_market_candidate": true,
+      "chainlink_feed_listed_in_discovery": true,
+      "seed": {
+        "sigma2_bps2": 2739.95,
+        "sigma2_wad": 2739949235708679946240,
+        "pseudo_count": 10,
+        "n_obs_to_data_end": 914
+      },
+      "classes": {
+        "Short": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 0.7572,
+          "class_scale_k_wad": 757245552462656000,
+          "floor_bps_train95": 48.2,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.8266,
+              "multiplier_wad": 1826574741363172608,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 168.4,
+              "stress_ltv_cap_bps": 9681,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 1.7298,
+              "multiplier_wad": 1729766872627982592,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 176.6,
+              "stress_ltv_cap_bps": 9673,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        },
+        "Weekend": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 1.0,
+          "class_scale_k_wad": 1000000000000000000,
+          "floor_bps_train95": 88.4,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.5523,
+              "multiplier_wad": 1552316393949177856,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 189.0,
+              "stress_ltv_cap_bps": 9660,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 1.8463,
+              "multiplier_wad": 1846317733567314688,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 248.9,
+              "stress_ltv_cap_bps": 9601,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        },
+        "Long": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 0.9215,
+          "class_scale_k_wad": 921519914922494848,
+          "floor_bps_train95": 112.8,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.6132,
+              "multiplier_wad": 1613243781085670144,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 181.0,
+              "stress_ltv_cap_bps": 9668,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 2.2709,
+              "multiplier_wad": 2270884558486134016,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 282.2,
+              "stress_ltv_cap_bps": 9567,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        }
+      },
+      "base_lltv_bps_q9900": 8600
+    },
+    "QQQ": {
+      "deployed_market_candidate": false,
+      "chainlink_feed_listed_in_discovery": true,
+      "seed": {
+        "sigma2_bps2": 7806.02,
+        "sigma2_wad": 7806019725082191986688,
+        "pseudo_count": 10,
+        "n_obs_to_data_end": 914
+      },
+      "classes": {
+        "Short": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 0.7572,
+          "class_scale_k_wad": 757245552462656000,
+          "floor_bps_train95": 50.2,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.8266,
+              "multiplier_wad": 1826574741363172608,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 284.3,
+              "stress_ltv_cap_bps": 9565,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 1.7298,
+              "multiplier_wad": 1729766872627982592,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 298.1,
+              "stress_ltv_cap_bps": 9551,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        },
+        "Weekend": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 1.0,
+          "class_scale_k_wad": 1000000000000000000,
+          "floor_bps_train95": 88.5,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.5523,
+              "multiplier_wad": 1552316393949177856,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 319.1,
+              "stress_ltv_cap_bps": 9530,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 1.8463,
+              "multiplier_wad": 1846317733567314688,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 420.2,
+              "stress_ltv_cap_bps": 9429,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        },
+        "Long": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 0.9215,
+          "class_scale_k_wad": 921519914922494848,
+          "floor_bps_train95": 129.1,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.6132,
+              "multiplier_wad": 1613243781085670144,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 305.6,
+              "stress_ltv_cap_bps": 9544,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 2.2709,
+              "multiplier_wad": 2270884558486134016,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 476.2,
+              "stress_ltv_cap_bps": 9373,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        }
+      },
+      "base_lltv_bps_q9900": 8600
+    },
+    "MSFT": {
+      "deployed_market_candidate": false,
+      "chainlink_feed_listed_in_discovery": true,
+      "seed": {
+        "sigma2_bps2": 16123.89,
+        "sigma2_wad": 16123886567364019355648,
+        "pseudo_count": 10,
+        "n_obs_to_data_end": 914
+      },
+      "classes": {
+        "Short": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 0.7572,
+          "class_scale_k_wad": 757245552462656000,
+          "floor_bps_train95": 57.0,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.8266,
+              "multiplier_wad": 1826574741363172608,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 408.6,
+              "stress_ltv_cap_bps": 9441,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 1.7298,
+              "multiplier_wad": 1729766872627982592,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 428.4,
+              "stress_ltv_cap_bps": 9421,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        },
+        "Weekend": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 1.0,
+          "class_scale_k_wad": 1000000000000000000,
+          "floor_bps_train95": 112.0,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.5523,
+              "multiplier_wad": 1552316393949177856,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 458.6,
+              "stress_ltv_cap_bps": 9391,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 1.8463,
+              "multiplier_wad": 1846317733567314688,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 603.9,
+              "stress_ltv_cap_bps": 9246,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        },
+        "Long": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 0.9215,
+          "class_scale_k_wad": 921519914922494848,
+          "floor_bps_train95": 152.5,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.6132,
+              "multiplier_wad": 1613243781085670144,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 439.2,
+              "stress_ltv_cap_bps": 9410,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 2.2709,
+              "multiplier_wad": 2270884558486134016,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 684.5,
+              "stress_ltv_cap_bps": 9165,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        }
+      },
+      "base_lltv_bps_q9900": 8600
+    },
+    "AMZN": {
+      "deployed_market_candidate": false,
+      "chainlink_feed_listed_in_discovery": true,
+      "seed": {
+        "sigma2_bps2": 13882.99,
+        "sigma2_wad": 13882985537660514205696,
+        "pseudo_count": 10,
+        "n_obs_to_data_end": 914
+      },
+      "classes": {
+        "Short": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 0.7572,
+          "class_scale_k_wad": 757245552462656000,
+          "floor_bps_train95": 43.2,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.8266,
+              "multiplier_wad": 1826574741363172608,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 379.1,
+              "stress_ltv_cap_bps": 9470,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 1.7298,
+              "multiplier_wad": 1729766872627982592,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 397.5,
+              "stress_ltv_cap_bps": 9452,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        },
+        "Weekend": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 1.0,
+          "class_scale_k_wad": 1000000000000000000,
+          "floor_bps_train95": 99.9,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.5523,
+              "multiplier_wad": 1552316393949177856,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 425.5,
+              "stress_ltv_cap_bps": 9424,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 1.8463,
+              "multiplier_wad": 1846317733567314688,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 560.4,
+              "stress_ltv_cap_bps": 9289,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        },
+        "Long": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 0.9215,
+          "class_scale_k_wad": 921519914922494848,
+          "floor_bps_train95": 133.1,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.6132,
+              "multiplier_wad": 1613243781085670144,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 407.5,
+              "stress_ltv_cap_bps": 9442,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 2.2709,
+              "multiplier_wad": 2270884558486134016,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 635.1,
+              "stress_ltv_cap_bps": 9214,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        }
+      },
+      "base_lltv_bps_q9900": 8600
+    },
+    "GOOGL": {
+      "deployed_market_candidate": false,
+      "chainlink_feed_listed_in_discovery": true,
+      "seed": {
+        "sigma2_bps2": 13829.05,
+        "sigma2_wad": 13829048090044072460288,
+        "pseudo_count": 10,
+        "n_obs_to_data_end": 914
+      },
+      "classes": {
+        "Short": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 0.7572,
+          "class_scale_k_wad": 757245552462656000,
+          "floor_bps_train95": 78.2,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.8266,
+              "multiplier_wad": 1826574741363172608,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 378.4,
+              "stress_ltv_cap_bps": 9471,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 1.7298,
+              "multiplier_wad": 1729766872627982592,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 396.8,
+              "stress_ltv_cap_bps": 9453,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        },
+        "Weekend": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 1.0,
+          "class_scale_k_wad": 1000000000000000000,
+          "floor_bps_train95": 102.4,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.5523,
+              "multiplier_wad": 1552316393949177856,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 424.7,
+              "stress_ltv_cap_bps": 9425,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 1.8463,
+              "multiplier_wad": 1846317733567314688,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 559.3,
+              "stress_ltv_cap_bps": 9290,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        },
+        "Long": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 0.9215,
+          "class_scale_k_wad": 921519914922494848,
+          "floor_bps_train95": 136.9,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.6132,
+              "multiplier_wad": 1613243781085670144,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 406.7,
+              "stress_ltv_cap_bps": 9443,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 2.2709,
+              "multiplier_wad": 2270884558486134016,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 633.9,
+              "stress_ltv_cap_bps": 9216,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        }
+      },
+      "base_lltv_bps_q9900": 8600
+    },
+    "META": {
+      "deployed_market_candidate": false,
+      "chainlink_feed_listed_in_discovery": true,
+      "seed": {
+        "sigma2_bps2": 14421.04,
+        "sigma2_wad": 14421041754787173892096,
+        "pseudo_count": 10,
+        "n_obs_to_data_end": 789
+      },
+      "classes": {
+        "Short": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 0.7572,
+          "class_scale_k_wad": 757245552462656000,
+          "floor_bps_train95": 3.3,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.8266,
+              "multiplier_wad": 1826574741363172608,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 386.4,
+              "stress_ltv_cap_bps": 9463,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 1.7298,
+              "multiplier_wad": 1729766872627982592,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 405.2,
+              "stress_ltv_cap_bps": 9444,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        },
+        "Weekend": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 1.0,
+          "class_scale_k_wad": 1000000000000000000,
+          "floor_bps_train95": 161.1,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.5523,
+              "multiplier_wad": 1552316393949177856,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 433.7,
+              "stress_ltv_cap_bps": 9416,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 1.8463,
+              "multiplier_wad": 1846317733567314688,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 571.1,
+              "stress_ltv_cap_bps": 9278,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        },
+        "Long": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 0.9215,
+          "class_scale_k_wad": 921519914922494848,
+          "floor_bps_train95": 167.3,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.6132,
+              "multiplier_wad": 1613243781085670144,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 415.3,
+              "stress_ltv_cap_bps": 9434,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 2.2709,
+              "multiplier_wad": 2270884558486134016,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 647.3,
+              "stress_ltv_cap_bps": 9202,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        }
+      },
+      "base_lltv_bps_q9900": 8600
+    },
+    "JPM": {
+      "deployed_market_candidate": false,
+      "chainlink_feed_listed_in_discovery": false,
+      "seed": {
+        "sigma2_bps2": 4951.24,
+        "sigma2_wad": 4951239029871220883456,
+        "pseudo_count": 10,
+        "n_obs_to_data_end": 914
+      },
+      "classes": {
+        "Short": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 0.7572,
+          "class_scale_k_wad": 757245552462656000,
+          "floor_bps_train95": 84.2,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.8266,
+              "multiplier_wad": 1826574741363172608,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 226.4,
+              "stress_ltv_cap_bps": 9623,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 1.7298,
+              "multiplier_wad": 1729766872627982592,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 237.4,
+              "stress_ltv_cap_bps": 9612,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        },
+        "Weekend": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 1.0,
+          "class_scale_k_wad": 1000000000000000000,
+          "floor_bps_train95": 159.6,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.5523,
+              "multiplier_wad": 1552316393949177856,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 254.1,
+              "stress_ltv_cap_bps": 9595,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 1.8463,
+              "multiplier_wad": 1846317733567314688,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 334.6,
+              "stress_ltv_cap_bps": 9515,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        },
+        "Long": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 0.9215,
+          "class_scale_k_wad": 921519914922494848,
+          "floor_bps_train95": 276.7,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.6132,
+              "multiplier_wad": 1613243781085670144,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 243.4,
+              "stress_ltv_cap_bps": 9606,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 2.2709,
+              "multiplier_wad": 2270884558486134016,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 379.3,
+              "stress_ltv_cap_bps": 9470,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        }
+      },
+      "base_lltv_bps_q9900": 8600
+    },
+    "XOM": {
+      "deployed_market_candidate": false,
+      "chainlink_feed_listed_in_discovery": false,
+      "seed": {
+        "sigma2_bps2": 21776.83,
+        "sigma2_wad": 21776831076957146841088,
+        "pseudo_count": 10,
+        "n_obs_to_data_end": 914
+      },
+      "classes": {
+        "Short": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 0.7572,
+          "class_scale_k_wad": 757245552462656000,
+          "floor_bps_train95": 152.7,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.8266,
+              "multiplier_wad": 1826574741363172608,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 474.8,
+              "stress_ltv_cap_bps": 9375,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 1.7298,
+              "multiplier_wad": 1729766872627982592,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 497.9,
+              "stress_ltv_cap_bps": 9352,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        },
+        "Weekend": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 1.0,
+          "class_scale_k_wad": 1000000000000000000,
+          "floor_bps_train95": 98.5,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.5523,
+              "multiplier_wad": 1552316393949177856,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 532.9,
+              "stress_ltv_cap_bps": 9317,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 1.8463,
+              "multiplier_wad": 1846317733567314688,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 701.8,
+              "stress_ltv_cap_bps": 9148,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        },
+        "Long": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 0.9215,
+          "class_scale_k_wad": 921519914922494848,
+          "floor_bps_train95": 91.4,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.6132,
+              "multiplier_wad": 1613243781085670144,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 510.4,
+              "stress_ltv_cap_bps": 9339,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 2.2709,
+              "multiplier_wad": 2270884558486134016,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 795.5,
+              "stress_ltv_cap_bps": 9054,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        }
+      },
+      "base_lltv_bps_q9900": 8600
+    },
+    "WMT": {
+      "deployed_market_candidate": false,
+      "chainlink_feed_listed_in_discovery": false,
+      "seed": {
+        "sigma2_bps2": 4204.54,
+        "sigma2_wad": 4204539295282649628672,
+        "pseudo_count": 10,
+        "n_obs_to_data_end": 914
+      },
+      "classes": {
+        "Short": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 0.7572,
+          "class_scale_k_wad": 757245552462656000,
+          "floor_bps_train95": 55.0,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.8266,
+              "multiplier_wad": 1826574741363172608,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 208.6,
+              "stress_ltv_cap_bps": 9641,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 1.7298,
+              "multiplier_wad": 1729766872627982592,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 218.8,
+              "stress_ltv_cap_bps": 9631,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        },
+        "Weekend": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 1.0,
+          "class_scale_k_wad": 1000000000000000000,
+          "floor_bps_train95": 71.2,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.5523,
+              "multiplier_wad": 1552316393949177856,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 234.2,
+              "stress_ltv_cap_bps": 9615,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 1.8463,
+              "multiplier_wad": 1846317733567314688,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 308.4,
+              "stress_ltv_cap_bps": 9541,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        },
+        "Long": {
+          "estimator": "pooled_scaled_ewma",
+          "lambda": 0.9,
+          "lambda_wad": 900000000000000000,
+          "N": null,
+          "class_scale_k": 0.9215,
+          "class_scale_k_wad": 921519914922494848,
+          "floor_bps_train95": 115.1,
+          "by_quantile": {
+            "q9900": {
+              "multiplier": 1.6132,
+              "multiplier_wad": 1613243781085670144,
+              "z_wad": 2326347874040840704,
+              "gap_var_bps_at_data_end": 224.3,
+              "stress_ltv_cap_bps": 9625,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            },
+            "q9950": {
+              "multiplier": 2.2709,
+              "multiplier_wad": 2270884558486134016,
+              "z_wad": 2575829303548900352,
+              "gap_var_bps_at_data_end": 349.5,
+              "stress_ltv_cap_bps": 9500,
+              "recommended_lltv_bps": 8600,
+              "cap_binds_below_lltv_ceiling": false,
+              "bonus_bounds_bps": {
+                "min": 100,
+                "max": 813,
+                "basis": "design-derived prior, unvalidated"
+              }
+            }
+          }
+        }
+      },
+      "base_lltv_bps_q9900": 8600
+    }
+  }
+}
