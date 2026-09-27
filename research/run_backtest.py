@@ -13,6 +13,7 @@ import pandas as pd
 import backtest as bt
 import credit_sim as cs
 import estimators as est
+import frontier as fr
 import gap_stats
 from config import (
     BLIND_CLASSES,
@@ -137,7 +138,6 @@ def _events(df, panel, forecasts_q99, full: bool = False):
         for c in BLIND_CLASSES:
             ev[(t, c)] = g[g.cls == c]
         p = panel[(panel.ticker == t) & (panel.d2 >= start)]
-        ev[(t, "overnight")] = p[p.cls == "Overnight"].assign(var=np.nan)
         ev[(t, "regular")] = p.assign(var=np.nan)
     return ev
 
@@ -176,7 +176,7 @@ def stage_credit(df, panel, chosen, forecasts):
     ev99 = _events(df, panel, forecasts[STRESS_Q][0])
     base = cs.Params()
     arms = {"control": cs.Params(), "treat_e1": base, "treat_e0.5": cs.Params(enforcement=0.5)}
-    scns = ["blind", *BLIND_CLASSES, "overnight", "regular"]
+    scns = ["blind", *BLIND_CLASSES, "regular"]
     rows = []
     for gname, tick in groups.items():
         for ctl in cs.controls():
@@ -199,7 +199,7 @@ def stage_credit(df, panel, chosen, forecasts):
     rows_f = []
     for gname in ("DEPLOY4", "UNIVERSE12"):
         for ctl in cs.controls():
-            for scn in ("blind", "overnight", "regular"):
+            for scn in ("blind", "regular"):
                 for aname in ("control", "treat_e1"):
                     arm = "control" if aname == "control" else "treat"
                     _, s = run_group(ev_full, groups[gname], scn, ctl, cs.Params(), arm,
@@ -300,69 +300,12 @@ def stage_credit(df, panel, chosen, forecasts):
     for c in ("control_ci", "treat_ci", "reduction_ci", "cap_ci"):
         ci[c] = ci[c].map(lambda t: f"[{t[0]:.4g}, {t[1]:.4g}]")
     save(ci, "credit_headline_ci.csv")
-    save(frontier(ev99, groups), "credit_frontier.csv")
+    for cl, fname in (("month", "credit_frontier_month.csv"),
+                      ("date", "credit_frontier_datecluster.csv")):
+        pts, curve = fr.frontier(ev99, groups, years, cl)
+        save(pts, fname)
+        save(curve, fname.replace("frontier", "frontier_curve"))
     return main, ci
-
-
-def _ci(a: np.ndarray) -> str:
-    return f"[{np.quantile(a[1:], 0.025):.2f}, {np.quantile(a[1:], 0.975):.2f}]"
-
-
-def frontier(ev, groups, n_boot: int = 2000) -> pd.DataFrame:
-    """Equal-risk comparison: for each treatment point, the flat LLTV with the same annualised
-    bad debt (piecewise-linear over the Morpho-bonus flat points) and the LTV gained.
-    Month-cluster bootstrap over the whole interpolation (flat and treatment resampled
-    jointly); column 0 of every weight matrix is the point estimate."""
-    rng = np.random.default_rng(SEED + 23)
-    flat_pts = [c for c in cs.controls() if c.name.startswith(("morpho_77", "morpho_86", "cf_"))]
-    order = sorted(flat_pts, key=lambda c: c.lltv)
-    ys = np.array([c.lltv * 100 for c in order])
-    rows = []
-    for gname in ("DEPLOY4", "UNIVERSE12"):
-        tick = groups[gname]
-        months = pd.concat([ev[(t, "blind")] for t in tick]).d2.dt.to_period("M")
-        uniq = sorted(months.unique())
-        midx = {m: i for i, m in enumerate(uniq)}
-        n_m = len(uniq)
-        w = np.vstack([np.ones(n_m), rng.multinomial(n_m, np.full(n_m, 1 / n_m), size=n_boot)
-                       ]).astype(float)
-        years_rep = w.sum(axis=1) / 12.0
-
-        def month_sums(ctl, treat, tick=tick, midx=midx, n_m=n_m):
-            lr, cap = np.zeros(n_m), np.zeros(n_m)
-            for t in tick:
-                g = ev[(t, "blind")]
-                if not len(g):
-                    continue
-                r = cs.run_events(g.gap_bps.to_numpy(float),
-                                  g["var"].to_numpy(float) if treat else None, ctl, cs.Params())
-                mi = g.d2.dt.to_period("M").map(midx).to_numpy()
-                lr += np.bincount(mi, weights=r["loss_ratio"], minlength=n_m)
-                cap += np.bincount(mi, weights=(g.hours.to_numpy(float) + 24)
-                                   * r["cap_reduction"], minlength=n_m)
-            return lr, cap
-
-        def annualised(lr, n=tick, w=w, years_rep=years_rep):
-            return 1e4 * (w @ lr) / len(n) / years_rep
-
-        flat = {c.name: annualised(month_sums(c, False)[0]) for c in flat_pts}
-        xs = np.stack([flat[c.name] for c in order], axis=1)  # (reps, points)
-        for ctl in flat_pts:
-            lr_t, cap_t = month_sums(ctl, True)
-            bd_t = annualised(lr_t)
-            capshare = 100 * (w @ cap_t) / (years_rep * 365.25 * 24 * len(tick))
-            eq = np.array([np.interp(bd_t[b], np.sort(xs[b]), ys[np.argsort(xs[b])])
-                           for b in range(len(bd_t))])
-            gain = ctl.lltv * 100 - eq
-            net = ctl.lltv * 100 * (1 - capshare / 100) - eq
-            rows.append({"group": gname, "treatment_base_lltv": ctl.name, "kind": ctl.kind,
-                         "treat_annualised_bad_debt_bps": bd_t[0],
-                         "flat_same_lltv_bad_debt_bps": flat[ctl.name][0],
-                         "equivalent_flat_lltv_pct": eq[0], "equivalent_ci": _ci(eq),
-                         "ltv_gain_pp_gross": gain[0], "gain_ci": _ci(gain),
-                         "capacity_given_up_time_avg_pct": capshare[0],
-                         "ltv_gain_pp_net_of_capacity": net[0], "net_gain_ci": _ci(net)})
-    return pd.DataFrame(rows)
 
 
 def main() -> None:

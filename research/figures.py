@@ -120,7 +120,6 @@ def fig_oracle_noise():
 
 def fig_credit():
     c = pd.read_csv(RESULTS_DIR / "credit_summary.csv")
-    f = pd.read_csv(RESULTS_DIR / "credit_frontier.csv")
     fig, axes = plt.subplots(1, 2, figsize=(11, 3.8))
     ax = axes[0]
     sub = c[(c.group == "UNIVERSE12") & (c.scenario == "blind")
@@ -140,25 +139,14 @@ def fig_credit():
     ax.legend(frameon=False, fontsize=8)
     ax = axes[1]
     s = c[(c.group == "UNIVERSE12") & (c.arm == "control") & (c.control == "morpho_86")]
-    order = ["Weekend", "Long", "Short", "overnight", "regular"]
+    order = ["Weekend", "Long", "Short", "regular"]
     s = s.set_index("scenario").loc[order]
-    cols = [C["Weekend"], C["Long"], C["Short"], MUTED, "#999999"]
-    ax.bar(range(5), s.annualised_bad_debt_bps, color=cols)
-    ax.set_xticks(range(5), ["Weekend", "Long", "Short", "Overnight\n(n=0)", "Regular\nhours"])
-    ax.set_title("Flat-86% bad debt by gap source")
+    cols = [C["Weekend"], C["Long"], C["Short"], "#999999"]
+    ax.bar(range(4), s.annualised_bad_debt_bps, color=cols)
+    ax.set_xticks(range(4), ["Weekend", "Long", "Short", "Regular hours\n(oracle live)"])
+    ax.set_title("Flat-86% bad debt: blind windows vs in-session moves")
     ax.set_ylabel("annualised bad debt, bps of outstanding")
     _save(fig, "m2_credit_sim.png")
-    fig, ax = plt.subplots(figsize=(6.2, 3.8))
-    g = f[(f.group == "UNIVERSE12") & (f.kind == "counterfactual")]
-    ax.bar(range(3), g.ltv_gain_pp_gross, color=SERIES[0], label="gross LTV gain at equal risk")
-    ax.plot(range(3), g.ltv_gain_pp_net_of_capacity, "o", color=SERIES[3], markersize=6,
-            label="net of capacity given up")
-    ax.set_xticks(range(3), ["90%", "93%", "95%"])
-    ax.set_xlabel("treatment base LLTV (counterfactual)")
-    ax.set_ylabel("percentage points of LTV")
-    ax.set_title("Equal-bad-debt frontier gain vs flat LLTV")
-    ax.legend(frameon=False, fontsize=8)
-    _save(fig, "m2_frontier.png")
 
 
 def main():

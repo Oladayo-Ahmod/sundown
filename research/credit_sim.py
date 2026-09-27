@@ -70,11 +70,17 @@ class Params:
     safety_buffer_bps: float = float(SAFETY_BUFFER_BPS)
     bonus_aware_cap: bool = False  # cap = (1 - VaR - buffers) / (1 + bonus)
     bonus_override: float | None = None
+    slippage: float = 0.0  # liquidation proceeds = post-gap price * (1 - slippage)
     lookahead_h: float = float(LOOKAHEAD_HOURS)
 
 
 def weights(kind: str) -> np.ndarray:
-    w = UTIL**4 if kind == "high" else np.ones_like(UTIL)
+    if kind == "high":  # clustered near max LTV
+        w = UTIL**4
+    elif kind == "conservative":  # most borrowers far below max LTV
+        w = (1.05 - UTIL) ** 3
+    else:
+        w = np.ones_like(UTIL)
     return w / w.sum()
 
 
@@ -99,14 +105,17 @@ def run_events(x_bps: np.ndarray, var_bps: np.ndarray | None, ctl: Control, p: P
         d = d0 - p.enforcement * np.maximum(0.0, d0 - cap[:, None])
     s = (np.exp(x_bps / 1e4) / (1.0 + p.noise_bps / 1e4))[:, None]
     liq = (d / s >= ctl.lltv) & (d > 0)
-    bad = np.where(liq, np.maximum(0.0, d - s / (1.0 + bonus)), 0.0)
+    bad = np.where(liq, np.maximum(0.0, d - s * (1.0 - p.slippage) / (1.0 + bonus)), 0.0)
     debt = (w * d).sum(1)
     base_debt = (w * d0).sum(1)
     liq_debt = (w * np.where(liq, d, 0.0)).sum(1)
     bad_w = (w * bad).sum(1)
     with np.errstate(invalid="ignore", divide="ignore"):
         loss_ratio = np.where(debt > 0, bad_w / debt, 0.0)
-    return {"debt": debt, "base_debt": base_debt, "liq_debt": liq_debt, "bad": bad_w,
+    excess = (w * np.maximum(0.0, d0 - cap[:, None])).sum(1)
+    flagged = (w * (d0 > cap[:, None] + 1e-12)).sum(1)
+    return {"debt": debt, "base_debt": base_debt, "excess": excess, "flagged": flagged,
+            "liq_debt": liq_debt, "bad": bad_w,
             "loss_ratio": loss_ratio, "cap": cap,
             "cap_reduction": (ctl.lltv - cap) / ctl.lltv,
             "forced_delev": (base_debt - debt) / base_debt}
