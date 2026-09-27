@@ -1,6 +1,6 @@
 # research/
 
-Offline analysis only. Nothing here is deployed or imported by `contracts/src`. Findings and the handoff summary are in [REPORT.md](REPORT.md); data provenance in [DATA_PROVENANCE.md](DATA_PROVENANCE.md).
+Offline analysis only. Nothing here is deployed or imported by `contracts/src`. Findings in [REPORT.md](REPORT.md), defensible claims and non-claims in [CLAIMS.md](CLAIMS.md); data provenance in [DATA_PROVENANCE.md](DATA_PROVENANCE.md).
 
 - Python 3.11, dependencies pinned in `requirements.txt` (compiled from `requirements.in` with `uv pip compile`).
 - `data/raw/` is git-ignored: raw vendor data is never committed. `data/derived/` holds returns only.
@@ -10,11 +10,13 @@ Offline analysis only. Nothing here is deployed or imported by `contracts/src`. 
 ```bash
 cd research
 make venv        # uv venv + pinned install (once)
-make test        # 35 unit tests (+1 skipped until contracts/test/fixtures/calendar_cases.json exists)
+make test        # 41 unit tests (+1 skipped until contracts/test/fixtures/calendar_cases.json exists)
 make backtest    # offline, deterministic (fixed seeds): results/, figures, risk_params.json, replay_events.json
 # network steps, only when refreshing data:
+make m21         # M2.1: per-asset, mechanisms, slippage grid, clustered frontier (offline)
 make data        # re-download daily history, rewrite data/derived
 make intraday    # re-download ~730 days of hourly bars, rewrite results/intraday_*
+make pools       # snapshot Robinhood Chain pool depth (DexScreener + RPC via cast)
 ```
 
 ## Modules

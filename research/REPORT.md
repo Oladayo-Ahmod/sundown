@@ -1,5 +1,6 @@
 # M2 report: empirical foundation and risk-model calibration
 
+> **M2.1 update:** claims, per-asset results, clustered CIs, enforcement mechanisms and the slippage grid are in [CLAIMS.md](CLAIMS.md); where this report and CLAIMS.md differ, CLAIMS.md governs (frontier numbers were recomputed on a 1 pp flat grid with date- and month-clustered bootstraps).
 Status: research output on a **daily proxy** (previous regular close -> next regular open). The proxy is a conservative superset of the oracle-blind exposure: on the intraday subset the extended-hours bracket carries 58 % of the proxy's second moment and a 99 % loss of 342 bps vs 418 bps. It is never the exact blind gap. Split: structure chosen on 2015-2017 validation, evaluated strictly on 2018-2026-10-01 (test). All figures are reproducible with `make backtest`.
 
 ## 1. Coverage
@@ -8,7 +9,7 @@ Status: research output on a **daily proxy** (previous regular close -> next reg
 
 ## 2. Findings
 
-**F1. Blind windows are not much riskier than ordinary overnights.** Second-moment ratio vs a normal overnight gap (month-cluster bootstrap, 95 % CI, median across assets): Weekend **1.23 [0.91, 1.57]**, Long **1.22 [0.80, 1.55]**, Short **0.65 [0.30, 1.01]**. That is near trading-time scaling (1x), far from calendar-time (3x/4x). Caveat: overnights include earnings gaps, which inflates the denominator (no earnings calendar used). The proxy also contains Monday pre-market news that the 24/5 feed would show.
+**F1. Proxy-gap variance scales roughly 1x, not 3-4x.** Second-moment ratio of the closed-window proxy gap to an ordinary close-to-open gap (month-cluster bootstrap, 95 % CI, median across assets): Weekend **1.23 [0.91, 1.57]**, Long **1.22 [0.80, 1.55]**, Short **0.65 [0.30, 1.01]**. This is a descriptive property of the daily proxy (how big a gap is after a multi-day closure relative to a normal one), not a measure of oracle-blind exposure and not a statement about Sundown's value: under D1 weeknights are *not* blind (the 24/5 feed is live), so ordinary close-to-open gaps are not a comparison population for the guard. Earnings gaps inflate the baseline; the proxy also contains Monday pre-market news the feed would show.
 
 **F2. The tails are the issue, not the variance.** Weekend excess kurtosis 11-47 (SPY 46.6, Mar-2020). Weekend 99 % loss (bps, point [CI]): SPY 259 [156, 537], AAPL 359 [258, 915], NVDA 754 [453, 1256], TSLA 555 [423, 1293]. 99.9 % is unresolvable per asset (n ~ 760).
 
@@ -33,7 +34,7 @@ Status: research output on a **daily proxy** (previous regular close -> next reg
 - At the **real flat LLTVs (38.5 / 62.5 / 77 / 86 %, Aave 65 / 79 %) window gaps produce almost no bad debt**: 0 % at <= 65 %, ~0.00001 % at 77 %, 0.0008 % of outstanding at 86 % (annualised 4.5 bps, 99.9th-percentile window lender loss 0.31 %, worst 1.17 %). **The stress rule is inert there**: it cuts annualised bad debt at 86 % by 13 % (4.46 -> 3.87 bps), bootstrap CI of the reduction includes 0, and it never binds below ~90 % LLTV.
 - The rule only matters where it binds. Counterfactual flat LLTV 90/93/95 % (not observed anywhere): annualised bad debt 12.6 / 24.0 / 36.7 bps, with the rule 9.4 / 14.0 / 17.3 bps (reduction CIs exclude 0 for 93 and 95 %). Costs: capacity given up at windows 0.25 / 0.62 / 1.19 %, time-averaged 0.12 / 0.29 / 0.56 %, forced deleveraging 0.03-0.14 % of debt. **Equal-risk frontier:** the rule buys **+1.6 / +2.6 / +3.8 pp LTV** over an equal-bad-debt flat LLTV (UNIVERSE12; CIs in `credit_frontier.csv`, DEPLOY4 +1.9 / +3.4 / +4.9). That is modest and noisy.
 - **Enforcement is the whole effect.** If the cap applies only to new borrows (pre-existing positions untouched) the benefit is exactly zero; at 50 % enforcement about half. The design (3.4) restricts new borrows/withdrawals, not existing debt, so it needs a stress-HF deleveraging path to work.
-- **Sundown does NOT help with:** ordinary overnight gaps (n = 0; earnings): at flat 86 % they produce 9.9 bps/yr vs 4.5 for windows, at 93 % 38.7 vs 24.0; regular-hours moves (1.0 / 32.9 bps/yr at 86 / 93 %); single-name shocks; thin liquidation liquidity (bonus 10 % -> 0.0039 %, 15 % -> 0.0201 % at 86 %: the bonus matters more than the guard, untouched by it); issuer pause/blocklist/adminBurn; oracle bugs. Windows are roughly a quarter to a third of gap-driven bad debt.
+- **Sundown does NOT help with** (M2.1 corrected): regular-hours in-session moves (oracle live; 1.0 / 32.9 bps/yr at flat 86 / 93 %), single-name shocks beyond the VaR, thin liquidation liquidity (bonus and slippage dominate, see M2.1), issuer pause/blocklist/adminBurn, oracle bugs. The earlier comparison with ordinary overnight gaps was removed: weeknights are not blind under D1.
 - Sensitivities (`credit_sensitivity.csv`): VaR quantile 99.5 / 99.9 % lifts reduction at 86 % to 50 % / ~100 % at 0.37 % / 4.3 % capacity cost at windows; adverse staleness 50 bps raises control bad debt 25 % and the 50 bps buffer covers it; high-utilisation borrowers raise bad debt ~2.8x; full-history run (`credit_summary_full_history.csv`, in-sample before 2018) agrees.
 - Liquidated share per event (~4.6 %) is a scale-invariant artifact of the utilisation grid (a borrower is liquidated iff utilisation >= post-gap value, independent of LLTV); do not read it as LLTV risk.
 
@@ -43,7 +44,7 @@ Status: research output on a **daily proxy** (previous regular close -> next reg
 2. **Reframe as capacity expansion**: run the isolated market at a higher base LLTV (90-93 %) with window tightening and stress-HF deleveraging, and measure the equal-risk LTV gain (+2-4 pp) in M7 replays. Decide whether +2-4 pp justifies the extra machinery.
 3. Calibrate to q = 99.5 %, oracle buffer 50 bps, safety 100 bps; seed the cold start from `risk_params.json`; treat Short as Weekend.
 4. Make the **liquidation bonus** and liquidation liquidity first-class: they dominate tail loss in the sensitivity.
-5. Add the overnight (n = 0) gap as a guard input if any intraday protection is wanted; windows alone address a minority of gap risk.
+5. (Removed in M2.1: the overnight (n = 0) comparison does not apply under D1.)
 
 ## 4. Limits and open items
 
