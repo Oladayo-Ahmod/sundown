@@ -1,0 +1,235 @@
+{
+  "retrieved_utc": "2026-10-02T18:53:02+00:00",
+  "source": "Yahoo Finance via yfinance",
+  "price_basis": "split-adjusted, not dividend-adjusted (auto_adjust=False)",
+  "assets": [
+    {
+      "ticker": "AAPL",
+      "rows": 4212,
+      "first": "2010-01-04",
+      "last": "2026-10-01",
+      "sha256": "73cda936731bc3dd01ca32ab597a47dcfc0f832c11a583f957ec4053513c2785",
+      "quality": {
+        "ticker": "AAPL",
+        "raw_rows": 4212,
+        "non_session_rows": 0,
+        "invalid_ohlc_rows": 0,
+        "pairs_total": 4212,
+        "pairs_dropped_missing_or_invalid": 1,
+        "pairs_kept": 4211,
+        "flagged_abs_gap_gt_40pct": [],
+        "first_pair": "2010-01-05",
+        "last_pair": "2026-10-01"
+      }
+    },
+    {
+      "ticker": "NVDA",
+      "rows": 4212,
+      "first": "2010-01-04",
+      "last": "2026-10-01",
+      "sha256": "96cbf6e4c5ef439be38a3d518d2fcfd93e489baab5610c22731d602a90e75277",
+      "quality": {
+        "ticker": "NVDA",
+        "raw_rows": 4212,
+        "non_session_rows": 0,
+        "invalid_ohlc_rows": 0,
+        "pairs_total": 4212,
+        "pairs_dropped_missing_or_invalid": 1,
+        "pairs_kept": 4211,
+        "flagged_abs_gap_gt_40pct": [],
+        "first_pair": "2010-01-05",
+        "last_pair": "2026-10-01"
+      }
+    },
+    {
+      "ticker": "TSLA",
+      "rows": 4090,
+      "first": "2010-06-29",
+      "last": "2026-10-01",
+      "sha256": "a1f6518e55ae7e9f454af2644e4f80b95dc7240864dc742521c15042d3c4947f",
+      "quality": {
+        "ticker": "TSLA",
+        "raw_rows": 4090,
+        "non_session_rows": 0,
+        "invalid_ohlc_rows": 0,
+        "pairs_total": 4090,
+        "pairs_dropped_missing_or_invalid": 1,
+        "pairs_kept": 4089,
+        "flagged_abs_gap_gt_40pct": [],
+        "first_pair": "2010-06-30",
+        "last_pair": "2026-10-01"
+      }
+    },
+    {
+      "ticker": "SPY",
+      "rows": 4212,
+      "first": "2010-01-04",
+      "last": "2026-10-01",
+      "sha256": "5e24c04269b754151134d24e5ca88313bed78e571f71b99ce232ef33e234face",
+      "quality": {
+        "ticker": "SPY",
+        "raw_rows": 4212,
+        "non_session_rows": 0,
+        "invalid_ohlc_rows": 0,
+        "pairs_total": 4212,
+        "pairs_dropped_missing_or_invalid": 1,
+        "pairs_kept": 4211,
+        "flagged_abs_gap_gt_40pct": [],
+        "first_pair": "2010-01-05",
+        "last_pair": "2026-10-01"
+      }
+    },
+    {
+      "ticker": "QQQ",
+      "rows": 4212,
+      "first": "2010-01-04",
+      "last": "2026-10-01",
+      "sha256": "a17a0744a95444050a6122663d4ddbf418efb965110de66aa64709f88b2d0476",
+      "quality": {
+        "ticker": "QQQ",
+        "raw_rows": 4212,
+        "non_session_rows": 0,
+        "invalid_ohlc_rows": 0,
+        "pairs_total": 4212,
+        "pairs_dropped_missing_or_invalid": 1,
+        "pairs_kept": 4211,
+        "flagged_abs_gap_gt_40pct": [],
+        "first_pair": "2010-01-05",
+        "last_pair": "2026-10-01"
+      }
+    },
+    {
+      "ticker": "MSFT",
+      "rows": 4212,
+      "first": "2010-01-04",
+      "last": "2026-10-01",
+      "sha256": "9d5341fe194adff580e7712bf6f29b12ce3428a76e15ef5928643ae390fc8147",
+      "quality": {
+        "ticker": "MSFT",
+        "raw_rows": 4212,
+        "non_session_rows": 0,
+        "invalid_ohlc_rows": 0,
+        "pairs_total": 4212,
+        "pairs_dropped_missing_or_invalid": 1,
+        "pairs_kept": 4211,
+        "flagged_abs_gap_gt_40pct": [],
+        "first_pair": "2010-01-05",
+        "last_pair": "2026-10-01"
+      }
+    },
+    {
+      "ticker": "AMZN",
+      "rows": 4212,
+      "first": "2010-01-04",
+      "last": "2026-10-01",
+      "sha256": "ef85529b834ec560c5e7472e6a32c45d1dfd183185108341cf3959a2e701cd60",
+      "quality": {
+        "ticker": "AMZN",
+        "raw_rows": 4212,
+        "non_session_rows": 0,
+        "invalid_ohlc_rows": 0,
+        "pairs_total": 4212,
+        "pairs_dropped_missing_or_invalid": 1,
+        "pairs_kept": 4211,
+        "flagged_abs_gap_gt_40pct": [],
+        "first_pair": "2010-01-05",
+        "last_pair": "2026-10-01"
+      }
+    },
+    {
+      "ticker": "GOOGL",
+      "rows": 4212,
+      "first": "2010-01-04",
+      "last": "2026-10-01",
+      "sha256": "3186c4bf563443e9b0f735ab7272118db57e8d80e20a070ed1d3f28fdcbeb7ad",
+      "quality": {
+        "ticker": "GOOGL",
+        "raw_rows": 4212,
+        "non_session_rows": 0,
+        "invalid_ohlc_rows": 0,
+        "pairs_total": 4212,
+        "pairs_dropped_missing_or_invalid": 1,
+        "pairs_kept": 4211,
+        "flagged_abs_gap_gt_40pct": [],
+        "first_pair": "2010-01-05",
+        "last_pair": "2026-10-01"
+      }
+    },
+    {
+      "ticker": "META",
+      "rows": 3613,
+      "first": "2012-05-18",
+      "last": "2026-10-01",
+      "sha256": "b66c7124cda699cd9d2982cc1dc36c56ddb804e37e08b04407b58c48e4836621",
+      "quality": {
+        "ticker": "META",
+        "raw_rows": 3613,
+        "non_session_rows": 0,
+        "invalid_ohlc_rows": 0,
+        "pairs_total": 3613,
+        "pairs_dropped_missing_or_invalid": 1,
+        "pairs_kept": 3612,
+        "flagged_abs_gap_gt_40pct": [],
+        "first_pair": "2012-05-21",
+        "last_pair": "2026-10-01"
+      }
+    },
+    {
+      "ticker": "JPM",
+      "rows": 4212,
+      "first": "2010-01-04",
+      "last": "2026-10-01",
+      "sha256": "8a58e195a80ecfb6d4454a3b55f9c65aed28d92d8232228dd7b8aa9b8e85a9fe",
+      "quality": {
+        "ticker": "JPM",
+        "raw_rows": 4212,
+        "non_session_rows": 0,
+        "invalid_ohlc_rows": 0,
+        "pairs_total": 4212,
+        "pairs_dropped_missing_or_invalid": 1,
+        "pairs_kept": 4211,
+        "flagged_abs_gap_gt_40pct": [],
+        "first_pair": "2010-01-05",
+        "last_pair": "2026-10-01"
+      }
+    },
+    {
+      "ticker": "XOM",
+      "rows": 4212,
+      "first": "2010-01-04",
+      "last": "2026-10-01",
+      "sha256": "3e4ec71f14b092bcc9c9d0bffe43d8ce04755b79e33e180622b729ab1f4d0d8d",
+      "quality": {
+        "ticker": "XOM",
+        "raw_rows": 4212,
+        "non_session_rows": 0,
+        "invalid_ohlc_rows": 0,
+        "pairs_total": 4212,
+        "pairs_dropped_missing_or_invalid": 1,
+        "pairs_kept": 4211,
+        "flagged_abs_gap_gt_40pct": [],
+        "first_pair": "2010-01-05",
+        "last_pair": "2026-10-01"
+      }
+    },
+    {
+      "ticker": "WMT",
+      "rows": 4212,
+      "first": "2010-01-04",
+      "last": "2026-10-01",
+      "sha256": "13c9c3c86148fec2d22761ee1ab957d62948a2ac90a75be18c4944ace72598d2",
+      "quality": {
+        "ticker": "WMT",
+        "raw_rows": 4212,
+        "non_session_rows": 0,
+        "invalid_ohlc_rows": 0,
+        "pairs_total": 4212,
+        "pairs_dropped_missing_or_invalid": 1,
+        "pairs_kept": 4211,
+        "flagged_abs_gap_gt_40pct": [],
+        "first_pair": "2010-01-05",
+        "last_pair": "2026-10-01"
+      }
+    }
+  ]
+}
