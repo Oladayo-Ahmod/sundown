@@ -1,0 +1,6 @@
+exchange_calendars
+pandas
+numpy
+scipy
+ruff
+pytest
