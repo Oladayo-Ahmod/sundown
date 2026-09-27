@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "generated_by": "research/run_backtest.py (outputs.py)",
-  "generated_utc": "2026-10-02T19:11:40+00:00",
+  "generated_utc": "2026-10-02T20:04:56+00:00",
   "data_through": "2026-10-01",
   "status": "RESEARCH OUTPUT. Calibrated on daily proxy gaps (conservative superset of the oracle-blind exposure); not an audited or governance-approved set.",
   "split": {

@@ -11,9 +11,6 @@ DEPLOY4,morpho_38.5,in_the_wild,0.385,0.15,Weekend,treat_e0.5,1584,0,4.50307,0,0
 DEPLOY4,morpho_38.5,in_the_wild,0.385,0.15,Long,control,244,0,5.14052,0,0,0,0,0,0,0,0
 DEPLOY4,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e1,244,0,5.14052,0,0,0,0,0,0,0,0
 DEPLOY4,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e0.5,244,0,5.14052,0,0,0,0,0,0,0,0
-DEPLOY4,morpho_38.5,in_the_wild,0.385,0.15,overnight,control,6872,0,4.28066,0,0,0,0,0,0,0,
-DEPLOY4,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e1,6872,0,4.28066,0,0,0,0,0,0,0,
-DEPLOY4,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e0.5,6872,0,4.28066,0,0,0,0,0,0,0,
 DEPLOY4,morpho_38.5,in_the_wild,0.385,0.15,regular,control,8796,0,4.70333,0,0,0,0,0,0,0,
 DEPLOY4,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e1,8796,0,4.70333,0,0,0,0,0,0,0,
 DEPLOY4,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e0.5,8796,0,4.70333,0,0,0,0,0,0,0,
@@ -29,9 +26,6 @@ DEPLOY4,morpho_62.5,in_the_wild,0.625,0.126761,Weekend,treat_e0.5,1584,0,4.50307
 DEPLOY4,morpho_62.5,in_the_wild,0.625,0.126761,Long,control,244,0,5.14052,0,0,0,0,0,0,0,0
 DEPLOY4,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e1,244,0,5.14052,0,0,0,0,0,0,0,0
 DEPLOY4,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e0.5,244,0,5.14052,0,0,0,0,0,0,0,0
-DEPLOY4,morpho_62.5,in_the_wild,0.625,0.126761,overnight,control,6872,0,4.28066,0,0,0,0,0,0,0,
-DEPLOY4,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e1,6872,0,4.28066,0,0,0,0,0,0,0,
-DEPLOY4,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e0.5,6872,0,4.28066,0,0,0,0,0,0,0,
 DEPLOY4,morpho_62.5,in_the_wild,0.625,0.126761,regular,control,8796,0,4.70333,0,0,0,0,0,0,0,
 DEPLOY4,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e1,8796,0,4.70333,0,0,0,0,0,0,0,
 DEPLOY4,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e0.5,8796,0,4.70333,0,0,0,0,0,0,0,
@@ -47,9 +41,6 @@ DEPLOY4,morpho_77,in_the_wild,0.77,0.0741139,Weekend,treat_e0.5,1584,0,4.50303,0
 DEPLOY4,morpho_77,in_the_wild,0.77,0.0741139,Long,control,244,0,5.14052,0,0,0,0,0,0,0,0
 DEPLOY4,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e1,244,0,5.14052,0,0,0,0,0,0.000646225,6.15452e-05,4.93981e-05
 DEPLOY4,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e0.5,244,0,5.14052,0,0,0,0,0,0.000646225,3.07726e-05,4.93981e-05
-DEPLOY4,morpho_77,in_the_wild,0.77,0.0741139,overnight,control,6872,3.36988e-05,4.28066,0.0145518,0,0,0.231578,0.662469,0,0,
-DEPLOY4,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e1,6872,3.36988e-05,4.28066,0.0145518,0,0,0.231578,0.662469,0,0,
-DEPLOY4,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e0.5,6872,3.36988e-05,4.28066,0.0145518,0,0,0.231578,0.662469,0,0,
 DEPLOY4,morpho_77,in_the_wild,0.77,0.0741139,regular,control,8796,0,4.70333,0,0,0,0,0,0,0,
 DEPLOY4,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e1,8796,0,4.70333,0,0,0,0,0,0,0,
 DEPLOY4,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e0.5,8796,0,4.70333,0,0,0,0,0,0,0,
@@ -65,9 +56,6 @@ DEPLOY4,morpho_86,in_the_wild,0.86,0.0438413,Weekend,treat_e0.5,1584,0.00126622,
 DEPLOY4,morpho_86,in_the_wild,0.86,0.0438413,Long,control,244,0.00210772,5.14052,0.409836,0,0.389312,0.514283,1.47119,0,0,0
 DEPLOY4,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e1,244,0.00210804,5.06241,0.409836,0,0.389312,0.514283,1.47119,0.134009,0.0152185,0.0102438
 DEPLOY4,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e0.5,244,0.00210788,5.06243,0.409836,0,0.389312,0.514283,1.47119,0.134009,0.00760925,0.0102438
-DEPLOY4,morpho_86,in_the_wild,0.86,0.0438413,overnight,control,6872,0.000266862,4.28066,0.0582072,0,0,1.45964,5.24611,0,0,
-DEPLOY4,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e1,6872,0.000266862,4.28066,0.0582072,0,0,1.45964,5.24611,0,0,
-DEPLOY4,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e0.5,6872,0.000266862,4.28066,0.0582072,0,0,1.45964,5.24611,0,0,
 DEPLOY4,morpho_86,in_the_wild,0.86,0.0438413,regular,control,8796,0.000122432,4.70333,0.0909504,0,0,0.271601,3.08069,0,0,
 DEPLOY4,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e1,8796,0.000122432,4.70333,0.0909504,0,0,0.271601,3.08069,0,0,
 DEPLOY4,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e0.5,8796,0.000122432,4.70333,0.0909504,0,0,0.271601,3.08069,0,0,
@@ -83,9 +71,6 @@ DEPLOY4,aave_65,in_the_wild,0.65,0.055,Weekend,treat_e0.5,1584,0,4.50307,0,0,0,0
 DEPLOY4,aave_65,in_the_wild,0.65,0.055,Long,control,244,0,5.14052,0,0,0,0,0,0,0,0
 DEPLOY4,aave_65,in_the_wild,0.65,0.055,Long,treat_e1,244,0,5.14052,0,0,0,0,0,0,0,0
 DEPLOY4,aave_65,in_the_wild,0.65,0.055,Long,treat_e0.5,244,0,5.14052,0,0,0,0,0,0,0,0
-DEPLOY4,aave_65,in_the_wild,0.65,0.055,overnight,control,6872,0,4.28066,0,0,0,0,0,0,0,
-DEPLOY4,aave_65,in_the_wild,0.65,0.055,overnight,treat_e1,6872,0,4.28066,0,0,0,0,0,0,0,
-DEPLOY4,aave_65,in_the_wild,0.65,0.055,overnight,treat_e0.5,6872,0,4.28066,0,0,0,0,0,0,0,
 DEPLOY4,aave_65,in_the_wild,0.65,0.055,regular,control,8796,0,4.70333,0,0,0,0,0,0,0,
 DEPLOY4,aave_65,in_the_wild,0.65,0.055,regular,treat_e1,8796,0,4.70333,0,0,0,0,0,0,0,
 DEPLOY4,aave_65,in_the_wild,0.65,0.055,regular,treat_e0.5,8796,0,4.70333,0,0,0,0,0,0,0,
@@ -101,9 +86,6 @@ DEPLOY4,aave_79,in_the_wild,0.79,0.055,Weekend,treat_e0.5,1584,0,4.49704,0,0,0,0
 DEPLOY4,aave_79,in_the_wild,0.79,0.055,Long,control,244,0,5.14052,0,0,0,0,0,0,0,0
 DEPLOY4,aave_79,in_the_wild,0.79,0.055,Long,treat_e1,244,0,5.14057,0,0,0,0,0,0.0110055,0.00104814,0.00084127
 DEPLOY4,aave_79,in_the_wild,0.79,0.055,Long,treat_e0.5,244,0,5.14054,0,0,0,0,0,0.0110055,0.00052407,0.00084127
-DEPLOY4,aave_79,in_the_wild,0.79,0.055,overnight,control,6872,4.40535e-05,4.28066,0.0145518,0,0,0.302736,0.866026,0,0,
-DEPLOY4,aave_79,in_the_wild,0.79,0.055,overnight,treat_e1,6872,4.40535e-05,4.28066,0.0145518,0,0,0.302736,0.866026,0,0,
-DEPLOY4,aave_79,in_the_wild,0.79,0.055,overnight,treat_e0.5,6872,4.40535e-05,4.28066,0.0145518,0,0,0.302736,0.866026,0,0,
 DEPLOY4,aave_79,in_the_wild,0.79,0.055,regular,control,8796,0,4.70333,0,0,0,0,0,0,0,
 DEPLOY4,aave_79,in_the_wild,0.79,0.055,regular,treat_e1,8796,0,4.70333,0,0,0,0,0,0,0,
 DEPLOY4,aave_79,in_the_wild,0.79,0.055,regular,treat_e0.5,8796,0,4.70333,0,0,0,0,0,0,0,
@@ -119,9 +101,6 @@ DEPLOY4,cf_90,counterfactual,0.9,0.0309278,Weekend,treat_e0.5,1584,0.00355936,4.
 DEPLOY4,cf_90,counterfactual,0.9,0.0309278,Long,control,244,0.00467414,5.14052,0.819672,0,0.842893,1.10069,3.26256,0,0,0
 DEPLOY4,cf_90,counterfactual,0.9,0.0309278,Long,treat_e1,244,0.00346566,4.71033,0.409836,0,0.641368,0.847249,2.4237,0.539983,0.0634257,0.0412769
 DEPLOY4,cf_90,counterfactual,0.9,0.0309278,Long,treat_e0.5,244,0.00398851,4.86478,0.409836,0,0.737418,0.974132,2.78667,0.539983,0.0317128,0.0412769
-DEPLOY4,cf_90,counterfactual,0.9,0.0309278,overnight,control,6872,0.000817207,4.28066,0.349243,0,0.165221,2.29371,16.0651,0,0,
-DEPLOY4,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e1,6872,0.000817207,4.28066,0.349243,0,0.165221,2.29371,16.0651,0,0,
-DEPLOY4,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e0.5,6872,0.000817207,4.28066,0.349243,0,0.165221,2.29371,16.0651,0,0,
 DEPLOY4,cf_90,counterfactual,0.9,0.0309278,regular,control,8796,0.000854505,4.70333,0.522965,0,0.263712,0.667943,21.5014,0,0,
 DEPLOY4,cf_90,counterfactual,0.9,0.0309278,regular,treat_e1,8796,0.000854505,4.70333,0.522965,0,0.263712,0.667943,21.5014,0,0,
 DEPLOY4,cf_90,counterfactual,0.9,0.0309278,regular,treat_e0.5,8796,0.000854505,4.70333,0.522965,0,0.263712,0.667943,21.5014,0,0,
@@ -137,9 +116,6 @@ DEPLOY4,cf_93,counterfactual,0.93,0.0214505,Weekend,treat_e0.5,1584,0.00552313,3
 DEPLOY4,cf_93,counterfactual,0.93,0.0214505,Long,control,244,0.00856605,5.14052,1.63934,0.15007,1.23425,1.5468,5.97913,0,0,0
 DEPLOY4,cf_93,counterfactual,0.93,0.0214505,Long,treat_e1,244,0.00409781,4.12334,0.819672,0,0.716721,0.919652,2.87267,1.32265,0.159273,0.101105
 DEPLOY4,cf_93,counterfactual,0.93,0.0214505,Long,treat_e0.5,244,0.00580206,4.50953,1.22951,0.0230105,0.969314,1.23422,4.05831,1.32265,0.0796366,0.101105
-DEPLOY4,cf_93,counterfactual,0.93,0.0214505,overnight,control,6872,0.00219172,4.28066,0.785797,0,0.38308,2.87718,43.0859,0,0,
-DEPLOY4,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e1,6872,0.00219172,4.28066,0.785797,0,0.38308,2.87718,43.0859,0,0,
-DEPLOY4,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e0.5,6872,0.00219172,4.28066,0.785797,0,0.38308,2.87718,43.0859,0,0,
 DEPLOY4,cf_93,counterfactual,0.93,0.0214505,regular,control,8796,0.00340788,4.70333,1.87585,0.114578,0.482365,1.08472,85.7505,0,0,
 DEPLOY4,cf_93,counterfactual,0.93,0.0214505,regular,treat_e1,8796,0.00340788,4.70333,1.87585,0.114578,0.482365,1.08472,85.7505,0,0,
 DEPLOY4,cf_93,counterfactual,0.93,0.0214505,regular,treat_e0.5,8796,0.00340788,4.70333,1.87585,0.114578,0.482365,1.08472,85.7505,0,0,
@@ -155,9 +131,6 @@ DEPLOY4,cf_95,counterfactual,0.95,0.0152284,Weekend,treat_e0.5,1584,0.0071726,3.
 DEPLOY4,cf_95,counterfactual,0.95,0.0152284,Long,control,244,0.01289,5.14052,3.27869,0.291172,1.5598,1.9321,8.99729,0,0,0
 DEPLOY4,cf_95,counterfactual,0.95,0.0152284,Long,treat_e1,244,0.00396004,3.25852,1.22951,0.00874567,0.711198,0.930883,2.78359,2.24196,0.278041,0.171378
 DEPLOY4,cf_95,counterfactual,0.95,0.0152284,Long,treat_e0.5,244,0.00716593,3.80277,2.04918,0.0630106,1.13066,1.43403,5.0176,2.24196,0.13902,0.171378
-DEPLOY4,cf_95,counterfactual,0.95,0.0152284,overnight,control,6872,0.00416738,4.28066,1.77532,0.107747,0.56516,3.36431,81.9244,0,0,
-DEPLOY4,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e1,6872,0.00416738,4.28066,1.77532,0.107747,0.56516,3.36431,81.9244,0,0,
-DEPLOY4,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e0.5,6872,0.00416738,4.28066,1.77532,0.107747,0.56516,3.36431,81.9244,0,0,
 DEPLOY4,cf_95,counterfactual,0.95,0.0152284,regular,control,8796,0.00796825,4.70333,4.46794,0.256215,0.754659,1.34795,200.501,0,0,
 DEPLOY4,cf_95,counterfactual,0.95,0.0152284,regular,treat_e1,8796,0.00796825,4.70333,4.46794,0.256215,0.754659,1.34795,200.501,0,0,
 DEPLOY4,cf_95,counterfactual,0.95,0.0152284,regular,treat_e0.5,8796,0.00796825,4.70333,4.46794,0.256215,0.754659,1.34795,200.501,0,0,
@@ -173,9 +146,6 @@ UNIVERSE12,morpho_38.5,in_the_wild,0.385,0.15,Weekend,treat_e0.5,4752,0,4.50758,
 UNIVERSE12,morpho_38.5,in_the_wild,0.385,0.15,Long,control,732,0,5.26477,0,0,0,0,0,0,0,0
 UNIVERSE12,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e1,732,0,5.26477,0,0,0,0,0,0,0,0
 UNIVERSE12,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e0.5,732,0,5.26477,0,0,0,0,0,0,0,0
-UNIVERSE12,morpho_38.5,in_the_wild,0.385,0.15,overnight,control,20616,0,4.34655,0,0,0,0,0,0,0,
-UNIVERSE12,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e1,20616,0,4.34655,0,0,0,0,0,0,0,
-UNIVERSE12,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e0.5,20616,0,4.34655,0,0,0,0,0,0,0,
 UNIVERSE12,morpho_38.5,in_the_wild,0.385,0.15,regular,control,26388,0,4.65646,0,0,0,0,0,0,0,
 UNIVERSE12,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e1,26388,0,4.65646,0,0,0,0,0,0,0,
 UNIVERSE12,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e0.5,26388,0,4.65646,0,0,0,0,0,0,0,
@@ -191,9 +161,6 @@ UNIVERSE12,morpho_62.5,in_the_wild,0.625,0.126761,Weekend,treat_e0.5,4752,0,4.50
 UNIVERSE12,morpho_62.5,in_the_wild,0.625,0.126761,Long,control,732,0,5.26477,0,0,0,0,0,0,0,0
 UNIVERSE12,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e1,732,0,5.26477,0,0,0,0,0,0,0,0
 UNIVERSE12,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e0.5,732,0,5.26477,0,0,0,0,0,0,0,0
-UNIVERSE12,morpho_62.5,in_the_wild,0.625,0.126761,overnight,control,20616,0,4.34655,0,0,0,0,0,0,0,
-UNIVERSE12,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e1,20616,0,4.34655,0,0,0,0,0,0,0,
-UNIVERSE12,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e0.5,20616,0,4.34655,0,0,0,0,0,0,0,
 UNIVERSE12,morpho_62.5,in_the_wild,0.625,0.126761,regular,control,26388,0,4.65646,0,0,0,0,0,0,0,
 UNIVERSE12,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e1,26388,0,4.65646,0,0,0,0,0,0,0,
 UNIVERSE12,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e0.5,26388,0,4.65646,0,0,0,0,0,0,0,
@@ -209,9 +176,6 @@ UNIVERSE12,morpho_77,in_the_wild,0.77,0.0741139,Weekend,treat_e0.5,4752,1.72717e
 UNIVERSE12,morpho_77,in_the_wild,0.77,0.0741139,Long,control,732,0,5.26477,0,0,0,0,0,0,0,0
 UNIVERSE12,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e1,732,0,5.26477,0,0,0,0,0,0.000215408,2.05151e-05,1.6466e-05
 UNIVERSE12,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e0.5,732,0,5.26477,0,0,0,0,0,0.000215408,1.02575e-05,1.6466e-05
-UNIVERSE12,morpho_77,in_the_wild,0.77,0.0741139,overnight,control,20616,0.000136464,4.34655,0.0194024,0,0,1.18961,2.68268,0,0,
-UNIVERSE12,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e1,20616,0.000136464,4.34655,0.0194024,0,0,1.18961,2.68268,0,0,
-UNIVERSE12,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e0.5,20616,0.000136464,4.34655,0.0194024,0,0,1.18961,2.68268,0,0,
 UNIVERSE12,morpho_77,in_the_wild,0.77,0.0741139,regular,control,26388,0,4.65646,0,0,0,0,0,0,0,
 UNIVERSE12,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e1,26388,0,4.65646,0,0,0,0,0,0,0,
 UNIVERSE12,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e0.5,26388,0,4.65646,0,0,0,0,0,0,0,
@@ -227,9 +191,6 @@ UNIVERSE12,morpho_86,in_the_wild,0.86,0.0438413,Weekend,treat_e0.5,4752,0.000774
 UNIVERSE12,morpho_86,in_the_wild,0.86,0.0438413,Long,control,732,0.000702572,5.26477,0.136612,0,0.138342,0.514283,0.490397,0,0,0
 UNIVERSE12,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e1,732,0.000702628,5.22588,0.136612,0,0.138342,0.514283,0.490397,0.0695916,0.00801196,0.00531966
 UNIVERSE12,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e0.5,732,0.0007026,5.22581,0.136612,0,0.138342,0.514283,0.490397,0.0695916,0.00400598,0.00531966
-UNIVERSE12,morpho_86,in_the_wild,0.86,0.0438413,overnight,control,20616,0.000504301,4.34655,0.048506,0,0,3.20983,9.91381,0,0,
-UNIVERSE12,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e1,20616,0.000504301,4.34655,0.048506,0,0,3.20983,9.91381,0,0,
-UNIVERSE12,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e0.5,20616,0.000504301,4.34655,0.048506,0,0,3.20983,9.91381,0,0,
 UNIVERSE12,morpho_86,in_the_wild,0.86,0.0438413,regular,control,26388,4.08107e-05,4.65646,0.0303168,0,0,0.271601,1.0269,0,0,
 UNIVERSE12,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e1,26388,4.08107e-05,4.65646,0.0303168,0,0,0.271601,1.0269,0,0,
 UNIVERSE12,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e0.5,26388,4.08107e-05,4.65646,0.0303168,0,0,0.271601,1.0269,0,0,
@@ -245,9 +206,6 @@ UNIVERSE12,aave_65,in_the_wild,0.65,0.055,Weekend,treat_e0.5,4752,0,4.50758,0,0,
 UNIVERSE12,aave_65,in_the_wild,0.65,0.055,Long,control,732,0,5.26477,0,0,0,0,0,0,0,0
 UNIVERSE12,aave_65,in_the_wild,0.65,0.055,Long,treat_e1,732,0,5.26477,0,0,0,0,0,0,0,0
 UNIVERSE12,aave_65,in_the_wild,0.65,0.055,Long,treat_e0.5,732,0,5.26477,0,0,0,0,0,0,0,0
-UNIVERSE12,aave_65,in_the_wild,0.65,0.055,overnight,control,20616,0,4.34655,0,0,0,0,0,0,0,
-UNIVERSE12,aave_65,in_the_wild,0.65,0.055,overnight,treat_e1,20616,0,4.34655,0,0,0,0,0,0,0,
-UNIVERSE12,aave_65,in_the_wild,0.65,0.055,overnight,treat_e0.5,20616,0,4.34655,0,0,0,0,0,0,0,
 UNIVERSE12,aave_65,in_the_wild,0.65,0.055,regular,control,26388,0,4.65646,0,0,0,0,0,0,0,
 UNIVERSE12,aave_65,in_the_wild,0.65,0.055,regular,treat_e1,26388,0,4.65646,0,0,0,0,0,0,0,
 UNIVERSE12,aave_65,in_the_wild,0.65,0.055,regular,treat_e0.5,26388,0,4.65646,0,0,0,0,0,0,0,
@@ -263,9 +221,6 @@ UNIVERSE12,aave_79,in_the_wild,0.79,0.055,Weekend,treat_e0.5,4752,3.24869e-05,4.
 UNIVERSE12,aave_79,in_the_wild,0.79,0.055,Long,control,732,0,5.26477,0,0,0,0,0,0,0,0
 UNIVERSE12,aave_79,in_the_wild,0.79,0.055,Long,treat_e1,732,0,5.26479,0,0,0,0,0,0.00546446,0.000520425,0.00041771
 UNIVERSE12,aave_79,in_the_wild,0.79,0.055,Long,treat_e0.5,732,0,5.26478,0,0,0,0,0,0.00546446,0.000260213,0.00041771
-UNIVERSE12,aave_79,in_the_wild,0.79,0.055,overnight,control,20616,0.000156291,4.34655,0.0194024,0,0,1.32271,3.07244,0,0,
-UNIVERSE12,aave_79,in_the_wild,0.79,0.055,overnight,treat_e1,20616,0.000156291,4.34655,0.0194024,0,0,1.32271,3.07244,0,0,
-UNIVERSE12,aave_79,in_the_wild,0.79,0.055,overnight,treat_e0.5,20616,0.000156291,4.34655,0.0194024,0,0,1.32271,3.07244,0,0,
 UNIVERSE12,aave_79,in_the_wild,0.79,0.055,regular,control,26388,0,4.65646,0,0,0,0,0,0,0,
 UNIVERSE12,aave_79,in_the_wild,0.79,0.055,regular,treat_e1,26388,0,4.65646,0,0,0,0,0,0,0,
 UNIVERSE12,aave_79,in_the_wild,0.79,0.055,regular,treat_e0.5,26388,0,4.65646,0,0,0,0,0,0,0,
@@ -281,9 +236,6 @@ UNIVERSE12,cf_90,counterfactual,0.9,0.0309278,Weekend,treat_e0.5,4752,0.00208601
 UNIVERSE12,cf_90,counterfactual,0.9,0.0309278,Long,control,732,0.00158863,5.26477,0.409836,0,0.325179,1.10069,1.10887,0,0,0
 UNIVERSE12,cf_90,counterfactual,0.9,0.0309278,Long,treat_e1,732,0.00118546,5.05697,0.273224,0,0.244277,0.847249,0.829249,0.27478,0.032515,0.0210045
 UNIVERSE12,cf_90,counterfactual,0.9,0.0309278,Long,treat_e0.5,732,0.00135989,5.10812,0.273224,0,0.278408,0.974132,0.950239,0.27478,0.0162575,0.0210045
-UNIVERSE12,cf_90,counterfactual,0.9,0.0309278,overnight,control,20616,0.000973493,4.34655,0.237679,0,0.136586,4.24995,19.1374,0,0,
-UNIVERSE12,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e1,20616,0.000973493,4.34655,0.237679,0,0.136586,4.24995,19.1374,0,0,
-UNIVERSE12,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e0.5,20616,0.000973493,4.34655,0.237679,0,0.136586,4.24995,19.1374,0,0,
 UNIVERSE12,cf_90,counterfactual,0.9,0.0309278,regular,control,26388,0.000289709,4.65646,0.18569,0,0.0916386,0.667943,7.28978,0,0,
 UNIVERSE12,cf_90,counterfactual,0.9,0.0309278,regular,treat_e1,26388,0.000289709,4.65646,0.18569,0,0.0916386,0.667943,7.28978,0,0,
 UNIVERSE12,cf_90,counterfactual,0.9,0.0309278,regular,treat_e0.5,26388,0.000289709,4.65646,0.18569,0,0.0916386,0.667943,7.28978,0,0,
@@ -299,9 +251,6 @@ UNIVERSE12,cf_93,counterfactual,0.93,0.0214505,Weekend,treat_e0.5,4752,0.0034992
 UNIVERSE12,cf_93,counterfactual,0.93,0.0214505,Long,control,732,0.0031881,5.26477,0.68306,0,0.606572,1.5468,2.2253,0,0,0
 UNIVERSE12,cf_93,counterfactual,0.93,0.0214505,Long,treat_e1,732,0.00169791,4.73156,0.409836,0,0.425439,0.919652,1.18982,0.683983,0.0824604,0.0522844
 UNIVERSE12,cf_93,counterfactual,0.93,0.0214505,Long,treat_e0.5,732,0.00226617,4.88562,0.546448,0,0.510058,1.23422,1.58503,0.683983,0.0412302,0.0522844
-UNIVERSE12,cf_93,counterfactual,0.93,0.0214505,overnight,control,20616,0.00196887,4.34655,0.572371,0,0.355111,5.02368,38.7049,0,0,
-UNIVERSE12,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e1,20616,0.00196887,4.34655,0.572371,0,0.355111,5.02368,38.7049,0,0,
-UNIVERSE12,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e0.5,20616,0.00196887,4.34655,0.572371,0,0.355111,5.02368,38.7049,0,0,
 UNIVERSE12,cf_93,counterfactual,0.93,0.0214505,regular,control,26388,0.00130926,4.65646,0.85645,0,0.31121,1.08472,32.9443,0,0,
 UNIVERSE12,cf_93,counterfactual,0.93,0.0214505,regular,treat_e1,26388,0.00130926,4.65646,0.85645,0,0.31121,1.08472,32.9443,0,0,
 UNIVERSE12,cf_93,counterfactual,0.93,0.0214505,regular,treat_e0.5,26388,0.00130926,4.65646,0.85645,0,0.31121,1.08472,32.9443,0,0,
@@ -317,9 +266,6 @@ UNIVERSE12,cf_95,counterfactual,0.95,0.0152284,Weekend,treat_e0.5,4752,0.0047838
 UNIVERSE12,cf_95,counterfactual,0.95,0.0152284,Long,control,732,0.00509454,5.26477,1.91257,0.084588,0.812147,1.9321,3.556,0,0,0
 UNIVERSE12,cf_95,counterfactual,0.95,0.0152284,Long,treat_e1,732,0.00186874,3.99936,0.68306,0,0.530577,0.930883,1.31143,1.2836,0.155226,0.0981201
 UNIVERSE12,cf_95,counterfactual,0.95,0.0152284,Long,treat_e0.5,732,0.00299288,4.40066,0.956284,0,0.665924,1.43403,2.09501,1.2836,0.0776131,0.0981201
-UNIVERSE12,cf_95,counterfactual,0.95,0.0152284,overnight,control,20616,0.0033244,4.34655,1.15929,0.0318219,0.510064,5.59319,65.3527,0,0,
-UNIVERSE12,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e1,20616,0.0033244,4.34655,1.15929,0.0318219,0.510064,5.59319,65.3527,0,0,
-UNIVERSE12,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e0.5,20616,0.0033244,4.34655,1.15929,0.0318219,0.510064,5.59319,65.3527,0,0,
 UNIVERSE12,cf_95,counterfactual,0.95,0.0152284,regular,control,26388,0.00354316,4.65646,2.42156,0.122211,0.449887,1.34795,89.1544,0,0,
 UNIVERSE12,cf_95,counterfactual,0.95,0.0152284,regular,treat_e1,26388,0.00354316,4.65646,2.42156,0.122211,0.449887,1.34795,89.1544,0,0,
 UNIVERSE12,cf_95,counterfactual,0.95,0.0152284,regular,treat_e0.5,26388,0.00354316,4.65646,2.42156,0.122211,0.449887,1.34795,89.1544,0,0,
@@ -335,9 +281,6 @@ AAPL,morpho_38.5,in_the_wild,0.385,0.15,Weekend,treat_e0.5,396,0,4.87374,0,0,0,0
 AAPL,morpho_38.5,in_the_wild,0.385,0.15,Long,control,61,0,5.6128,0,0,0,0,0,0,0,0
 AAPL,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e1,61,0,5.6128,0,0,0,0,0,0,0,0
 AAPL,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e0.5,61,0,5.6128,0,0,0,0,0,0,0,0
-AAPL,morpho_38.5,in_the_wild,0.385,0.15,overnight,control,1718,0,4.39963,0,0,0,0,0,0,0,
-AAPL,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e1,1718,0,4.39963,0,0,0,0,0,0,0,
-AAPL,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e0.5,1718,0,4.39963,0,0,0,0,0,0,0,
 AAPL,morpho_38.5,in_the_wild,0.385,0.15,regular,control,2199,0,4.42106,0,0,0,0,0,0,0,
 AAPL,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e1,2199,0,4.42106,0,0,0,0,0,0,0,
 AAPL,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e0.5,2199,0,4.42106,0,0,0,0,0,0,0,
@@ -353,9 +296,6 @@ AAPL,morpho_62.5,in_the_wild,0.625,0.126761,Weekend,treat_e0.5,396,0,4.87374,0,0
 AAPL,morpho_62.5,in_the_wild,0.625,0.126761,Long,control,61,0,5.6128,0,0,0,0,0,0,0,0
 AAPL,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e1,61,0,5.6128,0,0,0,0,0,0,0,0
 AAPL,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e0.5,61,0,5.6128,0,0,0,0,0,0,0,0
-AAPL,morpho_62.5,in_the_wild,0.625,0.126761,overnight,control,1718,0,4.39963,0,0,0,0,0,0,0,
-AAPL,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e1,1718,0,4.39963,0,0,0,0,0,0,0,
-AAPL,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e0.5,1718,0,4.39963,0,0,0,0,0,0,0,
 AAPL,morpho_62.5,in_the_wild,0.625,0.126761,regular,control,2199,0,4.42106,0,0,0,0,0,0,0,
 AAPL,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e1,2199,0,4.42106,0,0,0,0,0,0,0,
 AAPL,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e0.5,2199,0,4.42106,0,0,0,0,0,0,0,
@@ -371,9 +311,6 @@ AAPL,morpho_77,in_the_wild,0.77,0.0741139,Weekend,treat_e0.5,396,0,4.87374,0,0,0
 AAPL,morpho_77,in_the_wild,0.77,0.0741139,Long,control,61,0,5.6128,0,0,0,0,0,0,0,0
 AAPL,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e1,61,0,5.6128,0,0,0,0,0,0,0,0
 AAPL,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e0.5,61,0,5.6128,0,0,0,0,0,0,0,0
-AAPL,morpho_77,in_the_wild,0.77,0.0741139,overnight,control,1718,0,4.39963,0,0,0,0,0,0,0,
-AAPL,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e1,1718,0,4.39963,0,0,0,0,0,0,0,
-AAPL,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e0.5,1718,0,4.39963,0,0,0,0,0,0,0,
 AAPL,morpho_77,in_the_wild,0.77,0.0741139,regular,control,2199,0,4.42106,0,0,0,0,0,0,0,
 AAPL,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e1,2199,0,4.42106,0,0,0,0,0,0,0,
 AAPL,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e0.5,2199,0,4.42106,0,0,0,0,0,0,0,
@@ -389,9 +326,6 @@ AAPL,morpho_86,in_the_wild,0.86,0.0438413,Weekend,treat_e0.5,396,0.000731022,4.8
 AAPL,morpho_86,in_the_wild,0.86,0.0438413,Long,control,61,0,5.6128,0,0,0,0,0,0,0,0
 AAPL,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e1,61,0,5.61313,0,0,0,0,0,0.0614014,0.00584775,0.00469359
 AAPL,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e0.5,61,0,5.61297,0,0,0,0,0,0.0614014,0.00292387,0.00469359
-AAPL,morpho_86,in_the_wild,0.86,0.0438413,overnight,control,1718,0,4.39963,0,0,0,0,0,0,0,
-AAPL,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e1,1718,0,4.39963,0,0,0,0,0,0,0,
-AAPL,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e0.5,1718,0,4.39963,0,0,0,0,0,0,0,
 AAPL,morpho_86,in_the_wild,0.86,0.0438413,regular,control,2199,0,4.42106,0,0,0,0,0,0,0,
 AAPL,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e1,2199,0,4.42106,0,0,0,0,0,0,0,
 AAPL,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e0.5,2199,0,4.42106,0,0,0,0,0,0,0,
@@ -407,9 +341,6 @@ AAPL,aave_65,in_the_wild,0.65,0.055,Weekend,treat_e0.5,396,0,4.87374,0,0,0,0,0,0
 AAPL,aave_65,in_the_wild,0.65,0.055,Long,control,61,0,5.6128,0,0,0,0,0,0,0,0
 AAPL,aave_65,in_the_wild,0.65,0.055,Long,treat_e1,61,0,5.6128,0,0,0,0,0,0,0,0
 AAPL,aave_65,in_the_wild,0.65,0.055,Long,treat_e0.5,61,0,5.6128,0,0,0,0,0,0,0,0
-AAPL,aave_65,in_the_wild,0.65,0.055,overnight,control,1718,0,4.39963,0,0,0,0,0,0,0,
-AAPL,aave_65,in_the_wild,0.65,0.055,overnight,treat_e1,1718,0,4.39963,0,0,0,0,0,0,0,
-AAPL,aave_65,in_the_wild,0.65,0.055,overnight,treat_e0.5,1718,0,4.39963,0,0,0,0,0,0,0,
 AAPL,aave_65,in_the_wild,0.65,0.055,regular,control,2199,0,4.42106,0,0,0,0,0,0,0,
 AAPL,aave_65,in_the_wild,0.65,0.055,regular,treat_e1,2199,0,4.42106,0,0,0,0,0,0,0,
 AAPL,aave_65,in_the_wild,0.65,0.055,regular,treat_e0.5,2199,0,4.42106,0,0,0,0,0,0,0,
@@ -425,9 +356,6 @@ AAPL,aave_79,in_the_wild,0.79,0.055,Weekend,treat_e0.5,396,0,4.87374,0,0,0,0,0,0
 AAPL,aave_79,in_the_wild,0.79,0.055,Long,control,61,0,5.6128,0,0,0,0,0,0,0,0
 AAPL,aave_79,in_the_wild,0.79,0.055,Long,treat_e1,61,0,5.6128,0,0,0,0,0,0,0,0
 AAPL,aave_79,in_the_wild,0.79,0.055,Long,treat_e0.5,61,0,5.6128,0,0,0,0,0,0,0,0
-AAPL,aave_79,in_the_wild,0.79,0.055,overnight,control,1718,0,4.39963,0,0,0,0,0,0,0,
-AAPL,aave_79,in_the_wild,0.79,0.055,overnight,treat_e1,1718,0,4.39963,0,0,0,0,0,0,0,
-AAPL,aave_79,in_the_wild,0.79,0.055,overnight,treat_e0.5,1718,0,4.39963,0,0,0,0,0,0,0,
 AAPL,aave_79,in_the_wild,0.79,0.055,regular,control,2199,0,4.42106,0,0,0,0,0,0,0,
 AAPL,aave_79,in_the_wild,0.79,0.055,regular,treat_e1,2199,0,4.42106,0,0,0,0,0,0,0,
 AAPL,aave_79,in_the_wild,0.79,0.055,regular,treat_e0.5,2199,0,4.42106,0,0,0,0,0,0,0,
@@ -443,9 +371,6 @@ AAPL,cf_90,counterfactual,0.9,0.0309278,Weekend,treat_e0.5,396,0.00236459,4.6089
 AAPL,cf_90,counterfactual,0.9,0.0309278,Long,control,61,0,5.6128,0,0,0,0,0,0,0,0
 AAPL,cf_90,counterfactual,0.9,0.0309278,Long,treat_e1,61,0,5.45666,0,0,0,0,0,0.237943,0.0273817,0.0181886
 AAPL,cf_90,counterfactual,0.9,0.0309278,Long,treat_e0.5,61,0,5.45667,0,0,0,0,0,0.237943,0.0136908,0.0181886
-AAPL,cf_90,counterfactual,0.9,0.0309278,overnight,control,1718,0.000236432,4.39963,0.174622,0,0.111795,0.165336,4.64789,0,0,
-AAPL,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e1,1718,0.000236432,4.39963,0.174622,0,0.111795,0.165336,4.64789,0,0,
-AAPL,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e0.5,1718,0.000236432,4.39963,0.174622,0,0.111795,0.165336,4.64789,0,0,
 AAPL,cf_90,counterfactual,0.9,0.0309278,regular,control,2199,2.21027e-05,4.42106,0.0909504,0,0,0.0443601,0.556158,0,0,
 AAPL,cf_90,counterfactual,0.9,0.0309278,regular,treat_e1,2199,2.21027e-05,4.42106,0.0909504,0,0,0.0443601,0.556158,0,0,
 AAPL,cf_90,counterfactual,0.9,0.0309278,regular,treat_e0.5,2199,2.21027e-05,4.42106,0.0909504,0,0,0.0443601,0.556158,0,0,
@@ -461,9 +386,6 @@ AAPL,cf_93,counterfactual,0.93,0.0214505,Weekend,treat_e0.5,396,0.00401051,4.367
 AAPL,cf_93,counterfactual,0.93,0.0214505,Long,control,61,0.0012987,5.6128,1.63934,0.0316882,0.0744673,0.0792205,0.906494,0,0,0
 AAPL,cf_93,counterfactual,0.93,0.0214505,Long,treat_e1,61,0,4.98903,0,0,0,0,0,0.62497,0.0730331,0.0477734
 AAPL,cf_93,counterfactual,0.93,0.0214505,Long,treat_e0.5,61,0,4.98866,0,0,0,0,0,0.62497,0.0365165,0.0477734
-AAPL,cf_93,counterfactual,0.93,0.0214505,overnight,control,1718,0.000844419,4.39963,0.407451,0,0.330898,0.383192,16.6,0,0,
-AAPL,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e1,1718,0.000844419,4.39963,0.407451,0,0.330898,0.383192,16.6,0,0,
-AAPL,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e0.5,1718,0.000844419,4.39963,0.407451,0,0.330898,0.383192,16.6,0,0,
 AAPL,cf_93,counterfactual,0.93,0.0214505,regular,control,2199,0.000256372,4.42106,0.181901,0,0.0569888,0.265032,6.45094,0,0,
 AAPL,cf_93,counterfactual,0.93,0.0214505,regular,treat_e1,2199,0.000256372,4.42106,0.181901,0,0.0569888,0.265032,6.45094,0,0,
 AAPL,cf_93,counterfactual,0.93,0.0214505,regular,treat_e0.5,2199,0.000256372,4.42106,0.181901,0,0.0569888,0.265032,6.45094,0,0,
@@ -479,9 +401,6 @@ AAPL,cf_95,counterfactual,0.95,0.0152284,Weekend,treat_e0.5,396,0.0057804,3.8126
 AAPL,cf_95,counterfactual,0.95,0.0152284,Long,control,61,0.00362934,5.6128,1.63934,0.0885558,0.208106,0.221389,2.53329,0,0,0
 AAPL,cf_95,counterfactual,0.95,0.0152284,Long,treat_e1,61,0,4.35958,0,0,0,0,0,1.16914,0.139752,0.0893704
 AAPL,cf_95,counterfactual,0.95,0.0152284,Long,treat_e0.5,61,0.000566636,4.6721,1.63934,0.0138421,0.032529,0.0346053,0.395977,1.16914,0.0698762,0.0893704
-AAPL,cf_95,counterfactual,0.95,0.0152284,overnight,control,1718,0.00179503,4.39963,1.04773,0.00871686,0.475087,0.565379,35.2877,0,0,
-AAPL,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e1,1718,0.00179503,4.39963,1.04773,0.00871686,0.475087,0.565379,35.2877,0,0,
-AAPL,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e0.5,1718,0.00179503,4.39963,1.04773,0.00871686,0.475087,0.565379,35.2877,0,0,
 AAPL,cf_95,counterfactual,0.95,0.0152284,regular,control,2199,0.00120828,4.42106,1.45521,0.0359481,0.199492,0.404404,30.4033,0,0,
 AAPL,cf_95,counterfactual,0.95,0.0152284,regular,treat_e1,2199,0.00120828,4.42106,1.45521,0.0359481,0.199492,0.404404,30.4033,0,0,
 AAPL,cf_95,counterfactual,0.95,0.0152284,regular,treat_e0.5,2199,0.00120828,4.42106,1.45521,0.0359481,0.199492,0.404404,30.4033,0,0,
@@ -497,9 +416,6 @@ NVDA,morpho_38.5,in_the_wild,0.385,0.15,Weekend,treat_e0.5,396,0,4.47691,0,0,0,0
 NVDA,morpho_38.5,in_the_wild,0.385,0.15,Long,control,61,0,5.14442,0,0,0,0,0,0,0,0
 NVDA,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e1,61,0,5.14442,0,0,0,0,0,0,0,0
 NVDA,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e0.5,61,0,5.14442,0,0,0,0,0,0,0,0
-NVDA,morpho_38.5,in_the_wild,0.385,0.15,overnight,control,1718,0,4.12052,0,0,0,0,0,0,0,
-NVDA,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e1,1718,0,4.12052,0,0,0,0,0,0,0,
-NVDA,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e0.5,1718,0,4.12052,0,0,0,0,0,0,0,
 NVDA,morpho_38.5,in_the_wild,0.385,0.15,regular,control,2199,0,4.84138,0,0,0,0,0,0,0,
 NVDA,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e1,2199,0,4.84138,0,0,0,0,0,0,0,
 NVDA,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e0.5,2199,0,4.84138,0,0,0,0,0,0,0,
@@ -515,9 +431,6 @@ NVDA,morpho_62.5,in_the_wild,0.625,0.126761,Weekend,treat_e0.5,396,0,4.47691,0,0
 NVDA,morpho_62.5,in_the_wild,0.625,0.126761,Long,control,61,0,5.14442,0,0,0,0,0,0,0,0
 NVDA,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e1,61,0,5.14442,0,0,0,0,0,0,0,0
 NVDA,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e0.5,61,0,5.14442,0,0,0,0,0,0,0,0
-NVDA,morpho_62.5,in_the_wild,0.625,0.126761,overnight,control,1718,0,4.12052,0,0,0,0,0,0,0,
-NVDA,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e1,1718,0,4.12052,0,0,0,0,0,0,0,
-NVDA,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e0.5,1718,0,4.12052,0,0,0,0,0,0,0,
 NVDA,morpho_62.5,in_the_wild,0.625,0.126761,regular,control,2199,0,4.84138,0,0,0,0,0,0,0,
 NVDA,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e1,2199,0,4.84138,0,0,0,0,0,0,0,
 NVDA,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e0.5,2199,0,4.84138,0,0,0,0,0,0,0,
@@ -533,9 +446,6 @@ NVDA,morpho_77,in_the_wild,0.77,0.0741139,Weekend,treat_e0.5,396,0,4.47691,0,0,0
 NVDA,morpho_77,in_the_wild,0.77,0.0741139,Long,control,61,0,5.14442,0,0,0,0,0,0,0,0
 NVDA,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e1,61,0,5.14442,0,0,0,0,0,0,0,0
 NVDA,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e0.5,61,0,5.14442,0,0,0,0,0,0,0,0
-NVDA,morpho_77,in_the_wild,0.77,0.0741139,overnight,control,1718,0.000134795,4.12052,0.0582072,0,0,0.231578,2.64987,0,0,
-NVDA,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e1,1718,0.000134795,4.12052,0.0582072,0,0,0.231578,2.64987,0,0,
-NVDA,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e0.5,1718,0.000134795,4.12052,0.0582072,0,0,0.231578,2.64987,0,0,
 NVDA,morpho_77,in_the_wild,0.77,0.0741139,regular,control,2199,0,4.84138,0,0,0,0,0,0,0,
 NVDA,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e1,2199,0,4.84138,0,0,0,0,0,0,0,
 NVDA,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e0.5,2199,0,4.84138,0,0,0,0,0,0,0,
@@ -551,9 +461,6 @@ NVDA,morpho_86,in_the_wild,0.86,0.0438413,Weekend,treat_e0.5,396,0.00311062,4.35
 NVDA,morpho_86,in_the_wild,0.86,0.0438413,Long,control,61,0,5.14442,0,0,0,0,0,0,0,0
 NVDA,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e1,61,0,4.82986,0,0,0,0,0,0.201996,0.0192378,0.0154408
 NVDA,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e0.5,61,0,4.83101,0,0,0,0,0,0.201996,0.00961888,0.0154408
-NVDA,morpho_86,in_the_wild,0.86,0.0438413,overnight,control,1718,0.000849618,4.12052,0.0582072,0,0,1.45964,16.7022,0,0,
-NVDA,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e1,1718,0.000849618,4.12052,0.0582072,0,0,1.45964,16.7022,0,0,
-NVDA,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e0.5,1718,0.000849618,4.12052,0.0582072,0,0,1.45964,16.7022,0,0,
 NVDA,morpho_86,in_the_wild,0.86,0.0438413,regular,control,2199,5.32548e-05,4.84138,0.0909504,0,0,0.0817293,1.34002,0,0,
 NVDA,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e1,2199,5.32548e-05,4.84138,0.0909504,0,0,0.0817293,1.34002,0,0,
 NVDA,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e0.5,2199,5.32548e-05,4.84138,0.0909504,0,0,0.0817293,1.34002,0,0,
@@ -569,9 +476,6 @@ NVDA,aave_65,in_the_wild,0.65,0.055,Weekend,treat_e0.5,396,0,4.47691,0,0,0,0,0,0
 NVDA,aave_65,in_the_wild,0.65,0.055,Long,control,61,0,5.14442,0,0,0,0,0,0,0,0
 NVDA,aave_65,in_the_wild,0.65,0.055,Long,treat_e1,61,0,5.14442,0,0,0,0,0,0,0,0
 NVDA,aave_65,in_the_wild,0.65,0.055,Long,treat_e0.5,61,0,5.14442,0,0,0,0,0,0,0,0
-NVDA,aave_65,in_the_wild,0.65,0.055,overnight,control,1718,0,4.12052,0,0,0,0,0,0,0,
-NVDA,aave_65,in_the_wild,0.65,0.055,overnight,treat_e1,1718,0,4.12052,0,0,0,0,0,0,0,
-NVDA,aave_65,in_the_wild,0.65,0.055,overnight,treat_e0.5,1718,0,4.12052,0,0,0,0,0,0,0,
 NVDA,aave_65,in_the_wild,0.65,0.055,regular,control,2199,0,4.84138,0,0,0,0,0,0,0,
 NVDA,aave_65,in_the_wild,0.65,0.055,regular,treat_e1,2199,0,4.84138,0,0,0,0,0,0,0,
 NVDA,aave_65,in_the_wild,0.65,0.055,regular,treat_e0.5,2199,0,4.84138,0,0,0,0,0,0,0,
@@ -587,9 +491,6 @@ NVDA,aave_79,in_the_wild,0.79,0.055,Weekend,treat_e0.5,396,0,4.47691,0,0,0,0,0,0
 NVDA,aave_79,in_the_wild,0.79,0.055,Long,control,61,0,5.14442,0,0,0,0,0,0,0,0
 NVDA,aave_79,in_the_wild,0.79,0.055,Long,treat_e1,61,0,5.14442,0,0,0,0,0,0,0,0
 NVDA,aave_79,in_the_wild,0.79,0.055,Long,treat_e0.5,61,0,5.14442,0,0,0,0,0,0,0,0
-NVDA,aave_79,in_the_wild,0.79,0.055,overnight,control,1718,0.000176214,4.12052,0.0582072,0,0,0.302736,3.4641,0,0,
-NVDA,aave_79,in_the_wild,0.79,0.055,overnight,treat_e1,1718,0.000176214,4.12052,0.0582072,0,0,0.302736,3.4641,0,0,
-NVDA,aave_79,in_the_wild,0.79,0.055,overnight,treat_e0.5,1718,0.000176214,4.12052,0.0582072,0,0,0.302736,3.4641,0,0,
 NVDA,aave_79,in_the_wild,0.79,0.055,regular,control,2199,0,4.84138,0,0,0,0,0,0,0,
 NVDA,aave_79,in_the_wild,0.79,0.055,regular,treat_e1,2199,0,4.84138,0,0,0,0,0,0,0,
 NVDA,aave_79,in_the_wild,0.79,0.055,regular,treat_e0.5,2199,0,4.84138,0,0,0,0,0,0,0,
@@ -605,9 +506,6 @@ NVDA,cf_90,counterfactual,0.9,0.0309278,Weekend,treat_e0.5,396,0.00801923,4.0642
 NVDA,cf_90,counterfactual,0.9,0.0309278,Long,control,61,0,5.14442,0,0,0,0,0,0,0,0
 NVDA,cf_90,counterfactual,0.9,0.0309278,Long,treat_e1,61,0,4.36758,0,0,0,0,0,0.763796,0.0869815,0.0583854
 NVDA,cf_90,counterfactual,0.9,0.0309278,Long,treat_e0.5,61,0,4.51813,0,0,0,0,0,0.763796,0.0434907,0.0583854
-NVDA,cf_90,counterfactual,0.9,0.0309278,overnight,control,1718,0.00146241,4.12052,0.232829,0,0.0884919,2.29371,28.7487,0,0,
-NVDA,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e1,1718,0.00146241,4.12052,0.232829,0,0.0884919,2.29371,28.7487,0,0,
-NVDA,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e0.5,1718,0.00146241,4.12052,0.232829,0,0.0884919,2.29371,28.7487,0,0,
 NVDA,cf_90,counterfactual,0.9,0.0309278,regular,control,2199,0.00102295,4.84138,0.727603,0,0.196083,0.388361,25.7399,0,0,
 NVDA,cf_90,counterfactual,0.9,0.0309278,regular,treat_e1,2199,0.00102295,4.84138,0.727603,0,0.196083,0.388361,25.7399,0,0,
 NVDA,cf_90,counterfactual,0.9,0.0309278,regular,treat_e0.5,2199,0.00102295,4.84138,0.727603,0,0.196083,0.388361,25.7399,0,0,
@@ -623,9 +521,6 @@ NVDA,cf_93,counterfactual,0.93,0.0214505,Weekend,treat_e0.5,396,0.0122476,3.4128
 NVDA,cf_93,counterfactual,0.93,0.0214505,Long,control,61,0.00333635,5.14442,1.63934,0.0814069,0.191306,0.203517,2.32878,0,0,0
 NVDA,cf_93,counterfactual,0.93,0.0214505,Long,treat_e1,61,0.00138709,3.58729,1.63934,0.0338169,0.0794697,0.0845422,0.967389,1.62227,0.201749,0.124008
 NVDA,cf_93,counterfactual,0.93,0.0214505,Long,treat_e0.5,61,0.0023627,4.2048,1.63934,0.0576261,0.135421,0.144065,1.64849,1.62227,0.100874,0.124008
-NVDA,cf_93,counterfactual,0.93,0.0214505,overnight,control,1718,0.0025115,4.12052,0.523865,0,0.308137,2.87718,49.3723,0,0,
-NVDA,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e1,1718,0.0025115,4.12052,0.523865,0,0.308137,2.87718,49.3723,0,0,
-NVDA,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e0.5,1718,0.0025115,4.12052,0.523865,0,0.308137,2.87718,49.3723,0,0,
 NVDA,cf_93,counterfactual,0.93,0.0214505,regular,control,2199,0.00474369,4.84138,2.68304,0.189065,0.413223,0.725861,119.363,0,0,
 NVDA,cf_93,counterfactual,0.93,0.0214505,regular,treat_e1,2199,0.00474369,4.84138,2.68304,0.189065,0.413223,0.725861,119.363,0,0,
 NVDA,cf_93,counterfactual,0.93,0.0214505,regular,treat_e0.5,2199,0.00474369,4.84138,2.68304,0.189065,0.413223,0.725861,119.363,0,0,
@@ -641,9 +536,6 @@ NVDA,cf_95,counterfactual,0.95,0.0152284,Weekend,treat_e0.5,396,0.0151447,2.6596
 NVDA,cf_95,counterfactual,0.95,0.0152284,Long,control,61,0.00563631,5.14442,1.63934,0.137526,0.323186,0.343815,3.93416,0,0,0
 NVDA,cf_95,counterfactual,0.95,0.0152284,Long,treat_e1,61,0.000440041,2.01033,1.63934,0.0107321,0.0252204,0.0268302,0.307009,2.89728,0.36292,0.221471
 NVDA,cf_95,counterfactual,0.95,0.0152284,Long,treat_e0.5,61,0.0030429,2.7919,1.63934,0.0742297,0.17444,0.185574,2.12347,2.89728,0.18146,0.221471
-NVDA,cf_95,counterfactual,0.95,0.0152284,overnight,control,1718,0.0043549,4.12052,1.6298,0.0946832,0.451017,3.36431,85.6109,0,0,
-NVDA,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e1,1718,0.0043549,4.12052,1.6298,0.0946832,0.451017,3.36431,85.6109,0,0,
-NVDA,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e0.5,1718,0.0043549,4.12052,1.6298,0.0946832,0.451017,3.36431,85.6109,0,0,
 NVDA,cf_95,counterfactual,0.95,0.0152284,regular,control,2199,0.0114391,4.84138,6.59391,0.329581,0.624538,0.994489,287.837,0,0,
 NVDA,cf_95,counterfactual,0.95,0.0152284,regular,treat_e1,2199,0.0114391,4.84138,6.59391,0.329581,0.624538,0.994489,287.837,0,0,
 NVDA,cf_95,counterfactual,0.95,0.0152284,regular,treat_e0.5,2199,0.0114391,4.84138,6.59391,0.329581,0.624538,0.994489,287.837,0,0,
@@ -659,9 +551,6 @@ TSLA,morpho_38.5,in_the_wild,0.385,0.15,Weekend,treat_e0.5,396,0,4.38552,0,0,0,0
 TSLA,morpho_38.5,in_the_wild,0.385,0.15,Long,control,61,0,4.49649,0,0,0,0,0,0,0,0
 TSLA,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e1,61,0,4.49649,0,0,0,0,0,0,0,0
 TSLA,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e0.5,61,0,4.49649,0,0,0,0,0,0,0,0
-TSLA,morpho_38.5,in_the_wild,0.385,0.15,overnight,control,1718,0,4.48417,0,0,0,0,0,0,0,
-TSLA,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e1,1718,0,4.48417,0,0,0,0,0,0,0,
-TSLA,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e0.5,1718,0,4.48417,0,0,0,0,0,0,0,
 TSLA,morpho_38.5,in_the_wild,0.385,0.15,regular,control,2199,0,5.14216,0,0,0,0,0,0,0,
 TSLA,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e1,2199,0,5.14216,0,0,0,0,0,0,0,
 TSLA,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e0.5,2199,0,5.14216,0,0,0,0,0,0,0,
@@ -677,9 +566,6 @@ TSLA,morpho_62.5,in_the_wild,0.625,0.126761,Weekend,treat_e0.5,396,0,4.38552,0,0
 TSLA,morpho_62.5,in_the_wild,0.625,0.126761,Long,control,61,0,4.49649,0,0,0,0,0,0,0,0
 TSLA,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e1,61,0,4.49649,0,0,0,0,0,0,0,0
 TSLA,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e0.5,61,0,4.49649,0,0,0,0,0,0,0,0
-TSLA,morpho_62.5,in_the_wild,0.625,0.126761,overnight,control,1718,0,4.48417,0,0,0,0,0,0,0,
-TSLA,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e1,1718,0,4.48417,0,0,0,0,0,0,0,
-TSLA,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e0.5,1718,0,4.48417,0,0,0,0,0,0,0,
 TSLA,morpho_62.5,in_the_wild,0.625,0.126761,regular,control,2199,0,5.14216,0,0,0,0,0,0,0,
 TSLA,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e1,2199,0,5.14216,0,0,0,0,0,0,0,
 TSLA,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e0.5,2199,0,5.14216,0,0,0,0,0,0,0,
@@ -695,9 +581,6 @@ TSLA,morpho_77,in_the_wild,0.77,0.0741139,Weekend,treat_e0.5,396,0,4.38536,0,0,0
 TSLA,morpho_77,in_the_wild,0.77,0.0741139,Long,control,61,0,4.49649,0,0,0,0,0,0,0,0
 TSLA,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e1,61,0,4.4965,0,0,0,0,0,0.0025849,0.000246181,0.000197592
 TSLA,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e0.5,61,0,4.49649,0,0,0,0,0,0.0025849,0.00012309,0.000197592
-TSLA,morpho_77,in_the_wild,0.77,0.0741139,overnight,control,1718,0,4.48417,0,0,0,0,0,0,0,
-TSLA,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e1,1718,0,4.48417,0,0,0,0,0,0,0,
-TSLA,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e0.5,1718,0,4.48417,0,0,0,0,0,0,0,
 TSLA,morpho_77,in_the_wild,0.77,0.0741139,regular,control,2199,0,5.14216,0,0,0,0,0,0,0,
 TSLA,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e1,2199,0,5.14216,0,0,0,0,0,0,0,
 TSLA,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e0.5,2199,0,5.14216,0,0,0,0,0,0,0,
@@ -713,9 +596,6 @@ TSLA,morpho_86,in_the_wild,0.86,0.0438413,Weekend,treat_e0.5,396,0.00116468,4.26
 TSLA,morpho_86,in_the_wild,0.86,0.0438413,Long,control,61,0.00843086,4.49649,1.63934,0.205713,0.483426,0.514283,5.88477,0,0,0
 TSLA,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e1,61,0.00843388,4.4981,1.63934,0.205713,0.483426,0.514283,5.88477,0.272637,0.0357885,0.0208407
 TSLA,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e0.5,61,0.00843237,4.49729,1.63934,0.205713,0.483426,0.514283,5.88477,0.272637,0.0178942,0.0208407
-TSLA,morpho_86,in_the_wild,0.86,0.0438413,overnight,control,1718,0.000217831,4.48417,0.174622,0,0.0503487,0.200158,4.28223,0,0,
-TSLA,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e1,1718,0.000217831,4.48417,0.174622,0,0.0503487,0.200158,4.28223,0,0,
-TSLA,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e0.5,1718,0.000217831,4.48417,0.174622,0,0.0503487,0.200158,4.28223,0,0,
 TSLA,morpho_86,in_the_wild,0.86,0.0438413,regular,control,2199,0.000436474,5.14216,0.272851,0,0.178121,0.271601,10.9827,0,0,
 TSLA,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e1,2199,0.000436474,5.14216,0.272851,0,0.178121,0.271601,10.9827,0,0,
 TSLA,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e0.5,2199,0.000436474,5.14216,0.272851,0,0.178121,0.271601,10.9827,0,0,
@@ -731,9 +611,6 @@ TSLA,aave_65,in_the_wild,0.65,0.055,Weekend,treat_e0.5,396,0,4.38552,0,0,0,0,0,0
 TSLA,aave_65,in_the_wild,0.65,0.055,Long,control,61,0,4.49649,0,0,0,0,0,0,0,0
 TSLA,aave_65,in_the_wild,0.65,0.055,Long,treat_e1,61,0,4.49649,0,0,0,0,0,0,0,0
 TSLA,aave_65,in_the_wild,0.65,0.055,Long,treat_e0.5,61,0,4.49649,0,0,0,0,0,0,0,0
-TSLA,aave_65,in_the_wild,0.65,0.055,overnight,control,1718,0,4.48417,0,0,0,0,0,0,0,
-TSLA,aave_65,in_the_wild,0.65,0.055,overnight,treat_e1,1718,0,4.48417,0,0,0,0,0,0,0,
-TSLA,aave_65,in_the_wild,0.65,0.055,overnight,treat_e0.5,1718,0,4.48417,0,0,0,0,0,0,0,
 TSLA,aave_65,in_the_wild,0.65,0.055,regular,control,2199,0,5.14216,0,0,0,0,0,0,0,
 TSLA,aave_65,in_the_wild,0.65,0.055,regular,treat_e1,2199,0,5.14216,0,0,0,0,0,0,0,
 TSLA,aave_65,in_the_wild,0.65,0.055,regular,treat_e0.5,2199,0,5.14216,0,0,0,0,0,0,0,
@@ -749,9 +626,6 @@ TSLA,aave_79,in_the_wild,0.79,0.055,Weekend,treat_e0.5,396,0,4.3614,0,0,0,0,0,0.
 TSLA,aave_79,in_the_wild,0.79,0.055,Long,control,61,0,4.49649,0,0,0,0,0,0,0,0
 TSLA,aave_79,in_the_wild,0.79,0.055,Long,treat_e1,61,0,4.49668,0,0,0,0,0,0.0440218,0.00419256,0.00336508
 TSLA,aave_79,in_the_wild,0.79,0.055,Long,treat_e0.5,61,0,4.49658,0,0,0,0,0,0.0440218,0.00209628,0.00336508
-TSLA,aave_79,in_the_wild,0.79,0.055,overnight,control,1718,0,4.48417,0,0,0,0,0,0,0,
-TSLA,aave_79,in_the_wild,0.79,0.055,overnight,treat_e1,1718,0,4.48417,0,0,0,0,0,0,0,
-TSLA,aave_79,in_the_wild,0.79,0.055,overnight,treat_e0.5,1718,0,4.48417,0,0,0,0,0,0,0,
 TSLA,aave_79,in_the_wild,0.79,0.055,regular,control,2199,0,5.14216,0,0,0,0,0,0,0,
 TSLA,aave_79,in_the_wild,0.79,0.055,regular,treat_e1,2199,0,5.14216,0,0,0,0,0,0,0,
 TSLA,aave_79,in_the_wild,0.79,0.055,regular,treat_e0.5,2199,0,5.14216,0,0,0,0,0,0,0,
@@ -767,9 +641,6 @@ TSLA,cf_90,counterfactual,0.9,0.0309278,Weekend,treat_e0.5,396,0.00295642,3.8527
 TSLA,cf_90,counterfactual,0.9,0.0309278,Long,control,61,0.0186965,4.49649,3.27869,0.464156,1.03704,1.10069,13.0502,0,0,0
 TSLA,cf_90,counterfactual,0.9,0.0309278,Long,treat_e1,61,0.013872,3.86325,1.63934,0.3389,0.796414,0.847249,9.69479,1.06893,0.130838,0.0817103
 TSLA,cf_90,counterfactual,0.9,0.0309278,Long,treat_e0.5,61,0.0159594,4.33146,1.63934,0.389653,0.915684,0.974132,11.1467,1.06893,0.0654192,0.0817103
-TSLA,cf_90,counterfactual,0.9,0.0309278,overnight,control,1718,0.00156999,4.48417,0.989523,0,0.358,0.529698,30.8636,0,0,
-TSLA,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e1,1718,0.00156999,4.48417,0.989523,0,0.358,0.529698,30.8636,0,0,
-TSLA,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e0.5,1718,0.00156999,4.48417,0.989523,0,0.358,0.529698,30.8636,0,0,
 TSLA,cf_90,counterfactual,0.9,0.0309278,regular,control,2199,0.00237297,5.14216,1.27331,0.0376166,0.48985,0.667943,59.7097,0,0,
 TSLA,cf_90,counterfactual,0.9,0.0309278,regular,treat_e1,2199,0.00237297,5.14216,1.27331,0.0376166,0.48985,0.667943,59.7097,0,0,
 TSLA,cf_90,counterfactual,0.9,0.0309278,regular,treat_e0.5,2199,0.00237297,5.14216,1.27331,0.0376166,0.48985,0.667943,59.7097,0,0,
@@ -785,9 +656,6 @@ TSLA,cf_93,counterfactual,0.93,0.0214505,Weekend,treat_e0.5,396,0.00404158,3.094
 TSLA,cf_93,counterfactual,0.93,0.0214505,Long,control,61,0.0296292,4.49649,3.27869,0.775067,1.46963,1.5468,20.6812,0,0,0
 TSLA,cf_93,counterfactual,0.93,0.0214505,Long,treat_e1,61,0.0150315,2.75872,1.63934,0.367861,0.864473,0.919652,10.5233,2.81874,0.337131,0.215468
 TSLA,cf_93,counterfactual,0.93,0.0214505,Long,treat_e0.5,61,0.0208646,3.69036,3.27869,0.517911,1.16259,1.23422,14.5847,2.81874,0.168565,0.215468
-TSLA,cf_93,counterfactual,0.93,0.0214505,overnight,control,1718,0.00522256,4.48417,2.09546,0.215996,0.666551,0.949692,102.668,0,0,
-TSLA,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e1,1718,0.00522256,4.48417,2.09546,0.215996,0.666551,0.949692,102.668,0,0,
-TSLA,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e0.5,1718,0.00522256,4.48417,2.09546,0.215996,0.666551,0.949692,102.668,0,0,
 TSLA,cf_93,counterfactual,0.93,0.0214505,regular,control,2199,0.00860154,5.14216,4.593,0.258446,0.908042,1.08472,216.436,0,0,
 TSLA,cf_93,counterfactual,0.93,0.0214505,regular,treat_e1,2199,0.00860154,5.14216,4.593,0.258446,0.908042,1.08472,216.436,0,0,
 TSLA,cf_93,counterfactual,0.93,0.0214505,regular,treat_e0.5,2199,0.00860154,5.14216,4.593,0.258446,0.908042,1.08472,216.436,0,0,
@@ -803,9 +671,6 @@ TSLA,cf_95,counterfactual,0.95,0.0152284,Weekend,treat_e0.5,396,0.00509955,2.006
 TSLA,cf_95,counterfactual,0.95,0.0152284,Long,control,61,0.0422945,4.49649,9.83607,1.01285,1.84017,1.9321,29.5217,0,0,0
 TSLA,cf_95,counterfactual,0.95,0.0152284,Long,treat_e1,61,0.0154445,1.65685,3.27869,0.381559,0.875951,0.930883,10.8274,4.49604,0.562008,0.343683
 TSLA,cf_95,counterfactual,0.95,0.0152284,Long,treat_e0.5,61,0.0250908,2.59131,4.91803,0.624277,1.35306,1.43403,17.5509,4.49604,0.281004,0.343683
-TSLA,cf_95,counterfactual,0.95,0.0152284,overnight,control,1718,0.0101535,4.48417,4.24913,0.356106,0.936073,1.21495,199.602,0,0,
-TSLA,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e1,1718,0.0101535,4.48417,4.24913,0.356106,0.936073,1.21495,199.602,0,0,
-TSLA,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e0.5,1718,0.0101535,4.48417,4.24913,0.356106,0.936073,1.21495,199.602,0,0,
 TSLA,cf_95,counterfactual,0.95,0.0152284,regular,control,2199,0.0190578,5.14216,9.68622,0.397917,1.17393,1.34795,479.539,0,0,
 TSLA,cf_95,counterfactual,0.95,0.0152284,regular,treat_e1,2199,0.0190578,5.14216,9.68622,0.397917,1.17393,1.34795,479.539,0,0,
 TSLA,cf_95,counterfactual,0.95,0.0152284,regular,treat_e0.5,2199,0.0190578,5.14216,9.68622,0.397917,1.17393,1.34795,479.539,0,0,
@@ -821,9 +686,6 @@ SPY,morpho_38.5,in_the_wild,0.385,0.15,Weekend,treat_e0.5,396,0,4.27609,0,0,0,0,
 SPY,morpho_38.5,in_the_wild,0.385,0.15,Long,control,61,0,5.30835,0,0,0,0,0,0,0,0
 SPY,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e1,61,0,5.30835,0,0,0,0,0,0,0,0
 SPY,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e0.5,61,0,5.30835,0,0,0,0,0,0,0,0
-SPY,morpho_38.5,in_the_wild,0.385,0.15,overnight,control,1718,0,4.1183,0,0,0,0,0,0,0,
-SPY,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e1,1718,0,4.1183,0,0,0,0,0,0,0,
-SPY,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e0.5,1718,0,4.1183,0,0,0,0,0,0,0,
 SPY,morpho_38.5,in_the_wild,0.385,0.15,regular,control,2199,0,4.40871,0,0,0,0,0,0,0,
 SPY,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e1,2199,0,4.40871,0,0,0,0,0,0,0,
 SPY,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e0.5,2199,0,4.40871,0,0,0,0,0,0,0,
@@ -839,9 +701,6 @@ SPY,morpho_62.5,in_the_wild,0.625,0.126761,Weekend,treat_e0.5,396,0,4.27609,0,0,
 SPY,morpho_62.5,in_the_wild,0.625,0.126761,Long,control,61,0,5.30835,0,0,0,0,0,0,0,0
 SPY,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e1,61,0,5.30835,0,0,0,0,0,0,0,0
 SPY,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e0.5,61,0,5.30835,0,0,0,0,0,0,0,0
-SPY,morpho_62.5,in_the_wild,0.625,0.126761,overnight,control,1718,0,4.1183,0,0,0,0,0,0,0,
-SPY,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e1,1718,0,4.1183,0,0,0,0,0,0,0,
-SPY,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e0.5,1718,0,4.1183,0,0,0,0,0,0,0,
 SPY,morpho_62.5,in_the_wild,0.625,0.126761,regular,control,2199,0,4.40871,0,0,0,0,0,0,0,
 SPY,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e1,2199,0,4.40871,0,0,0,0,0,0,0,
 SPY,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e0.5,2199,0,4.40871,0,0,0,0,0,0,0,
@@ -857,9 +716,6 @@ SPY,morpho_77,in_the_wild,0.77,0.0741139,Weekend,treat_e0.5,396,0,4.27609,0,0,0,
 SPY,morpho_77,in_the_wild,0.77,0.0741139,Long,control,61,0,5.30835,0,0,0,0,0,0,0,0
 SPY,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e1,61,0,5.30835,0,0,0,0,0,0,0,0
 SPY,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e0.5,61,0,5.30835,0,0,0,0,0,0,0,0
-SPY,morpho_77,in_the_wild,0.77,0.0741139,overnight,control,1718,0,4.1183,0,0,0,0,0,0,0,
-SPY,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e1,1718,0,4.1183,0,0,0,0,0,0,0,
-SPY,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e0.5,1718,0,4.1183,0,0,0,0,0,0,0,
 SPY,morpho_77,in_the_wild,0.77,0.0741139,regular,control,2199,0,4.40871,0,0,0,0,0,0,0,
 SPY,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e1,2199,0,4.40871,0,0,0,0,0,0,0,
 SPY,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e0.5,2199,0,4.40871,0,0,0,0,0,0,0,
@@ -875,9 +731,6 @@ SPY,morpho_86,in_the_wild,0.86,0.0438413,Weekend,treat_e0.5,396,5.86493e-05,4.25
 SPY,morpho_86,in_the_wild,0.86,0.0438413,Long,control,61,0,5.30835,0,0,0,0,0,0,0,0
 SPY,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e1,61,0,5.30835,0,0,0,0,0,0,0,0
 SPY,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e0.5,61,0,5.30835,0,0,0,0,0,0,0,0
-SPY,morpho_86,in_the_wild,0.86,0.0438413,overnight,control,1718,0,4.1183,0,0,0,0,0,0,0,
-SPY,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e1,1718,0,4.1183,0,0,0,0,0,0,0,
-SPY,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e0.5,1718,0,4.1183,0,0,0,0,0,0,0,
 SPY,morpho_86,in_the_wild,0.86,0.0438413,regular,control,2199,0,4.40871,0,0,0,0,0,0,0,
 SPY,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e1,2199,0,4.40871,0,0,0,0,0,0,0,
 SPY,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e0.5,2199,0,4.40871,0,0,0,0,0,0,0,
@@ -893,9 +746,6 @@ SPY,aave_65,in_the_wild,0.65,0.055,Weekend,treat_e0.5,396,0,4.27609,0,0,0,0,0,0,
 SPY,aave_65,in_the_wild,0.65,0.055,Long,control,61,0,5.30835,0,0,0,0,0,0,0,0
 SPY,aave_65,in_the_wild,0.65,0.055,Long,treat_e1,61,0,5.30835,0,0,0,0,0,0,0,0
 SPY,aave_65,in_the_wild,0.65,0.055,Long,treat_e0.5,61,0,5.30835,0,0,0,0,0,0,0,0
-SPY,aave_65,in_the_wild,0.65,0.055,overnight,control,1718,0,4.1183,0,0,0,0,0,0,0,
-SPY,aave_65,in_the_wild,0.65,0.055,overnight,treat_e1,1718,0,4.1183,0,0,0,0,0,0,0,
-SPY,aave_65,in_the_wild,0.65,0.055,overnight,treat_e0.5,1718,0,4.1183,0,0,0,0,0,0,0,
 SPY,aave_65,in_the_wild,0.65,0.055,regular,control,2199,0,4.40871,0,0,0,0,0,0,0,
 SPY,aave_65,in_the_wild,0.65,0.055,regular,treat_e1,2199,0,4.40871,0,0,0,0,0,0,0,
 SPY,aave_65,in_the_wild,0.65,0.055,regular,treat_e0.5,2199,0,4.40871,0,0,0,0,0,0,0,
@@ -911,9 +761,6 @@ SPY,aave_79,in_the_wild,0.79,0.055,Weekend,treat_e0.5,396,0,4.27609,0,0,0,0,0,0,
 SPY,aave_79,in_the_wild,0.79,0.055,Long,control,61,0,5.30835,0,0,0,0,0,0,0,0
 SPY,aave_79,in_the_wild,0.79,0.055,Long,treat_e1,61,0,5.30835,0,0,0,0,0,0,0,0
 SPY,aave_79,in_the_wild,0.79,0.055,Long,treat_e0.5,61,0,5.30835,0,0,0,0,0,0,0,0
-SPY,aave_79,in_the_wild,0.79,0.055,overnight,control,1718,0,4.1183,0,0,0,0,0,0,0,
-SPY,aave_79,in_the_wild,0.79,0.055,overnight,treat_e1,1718,0,4.1183,0,0,0,0,0,0,0,
-SPY,aave_79,in_the_wild,0.79,0.055,overnight,treat_e0.5,1718,0,4.1183,0,0,0,0,0,0,0,
 SPY,aave_79,in_the_wild,0.79,0.055,regular,control,2199,0,4.40871,0,0,0,0,0,0,0,
 SPY,aave_79,in_the_wild,0.79,0.055,regular,treat_e1,2199,0,4.40871,0,0,0,0,0,0,0,
 SPY,aave_79,in_the_wild,0.79,0.055,regular,treat_e0.5,2199,0,4.40871,0,0,0,0,0,0,0,
@@ -929,9 +776,6 @@ SPY,cf_90,counterfactual,0.9,0.0309278,Weekend,treat_e0.5,396,0.000898251,4.1559
 SPY,cf_90,counterfactual,0.9,0.0309278,Long,control,61,0,5.30835,0,0,0,0,0,0,0,0
 SPY,cf_90,counterfactual,0.9,0.0309278,Long,treat_e1,61,0,5.15266,0,0,0,0,0,0.0892626,0.0085012,0.00682333
 SPY,cf_90,counterfactual,0.9,0.0309278,Long,treat_e0.5,61,0,5.15244,0,0,0,0,0,0.0892626,0.0042506,0.00682333
-SPY,cf_90,counterfactual,0.9,0.0309278,overnight,control,1718,0,4.1183,0,0,0,0,0,0,0,
-SPY,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e1,1718,0,4.1183,0,0,0,0,0,0,0,
-SPY,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e0.5,1718,0,4.1183,0,0,0,0,0,0,0,
 SPY,cf_90,counterfactual,0.9,0.0309278,regular,control,2199,0,4.40871,0,0,0,0,0,0,0,
 SPY,cf_90,counterfactual,0.9,0.0309278,regular,treat_e1,2199,0,4.40871,0,0,0,0,0,0,0,
 SPY,cf_90,counterfactual,0.9,0.0309278,regular,treat_e0.5,2199,0,4.40871,0,0,0,0,0,0,0,
@@ -947,9 +791,6 @@ SPY,cf_93,counterfactual,0.93,0.0214505,Weekend,treat_e0.5,396,0.00179596,4.1074
 SPY,cf_93,counterfactual,0.93,0.0214505,Long,control,61,0,5.30835,0,0,0,0,0,0,0,0
 SPY,cf_93,counterfactual,0.93,0.0214505,Long,treat_e1,61,0,5.15352,0,0,0,0,0,0.224615,0.0251805,0.0171698
 SPY,cf_93,counterfactual,0.93,0.0214505,Long,treat_e0.5,61,0,5.15287,0,0,0,0,0,0.224615,0.0125903,0.0171698
-SPY,cf_93,counterfactual,0.93,0.0214505,overnight,control,1718,0.000188399,4.1183,0.116414,0,0.0437379,0.169118,3.70363,0,0,
-SPY,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e1,1718,0.000188399,4.1183,0.116414,0,0.0437379,0.169118,3.70363,0,0,
-SPY,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e0.5,1718,0.000188399,4.1183,0.116414,0,0.0437379,0.169118,3.70363,0,0,
 SPY,cf_93,counterfactual,0.93,0.0214505,regular,control,2199,2.99096e-05,4.40871,0.0454752,0,0,0.0657713,0.752599,0,0,
 SPY,cf_93,counterfactual,0.93,0.0214505,regular,treat_e1,2199,2.99096e-05,4.40871,0.0454752,0,0,0.0657713,0.752599,0,0,
 SPY,cf_93,counterfactual,0.93,0.0214505,regular,treat_e0.5,2199,2.99096e-05,4.40871,0.0454752,0,0,0.0657713,0.752599,0,0,
@@ -965,9 +806,6 @@ SPY,cf_95,counterfactual,0.95,0.0152284,Weekend,treat_e0.5,396,0.00267217,3.9871
 SPY,cf_95,counterfactual,0.95,0.0152284,Long,control,61,0,5.30835,0,0,0,0,0,0,0,0
 SPY,cf_95,counterfactual,0.95,0.0152284,Long,treat_e1,61,0,4.99617,0,0,0,0,0,0.40537,0.0474821,0.0309869
 SPY,cf_95,counterfactual,0.95,0.0152284,Long,treat_e0.5,61,0,5.15147,0,0,0,0,0,0.40537,0.0237411,0.0309869
-SPY,cf_95,counterfactual,0.95,0.0152284,overnight,control,1718,0.000366089,4.1183,0.174622,0,0.100444,0.309934,7.19677,0,0,
-SPY,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e1,1718,0.000366089,4.1183,0.174622,0,0.100444,0.309934,7.19677,0,0,
-SPY,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e0.5,1718,0.000366089,4.1183,0.174622,0,0.100444,0.309934,7.19677,0,0,
 SPY,cf_95,counterfactual,0.95,0.0152284,regular,control,2199,0.000167838,4.40871,0.136426,0,0.025319,0.208143,4.22322,0,0,
 SPY,cf_95,counterfactual,0.95,0.0152284,regular,treat_e1,2199,0.000167838,4.40871,0.136426,0,0.025319,0.208143,4.22322,0,0,
 SPY,cf_95,counterfactual,0.95,0.0152284,regular,treat_e0.5,2199,0.000167838,4.40871,0.136426,0,0.025319,0.208143,4.22322,0,0,
@@ -983,9 +821,6 @@ QQQ,morpho_38.5,in_the_wild,0.385,0.15,Weekend,treat_e0.5,396,0,4.4697,0,0,0,0,0
 QQQ,morpho_38.5,in_the_wild,0.385,0.15,Long,control,61,0,4.9961,0,0,0,0,0,0,0,0
 QQQ,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e1,61,0,4.9961,0,0,0,0,0,0,0,0
 QQQ,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e0.5,61,0,4.9961,0,0,0,0,0,0,0,0
-QQQ,morpho_38.5,in_the_wild,0.385,0.15,overnight,control,1718,0,4.08504,0,0,0,0,0,0,0,
-QQQ,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e1,1718,0,4.08504,0,0,0,0,0,0,0,
-QQQ,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e0.5,1718,0,4.08504,0,0,0,0,0,0,0,
 QQQ,morpho_38.5,in_the_wild,0.385,0.15,regular,control,2199,0,4.42149,0,0,0,0,0,0,0,
 QQQ,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e1,2199,0,4.42149,0,0,0,0,0,0,0,
 QQQ,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e0.5,2199,0,4.42149,0,0,0,0,0,0,0,
@@ -1001,9 +836,6 @@ QQQ,morpho_62.5,in_the_wild,0.625,0.126761,Weekend,treat_e0.5,396,0,4.4697,0,0,0
 QQQ,morpho_62.5,in_the_wild,0.625,0.126761,Long,control,61,0,4.9961,0,0,0,0,0,0,0,0
 QQQ,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e1,61,0,4.9961,0,0,0,0,0,0,0,0
 QQQ,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e0.5,61,0,4.9961,0,0,0,0,0,0,0,0
-QQQ,morpho_62.5,in_the_wild,0.625,0.126761,overnight,control,1718,0,4.08504,0,0,0,0,0,0,0,
-QQQ,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e1,1718,0,4.08504,0,0,0,0,0,0,0,
-QQQ,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e0.5,1718,0,4.08504,0,0,0,0,0,0,0,
 QQQ,morpho_62.5,in_the_wild,0.625,0.126761,regular,control,2199,0,4.42149,0,0,0,0,0,0,0,
 QQQ,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e1,2199,0,4.42149,0,0,0,0,0,0,0,
 QQQ,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e0.5,2199,0,4.42149,0,0,0,0,0,0,0,
@@ -1019,9 +851,6 @@ QQQ,morpho_77,in_the_wild,0.77,0.0741139,Weekend,treat_e0.5,396,0,4.4697,0,0,0,0
 QQQ,morpho_77,in_the_wild,0.77,0.0741139,Long,control,61,0,4.9961,0,0,0,0,0,0,0,0
 QQQ,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e1,61,0,4.9961,0,0,0,0,0,0,0,0
 QQQ,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e0.5,61,0,4.9961,0,0,0,0,0,0,0,0
-QQQ,morpho_77,in_the_wild,0.77,0.0741139,overnight,control,1718,0,4.08504,0,0,0,0,0,0,0,
-QQQ,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e1,1718,0,4.08504,0,0,0,0,0,0,0,
-QQQ,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e0.5,1718,0,4.08504,0,0,0,0,0,0,0,
 QQQ,morpho_77,in_the_wild,0.77,0.0741139,regular,control,2199,0,4.42149,0,0,0,0,0,0,0,
 QQQ,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e1,2199,0,4.42149,0,0,0,0,0,0,0,
 QQQ,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e0.5,2199,0,4.42149,0,0,0,0,0,0,0,
@@ -1037,9 +866,6 @@ QQQ,morpho_86,in_the_wild,0.86,0.0438413,Weekend,treat_e0.5,396,0,4.4697,0,0,0,0
 QQQ,morpho_86,in_the_wild,0.86,0.0438413,Long,control,61,0,4.9961,0,0,0,0,0,0,0,0
 QQQ,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e1,61,0,4.9961,0,0,0,0,0,0,0,0
 QQQ,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e0.5,61,0,4.9961,0,0,0,0,0,0,0,0
-QQQ,morpho_86,in_the_wild,0.86,0.0438413,overnight,control,1718,0,4.08504,0,0,0,0,0,0,0,
-QQQ,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e1,1718,0,4.08504,0,0,0,0,0,0,0,
-QQQ,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e0.5,1718,0,4.08504,0,0,0,0,0,0,0,
 QQQ,morpho_86,in_the_wild,0.86,0.0438413,regular,control,2199,0,4.42149,0,0,0,0,0,0,0,
 QQQ,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e1,2199,0,4.42149,0,0,0,0,0,0,0,
 QQQ,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e0.5,2199,0,4.42149,0,0,0,0,0,0,0,
@@ -1055,9 +881,6 @@ QQQ,aave_65,in_the_wild,0.65,0.055,Weekend,treat_e0.5,396,0,4.4697,0,0,0,0,0,0,0
 QQQ,aave_65,in_the_wild,0.65,0.055,Long,control,61,0,4.9961,0,0,0,0,0,0,0,0
 QQQ,aave_65,in_the_wild,0.65,0.055,Long,treat_e1,61,0,4.9961,0,0,0,0,0,0,0,0
 QQQ,aave_65,in_the_wild,0.65,0.055,Long,treat_e0.5,61,0,4.9961,0,0,0,0,0,0,0,0
-QQQ,aave_65,in_the_wild,0.65,0.055,overnight,control,1718,0,4.08504,0,0,0,0,0,0,0,
-QQQ,aave_65,in_the_wild,0.65,0.055,overnight,treat_e1,1718,0,4.08504,0,0,0,0,0,0,0,
-QQQ,aave_65,in_the_wild,0.65,0.055,overnight,treat_e0.5,1718,0,4.08504,0,0,0,0,0,0,0,
 QQQ,aave_65,in_the_wild,0.65,0.055,regular,control,2199,0,4.42149,0,0,0,0,0,0,0,
 QQQ,aave_65,in_the_wild,0.65,0.055,regular,treat_e1,2199,0,4.42149,0,0,0,0,0,0,0,
 QQQ,aave_65,in_the_wild,0.65,0.055,regular,treat_e0.5,2199,0,4.42149,0,0,0,0,0,0,0,
@@ -1073,9 +896,6 @@ QQQ,aave_79,in_the_wild,0.79,0.055,Weekend,treat_e0.5,396,0,4.4697,0,0,0,0,0,0,0
 QQQ,aave_79,in_the_wild,0.79,0.055,Long,control,61,0,4.9961,0,0,0,0,0,0,0,0
 QQQ,aave_79,in_the_wild,0.79,0.055,Long,treat_e1,61,0,4.9961,0,0,0,0,0,0,0,0
 QQQ,aave_79,in_the_wild,0.79,0.055,Long,treat_e0.5,61,0,4.9961,0,0,0,0,0,0,0,0
-QQQ,aave_79,in_the_wild,0.79,0.055,overnight,control,1718,0,4.08504,0,0,0,0,0,0,0,
-QQQ,aave_79,in_the_wild,0.79,0.055,overnight,treat_e1,1718,0,4.08504,0,0,0,0,0,0,0,
-QQQ,aave_79,in_the_wild,0.79,0.055,overnight,treat_e0.5,1718,0,4.08504,0,0,0,0,0,0,0,
 QQQ,aave_79,in_the_wild,0.79,0.055,regular,control,2199,0,4.42149,0,0,0,0,0,0,0,
 QQQ,aave_79,in_the_wild,0.79,0.055,regular,treat_e1,2199,0,4.42149,0,0,0,0,0,0,0,
 QQQ,aave_79,in_the_wild,0.79,0.055,regular,treat_e0.5,2199,0,4.42149,0,0,0,0,0,0,0,
@@ -1091,9 +911,6 @@ QQQ,cf_90,counterfactual,0.9,0.0309278,Weekend,treat_e0.5,396,0.000580829,4.4215
 QQQ,cf_90,counterfactual,0.9,0.0309278,Long,control,61,0,4.9961,0,0,0,0,0,0,0,0
 QQQ,cf_90,counterfactual,0.9,0.0309278,Long,treat_e1,61,0,4.84026,0,0,0,0,0,0.0624671,0.00594925,0.00477505
 QQQ,cf_90,counterfactual,0.9,0.0309278,Long,treat_e0.5,61,0,4.84011,0,0,0,0,0,0.0624671,0.00297462,0.00477505
-QQQ,cf_90,counterfactual,0.9,0.0309278,overnight,control,1718,0,4.08504,0,0,0,0,0,0,0,
-QQQ,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e1,1718,0,4.08504,0,0,0,0,0,0,0,
-QQQ,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e0.5,1718,0,4.08504,0,0,0,0,0,0,0,
 QQQ,cf_90,counterfactual,0.9,0.0309278,regular,control,2199,0,4.42149,0,0,0,0,0,0,0,
 QQQ,cf_90,counterfactual,0.9,0.0309278,regular,treat_e1,2199,0,4.42149,0,0,0,0,0,0,0,
 QQQ,cf_90,counterfactual,0.9,0.0309278,regular,treat_e0.5,2199,0,4.42149,0,0,0,0,0,0,0,
@@ -1109,9 +926,6 @@ QQQ,cf_93,counterfactual,0.93,0.0214505,Weekend,treat_e0.5,396,0.00134459,4.3010
 QQQ,cf_93,counterfactual,0.93,0.0214505,Long,control,61,0,4.9961,0,0,0,0,0,0,0,0
 QQQ,cf_93,counterfactual,0.93,0.0214505,Long,treat_e1,61,0,4.84097,0,0,0,0,0,0.191123,0.0207742,0.0146097
 QQQ,cf_93,counterfactual,0.93,0.0214505,Long,treat_e0.5,61,0,4.84047,0,0,0,0,0,0.191123,0.0103871,0.0146097
-QQQ,cf_93,counterfactual,0.93,0.0214505,overnight,control,1718,0.000145703,4.08504,0.116414,0,0.0220211,0.172504,2.86429,0,0,
-QQQ,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e1,1718,0.000145703,4.08504,0.116414,0,0.0220211,0.172504,2.86429,0,0,
-QQQ,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e0.5,1718,0.000145703,4.08504,0.116414,0,0.0220211,0.172504,2.86429,0,0,
 QQQ,cf_93,counterfactual,0.93,0.0214505,regular,control,2199,5.05292e-05,4.42149,0.0909504,0,0,0.107229,1.27144,0,0,
 QQQ,cf_93,counterfactual,0.93,0.0214505,regular,treat_e1,2199,5.05292e-05,4.42149,0.0909504,0,0,0.107229,1.27144,0,0,
 QQQ,cf_93,counterfactual,0.93,0.0214505,regular,treat_e0.5,2199,5.05292e-05,4.42149,0.0909504,0,0,0.107229,1.27144,0,0,
@@ -1127,9 +941,6 @@ QQQ,cf_95,counterfactual,0.95,0.0152284,Weekend,treat_e0.5,396,0.00232962,4.0836
 QQQ,cf_95,counterfactual,0.95,0.0152284,Long,control,61,0.000732755,4.9961,1.63934,0.0178792,0.0420162,0.0446981,0.511465,0,0,0
 QQQ,cf_95,counterfactual,0.95,0.0152284,Long,treat_e1,61,0,4.37087,0,0,0,0,0,0.458303,0.0501057,0.0350332
 QQQ,cf_95,counterfactual,0.95,0.0152284,Long,treat_e0.5,61,0,4.68147,0,0,0,0,0,0.458303,0.0250529,0.0350332
-QQQ,cf_95,counterfactual,0.95,0.0152284,overnight,control,1718,0.000344095,4.08504,0.174622,0,0.103764,0.313269,6.7644,0,0,
-QQQ,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e1,1718,0.000344095,4.08504,0.174622,0,0.103764,0.313269,6.7644,0,0,
-QQQ,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e0.5,1718,0.000344095,4.08504,0.174622,0,0.103764,0.313269,6.7644,0,0,
 QQQ,cf_95,counterfactual,0.95,0.0152284,regular,control,2199,0.000374282,4.42149,0.636653,0,0.0901175,0.248977,9.41785,0,0,
 QQQ,cf_95,counterfactual,0.95,0.0152284,regular,treat_e1,2199,0.000374282,4.42149,0.636653,0,0.0901175,0.248977,9.41785,0,0,
 QQQ,cf_95,counterfactual,0.95,0.0152284,regular,treat_e0.5,2199,0.000374282,4.42149,0.636653,0,0.0901175,0.248977,9.41785,0,0,
@@ -1145,9 +956,6 @@ MSFT,morpho_38.5,in_the_wild,0.385,0.15,Weekend,treat_e0.5,396,0,4.51539,0,0,0,0
 MSFT,morpho_38.5,in_the_wild,0.385,0.15,Long,control,61,0,5.46448,0,0,0,0,0,0,0,0
 MSFT,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e1,61,0,5.46448,0,0,0,0,0,0,0,0
 MSFT,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e0.5,61,0,5.46448,0,0,0,0,0,0,0,0
-MSFT,morpho_38.5,in_the_wild,0.385,0.15,overnight,control,1718,0,4.20616,0,0,0,0,0,0,0,
-MSFT,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e1,1718,0,4.20616,0,0,0,0,0,0,0,
-MSFT,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e0.5,1718,0,4.20616,0,0,0,0,0,0,0,
 MSFT,morpho_38.5,in_the_wild,0.385,0.15,regular,control,2199,0,4.52024,0,0,0,0,0,0,0,
 MSFT,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e1,2199,0,4.52024,0,0,0,0,0,0,0,
 MSFT,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e0.5,2199,0,4.52024,0,0,0,0,0,0,0,
@@ -1163,9 +971,6 @@ MSFT,morpho_62.5,in_the_wild,0.625,0.126761,Weekend,treat_e0.5,396,0,4.51539,0,0
 MSFT,morpho_62.5,in_the_wild,0.625,0.126761,Long,control,61,0,5.46448,0,0,0,0,0,0,0,0
 MSFT,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e1,61,0,5.46448,0,0,0,0,0,0,0,0
 MSFT,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e0.5,61,0,5.46448,0,0,0,0,0,0,0,0
-MSFT,morpho_62.5,in_the_wild,0.625,0.126761,overnight,control,1718,0,4.20616,0,0,0,0,0,0,0,
-MSFT,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e1,1718,0,4.20616,0,0,0,0,0,0,0,
-MSFT,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e0.5,1718,0,4.20616,0,0,0,0,0,0,0,
 MSFT,morpho_62.5,in_the_wild,0.625,0.126761,regular,control,2199,0,4.52024,0,0,0,0,0,0,0,
 MSFT,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e1,2199,0,4.52024,0,0,0,0,0,0,0,
 MSFT,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e0.5,2199,0,4.52024,0,0,0,0,0,0,0,
@@ -1181,9 +986,6 @@ MSFT,morpho_77,in_the_wild,0.77,0.0741139,Weekend,treat_e0.5,396,0,4.51539,0,0,0
 MSFT,morpho_77,in_the_wild,0.77,0.0741139,Long,control,61,0,5.46448,0,0,0,0,0,0,0,0
 MSFT,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e1,61,0,5.46448,0,0,0,0,0,0,0,0
 MSFT,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e0.5,61,0,5.46448,0,0,0,0,0,0,0,0
-MSFT,morpho_77,in_the_wild,0.77,0.0741139,overnight,control,1718,0,4.20616,0,0,0,0,0,0,0,
-MSFT,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e1,1718,0,4.20616,0,0,0,0,0,0,0,
-MSFT,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e0.5,1718,0,4.20616,0,0,0,0,0,0,0,
 MSFT,morpho_77,in_the_wild,0.77,0.0741139,regular,control,2199,0,4.52024,0,0,0,0,0,0,0,
 MSFT,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e1,2199,0,4.52024,0,0,0,0,0,0,0,
 MSFT,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e0.5,2199,0,4.52024,0,0,0,0,0,0,0,
@@ -1199,9 +1001,6 @@ MSFT,morpho_86,in_the_wild,0.86,0.0438413,Weekend,treat_e0.5,396,0.000435565,4.4
 MSFT,morpho_86,in_the_wild,0.86,0.0438413,Long,control,61,0,5.46448,0,0,0,0,0,0,0,0
 MSFT,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e1,61,0,5.3085,0,0,0,0,0,0.0291919,0.00278018,0.00223146
 MSFT,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e0.5,61,0,5.30843,0,0,0,0,0,0.0291919,0.00139009,0.00223146
-MSFT,morpho_86,in_the_wild,0.86,0.0438413,overnight,control,1718,0,4.20616,0,0,0,0,0,0,0,
-MSFT,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e1,1718,0,4.20616,0,0,0,0,0,0,0,
-MSFT,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e0.5,1718,0,4.20616,0,0,0,0,0,0,0,
 MSFT,morpho_86,in_the_wild,0.86,0.0438413,regular,control,2199,0,4.52024,0,0,0,0,0,0,0,
 MSFT,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e1,2199,0,4.52024,0,0,0,0,0,0,0,
 MSFT,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e0.5,2199,0,4.52024,0,0,0,0,0,0,0,
@@ -1217,9 +1016,6 @@ MSFT,aave_65,in_the_wild,0.65,0.055,Weekend,treat_e0.5,396,0,4.51539,0,0,0,0,0,0
 MSFT,aave_65,in_the_wild,0.65,0.055,Long,control,61,0,5.46448,0,0,0,0,0,0,0,0
 MSFT,aave_65,in_the_wild,0.65,0.055,Long,treat_e1,61,0,5.46448,0,0,0,0,0,0,0,0
 MSFT,aave_65,in_the_wild,0.65,0.055,Long,treat_e0.5,61,0,5.46448,0,0,0,0,0,0,0,0
-MSFT,aave_65,in_the_wild,0.65,0.055,overnight,control,1718,0,4.20616,0,0,0,0,0,0,0,
-MSFT,aave_65,in_the_wild,0.65,0.055,overnight,treat_e1,1718,0,4.20616,0,0,0,0,0,0,0,
-MSFT,aave_65,in_the_wild,0.65,0.055,overnight,treat_e0.5,1718,0,4.20616,0,0,0,0,0,0,0,
 MSFT,aave_65,in_the_wild,0.65,0.055,regular,control,2199,0,4.52024,0,0,0,0,0,0,0,
 MSFT,aave_65,in_the_wild,0.65,0.055,regular,treat_e1,2199,0,4.52024,0,0,0,0,0,0,0,
 MSFT,aave_65,in_the_wild,0.65,0.055,regular,treat_e0.5,2199,0,4.52024,0,0,0,0,0,0,0,
@@ -1235,9 +1031,6 @@ MSFT,aave_79,in_the_wild,0.79,0.055,Weekend,treat_e0.5,396,0,4.51539,0,0,0,0,0,0
 MSFT,aave_79,in_the_wild,0.79,0.055,Long,control,61,0,5.46448,0,0,0,0,0,0,0,0
 MSFT,aave_79,in_the_wild,0.79,0.055,Long,treat_e1,61,0,5.46448,0,0,0,0,0,0,0,0
 MSFT,aave_79,in_the_wild,0.79,0.055,Long,treat_e0.5,61,0,5.46448,0,0,0,0,0,0,0,0
-MSFT,aave_79,in_the_wild,0.79,0.055,overnight,control,1718,0,4.20616,0,0,0,0,0,0,0,
-MSFT,aave_79,in_the_wild,0.79,0.055,overnight,treat_e1,1718,0,4.20616,0,0,0,0,0,0,0,
-MSFT,aave_79,in_the_wild,0.79,0.055,overnight,treat_e0.5,1718,0,4.20616,0,0,0,0,0,0,0,
 MSFT,aave_79,in_the_wild,0.79,0.055,regular,control,2199,0,4.52024,0,0,0,0,0,0,0,
 MSFT,aave_79,in_the_wild,0.79,0.055,regular,treat_e1,2199,0,4.52024,0,0,0,0,0,0,0,
 MSFT,aave_79,in_the_wild,0.79,0.055,regular,treat_e0.5,2199,0,4.52024,0,0,0,0,0,0,0,
@@ -1253,9 +1046,6 @@ MSFT,cf_90,counterfactual,0.9,0.0309278,Weekend,treat_e0.5,396,0.00109915,4.3951
 MSFT,cf_90,counterfactual,0.9,0.0309278,Long,control,61,0,5.46448,0,0,0,0,0,0,0,0
 MSFT,cf_90,counterfactual,0.9,0.0309278,Long,treat_e1,61,0,5.30914,0,0,0,0,0,0.136285,0.0147687,0.0104177
 MSFT,cf_90,counterfactual,0.9,0.0309278,Long,treat_e0.5,61,0,5.30874,0,0,0,0,0,0.136285,0.00738436,0.0104177
-MSFT,cf_90,counterfactual,0.9,0.0309278,overnight,control,1718,0.000118783,4.20616,0.116414,0,0.0162374,0.146694,2.3351,0,0,
-MSFT,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e1,1718,0.000118783,4.20616,0.116414,0,0.0162374,0.146694,2.3351,0,0,
-MSFT,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e0.5,1718,0.000118783,4.20616,0.116414,0,0.0162374,0.146694,2.3351,0,0,
 MSFT,cf_90,counterfactual,0.9,0.0309278,regular,control,2199,0,4.52024,0,0,0,0,0,0,0,
 MSFT,cf_90,counterfactual,0.9,0.0309278,regular,treat_e1,2199,0,4.52024,0,0,0,0,0,0,0,
 MSFT,cf_90,counterfactual,0.9,0.0309278,regular,treat_e0.5,2199,0,4.52024,0,0,0,0,0,0,0,
@@ -1271,9 +1061,6 @@ MSFT,cf_93,counterfactual,0.93,0.0214505,Weekend,treat_e0.5,396,0.00227905,4.298
 MSFT,cf_93,counterfactual,0.93,0.0214505,Long,control,61,0,5.46448,0,0,0,0,0,0,0,0
 MSFT,cf_93,counterfactual,0.93,0.0214505,Long,treat_e1,61,0,5.30971,0,0,0,0,0,0.284453,0.0341115,0.0217439
 MSFT,cf_93,counterfactual,0.93,0.0214505,Long,treat_e0.5,61,0,5.30903,0,0,0,0,0,0.284453,0.0170558,0.0217439
-MSFT,cf_93,counterfactual,0.93,0.0214505,overnight,control,1718,0.000466326,4.20616,0.291036,0,0.13912,0.364984,9.16726,0,0,
-MSFT,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e1,1718,0.000466326,4.20616,0.291036,0,0.13912,0.364984,9.16726,0,0,
-MSFT,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e0.5,1718,0.000466326,4.20616,0.291036,0,0.13912,0.364984,9.16726,0,0,
 MSFT,cf_93,counterfactual,0.93,0.0214505,regular,control,2199,0.000140344,4.52024,0.272851,0,0.0559952,0.0921885,3.53139,0,0,
 MSFT,cf_93,counterfactual,0.93,0.0214505,regular,treat_e1,2199,0.000140344,4.52024,0.272851,0,0.0559952,0.0921885,3.53139,0,0,
 MSFT,cf_93,counterfactual,0.93,0.0214505,regular,treat_e0.5,2199,0.000140344,4.52024,0.272851,0,0.0559952,0.0921885,3.53139,0,0,
@@ -1289,9 +1076,6 @@ MSFT,cf_95,counterfactual,0.95,0.0152284,Weekend,treat_e0.5,396,0.00357667,4.128
 MSFT,cf_95,counterfactual,0.95,0.0152284,Long,control,61,0.000103532,5.46448,1.63934,0.00252618,0.00593653,0.00631546,0.0722657,0,0,0
 MSFT,cf_95,counterfactual,0.95,0.0152284,Long,treat_e1,61,0,5.14494,0,0,0,0,0,0.554411,0.0676142,0.0423798
 MSFT,cf_95,counterfactual,0.95,0.0152284,Long,treat_e0.5,61,0,5.14859,0,0,0,0,0,0.554411,0.0338071,0.0423798
-MSFT,cf_95,counterfactual,0.95,0.0152284,overnight,control,1718,0.000955502,4.20616,0.523865,0,0.280387,0.529512,18.7837,0,0,
-MSFT,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e1,1718,0.000955502,4.20616,0.523865,0,0.280387,0.529512,18.7837,0,0,
-MSFT,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e0.5,1718,0.000955502,4.20616,0.523865,0,0.280387,0.529512,18.7837,0,0,
 MSFT,cf_95,counterfactual,0.95,0.0152284,regular,control,2199,0.000858556,4.52024,1.04593,0.00438092,0.198514,0.234162,21.6033,0,0,
 MSFT,cf_95,counterfactual,0.95,0.0152284,regular,treat_e1,2199,0.000858556,4.52024,1.04593,0.00438092,0.198514,0.234162,21.6033,0,0,
 MSFT,cf_95,counterfactual,0.95,0.0152284,regular,treat_e0.5,2199,0.000858556,4.52024,1.04593,0.00438092,0.198514,0.234162,21.6033,0,0,
@@ -1307,9 +1091,6 @@ AMZN,morpho_38.5,in_the_wild,0.385,0.15,Weekend,treat_e0.5,396,0,4.13179,0,0,0,0
 AMZN,morpho_38.5,in_the_wild,0.385,0.15,Long,control,61,0,5.30835,0,0,0,0,0,0,0,0
 AMZN,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e1,61,0,5.30835,0,0,0,0,0,0,0,0
 AMZN,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e0.5,61,0,5.30835,0,0,0,0,0,0,0,0
-AMZN,morpho_38.5,in_the_wild,0.385,0.15,overnight,control,1718,0,4.16958,0,0,0,0,0,0,0,
-AMZN,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e1,1718,0,4.16958,0,0,0,0,0,0,0,
-AMZN,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e0.5,1718,0,4.16958,0,0,0,0,0,0,0,
 AMZN,morpho_38.5,in_the_wild,0.385,0.15,regular,control,2199,0,4.79179,0,0,0,0,0,0,0,
 AMZN,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e1,2199,0,4.79179,0,0,0,0,0,0,0,
 AMZN,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e0.5,2199,0,4.79179,0,0,0,0,0,0,0,
@@ -1325,9 +1106,6 @@ AMZN,morpho_62.5,in_the_wild,0.625,0.126761,Weekend,treat_e0.5,396,0,4.13179,0,0
 AMZN,morpho_62.5,in_the_wild,0.625,0.126761,Long,control,61,0,5.30835,0,0,0,0,0,0,0,0
 AMZN,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e1,61,0,5.30835,0,0,0,0,0,0,0,0
 AMZN,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e0.5,61,0,5.30835,0,0,0,0,0,0,0,0
-AMZN,morpho_62.5,in_the_wild,0.625,0.126761,overnight,control,1718,0,4.16958,0,0,0,0,0,0,0,
-AMZN,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e1,1718,0,4.16958,0,0,0,0,0,0,0,
-AMZN,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e0.5,1718,0,4.16958,0,0,0,0,0,0,0,
 AMZN,morpho_62.5,in_the_wild,0.625,0.126761,regular,control,2199,0,4.79179,0,0,0,0,0,0,0,
 AMZN,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e1,2199,0,4.79179,0,0,0,0,0,0,0,
 AMZN,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e0.5,2199,0,4.79179,0,0,0,0,0,0,0,
@@ -1343,9 +1121,6 @@ AMZN,morpho_77,in_the_wild,0.77,0.0741139,Weekend,treat_e0.5,396,0,4.13179,0,0,0
 AMZN,morpho_77,in_the_wild,0.77,0.0741139,Long,control,61,0,5.30835,0,0,0,0,0,0,0,0
 AMZN,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e1,61,0,5.30835,0,0,0,0,0,0,0,0
 AMZN,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e0.5,61,0,5.30835,0,0,0,0,0,0,0,0
-AMZN,morpho_77,in_the_wild,0.77,0.0741139,overnight,control,1718,0,4.16958,0,0,0,0,0,0,0,
-AMZN,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e1,1718,0,4.16958,0,0,0,0,0,0,0,
-AMZN,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e0.5,1718,0,4.16958,0,0,0,0,0,0,0,
 AMZN,morpho_77,in_the_wild,0.77,0.0741139,regular,control,2199,0,4.79179,0,0,0,0,0,0,0,
 AMZN,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e1,2199,0,4.79179,0,0,0,0,0,0,0,
 AMZN,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e0.5,2199,0,4.79179,0,0,0,0,0,0,0,
@@ -1361,9 +1136,6 @@ AMZN,morpho_86,in_the_wild,0.86,0.0438413,Weekend,treat_e0.5,396,0,4.13179,0,0,0
 AMZN,morpho_86,in_the_wild,0.86,0.0438413,Long,control,61,0,5.30835,0,0,0,0,0,0,0,0
 AMZN,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e1,61,0,5.30835,0,0,0,0,0,0,0,0
 AMZN,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e0.5,61,0,5.30835,0,0,0,0,0,0,0,0
-AMZN,morpho_86,in_the_wild,0.86,0.0438413,overnight,control,1718,9.45642e-05,4.16958,0.0582072,0,0,0.162461,1.85899,0,0,
-AMZN,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e1,1718,9.45642e-05,4.16958,0.0582072,0,0,0.162461,1.85899,0,0,
-AMZN,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e0.5,1718,9.45642e-05,4.16958,0.0582072,0,0,0.162461,1.85899,0,0,
 AMZN,morpho_86,in_the_wild,0.86,0.0438413,regular,control,2199,0,4.79179,0,0,0,0,0,0,0,
 AMZN,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e1,2199,0,4.79179,0,0,0,0,0,0,0,
 AMZN,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e0.5,2199,0,4.79179,0,0,0,0,0,0,0,
@@ -1379,9 +1151,6 @@ AMZN,aave_65,in_the_wild,0.65,0.055,Weekend,treat_e0.5,396,0,4.13179,0,0,0,0,0,0
 AMZN,aave_65,in_the_wild,0.65,0.055,Long,control,61,0,5.30835,0,0,0,0,0,0,0,0
 AMZN,aave_65,in_the_wild,0.65,0.055,Long,treat_e1,61,0,5.30835,0,0,0,0,0,0,0,0
 AMZN,aave_65,in_the_wild,0.65,0.055,Long,treat_e0.5,61,0,5.30835,0,0,0,0,0,0,0,0
-AMZN,aave_65,in_the_wild,0.65,0.055,overnight,control,1718,0,4.16958,0,0,0,0,0,0,0,
-AMZN,aave_65,in_the_wild,0.65,0.055,overnight,treat_e1,1718,0,4.16958,0,0,0,0,0,0,0,
-AMZN,aave_65,in_the_wild,0.65,0.055,overnight,treat_e0.5,1718,0,4.16958,0,0,0,0,0,0,0,
 AMZN,aave_65,in_the_wild,0.65,0.055,regular,control,2199,0,4.79179,0,0,0,0,0,0,0,
 AMZN,aave_65,in_the_wild,0.65,0.055,regular,treat_e1,2199,0,4.79179,0,0,0,0,0,0,0,
 AMZN,aave_65,in_the_wild,0.65,0.055,regular,treat_e0.5,2199,0,4.79179,0,0,0,0,0,0,0,
@@ -1397,9 +1166,6 @@ AMZN,aave_79,in_the_wild,0.79,0.055,Weekend,treat_e0.5,396,0,4.13179,0,0,0,0,0,0
 AMZN,aave_79,in_the_wild,0.79,0.055,Long,control,61,0,5.30835,0,0,0,0,0,0,0,0
 AMZN,aave_79,in_the_wild,0.79,0.055,Long,treat_e1,61,0,5.30835,0,0,0,0,0,0,0,0
 AMZN,aave_79,in_the_wild,0.79,0.055,Long,treat_e0.5,61,0,5.30835,0,0,0,0,0,0,0,0
-AMZN,aave_79,in_the_wild,0.79,0.055,overnight,control,1718,0,4.16958,0,0,0,0,0,0,0,
-AMZN,aave_79,in_the_wild,0.79,0.055,overnight,treat_e1,1718,0,4.16958,0,0,0,0,0,0,0,
-AMZN,aave_79,in_the_wild,0.79,0.055,overnight,treat_e0.5,1718,0,4.16958,0,0,0,0,0,0,0,
 AMZN,aave_79,in_the_wild,0.79,0.055,regular,control,2199,0,4.79179,0,0,0,0,0,0,0,
 AMZN,aave_79,in_the_wild,0.79,0.055,regular,treat_e1,2199,0,4.79179,0,0,0,0,0,0,0,
 AMZN,aave_79,in_the_wild,0.79,0.055,regular,treat_e0.5,2199,0,4.79179,0,0,0,0,0,0,0,
@@ -1415,9 +1181,6 @@ AMZN,cf_90,counterfactual,0.9,0.0309278,Weekend,treat_e0.5,396,0.000456034,4.083
 AMZN,cf_90,counterfactual,0.9,0.0309278,Long,control,61,0,5.30835,0,0,0,0,0,0,0,0
 AMZN,cf_90,counterfactual,0.9,0.0309278,Long,treat_e1,61,0,5.15254,0,0,0,0,0,0.0643762,0.00613106,0.00492098
 AMZN,cf_90,counterfactual,0.9,0.0309278,Long,treat_e0.5,61,0,5.15238,0,0,0,0,0,0.0643762,0.00306553,0.00492098
-AMZN,cf_90,counterfactual,0.9,0.0309278,overnight,control,1718,0.000699352,4.16958,0.349243,0,0.248033,0.466472,13.7482,0,0,
-AMZN,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e1,1718,0.000699352,4.16958,0.349243,0,0.248033,0.466472,13.7482,0,0,
-AMZN,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e0.5,1718,0.000699352,4.16958,0.349243,0,0.248033,0.466472,13.7482,0,0,
 AMZN,cf_90,counterfactual,0.9,0.0309278,regular,control,2199,3.40432e-05,4.79179,0.0909504,0,0,0.0666579,0.85661,0,0,
 AMZN,cf_90,counterfactual,0.9,0.0309278,regular,treat_e1,2199,3.40432e-05,4.79179,0.0909504,0,0,0.0666579,0.85661,0,0,
 AMZN,cf_90,counterfactual,0.9,0.0309278,regular,treat_e0.5,2199,3.40432e-05,4.79179,0.0909504,0,0,0.0666579,0.85661,0,0,
@@ -1433,9 +1196,6 @@ AMZN,cf_93,counterfactual,0.93,0.0214505,Weekend,treat_e0.5,396,0.00168079,3.842
 AMZN,cf_93,counterfactual,0.93,0.0214505,Long,control,61,0,5.30835,0,0,0,0,0,0,0,0
 AMZN,cf_93,counterfactual,0.93,0.0214505,Long,treat_e1,61,0,4.68212,0,0,0,0,0,0.344799,0.0332312,0.0263568
 AMZN,cf_93,counterfactual,0.93,0.0214505,Long,treat_e0.5,61,0,4.8384,0,0,0,0,0,0.344799,0.0166156,0.0263568
-AMZN,cf_93,counterfactual,0.93,0.0214505,overnight,control,1718,0.00209967,4.16958,0.756694,0,0.476568,0.878445,41.2764,0,0,
-AMZN,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e1,1718,0.00209967,4.16958,0.756694,0,0.476568,0.878445,41.2764,0,0,
-AMZN,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e0.5,1718,0.00209967,4.16958,0.756694,0,0.476568,0.878445,41.2764,0,0,
 AMZN,cf_93,counterfactual,0.93,0.0214505,regular,control,2199,0.000598095,4.79179,0.545703,0,0.180175,0.286811,15.0495,0,0,
 AMZN,cf_93,counterfactual,0.93,0.0214505,regular,treat_e1,2199,0.000598095,4.79179,0.545703,0,0.180175,0.286811,15.0495,0,0,
 AMZN,cf_93,counterfactual,0.93,0.0214505,regular,treat_e0.5,2199,0.000598095,4.79179,0.545703,0,0.180175,0.286811,15.0495,0,0,
@@ -1451,9 +1211,6 @@ AMZN,cf_95,counterfactual,0.95,0.0152284,Weekend,treat_e0.5,396,0.00301513,3.310
 AMZN,cf_95,counterfactual,0.95,0.0152284,Long,control,61,0.00164859,5.30835,1.63934,0.0402255,0.09453,0.100564,1.15072,0,0,0
 AMZN,cf_95,counterfactual,0.95,0.0152284,Long,treat_e1,61,0.00031112,4.05753,1.63934,0.00759061,0.0178379,0.0189765,0.217142,0.884795,0.0908963,0.0676347
 AMZN,cf_95,counterfactual,0.95,0.0152284,Long,treat_e0.5,61,0.000980157,4.36825,1.63934,0.0239147,0.0561996,0.0597868,0.684121,0.884795,0.0454482,0.0676347
-AMZN,cf_95,counterfactual,0.95,0.0152284,overnight,control,1718,0.00384273,4.16958,1.39697,0.0824701,0.724492,1.14478,75.5423,0,0,
-AMZN,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e1,1718,0.00384273,4.16958,1.39697,0.0824701,0.724492,1.14478,75.5423,0,0,
-AMZN,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e0.5,1718,0.00384273,4.16958,1.39697,0.0824701,0.724492,1.14478,75.5423,0,0,
 AMZN,cf_95,counterfactual,0.95,0.0152284,regular,control,2199,0.00227351,4.79179,2.09186,0.0801936,0.320825,0.425855,57.207,0,0,
 AMZN,cf_95,counterfactual,0.95,0.0152284,regular,treat_e1,2199,0.00227351,4.79179,2.09186,0.0801936,0.320825,0.425855,57.207,0,0,
 AMZN,cf_95,counterfactual,0.95,0.0152284,regular,treat_e0.5,2199,0.00227351,4.79179,2.09186,0.0801936,0.320825,0.425855,57.207,0,0,
@@ -1469,9 +1226,6 @@ GOOGL,morpho_38.5,in_the_wild,0.385,0.15,Weekend,treat_e0.5,396,0,4.73184,0,0,0,
 GOOGL,morpho_38.5,in_the_wild,0.385,0.15,Long,control,61,0,5.77674,0,0,0,0,0,0,0,0
 GOOGL,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e1,61,0,5.77674,0,0,0,0,0,0,0,0
 GOOGL,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e0.5,61,0,5.77674,0,0,0,0,0,0,0,0
-GOOGL,morpho_38.5,in_the_wild,0.385,0.15,overnight,control,1718,0,4.45368,0,0,0,0,0,0,0,
-GOOGL,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e1,1718,0,4.45368,0,0,0,0,0,0,0,
-GOOGL,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e0.5,1718,0,4.45368,0,0,0,0,0,0,0,
 GOOGL,morpho_38.5,in_the_wild,0.385,0.15,regular,control,2199,0,4.48537,0,0,0,0,0,0,0,
 GOOGL,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e1,2199,0,4.48537,0,0,0,0,0,0,0,
 GOOGL,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e0.5,2199,0,4.48537,0,0,0,0,0,0,0,
@@ -1487,9 +1241,6 @@ GOOGL,morpho_62.5,in_the_wild,0.625,0.126761,Weekend,treat_e0.5,396,0,4.73184,0,
 GOOGL,morpho_62.5,in_the_wild,0.625,0.126761,Long,control,61,0,5.77674,0,0,0,0,0,0,0,0
 GOOGL,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e1,61,0,5.77674,0,0,0,0,0,0,0,0
 GOOGL,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e0.5,61,0,5.77674,0,0,0,0,0,0,0,0
-GOOGL,morpho_62.5,in_the_wild,0.625,0.126761,overnight,control,1718,0,4.45368,0,0,0,0,0,0,0,
-GOOGL,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e1,1718,0,4.45368,0,0,0,0,0,0,0,
-GOOGL,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e0.5,1718,0,4.45368,0,0,0,0,0,0,0,
 GOOGL,morpho_62.5,in_the_wild,0.625,0.126761,regular,control,2199,0,4.48537,0,0,0,0,0,0,0,
 GOOGL,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e1,2199,0,4.48537,0,0,0,0,0,0,0,
 GOOGL,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e0.5,2199,0,4.48537,0,0,0,0,0,0,0,
@@ -1505,9 +1256,6 @@ GOOGL,morpho_77,in_the_wild,0.77,0.0741139,Weekend,treat_e0.5,396,0,4.73184,0,0,
 GOOGL,morpho_77,in_the_wild,0.77,0.0741139,Long,control,61,0,5.77674,0,0,0,0,0,0,0,0
 GOOGL,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e1,61,0,5.77674,0,0,0,0,0,0,0,0
 GOOGL,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e0.5,61,0,5.77674,0,0,0,0,0,0,0,0
-GOOGL,morpho_77,in_the_wild,0.77,0.0741139,overnight,control,1718,0,4.45368,0,0,0,0,0,0,0,
-GOOGL,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e1,1718,0,4.45368,0,0,0,0,0,0,0,
-GOOGL,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e0.5,1718,0,4.45368,0,0,0,0,0,0,0,
 GOOGL,morpho_77,in_the_wild,0.77,0.0741139,regular,control,2199,0,4.48537,0,0,0,0,0,0,0,
 GOOGL,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e1,2199,0,4.48537,0,0,0,0,0,0,0,
 GOOGL,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e0.5,2199,0,4.48537,0,0,0,0,0,0,0,
@@ -1523,9 +1271,6 @@ GOOGL,morpho_86,in_the_wild,0.86,0.0438413,Weekend,treat_e0.5,396,9.80108e-06,4.
 GOOGL,morpho_86,in_the_wild,0.86,0.0438413,Long,control,61,0,5.77674,0,0,0,0,0,0,0,0
 GOOGL,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e1,61,0,5.77674,0,0,0,0,0,0,0,0
 GOOGL,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e0.5,61,0,5.77674,0,0,0,0,0,0,0,0
-GOOGL,morpho_86,in_the_wild,0.86,0.0438413,overnight,control,1718,0,4.45368,0,0,0,0,0,0,0,
-GOOGL,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e1,1718,0,4.45368,0,0,0,0,0,0,0,
-GOOGL,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e0.5,1718,0,4.45368,0,0,0,0,0,0,0,
 GOOGL,morpho_86,in_the_wild,0.86,0.0438413,regular,control,2199,0,4.48537,0,0,0,0,0,0,0,
 GOOGL,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e1,2199,0,4.48537,0,0,0,0,0,0,0,
 GOOGL,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e0.5,2199,0,4.48537,0,0,0,0,0,0,0,
@@ -1541,9 +1286,6 @@ GOOGL,aave_65,in_the_wild,0.65,0.055,Weekend,treat_e0.5,396,0,4.73184,0,0,0,0,0,
 GOOGL,aave_65,in_the_wild,0.65,0.055,Long,control,61,0,5.77674,0,0,0,0,0,0,0,0
 GOOGL,aave_65,in_the_wild,0.65,0.055,Long,treat_e1,61,0,5.77674,0,0,0,0,0,0,0,0
 GOOGL,aave_65,in_the_wild,0.65,0.055,Long,treat_e0.5,61,0,5.77674,0,0,0,0,0,0,0,0
-GOOGL,aave_65,in_the_wild,0.65,0.055,overnight,control,1718,0,4.45368,0,0,0,0,0,0,0,
-GOOGL,aave_65,in_the_wild,0.65,0.055,overnight,treat_e1,1718,0,4.45368,0,0,0,0,0,0,0,
-GOOGL,aave_65,in_the_wild,0.65,0.055,overnight,treat_e0.5,1718,0,4.45368,0,0,0,0,0,0,0,
 GOOGL,aave_65,in_the_wild,0.65,0.055,regular,control,2199,0,4.48537,0,0,0,0,0,0,0,
 GOOGL,aave_65,in_the_wild,0.65,0.055,regular,treat_e1,2199,0,4.48537,0,0,0,0,0,0,0,
 GOOGL,aave_65,in_the_wild,0.65,0.055,regular,treat_e0.5,2199,0,4.48537,0,0,0,0,0,0,0,
@@ -1559,9 +1301,6 @@ GOOGL,aave_79,in_the_wild,0.79,0.055,Weekend,treat_e0.5,396,0,4.73184,0,0,0,0,0,
 GOOGL,aave_79,in_the_wild,0.79,0.055,Long,control,61,0,5.77674,0,0,0,0,0,0,0,0
 GOOGL,aave_79,in_the_wild,0.79,0.055,Long,treat_e1,61,0,5.77674,0,0,0,0,0,0,0,0
 GOOGL,aave_79,in_the_wild,0.79,0.055,Long,treat_e0.5,61,0,5.77674,0,0,0,0,0,0,0,0
-GOOGL,aave_79,in_the_wild,0.79,0.055,overnight,control,1718,0,4.45368,0,0,0,0,0,0,0,
-GOOGL,aave_79,in_the_wild,0.79,0.055,overnight,treat_e1,1718,0,4.45368,0,0,0,0,0,0,0,
-GOOGL,aave_79,in_the_wild,0.79,0.055,overnight,treat_e0.5,1718,0,4.45368,0,0,0,0,0,0,0,
 GOOGL,aave_79,in_the_wild,0.79,0.055,regular,control,2199,0,4.48537,0,0,0,0,0,0,0,
 GOOGL,aave_79,in_the_wild,0.79,0.055,regular,treat_e1,2199,0,4.48537,0,0,0,0,0,0,0,
 GOOGL,aave_79,in_the_wild,0.79,0.055,regular,treat_e0.5,2199,0,4.48537,0,0,0,0,0,0,0,
@@ -1577,9 +1316,6 @@ GOOGL,cf_90,counterfactual,0.9,0.0309278,Weekend,treat_e0.5,396,0.000777198,4.63
 GOOGL,cf_90,counterfactual,0.9,0.0309278,Long,control,61,0,5.77674,0,0,0,0,0,0,0,0
 GOOGL,cf_90,counterfactual,0.9,0.0309278,Long,treat_e1,61,0,5.62107,0,0,0,0,0,0.0855197,0.00814473,0.00653722
 GOOGL,cf_90,counterfactual,0.9,0.0309278,Long,treat_e0.5,61,0,5.62084,0,0,0,0,0,0.0855197,0.00407237,0.00653722
-GOOGL,cf_90,counterfactual,0.9,0.0309278,overnight,control,1718,0.000128341,4.45368,0.291036,0,0.0477372,0.0952603,2.52299,0,0,
-GOOGL,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e1,1718,0.000128341,4.45368,0.291036,0,0.0477372,0.0952603,2.52299,0,0,
-GOOGL,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e0.5,1718,0.000128341,4.45368,0.291036,0,0.0477372,0.0952603,2.52299,0,0,
 GOOGL,cf_90,counterfactual,0.9,0.0309278,regular,control,2199,2.44427e-05,4.48537,0.0454752,0,0,0.0537496,0.615039,0,0,
 GOOGL,cf_90,counterfactual,0.9,0.0309278,regular,treat_e1,2199,2.44427e-05,4.48537,0.0454752,0,0,0.0537496,0.615039,0,0,
 GOOGL,cf_90,counterfactual,0.9,0.0309278,regular,treat_e0.5,2199,2.44427e-05,4.48537,0.0454752,0,0,0.0537496,0.615039,0,0,
@@ -1595,9 +1331,6 @@ GOOGL,cf_93,counterfactual,0.93,0.0214505,Weekend,treat_e0.5,396,0.00199558,4.49
 GOOGL,cf_93,counterfactual,0.93,0.0214505,Long,control,61,0,5.77674,0,0,0,0,0,0,0,0
 GOOGL,cf_93,counterfactual,0.93,0.0214505,Long,treat_e1,61,0,5.46576,0,0,0,0,0,0.239643,0.0266951,0.0183186
 GOOGL,cf_93,counterfactual,0.93,0.0214505,Long,treat_e0.5,61,0,5.62027,0,0,0,0,0,0.239643,0.0133475,0.0183186
-GOOGL,cf_93,counterfactual,0.93,0.0214505,overnight,control,1718,0.000948287,4.45368,0.698487,0,0.268331,0.314748,18.6419,0,0,
-GOOGL,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e1,1718,0.000948287,4.45368,0.698487,0,0.268331,0.314748,18.6419,0,0,
-GOOGL,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e0.5,1718,0.000948287,4.45368,0.698487,0,0.268331,0.314748,18.6419,0,0,
 GOOGL,cf_93,counterfactual,0.93,0.0214505,regular,control,2199,0.000232583,4.48537,0.318327,0,0.0522007,0.274203,5.85236,0,0,
 GOOGL,cf_93,counterfactual,0.93,0.0214505,regular,treat_e1,2199,0.000232583,4.48537,0.318327,0,0.0522007,0.274203,5.85236,0,0,
 GOOGL,cf_93,counterfactual,0.93,0.0214505,regular,treat_e0.5,2199,0.000232583,4.48537,0.318327,0,0.0522007,0.274203,5.85236,0,0,
@@ -1613,9 +1346,6 @@ GOOGL,cf_95,counterfactual,0.95,0.0152284,Weekend,treat_e0.5,396,0.00332108,3.98
 GOOGL,cf_95,counterfactual,0.95,0.0152284,Long,control,61,2.55165e-06,5.77674,1.63934,6.22601e-05,0.000146311,0.00015565,0.00178106,0,0,0
 GOOGL,cf_95,counterfactual,0.95,0.0152284,Long,treat_e1,61,0,4.67856,0,0,0,0,0,0.712328,0.0763785,0.0544511
 GOOGL,cf_95,counterfactual,0.95,0.0152284,Long,treat_e0.5,61,0,4.99134,0,0,0,0,0,0.712328,0.0381893,0.0544511
-GOOGL,cf_95,counterfactual,0.95,0.0152284,overnight,control,1718,0.00219203,4.45368,0.989523,0,0.407653,0.453371,43.0921,0,0,
-GOOGL,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e1,1718,0.00219203,4.45368,0.989523,0,0.407653,0.453371,43.0921,0,0,
-GOOGL,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e0.5,1718,0.00219203,4.45368,0.989523,0,0.407653,0.453371,43.0921,0,0,
 GOOGL,cf_95,counterfactual,0.95,0.0152284,regular,control,2199,0.00140822,4.48537,1.40973,0.0385986,0.194776,0.413437,35.4343,0,0,
 GOOGL,cf_95,counterfactual,0.95,0.0152284,regular,treat_e1,2199,0.00140822,4.48537,1.40973,0.0385986,0.194776,0.413437,35.4343,0,0,
 GOOGL,cf_95,counterfactual,0.95,0.0152284,regular,treat_e0.5,2199,0.00140822,4.48537,1.40973,0.0385986,0.194776,0.413437,35.4343,0,0,
@@ -1631,9 +1361,6 @@ META,morpho_38.5,in_the_wild,0.385,0.15,Weekend,treat_e0.5,396,0,4.80399,0,0,0,0
 META,morpho_38.5,in_the_wild,0.385,0.15,Long,control,61,0,5.62061,0,0,0,0,0,0,0,0
 META,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e1,61,0,5.62061,0,0,0,0,0,0,0,0
 META,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e0.5,61,0,5.62061,0,0,0,0,0,0,0,0
-META,morpho_38.5,in_the_wild,0.385,0.15,overnight,control,1718,0,4.57786,0,0,0,0,0,0,0,
-META,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e1,1718,0,4.57786,0,0,0,0,0,0,0,
-META,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e0.5,1718,0,4.57786,0,0,0,0,0,0,0,
 META,morpho_38.5,in_the_wild,0.385,0.15,regular,control,2199,0,4.73808,0,0,0,0,0,0,0,
 META,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e1,2199,0,4.73808,0,0,0,0,0,0,0,
 META,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e0.5,2199,0,4.73808,0,0,0,0,0,0,0,
@@ -1649,9 +1376,6 @@ META,morpho_62.5,in_the_wild,0.625,0.126761,Weekend,treat_e0.5,396,0,4.80399,0,0
 META,morpho_62.5,in_the_wild,0.625,0.126761,Long,control,61,0,5.62061,0,0,0,0,0,0,0,0
 META,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e1,61,0,5.62061,0,0,0,0,0,0,0,0
 META,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e0.5,61,0,5.62061,0,0,0,0,0,0,0,0
-META,morpho_62.5,in_the_wild,0.625,0.126761,overnight,control,1718,0,4.57786,0,0,0,0,0,0,0,
-META,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e1,1718,0,4.57786,0,0,0,0,0,0,0,
-META,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e0.5,1718,0,4.57786,0,0,0,0,0,0,0,
 META,morpho_62.5,in_the_wild,0.625,0.126761,regular,control,2199,0,4.73808,0,0,0,0,0,0,0,
 META,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e1,2199,0,4.73808,0,0,0,0,0,0,0,
 META,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e0.5,2199,0,4.73808,0,0,0,0,0,0,0,
@@ -1667,9 +1391,6 @@ META,morpho_77,in_the_wild,0.77,0.0741139,Weekend,treat_e0.5,396,0,4.80399,0,0,0
 META,morpho_77,in_the_wild,0.77,0.0741139,Long,control,61,0,5.62061,0,0,0,0,0,0,0,0
 META,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e1,61,0,5.62061,0,0,0,0,0,0,0,0
 META,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e0.5,61,0,5.62061,0,0,0,0,0,0,0,0
-META,morpho_77,in_the_wild,0.77,0.0741139,overnight,control,1718,0.00150277,4.57786,0.174622,0,0.508804,1.18961,29.5423,0,0,
-META,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e1,1718,0.00150277,4.57786,0.174622,0,0.508804,1.18961,29.5423,0,0,
-META,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e0.5,1718,0.00150277,4.57786,0.174622,0,0.508804,1.18961,29.5423,0,0,
 META,morpho_77,in_the_wild,0.77,0.0741139,regular,control,2199,0,4.73808,0,0,0,0,0,0,0,
 META,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e1,2199,0,4.73808,0,0,0,0,0,0,0,
 META,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e0.5,2199,0,4.73808,0,0,0,0,0,0,0,
@@ -1685,9 +1406,6 @@ META,morpho_86,in_the_wild,0.86,0.0438413,Weekend,treat_e0.5,396,8.51212e-05,4.7
 META,morpho_86,in_the_wild,0.86,0.0438413,Long,control,61,0,5.62061,0,0,0,0,0,0,0,0
 META,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e1,61,0,5.62061,0,0,0,0,0,0,0,0
 META,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e0.5,61,0,5.62061,0,0,0,0,0,0,0,0
-META,morpho_86,in_the_wild,0.86,0.0438413,overnight,control,1718,0.0048896,4.57786,0.291036,0,1.98799,3.20983,96.1223,0,0,
-META,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e1,1718,0.0048896,4.57786,0.291036,0,1.98799,3.20983,96.1223,0,0,
-META,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e0.5,1718,0.0048896,4.57786,0.291036,0,1.98799,3.20983,96.1223,0,0,
 META,morpho_86,in_the_wild,0.86,0.0438413,regular,control,2199,0,4.73808,0,0,0,0,0,0,0,
 META,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e1,2199,0,4.73808,0,0,0,0,0,0,0,
 META,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e0.5,2199,0,4.73808,0,0,0,0,0,0,0,
@@ -1703,9 +1421,6 @@ META,aave_65,in_the_wild,0.65,0.055,Weekend,treat_e0.5,396,0,4.80399,0,0,0,0,0,0
 META,aave_65,in_the_wild,0.65,0.055,Long,control,61,0,5.62061,0,0,0,0,0,0,0,0
 META,aave_65,in_the_wild,0.65,0.055,Long,treat_e1,61,0,5.62061,0,0,0,0,0,0,0,0
 META,aave_65,in_the_wild,0.65,0.055,Long,treat_e0.5,61,0,5.62061,0,0,0,0,0,0,0,0
-META,aave_65,in_the_wild,0.65,0.055,overnight,control,1718,0,4.57786,0,0,0,0,0,0,0,
-META,aave_65,in_the_wild,0.65,0.055,overnight,treat_e1,1718,0,4.57786,0,0,0,0,0,0,0,
-META,aave_65,in_the_wild,0.65,0.055,overnight,treat_e0.5,1718,0,4.57786,0,0,0,0,0,0,0,
 META,aave_65,in_the_wild,0.65,0.055,regular,control,2199,0,4.73808,0,0,0,0,0,0,0,
 META,aave_65,in_the_wild,0.65,0.055,regular,treat_e1,2199,0,4.73808,0,0,0,0,0,0,0,
 META,aave_65,in_the_wild,0.65,0.055,regular,treat_e0.5,2199,0,4.73808,0,0,0,0,0,0,0,
@@ -1721,9 +1436,6 @@ META,aave_79,in_the_wild,0.79,0.055,Weekend,treat_e0.5,396,0,4.80399,0,0,0,0,0,0
 META,aave_79,in_the_wild,0.79,0.055,Long,control,61,0,5.62061,0,0,0,0,0,0,0,0
 META,aave_79,in_the_wild,0.79,0.055,Long,treat_e1,61,0,5.62061,0,0,0,0,0,0,0,0
 META,aave_79,in_the_wild,0.79,0.055,Long,treat_e0.5,61,0,5.62061,0,0,0,0,0,0,0,0
-META,aave_79,in_the_wild,0.79,0.055,overnight,control,1718,0.00169927,4.57786,0.174622,0,0.597446,1.32271,33.4052,0,0,
-META,aave_79,in_the_wild,0.79,0.055,overnight,treat_e1,1718,0.00169927,4.57786,0.174622,0,0.597446,1.32271,33.4052,0,0,
-META,aave_79,in_the_wild,0.79,0.055,overnight,treat_e0.5,1718,0.00169927,4.57786,0.174622,0,0.597446,1.32271,33.4052,0,0,
 META,aave_79,in_the_wild,0.79,0.055,regular,control,2199,0,4.73808,0,0,0,0,0,0,0,
 META,aave_79,in_the_wild,0.79,0.055,regular,treat_e1,2199,0,4.73808,0,0,0,0,0,0,0,
 META,aave_79,in_the_wild,0.79,0.055,regular,treat_e0.5,2199,0,4.73808,0,0,0,0,0,0,0,
@@ -1739,9 +1451,6 @@ META,cf_90,counterfactual,0.9,0.0309278,Weekend,treat_e0.5,396,0.000946426,4.707
 META,cf_90,counterfactual,0.9,0.0309278,Long,control,61,0,5.62061,0,0,0,0,0,0,0,0
 META,cf_90,counterfactual,0.9,0.0309278,Long,treat_e1,61,0,5.4649,0,0,0,0,0,0.0810471,0.00771877,0.00619533
 META,cf_90,counterfactual,0.9,0.0309278,Long,treat_e0.5,61,0,5.46469,0,0,0,0,0,0.0810471,0.00385939,0.00619533
-META,cf_90,counterfactual,0.9,0.0309278,overnight,control,1718,0.00735328,4.57786,0.523865,0,2.87929,4.24995,144.554,0,0,
-META,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e1,1718,0.00735328,4.57786,0.523865,0,2.87929,4.24995,144.554,0,0,
-META,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e0.5,1718,0.00735328,4.57786,0.523865,0,2.87929,4.24995,144.554,0,0,
 META,cf_90,counterfactual,0.9,0.0309278,regular,control,2199,0,4.73808,0,0,0,0,0,0,0,
 META,cf_90,counterfactual,0.9,0.0309278,regular,treat_e1,2199,0,4.73808,0,0,0,0,0,0,0,
 META,cf_90,counterfactual,0.9,0.0309278,regular,treat_e0.5,2199,0,4.73808,0,0,0,0,0,0,0,
@@ -1757,9 +1466,6 @@ META,cf_93,counterfactual,0.93,0.0214505,Weekend,treat_e0.5,396,0.0022814,4.4901
 META,cf_93,counterfactual,0.93,0.0214505,Long,control,61,0,5.62061,0,0,0,0,0,0,0,0
 META,cf_93,counterfactual,0.93,0.0214505,Long,treat_e1,61,0,5.15204,0,0,0,0,0,0.341386,0.0360803,0.026096
 META,cf_93,counterfactual,0.93,0.0214505,Long,treat_e0.5,61,0,5.15213,0,0,0,0,0,0.341386,0.0180402,0.026096
-META,cf_93,counterfactual,0.93,0.0214505,overnight,control,1718,0.00985447,4.57786,0.873108,0,3.52882,5.02368,193.724,0,0,
-META,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e1,1718,0.00985447,4.57786,0.873108,0,3.52882,5.02368,193.724,0,0,
-META,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e0.5,1718,0.00985447,4.57786,0.873108,0,3.52882,5.02368,193.724,0,0,
 META,cf_93,counterfactual,0.93,0.0214505,regular,control,2199,0.000702295,4.73808,0.909504,0,0.157205,0.211855,17.6714,0,0,
 META,cf_93,counterfactual,0.93,0.0214505,regular,treat_e1,2199,0.000702295,4.73808,0.909504,0,0.157205,0.211855,17.6714,0,0,
 META,cf_93,counterfactual,0.93,0.0214505,regular,treat_e0.5,2199,0.000702295,4.73808,0.909504,0,0.157205,0.211855,17.6714,0,0,
@@ -1775,9 +1481,6 @@ META,cf_95,counterfactual,0.95,0.0152284,Weekend,treat_e0.5,396,0.00360342,3.813
 META,cf_95,counterfactual,0.95,0.0152284,Long,control,61,0.000803754,5.62061,1.63934,0.0196116,0.0460873,0.049029,0.561023,0,0,0
 META,cf_95,counterfactual,0.95,0.0152284,Long,treat_e1,61,0,3.89966,0,0,0,0,0,0.913482,0.0954501,0.0698276
 META,cf_95,counterfactual,0.95,0.0152284,Long,treat_e0.5,61,0,4.5213,0,0,0,0,0,0.913482,0.047725,0.0698276
-META,cf_95,counterfactual,0.95,0.0152284,overnight,control,1718,0.0123639,4.57786,1.45518,0.0802257,4.0386,5.59319,243.055,0,0,
-META,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e1,1718,0.0123639,4.57786,1.45518,0.0802257,4.0386,5.59319,243.055,0,0,
-META,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e0.5,1718,0.0123639,4.57786,1.45518,0.0802257,4.0386,5.59319,243.055,0,0,
 META,cf_95,counterfactual,0.95,0.0152284,regular,control,2199,0.00313865,4.73808,3.04684,0.121421,0.2982,0.352028,78.9762,0,0,
 META,cf_95,counterfactual,0.95,0.0152284,regular,treat_e1,2199,0.00313865,4.73808,3.04684,0.121421,0.2982,0.352028,78.9762,0,0,
 META,cf_95,counterfactual,0.95,0.0152284,regular,treat_e0.5,2199,0.00313865,4.73808,3.04684,0.121421,0.2982,0.352028,78.9762,0,0,
@@ -1793,9 +1496,6 @@ JPM,morpho_38.5,in_the_wild,0.385,0.15,Weekend,treat_e0.5,396,0,4.55868,0,0,0,0,
 JPM,morpho_38.5,in_the_wild,0.385,0.15,Long,control,61,0,5.46448,0,0,0,0,0,0,0,0
 JPM,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e1,61,0,5.46448,0,0,0,0,0,0,0,0
 JPM,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e0.5,61,0,5.46448,0,0,0,0,0,0,0,0
-JPM,morpho_38.5,in_the_wild,0.385,0.15,overnight,control,1718,0,4.4717,0,0,0,0,0,0,0,
-JPM,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e1,1718,0,4.4717,0,0,0,0,0,0,0,
-JPM,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e0.5,1718,0,4.4717,0,0,0,0,0,0,0,
 JPM,morpho_38.5,in_the_wild,0.385,0.15,regular,control,2199,0,4.62938,0,0,0,0,0,0,0,
 JPM,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e1,2199,0,4.62938,0,0,0,0,0,0,0,
 JPM,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e0.5,2199,0,4.62938,0,0,0,0,0,0,0,
@@ -1811,9 +1511,6 @@ JPM,morpho_62.5,in_the_wild,0.625,0.126761,Weekend,treat_e0.5,396,0,4.55868,0,0,
 JPM,morpho_62.5,in_the_wild,0.625,0.126761,Long,control,61,0,5.46448,0,0,0,0,0,0,0,0
 JPM,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e1,61,0,5.46448,0,0,0,0,0,0,0,0
 JPM,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e0.5,61,0,5.46448,0,0,0,0,0,0,0,0
-JPM,morpho_62.5,in_the_wild,0.625,0.126761,overnight,control,1718,0,4.4717,0,0,0,0,0,0,0,
-JPM,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e1,1718,0,4.4717,0,0,0,0,0,0,0,
-JPM,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e0.5,1718,0,4.4717,0,0,0,0,0,0,0,
 JPM,morpho_62.5,in_the_wild,0.625,0.126761,regular,control,2199,0,4.62938,0,0,0,0,0,0,0,
 JPM,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e1,2199,0,4.62938,0,0,0,0,0,0,0,
 JPM,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e0.5,2199,0,4.62938,0,0,0,0,0,0,0,
@@ -1829,9 +1526,6 @@ JPM,morpho_77,in_the_wild,0.77,0.0741139,Weekend,treat_e0.5,396,0.000207261,4.55
 JPM,morpho_77,in_the_wild,0.77,0.0741139,Long,control,61,0,5.46448,0,0,0,0,0,0,0,0
 JPM,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e1,61,0,5.46448,0,0,0,0,0,0,0,0
 JPM,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e0.5,61,0,5.46448,0,0,0,0,0,0,0,0
-JPM,morpho_77,in_the_wild,0.77,0.0741139,overnight,control,1718,0,4.4717,0,0,0,0,0,0,0,
-JPM,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e1,1718,0,4.4717,0,0,0,0,0,0,0,
-JPM,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e0.5,1718,0,4.4717,0,0,0,0,0,0,0,
 JPM,morpho_77,in_the_wild,0.77,0.0741139,regular,control,2199,0,4.62938,0,0,0,0,0,0,0,
 JPM,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e1,2199,0,4.62938,0,0,0,0,0,0,0,
 JPM,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e0.5,2199,0,4.62938,0,0,0,0,0,0,0,
@@ -1847,9 +1541,6 @@ JPM,morpho_86,in_the_wild,0.86,0.0438413,Weekend,treat_e0.5,396,0.00307701,4.438
 JPM,morpho_86,in_the_wild,0.86,0.0438413,Long,control,61,0,5.46448,0,0,0,0,0,0,0,0
 JPM,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e1,61,0,5.46596,0,0,0,0,0,0.213819,0.0271508,0.0163445
 JPM,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e0.5,61,0,5.46522,0,0,0,0,0,0.213819,0.0135754,0.0163445
-JPM,morpho_86,in_the_wild,0.86,0.0438413,overnight,control,1718,0,4.4717,0,0,0,0,0,0,0,
-JPM,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e1,1718,0,4.4717,0,0,0,0,0,0,0,
-JPM,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e0.5,1718,0,4.4717,0,0,0,0,0,0,0,
 JPM,morpho_86,in_the_wild,0.86,0.0438413,regular,control,2199,0,4.62938,0,0,0,0,0,0,0,
 JPM,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e1,2199,0,4.62938,0,0,0,0,0,0,0,
 JPM,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e0.5,2199,0,4.62938,0,0,0,0,0,0,0,
@@ -1865,9 +1556,6 @@ JPM,aave_65,in_the_wild,0.65,0.055,Weekend,treat_e0.5,396,0,4.55868,0,0,0,0,0,0,
 JPM,aave_65,in_the_wild,0.65,0.055,Long,control,61,0,5.46448,0,0,0,0,0,0,0,0
 JPM,aave_65,in_the_wild,0.65,0.055,Long,treat_e1,61,0,5.46448,0,0,0,0,0,0,0,0
 JPM,aave_65,in_the_wild,0.65,0.055,Long,treat_e0.5,61,0,5.46448,0,0,0,0,0,0,0,0
-JPM,aave_65,in_the_wild,0.65,0.055,overnight,control,1718,0,4.4717,0,0,0,0,0,0,0,
-JPM,aave_65,in_the_wild,0.65,0.055,overnight,treat_e1,1718,0,4.4717,0,0,0,0,0,0,0,
-JPM,aave_65,in_the_wild,0.65,0.055,overnight,treat_e0.5,1718,0,4.4717,0,0,0,0,0,0,0,
 JPM,aave_65,in_the_wild,0.65,0.055,regular,control,2199,0,4.62938,0,0,0,0,0,0,0,
 JPM,aave_65,in_the_wild,0.65,0.055,regular,treat_e1,2199,0,4.62938,0,0,0,0,0,0,0,
 JPM,aave_65,in_the_wild,0.65,0.055,regular,treat_e0.5,2199,0,4.62938,0,0,0,0,0,0,0,
@@ -1883,9 +1571,6 @@ JPM,aave_79,in_the_wild,0.79,0.055,Weekend,treat_e0.5,396,0.000389846,4.51063,0.
 JPM,aave_79,in_the_wild,0.79,0.055,Long,control,61,0,5.46448,0,0,0,0,0,0,0,0
 JPM,aave_79,in_the_wild,0.79,0.055,Long,treat_e1,61,0,5.46459,0,0,0,0,0,0.0215517,0.00205255,0.00164744
 JPM,aave_79,in_the_wild,0.79,0.055,Long,treat_e0.5,61,0,5.46454,0,0,0,0,0,0.0215517,0.00102627,0.00164744
-JPM,aave_79,in_the_wild,0.79,0.055,overnight,control,1718,0,4.4717,0,0,0,0,0,0,0,
-JPM,aave_79,in_the_wild,0.79,0.055,overnight,treat_e1,1718,0,4.4717,0,0,0,0,0,0,0,
-JPM,aave_79,in_the_wild,0.79,0.055,overnight,treat_e0.5,1718,0,4.4717,0,0,0,0,0,0,0,
 JPM,aave_79,in_the_wild,0.79,0.055,regular,control,2199,0,4.62938,0,0,0,0,0,0,0,
 JPM,aave_79,in_the_wild,0.79,0.055,regular,treat_e1,2199,0,4.62938,0,0,0,0,0,0,0,
 JPM,aave_79,in_the_wild,0.79,0.055,regular,treat_e0.5,2199,0,4.62938,0,0,0,0,0,0,0,
@@ -1901,9 +1586,6 @@ JPM,cf_90,counterfactual,0.9,0.0309278,Weekend,treat_e0.5,396,0.005229,4.36592,0
 JPM,cf_90,counterfactual,0.9,0.0309278,Long,control,61,0,5.46448,0,0,0,0,0,0,0,0
 JPM,cf_90,counterfactual,0.9,0.0309278,Long,treat_e1,61,0,5.46798,0,0,0,0,0,0.430123,0.0639591,0.032879
 JPM,cf_90,counterfactual,0.9,0.0309278,Long,treat_e0.5,61,0,5.46623,0,0,0,0,0,0.430123,0.0319796,0.032879
-JPM,cf_90,counterfactual,0.9,0.0309278,overnight,control,1718,0,4.4717,0,0,0,0,0,0,0,
-JPM,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e1,1718,0,4.4717,0,0,0,0,0,0,0,
-JPM,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e0.5,1718,0,4.4717,0,0,0,0,0,0,0,
 JPM,cf_90,counterfactual,0.9,0.0309278,regular,control,2199,0,4.62938,0,0,0,0,0,0,0,
 JPM,cf_90,counterfactual,0.9,0.0309278,regular,treat_e1,2199,0,4.62938,0,0,0,0,0,0,0,
 JPM,cf_90,counterfactual,0.9,0.0309278,regular,treat_e0.5,2199,0,4.62938,0,0,0,0,0,0,0,
@@ -1919,9 +1601,6 @@ JPM,cf_93,counterfactual,0.93,0.0214505,Weekend,treat_e0.5,396,0.00689012,4.1982
 JPM,cf_93,counterfactual,0.93,0.0214505,Long,control,61,0,5.46448,0,0,0,0,0,0,0,0
 JPM,cf_93,counterfactual,0.93,0.0214505,Long,treat_e1,61,0,5.31463,0,0,0,0,0,0.785472,0.118076,0.0600423
 JPM,cf_93,counterfactual,0.93,0.0214505,Long,treat_e0.5,61,0,5.31149,0,0,0,0,0,0.785472,0.0590381,0.0600423
-JPM,cf_93,counterfactual,0.93,0.0214505,overnight,control,1718,0.000402622,4.4717,0.407451,0,0.153459,0.176431,7.91495,0,0,
-JPM,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e1,1718,0.000402622,4.4717,0.407451,0,0.153459,0.176431,7.91495,0,0,
-JPM,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e0.5,1718,0.000402622,4.4717,0.407451,0,0.153459,0.176431,7.91495,0,0,
 JPM,cf_93,counterfactual,0.93,0.0214505,regular,control,2199,6.47079e-05,4.62938,0.0909504,0,0,0.0962621,1.62821,0,0,
 JPM,cf_93,counterfactual,0.93,0.0214505,regular,treat_e1,2199,6.47079e-05,4.62938,0.0909504,0,0,0.0962621,1.62821,0,0,
 JPM,cf_93,counterfactual,0.93,0.0214505,regular,treat_e0.5,2199,6.47079e-05,4.62938,0.0909504,0,0,0.0962621,1.62821,0,0,
@@ -1937,9 +1616,6 @@ JPM,cf_95,counterfactual,0.95,0.0152284,Weekend,treat_e0.5,396,0.00798864,3.9083
 JPM,cf_95,counterfactual,0.95,0.0152284,Long,control,61,0,5.46448,0,0,0,0,0,0,0,0
 JPM,cf_95,counterfactual,0.95,0.0152284,Long,treat_e1,61,0,4.84379,0,0,0,0,0,1.21221,0.177685,0.0926626
 JPM,cf_95,counterfactual,0.95,0.0152284,Long,treat_e0.5,61,0,5.15391,0,0,0,0,0,1.21221,0.0888424,0.0926626
-JPM,cf_95,counterfactual,0.95,0.0152284,overnight,control,1718,0.001178,4.4717,0.698487,0,0.29451,0.317136,23.1576,0,0,
-JPM,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e1,1718,0.001178,4.4717,0.698487,0,0.29451,0.317136,23.1576,0,0,
-JPM,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e0.5,1718,0.001178,4.4717,0.698487,0,0.29451,0.317136,23.1576,0,0,
 JPM,cf_95,counterfactual,0.95,0.0152284,regular,control,2199,0.000689533,4.62938,0.95498,0,0.118793,0.238174,17.3503,0,0,
 JPM,cf_95,counterfactual,0.95,0.0152284,regular,treat_e1,2199,0.000689533,4.62938,0.95498,0,0.118793,0.238174,17.3503,0,0,
 JPM,cf_95,counterfactual,0.95,0.0152284,regular,treat_e0.5,2199,0.000689533,4.62938,0.95498,0,0.118793,0.238174,17.3503,0,0,
@@ -1955,9 +1631,6 @@ XOM,morpho_38.5,in_the_wild,0.385,0.15,Weekend,treat_e0.5,396,0,4.41919,0,0,0,0,
 XOM,morpho_38.5,in_the_wild,0.385,0.15,Long,control,61,0,4.52771,0,0,0,0,0,0,0,0
 XOM,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e1,61,0,4.52771,0,0,0,0,0,0,0,0
 XOM,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e0.5,61,0,4.52771,0,0,0,0,0,0,0,0
-XOM,morpho_38.5,in_the_wild,0.385,0.15,overnight,control,1718,0,4.47835,0,0,0,0,0,0,0,
-XOM,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e1,1718,0,4.47835,0,0,0,0,0,0,0,
-XOM,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e0.5,1718,0,4.47835,0,0,0,0,0,0,0,
 XOM,morpho_38.5,in_the_wild,0.385,0.15,regular,control,2199,0,4.81799,0,0,0,0,0,0,0,
 XOM,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e1,2199,0,4.81799,0,0,0,0,0,0,0,
 XOM,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e0.5,2199,0,4.81799,0,0,0,0,0,0,0,
@@ -1973,9 +1646,6 @@ XOM,morpho_62.5,in_the_wild,0.625,0.126761,Weekend,treat_e0.5,396,0,4.41919,0,0,
 XOM,morpho_62.5,in_the_wild,0.625,0.126761,Long,control,61,0,4.52771,0,0,0,0,0,0,0,0
 XOM,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e1,61,0,4.52771,0,0,0,0,0,0,0,0
 XOM,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e0.5,61,0,4.52771,0,0,0,0,0,0,0,0
-XOM,morpho_62.5,in_the_wild,0.625,0.126761,overnight,control,1718,0,4.47835,0,0,0,0,0,0,0,
-XOM,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e1,1718,0,4.47835,0,0,0,0,0,0,0,
-XOM,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e0.5,1718,0,4.47835,0,0,0,0,0,0,0,
 XOM,morpho_62.5,in_the_wild,0.625,0.126761,regular,control,2199,0,4.81799,0,0,0,0,0,0,0,
 XOM,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e1,2199,0,4.81799,0,0,0,0,0,0,0,
 XOM,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e0.5,2199,0,4.81799,0,0,0,0,0,0,0,
@@ -1991,9 +1661,6 @@ XOM,morpho_77,in_the_wild,0.77,0.0741139,Weekend,treat_e0.5,396,0,4.41919,0,0,0,
 XOM,morpho_77,in_the_wild,0.77,0.0741139,Long,control,61,0,4.52771,0,0,0,0,0,0,0,0
 XOM,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e1,61,0,4.52771,0,0,0,0,0,0,0,0
 XOM,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e0.5,61,0,4.52771,0,0,0,0,0,0,0,0
-XOM,morpho_77,in_the_wild,0.77,0.0741139,overnight,control,1718,0,4.47835,0,0,0,0,0,0,0,
-XOM,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e1,1718,0,4.47835,0,0,0,0,0,0,0,
-XOM,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e0.5,1718,0,4.47835,0,0,0,0,0,0,0,
 XOM,morpho_77,in_the_wild,0.77,0.0741139,regular,control,2199,0,4.81799,0,0,0,0,0,0,0,
 XOM,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e1,2199,0,4.81799,0,0,0,0,0,0,0,
 XOM,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e0.5,2199,0,4.81799,0,0,0,0,0,0,0,
@@ -2009,9 +1676,6 @@ XOM,morpho_86,in_the_wild,0.86,0.0438413,Weekend,treat_e0.5,396,0.000618794,4.32
 XOM,morpho_86,in_the_wild,0.86,0.0438413,Long,control,61,0,4.52771,0,0,0,0,0,0,0,0
 XOM,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e1,61,0,4.52795,0,0,0,0,0,0.0560544,0.00533852,0.00428486
 XOM,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e0.5,61,0,4.52783,0,0,0,0,0,0.0560544,0.00266926,0.00428486
-XOM,morpho_86,in_the_wild,0.86,0.0438413,overnight,control,1718,0,4.47835,0,0,0,0,0,0,0,
-XOM,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e1,1718,0,4.47835,0,0,0,0,0,0,0,
-XOM,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e0.5,1718,0,4.47835,0,0,0,0,0,0,0,
 XOM,morpho_86,in_the_wild,0.86,0.0438413,regular,control,2199,0,4.81799,0,0,0,0,0,0,0,
 XOM,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e1,2199,0,4.81799,0,0,0,0,0,0,0,
 XOM,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e0.5,2199,0,4.81799,0,0,0,0,0,0,0,
@@ -2027,9 +1691,6 @@ XOM,aave_65,in_the_wild,0.65,0.055,Weekend,treat_e0.5,396,0,4.41919,0,0,0,0,0,0,
 XOM,aave_65,in_the_wild,0.65,0.055,Long,control,61,0,4.52771,0,0,0,0,0,0,0,0
 XOM,aave_65,in_the_wild,0.65,0.055,Long,treat_e1,61,0,4.52771,0,0,0,0,0,0,0,0
 XOM,aave_65,in_the_wild,0.65,0.055,Long,treat_e0.5,61,0,4.52771,0,0,0,0,0,0,0,0
-XOM,aave_65,in_the_wild,0.65,0.055,overnight,control,1718,0,4.47835,0,0,0,0,0,0,0,
-XOM,aave_65,in_the_wild,0.65,0.055,overnight,treat_e1,1718,0,4.47835,0,0,0,0,0,0,0,
-XOM,aave_65,in_the_wild,0.65,0.055,overnight,treat_e0.5,1718,0,4.47835,0,0,0,0,0,0,0,
 XOM,aave_65,in_the_wild,0.65,0.055,regular,control,2199,0,4.81799,0,0,0,0,0,0,0,
 XOM,aave_65,in_the_wild,0.65,0.055,regular,treat_e1,2199,0,4.81799,0,0,0,0,0,0,0,
 XOM,aave_65,in_the_wild,0.65,0.055,regular,treat_e0.5,2199,0,4.81799,0,0,0,0,0,0,0,
@@ -2045,9 +1706,6 @@ XOM,aave_79,in_the_wild,0.79,0.055,Weekend,treat_e0.5,396,0,4.41919,0,0,0,0,0,0,
 XOM,aave_79,in_the_wild,0.79,0.055,Long,control,61,0,4.52771,0,0,0,0,0,0,0,0
 XOM,aave_79,in_the_wild,0.79,0.055,Long,treat_e1,61,0,4.52771,0,0,0,0,0,0,0,0
 XOM,aave_79,in_the_wild,0.79,0.055,Long,treat_e0.5,61,0,4.52771,0,0,0,0,0,0,0,0
-XOM,aave_79,in_the_wild,0.79,0.055,overnight,control,1718,0,4.47835,0,0,0,0,0,0,0,
-XOM,aave_79,in_the_wild,0.79,0.055,overnight,treat_e1,1718,0,4.47835,0,0,0,0,0,0,0,
-XOM,aave_79,in_the_wild,0.79,0.055,overnight,treat_e0.5,1718,0,4.47835,0,0,0,0,0,0,0,
 XOM,aave_79,in_the_wild,0.79,0.055,regular,control,2199,0,4.81799,0,0,0,0,0,0,0,
 XOM,aave_79,in_the_wild,0.79,0.055,regular,treat_e1,2199,0,4.81799,0,0,0,0,0,0,0,
 XOM,aave_79,in_the_wild,0.79,0.055,regular,treat_e0.5,2199,0,4.81799,0,0,0,0,0,0,0,
@@ -2063,9 +1721,6 @@ XOM,cf_90,counterfactual,0.9,0.0309278,Weekend,treat_e0.5,396,0.00155713,4.17671
 XOM,cf_90,counterfactual,0.9,0.0309278,Long,control,61,0,4.52771,0,0,0,0,0,0,0,0
 XOM,cf_90,counterfactual,0.9,0.0309278,Long,treat_e1,61,0,4.52906,0,0,0,0,0,0.277615,0.0298061,0.0212212
 XOM,cf_90,counterfactual,0.9,0.0309278,Long,treat_e0.5,61,0,4.52839,0,0,0,0,0,0.277615,0.014903,0.0212212
-XOM,cf_90,counterfactual,0.9,0.0309278,overnight,control,1718,0,4.47835,0,0,0,0,0,0,0,
-XOM,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e1,1718,0,4.47835,0,0,0,0,0,0,0,
-XOM,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e0.5,1718,0,4.47835,0,0,0,0,0,0,0,
 XOM,cf_90,counterfactual,0.9,0.0309278,regular,control,2199,0,4.81799,0,0,0,0,0,0,0,
 XOM,cf_90,counterfactual,0.9,0.0309278,regular,treat_e1,2199,0,4.81799,0,0,0,0,0,0,0,
 XOM,cf_90,counterfactual,0.9,0.0309278,regular,treat_e0.5,2199,0,4.81799,0,0,0,0,0,0,0,
@@ -2081,9 +1736,6 @@ XOM,cf_93,counterfactual,0.93,0.0214505,Weekend,treat_e0.5,396,0.0027265,3.96012
 XOM,cf_93,counterfactual,0.93,0.0214505,Long,control,61,0,4.52771,0,0,0,0,0,0,0,0
 XOM,cf_93,counterfactual,0.93,0.0214505,Long,treat_e1,61,0,4.21631,0,0,0,0,0,0.683668,0.0790205,0.0522603
 XOM,cf_93,counterfactual,0.93,0.0214505,Long,treat_e0.5,61,0,4.21588,0,0,0,0,0,0.683668,0.0395103,0.0522603
-XOM,cf_93,counterfactual,0.93,0.0214505,overnight,control,1718,0.00021143,4.47835,0.174622,0,0.114319,0.133719,4.15641,0,0,
-XOM,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e1,1718,0.00021143,4.47835,0.174622,0,0.114319,0.133719,4.15641,0,0,
-XOM,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e0.5,1718,0.00021143,4.47835,0.174622,0,0.114319,0.133719,4.15641,0,0,
 XOM,cf_93,counterfactual,0.93,0.0214505,regular,control,2199,0.000283988,4.81799,0.500227,0,0.0893887,0.181654,7.14582,0,0,
 XOM,cf_93,counterfactual,0.93,0.0214505,regular,treat_e1,2199,0.000283988,4.81799,0.500227,0,0.0893887,0.181654,7.14582,0,0,
 XOM,cf_93,counterfactual,0.93,0.0214505,regular,treat_e0.5,2199,0.000283988,4.81799,0.500227,0,0.0893887,0.181654,7.14582,0,0,
@@ -2099,9 +1751,6 @@ XOM,cf_95,counterfactual,0.95,0.0152284,Weekend,treat_e0.5,396,0.00383385,3.3303
 XOM,cf_95,counterfactual,0.95,0.0152284,Long,control,61,0,4.52771,0,0,0,0,0,0,0,0
 XOM,cf_95,counterfactual,0.95,0.0152284,Long,treat_e1,61,0,2.96779,0,0,0,0,0,1.50135,0.173514,0.114765
 XOM,cf_95,counterfactual,0.95,0.0152284,Long,treat_e0.5,61,0,3.5865,0,0,0,0,0,1.50135,0.0867568,0.114765
-XOM,cf_95,counterfactual,0.95,0.0152284,overnight,control,1718,0.000935641,4.47835,0.931315,0,0.255959,0.275067,18.3933,0,0,
-XOM,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e1,1718,0.000935641,4.47835,0.931315,0,0.255959,0.275067,18.3933,0,0,
-XOM,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e0.5,1718,0.000935641,4.47835,0.931315,0,0.255959,0.275067,18.3933,0,0,
 XOM,cf_95,counterfactual,0.95,0.0152284,regular,control,2199,0.00163751,4.81799,1.63711,0.0578537,0.231405,0.322281,41.2038,0,0,
 XOM,cf_95,counterfactual,0.95,0.0152284,regular,treat_e1,2199,0.00163751,4.81799,1.63711,0.0578537,0.231405,0.322281,41.2038,0,0,
 XOM,cf_95,counterfactual,0.95,0.0152284,regular,treat_e0.5,2199,0.00163751,4.81799,1.63711,0.0578537,0.231405,0.322281,41.2038,0,0,
@@ -2117,9 +1766,6 @@ WMT,morpho_38.5,in_the_wild,0.385,0.15,Weekend,treat_e0.5,396,0,4.44805,0,0,0,0,
 WMT,morpho_38.5,in_the_wild,0.385,0.15,Long,control,61,0,5.45667,0,0,0,0,0,0,0,0
 WMT,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e1,61,0,5.45667,0,0,0,0,0,0,0,0
 WMT,morpho_38.5,in_the_wild,0.385,0.15,Long,treat_e0.5,61,0,5.45667,0,0,0,0,0,0,0,0
-WMT,morpho_38.5,in_the_wild,0.385,0.15,overnight,control,1718,0,4.59366,0,0,0,0,0,0,0,
-WMT,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e1,1718,0,4.59366,0,0,0,0,0,0,0,
-WMT,morpho_38.5,in_the_wild,0.385,0.15,overnight,treat_e0.5,1718,0,4.59366,0,0,0,0,0,0,0,
 WMT,morpho_38.5,in_the_wild,0.385,0.15,regular,control,2199,0,4.65991,0,0,0,0,0,0,0,
 WMT,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e1,2199,0,4.65991,0,0,0,0,0,0,0,
 WMT,morpho_38.5,in_the_wild,0.385,0.15,regular,treat_e0.5,2199,0,4.65991,0,0,0,0,0,0,0,
@@ -2135,9 +1781,6 @@ WMT,morpho_62.5,in_the_wild,0.625,0.126761,Weekend,treat_e0.5,396,0,4.44805,0,0,
 WMT,morpho_62.5,in_the_wild,0.625,0.126761,Long,control,61,0,5.45667,0,0,0,0,0,0,0,0
 WMT,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e1,61,0,5.45667,0,0,0,0,0,0,0,0
 WMT,morpho_62.5,in_the_wild,0.625,0.126761,Long,treat_e0.5,61,0,5.45667,0,0,0,0,0,0,0,0
-WMT,morpho_62.5,in_the_wild,0.625,0.126761,overnight,control,1718,0,4.59366,0,0,0,0,0,0,0,
-WMT,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e1,1718,0,4.59366,0,0,0,0,0,0,0,
-WMT,morpho_62.5,in_the_wild,0.625,0.126761,overnight,treat_e0.5,1718,0,4.59366,0,0,0,0,0,0,0,
 WMT,morpho_62.5,in_the_wild,0.625,0.126761,regular,control,2199,0,4.65991,0,0,0,0,0,0,0,
 WMT,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e1,2199,0,4.65991,0,0,0,0,0,0,0,
 WMT,morpho_62.5,in_the_wild,0.625,0.126761,regular,treat_e0.5,2199,0,4.65991,0,0,0,0,0,0,0,
@@ -2153,9 +1796,6 @@ WMT,morpho_77,in_the_wild,0.77,0.0741139,Weekend,treat_e0.5,396,0,4.44805,0,0,0,
 WMT,morpho_77,in_the_wild,0.77,0.0741139,Long,control,61,0,5.45667,0,0,0,0,0,0,0,0
 WMT,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e1,61,0,5.45667,0,0,0,0,0,0,0,0
 WMT,morpho_77,in_the_wild,0.77,0.0741139,Long,treat_e0.5,61,0,5.45667,0,0,0,0,0,0,0,0
-WMT,morpho_77,in_the_wild,0.77,0.0741139,overnight,control,1718,0,4.59366,0,0,0,0,0,0,0,
-WMT,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e1,1718,0,4.59366,0,0,0,0,0,0,0,
-WMT,morpho_77,in_the_wild,0.77,0.0741139,overnight,treat_e0.5,1718,0,4.59366,0,0,0,0,0,0,0,
 WMT,morpho_77,in_the_wild,0.77,0.0741139,regular,control,2199,0,4.65991,0,0,0,0,0,0,0,
 WMT,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e1,2199,0,4.65991,0,0,0,0,0,0,0,
 WMT,morpho_77,in_the_wild,0.77,0.0741139,regular,treat_e0.5,2199,0,4.65991,0,0,0,0,0,0,0,
@@ -2171,9 +1811,6 @@ WMT,morpho_86,in_the_wild,0.86,0.0438413,Weekend,treat_e0.5,396,0,4.44805,0,0,0,
 WMT,morpho_86,in_the_wild,0.86,0.0438413,Long,control,61,0,5.45667,0,0,0,0,0,0,0,0
 WMT,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e1,61,0,5.45667,0,0,0,0,0,0,0,0
 WMT,morpho_86,in_the_wild,0.86,0.0438413,Long,treat_e0.5,61,0,5.45667,0,0,0,0,0,0,0,0
-WMT,morpho_86,in_the_wild,0.86,0.0438413,overnight,control,1718,0,4.59366,0,0,0,0,0,0,0,
-WMT,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e1,1718,0,4.59366,0,0,0,0,0,0,0,
-WMT,morpho_86,in_the_wild,0.86,0.0438413,overnight,treat_e0.5,1718,0,4.59366,0,0,0,0,0,0,0,
 WMT,morpho_86,in_the_wild,0.86,0.0438413,regular,control,2199,0,4.65991,0,0,0,0,0,0,0,
 WMT,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e1,2199,0,4.65991,0,0,0,0,0,0,0,
 WMT,morpho_86,in_the_wild,0.86,0.0438413,regular,treat_e0.5,2199,0,4.65991,0,0,0,0,0,0,0,
@@ -2189,9 +1826,6 @@ WMT,aave_65,in_the_wild,0.65,0.055,Weekend,treat_e0.5,396,0,4.44805,0,0,0,0,0,0,
 WMT,aave_65,in_the_wild,0.65,0.055,Long,control,61,0,5.45667,0,0,0,0,0,0,0,0
 WMT,aave_65,in_the_wild,0.65,0.055,Long,treat_e1,61,0,5.45667,0,0,0,0,0,0,0,0
 WMT,aave_65,in_the_wild,0.65,0.055,Long,treat_e0.5,61,0,5.45667,0,0,0,0,0,0,0,0
-WMT,aave_65,in_the_wild,0.65,0.055,overnight,control,1718,0,4.59366,0,0,0,0,0,0,0,
-WMT,aave_65,in_the_wild,0.65,0.055,overnight,treat_e1,1718,0,4.59366,0,0,0,0,0,0,0,
-WMT,aave_65,in_the_wild,0.65,0.055,overnight,treat_e0.5,1718,0,4.59366,0,0,0,0,0,0,0,
 WMT,aave_65,in_the_wild,0.65,0.055,regular,control,2199,0,4.65991,0,0,0,0,0,0,0,
 WMT,aave_65,in_the_wild,0.65,0.055,regular,treat_e1,2199,0,4.65991,0,0,0,0,0,0,0,
 WMT,aave_65,in_the_wild,0.65,0.055,regular,treat_e0.5,2199,0,4.65991,0,0,0,0,0,0,0,
@@ -2207,9 +1841,6 @@ WMT,aave_79,in_the_wild,0.79,0.055,Weekend,treat_e0.5,396,0,4.44805,0,0,0,0,0,0,
 WMT,aave_79,in_the_wild,0.79,0.055,Long,control,61,0,5.45667,0,0,0,0,0,0,0,0
 WMT,aave_79,in_the_wild,0.79,0.055,Long,treat_e1,61,0,5.45667,0,0,0,0,0,0,0,0
 WMT,aave_79,in_the_wild,0.79,0.055,Long,treat_e0.5,61,0,5.45667,0,0,0,0,0,0,0,0
-WMT,aave_79,in_the_wild,0.79,0.055,overnight,control,1718,0,4.59366,0,0,0,0,0,0,0,
-WMT,aave_79,in_the_wild,0.79,0.055,overnight,treat_e1,1718,0,4.59366,0,0,0,0,0,0,0,
-WMT,aave_79,in_the_wild,0.79,0.055,overnight,treat_e0.5,1718,0,4.59366,0,0,0,0,0,0,0,
 WMT,aave_79,in_the_wild,0.79,0.055,regular,control,2199,0,4.65991,0,0,0,0,0,0,0,
 WMT,aave_79,in_the_wild,0.79,0.055,regular,treat_e1,2199,0,4.65991,0,0,0,0,0,0,0,
 WMT,aave_79,in_the_wild,0.79,0.055,regular,treat_e0.5,2199,0,4.65991,0,0,0,0,0,0,0,
@@ -2225,9 +1856,6 @@ WMT,cf_90,counterfactual,0.9,0.0309278,Weekend,treat_e0.5,396,0.000151294,4.4480
 WMT,cf_90,counterfactual,0.9,0.0309278,Long,control,61,0.000367045,5.45667,1.63934,0.0089559,0.0210464,0.0223898,0.256199,0,0,0
 WMT,cf_90,counterfactual,0.9,0.0309278,Long,treat_e1,61,0.000367045,5.45667,1.63934,0.0089559,0.0210464,0.0223898,0.256199,0,0,0
 WMT,cf_90,counterfactual,0.9,0.0309278,Long,treat_e0.5,61,0.000367045,5.45667,1.63934,0.0089559,0.0210464,0.0223898,0.256199,0,0,0
-WMT,cf_90,counterfactual,0.9,0.0309278,overnight,control,1718,0.00011334,4.59366,0.174622,0,0.0310457,0.105956,2.2281,0,0,
-WMT,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e1,1718,0.00011334,4.59366,0.174622,0,0.0310457,0.105956,2.2281,0,0,
-WMT,cf_90,counterfactual,0.9,0.0309278,overnight,treat_e0.5,1718,0.00011334,4.59366,0.174622,0,0.0310457,0.105956,2.2281,0,0,
 WMT,cf_90,counterfactual,0.9,0.0309278,regular,control,2199,0,4.65991,0,0,0,0,0,0,0,
 WMT,cf_90,counterfactual,0.9,0.0309278,regular,treat_e1,2199,0,4.65991,0,0,0,0,0,0,0,
 WMT,cf_90,counterfactual,0.9,0.0309278,regular,treat_e0.5,2199,0,4.65991,0,0,0,0,0,0,0,
@@ -2243,9 +1871,6 @@ WMT,cf_93,counterfactual,0.93,0.0214505,Weekend,treat_e0.5,396,0.00070765,4.3998
 WMT,cf_93,counterfactual,0.93,0.0214505,Long,control,61,0.00399301,5.45667,1.63934,0.0974294,0.228959,0.243573,2.78713,0,0,0
 WMT,cf_93,counterfactual,0.93,0.0214505,Long,treat_e1,61,0.00399318,5.30078,1.63934,0.0974294,0.228959,0.243573,2.78713,0.0466526,0.0044431,0.00356617
 WMT,cf_93,counterfactual,0.93,0.0214505,Long,treat_e0.5,61,0.0039931,5.30066,1.63934,0.0974294,0.228959,0.243573,2.78713,0.0466526,0.00222155,0.00356617
-WMT,cf_93,counterfactual,0.93,0.0214505,overnight,control,1718,0.000730994,4.59366,0.407451,0,0.252028,0.325194,14.3702,0,0,
-WMT,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e1,1718,0.000730994,4.59366,0.407451,0,0.252028,0.325194,14.3702,0,0,
-WMT,cf_93,counterfactual,0.93,0.0214505,overnight,treat_e0.5,1718,0.000730994,4.59366,0.407451,0,0.252028,0.325194,14.3702,0,0,
 WMT,cf_93,counterfactual,0.93,0.0214505,regular,control,2199,7.12267e-06,4.65991,0.0454752,0,0,0.0156628,0.179224,0,0,
 WMT,cf_93,counterfactual,0.93,0.0214505,regular,treat_e1,2199,7.12267e-06,4.65991,0.0454752,0,0,0.0156628,0.179224,0,0,
 WMT,cf_93,counterfactual,0.93,0.0214505,regular,treat_e0.5,2199,7.12267e-06,4.65991,0.0454752,0,0,0.0156628,0.179224,0,0,
@@ -2261,9 +1886,6 @@ WMT,cf_95,counterfactual,0.95,0.0152284,Weekend,treat_e0.5,396,0.00105909,4.2556
 WMT,cf_95,counterfactual,0.95,0.0152284,Long,control,61,0.00628309,5.45667,1.63934,0.153307,0.360272,0.383268,4.38561,0,0,0
 WMT,cf_95,counterfactual,0.95,0.0152284,Long,treat_e1,61,0.00628428,4.98818,1.63934,0.153307,0.360272,0.383268,4.38561,0.198531,0.0189078,0.015176
 WMT,cf_95,counterfactual,0.95,0.0152284,Long,treat_e0.5,61,0.00628368,5.14274,1.63934,0.153307,0.360272,0.383268,4.38561,0.198531,0.00945388,0.015176
-WMT,cf_95,counterfactual,0.95,0.0152284,overnight,control,1718,0.00141139,4.59366,0.640279,0,0.391596,0.46366,27.7459,0,0,
-WMT,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e1,1718,0.00141139,4.59366,0.640279,0,0.391596,0.46366,27.7459,0,0,
-WMT,cf_95,counterfactual,0.95,0.0152284,overnight,treat_e0.5,1718,0.00141139,4.59366,0.640279,0,0.391596,0.46366,27.7459,0,0,
 WMT,cf_95,counterfactual,0.95,0.0152284,regular,control,2199,0.000264594,4.65991,0.363802,0,0.101125,0.158788,6.65784,0,0,
 WMT,cf_95,counterfactual,0.95,0.0152284,regular,treat_e1,2199,0.000264594,4.65991,0.363802,0,0.101125,0.158788,6.65784,0,0,
 WMT,cf_95,counterfactual,0.95,0.0152284,regular,treat_e0.5,2199,0.000264594,4.65991,0.363802,0,0.101125,0.158788,6.65784,0,0,

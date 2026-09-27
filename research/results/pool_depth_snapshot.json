@@ -1,0 +1,1585 @@
+{
+  "retrieved_utc": "2026-10-02T19:55:56+00:00",
+  "chain_id": 4663,
+  "pool_discovery": "DexScreener (secondary)",
+  "depth": "Uniswap v3 liquidity()/slot0() via public RPC (verified-onchain)",
+  "per_asset_summary": {
+    "TSLA": {
+      "usdg_pools": 11,
+      "usdg_pool_tvl_usd": 1590404,
+      "slippage_pct_pessimistic_cp_on_tvl": {
+        "10000": 1.24,
+        "100000": 11.17,
+        "1000000": 55.7
+      },
+      "slippage_pct_optimistic_v3_active_range": {
+        "10000": 0.18,
+        "100000": 1.74,
+        "1000000": 15.01
+      }
+    },
+    "NVDA": {
+      "usdg_pools": 21,
+      "usdg_pool_tvl_usd": 4816341,
+      "slippage_pct_pessimistic_cp_on_tvl": {
+        "10000": 0.41,
+        "100000": 3.99,
+        "1000000": 29.34
+      },
+      "slippage_pct_optimistic_v3_active_range": {
+        "10000": 0.01,
+        "100000": 0.14,
+        "1000000": 1.4
+      }
+    },
+    "AAPL": {
+      "usdg_pools": 15,
+      "usdg_pool_tvl_usd": 1707385,
+      "slippage_pct_pessimistic_cp_on_tvl": {
+        "10000": 1.16,
+        "100000": 10.49,
+        "1000000": 53.95
+      },
+      "slippage_pct_optimistic_v3_active_range": {
+        "10000": 0.07,
+        "100000": 0.71,
+        "1000000": 6.64
+      }
+    },
+    "SPY": {
+      "usdg_pools": 17,
+      "usdg_pool_tvl_usd": 7683079,
+      "slippage_pct_pessimistic_cp_on_tvl": {
+        "10000": 0.26,
+        "100000": 2.54,
+        "1000000": 20.65
+      },
+      "slippage_pct_optimistic_v3_active_range": {
+        "10000": 0.02,
+        "100000": 0.18,
+        "1000000": 1.75
+      }
+    }
+  },
+  "reading": "pessimistic = constant product on half the USDG-pool TVL (ignores concentration); optimistic = in-range virtual reserves (ignores range exhaustion). True slippage lies between; RFQ routing not modelled.",
+  "pools": [
+    {
+      "asset": "TSLA",
+      "pool": "0xA953CA88ff430e9487c60cA34d757414f4efdA07",
+      "dex": "uniswap",
+      "labels": [
+        "v3"
+      ],
+      "quote": "WETH",
+      "price_usd": "373.85",
+      "dexscreener_liquidity_usd": 337082.78,
+      "volume_h24_usd": 205910.64
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0x3ea70ce0b34473692549f97e630a1d82dc05cea94fa55f81b50f10c8c6d8186f",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "SPY",
+      "price_usd": "373.25",
+      "dexscreener_liquidity_usd": 181669.09,
+      "volume_h24_usd": 549835.79
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0xa821b3724b451b22476c5347471b2a96d185b86af8760f226273e34ab4b2b8a0",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "SPY",
+      "price_usd": "373.0054",
+      "dexscreener_liquidity_usd": 292363.67,
+      "volume_h24_usd": 550832.38
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0xf4ACdAEEB7022862A763C9B1B885e11191c889E3",
+      "dex": "uniswap",
+      "labels": [
+        "v3"
+      ],
+      "quote": "USDG",
+      "price_usd": "373.88",
+      "dexscreener_liquidity_usd": 499030.02,
+      "volume_h24_usd": 325514.36,
+      "active_range_quote_virtual_usd": 5508595.894925927,
+      "slippage_pct_by_size": {
+        "10000": 0.181,
+        "100000": 1.783,
+        "1000000": 15.364
+      }
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0x8517f8071ae5b831b738052f12125e8e3d6c158b78728aa44ce3b25e5104d32e",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "374.14",
+      "dexscreener_liquidity_usd": 855853.39,
+      "volume_h24_usd": 466541.52
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0xed80cb489e051246f95fbe9e507d04120faac8742e4c20eae69d6738d7b36d6f",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "ETH",
+      "price_usd": "373.56",
+      "dexscreener_liquidity_usd": 100317.35,
+      "volume_h24_usd": 124990.71
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0xd5effce87036cd858146c0c15fa825c231a9de1843200ca108e431e431331e8e",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "373.66",
+      "dexscreener_liquidity_usd": 170704.17,
+      "volume_h24_usd": 163557.17
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0xc4f0172D6ac8DD294Dd1137D047d5E1893760236",
+      "dex": "uniswap",
+      "labels": [
+        "v3"
+      ],
+      "quote": "USDG",
+      "price_usd": "373.19",
+      "dexscreener_liquidity_usd": 22567.12,
+      "volume_h24_usd": 237317.76,
+      "active_range_quote_virtual_usd": 148985.53603671436,
+      "slippage_pct_by_size": {
+        "10000": 6.29,
+        "100000": 40.163,
+        "1000000": 87.033
+      }
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0xb2a6d67bf3fc511d11cac788a531655f5a7b60cd31c8ff386f0476121741e751",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "ETH",
+      "price_usd": "368.99",
+      "dexscreener_liquidity_usd": 37132.11,
+      "volume_h24_usd": 94.11
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0x352771B68da27e3BeCe96eB2c8532D7faeD1de1B",
+      "dex": "alandale",
+      "labels": null,
+      "quote": "WETH",
+      "price_usd": "373.22",
+      "dexscreener_liquidity_usd": 20756.61,
+      "volume_h24_usd": 19403.45
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0x77BF6D7D6F18C2c0cA0673f95af96a8812a3cb86",
+      "dex": "up",
+      "labels": [
+        "v3"
+      ],
+      "quote": "USDG",
+      "price_usd": "373.15",
+      "dexscreener_liquidity_usd": 11606.36,
+      "volume_h24_usd": 81653.78,
+      "rpc_error": "Error: could not decode output; did you specify the wrong function return data type?\n\nContext:\n- ABI decoding failed: buffer overrun while deserializing"
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0x3f62C18272baFBeDF255Cd5c999DA1Ee1ED7a004",
+      "dex": "alandale",
+      "labels": null,
+      "quote": "USDG",
+      "price_usd": "373.30",
+      "dexscreener_liquidity_usd": 15102.53,
+      "volume_h24_usd": 16559.38
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0x0927698e8716bbb958a2cde0fc4f31d7a2b9a5b0ee1e501dc15e29788277dfa2",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "SPCX",
+      "price_usd": "369.45",
+      "dexscreener_liquidity_usd": 14403.68,
+      "volume_h24_usd": 909.55
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0x36ac732af427fd9958b9039a0dcb2ac0da0e45e959b4429d53e0b29b6cb2aeba",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "374.019",
+      "dexscreener_liquidity_usd": 9619.86,
+      "volume_h24_usd": 41118.56
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0xc3f6f18693c15a5b8314c5f3f1691d984483c5339fa30ddf4cb3996f0764562c",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "ETH",
+      "price_usd": "373.85",
+      "dexscreener_liquidity_usd": 5254.44,
+      "volume_h24_usd": 2633.52
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0xB349FB08C2712f3A70Bad40a4d006b68d67e888b",
+      "dex": "uniswap",
+      "labels": [
+        "v3"
+      ],
+      "quote": "USDG",
+      "price_usd": "371.19",
+      "dexscreener_liquidity_usd": 5208.77,
+      "volume_h24_usd": 518.89,
+      "active_range_quote_virtual_usd": 3499.1742830134212,
+      "slippage_pct_by_size": {
+        "10000": 74.079,
+        "100000": 96.619,
+        "1000000": 99.651
+      }
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0x442d52ecd9f7c69e50ba817c723d1b49a8fd3fd34815b8bfd447f040323633e9",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "SPCX",
+      "price_usd": "371.73",
+      "dexscreener_liquidity_usd": 1454.84,
+      "volume_h24_usd": 14.5
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0x4bf7d63d109fD68E79a1C8807b303EFE17a4b58b",
+      "dex": "uniswap",
+      "labels": [
+        "v3"
+      ],
+      "quote": "SPCX",
+      "price_usd": "372.25",
+      "dexscreener_liquidity_usd": 886.18,
+      "volume_h24_usd": 7.85
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0xf44a6b1d03b19a9ebee6af28c94599d88df2c9381e15472c228ea92304aa880b",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "ETH",
+      "price_usd": "373.84",
+      "dexscreener_liquidity_usd": 97.1,
+      "volume_h24_usd": 57.36
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0xbccda7f9d83db6a032a4f45d07a888b24b5f59cc81a44974dcb80ad526d34f7d",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "372.69",
+      "dexscreener_liquidity_usd": 50.45,
+      "volume_h24_usd": 16.3
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0x1eE3D7bcC93e9710bd01bC079609E3f4B93c1B58",
+      "dex": "uniswap",
+      "labels": [
+        "v3"
+      ],
+      "quote": "SPCX",
+      "price_usd": "371.90",
+      "dexscreener_liquidity_usd": 56.43,
+      "volume_h24_usd": 4.86
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0x131CC5ca8bAf2fc7e3A4EDC0B82e62d3E74E24dd",
+      "dex": "ramses",
+      "labels": [
+        "v3"
+      ],
+      "quote": "USDG",
+      "price_usd": "373.56",
+      "dexscreener_liquidity_usd": 112.62,
+      "volume_h24_usd": 28.34,
+      "active_range_quote_virtual_usd": 1228.8248267900967,
+      "slippage_pct_by_size": {
+        "10000": 89.057,
+        "100000": 98.786,
+        "1000000": 99.877
+      }
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0x17ebf98139fcd2bd60e20e2f35e73d7a7273de9b9f77f9caca506e784e9d5173",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "ETH",
+      "price_usd": "373.73",
+      "dexscreener_liquidity_usd": 56.99,
+      "volume_h24_usd": 1.35
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0x5f86280d8faC5B999434965B6e10bd47A283591a",
+      "dex": "0x3f9010f882f532E680A79875AB3e0e525E5E13FB",
+      "labels": null,
+      "quote": "USDG",
+      "price_usd": "370.34",
+      "dexscreener_liquidity_usd": 548.8,
+      "volume_h24_usd": 5.54
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0xdA70E2d25d5875480FF0fAe05172626C875936E0",
+      "dex": "sheriff",
+      "labels": [
+        "v4"
+      ],
+      "quote": "WETH",
+      "price_usd": "372.79",
+      "dexscreener_liquidity_usd": 251.56,
+      "volume_h24_usd": 4.61
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0x7189af7172c17d0fbe5096976d2e2a21d33b563ac9f8c778af03b18d54956bcd",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "371.75",
+      "dexscreener_liquidity_usd": null,
+      "volume_h24_usd": 251.62
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0x2A0fB1aeaF225663dDA8E2a819D20df2394C8351",
+      "dex": "0xD09Ecb37748938e6997Cc90C3EA1b051d94b0085",
+      "labels": null,
+      "quote": "USDG",
+      "price_usd": "371.64",
+      "dexscreener_liquidity_usd": null,
+      "volume_h24_usd": 26582.99
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0x6ee893d0b60ebca34f8d97d22af04041521b0dc13f152473530a5b36f0105d81",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "368.43",
+      "dexscreener_liquidity_usd": null,
+      "volume_h24_usd": 33.24
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0xF611212A85b402Aef0825e547c570f90A8c200e0",
+      "dex": "uniswap",
+      "labels": [
+        "v2"
+      ],
+      "quote": "WETH",
+      "price_usd": "361.83",
+      "dexscreener_liquidity_usd": 0.01,
+      "volume_h24_usd": 0
+    },
+    {
+      "asset": "TSLA",
+      "pool": "0xa1771923045e0dade6578f8c99de248d5a6029b97fb928328f9e767674e7663a",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "TSLA",
+      "price_usd": "0.003719",
+      "dexscreener_liquidity_usd": 171901.8,
+      "volume_h24_usd": 63233.72
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0xd4EB21209C4D6093f80B5b84f5C45cc093EA14a3",
+      "dex": "uniswap",
+      "labels": [
+        "v3"
+      ],
+      "quote": "USDG",
+      "price_usd": "234.42",
+      "dexscreener_liquidity_usd": 2952553.25,
+      "volume_h24_usd": 11904577.67,
+      "active_range_quote_virtual_usd": 49748138.76993567,
+      "slippage_pct_by_size": {
+        "10000": 0.02,
+        "100000": 0.201,
+        "1000000": 1.971
+      }
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0x62AB521f71431f78ac374CdbadC6cda3c8916b6C",
+      "dex": "uniswap",
+      "labels": [
+        "v3"
+      ],
+      "quote": "WETH",
+      "price_usd": "234.47",
+      "dexscreener_liquidity_usd": 1223698.62,
+      "volume_h24_usd": 5482229.04
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0xdac1904D823F7d6bcAaF431ceEe40c934fEd321b",
+      "dex": "ramses",
+      "labels": [
+        "v3"
+      ],
+      "quote": "USDG",
+      "price_usd": "234.38",
+      "dexscreener_liquidity_usd": 104870.35,
+      "volume_h24_usd": 8223093.48,
+      "active_range_quote_virtual_usd": 20084910.212893974,
+      "slippage_pct_by_size": {
+        "10000": 0.05,
+        "100000": 0.495,
+        "1000000": 4.743
+      }
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0x18A5aF4E442F8be68968Cc1f00D537F8af2D12Cd",
+      "dex": "up",
+      "labels": [
+        "v3"
+      ],
+      "quote": "USDG",
+      "price_usd": "234.36",
+      "dexscreener_liquidity_usd": 185401.11,
+      "volume_h24_usd": 3433062.77,
+      "rpc_error": "Error: could not decode output; did you specify the wrong function return data type?\n\nContext:\n- ABI decoding failed: buffer overrun while deserializing"
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0xF8996E22ac7A67fAe741830Ad83B3b4D5e5de203",
+      "dex": "ramses",
+      "labels": [
+        "v3"
+      ],
+      "quote": "WETH",
+      "price_usd": "234.45",
+      "dexscreener_liquidity_usd": 124605.27,
+      "volume_h24_usd": 878655.53
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0x71f9660f9535e3e81d720696a58ea80274da8b2c6eb7c3acb22611d977439a5c",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "ETH",
+      "price_usd": "234.62",
+      "dexscreener_liquidity_usd": 88266.23,
+      "volume_h24_usd": 1018605.6
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0x6444a8e0b267406a15db74ca00c4a24bdfa81ed3180f5b6d0851f8ed6f4f29c5",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "234.49",
+      "dexscreener_liquidity_usd": 77750.09,
+      "volume_h24_usd": 861809.2
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0xC0Be1cb0f674D9737C72B2A63fC542361185b807",
+      "dex": "uniswap",
+      "labels": [
+        "v3"
+      ],
+      "quote": "WETH",
+      "price_usd": "234.25",
+      "dexscreener_liquidity_usd": 633752.88,
+      "volume_h24_usd": 320532.5
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0x3bb34a44f1b2b5f32c034c38a53065a521a47b199700fa9bd19d60985ff24bf1",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "234.72",
+      "dexscreener_liquidity_usd": 814296.57,
+      "volume_h24_usd": 490391.34
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0x7990aad9e8fb048f49a155a7df5603db0366f0657035b78eb4196395cccb3dcd",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "234.32",
+      "dexscreener_liquidity_usd": 377544.73,
+      "volume_h24_usd": 308398.82
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0xdf5c0bcd967d54774c139a4ef803ec994779736346fb4c21b50ed241b1fd2682",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "234.50",
+      "dexscreener_liquidity_usd": 106368.97,
+      "volume_h24_usd": 14957.89
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0xaa8039d8e39d2bbcae23762e71f5a12162875a61848f0d96914c827f61877ef6",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "ETH",
+      "price_usd": "227.15",
+      "dexscreener_liquidity_usd": 154882.31,
+      "volume_h24_usd": 595.25
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0xb56D399C77bBb510568fa37BDbd6Aa2Aa3ebAe7D",
+      "dex": "kittenswap",
+      "labels": null,
+      "quote": "USDG",
+      "price_usd": "234.53",
+      "dexscreener_liquidity_usd": 65714.63,
+      "volume_h24_usd": 146573.5
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0x647836c4965c512f0d82a2128abe7826eacf5a79d2dbed252a89ba5c591d1e87",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "WETH",
+      "price_usd": "234.36",
+      "dexscreener_liquidity_usd": 33194.03,
+      "volume_h24_usd": 69777.04
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0xbca94fe0a52fbd4259263f5bf7e73a2d341de0fb217b6715241ea9e157bddfcf",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "234.042",
+      "dexscreener_liquidity_usd": 5746.4,
+      "volume_h24_usd": 534.61
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0xf28521367b68a68fFc85Ed6fAd4AF73c5ff7B24a",
+      "dex": "giga",
+      "labels": [
+        "v3"
+      ],
+      "quote": "USDG",
+      "price_usd": "234.57",
+      "dexscreener_liquidity_usd": 16299.58,
+      "volume_h24_usd": 42086.25,
+      "active_range_quote_virtual_usd": 188835.50695337134,
+      "slippage_pct_by_size": {
+        "10000": 5.029,
+        "100000": 34.622,
+        "1000000": 84.116
+      }
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0x9bb1dd8e6906ec391c9dcdf927c1eadf910005250fa6642e614a2b89d9abaa6e",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "233.69",
+      "dexscreener_liquidity_usd": 4767.06,
+      "volume_h24_usd": 4778.75
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0xB944cec30Bd4175855215D767ADC81F39e5f7E2B",
+      "dex": "uniswap",
+      "labels": [
+        "v3"
+      ],
+      "quote": "USDG",
+      "price_usd": "234.71",
+      "dexscreener_liquidity_usd": 27308.31,
+      "volume_h24_usd": 45410.44,
+      "active_range_quote_virtual_usd": 517713.94001223345,
+      "slippage_pct_by_size": {
+        "10000": 1.895,
+        "100000": 16.189,
+        "1000000": 65.889
+      }
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0x1a3c601f9bee0986053f5546bdcffe49367a5cc27ff68812b745f4f055630ab6",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "234.54",
+      "dexscreener_liquidity_usd": 23785.89,
+      "volume_h24_usd": 7476.42
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0x53e74184f024eb01ceb7bbde68866bff3cc3ddf378c78745eb52bdd9ad7bcd91",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "234.46",
+      "dexscreener_liquidity_usd": 19173.99,
+      "volume_h24_usd": 10522.68
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0x8097a5015711825f5f2Ffc703Fa0F750eF183dcc",
+      "dex": "alandale",
+      "labels": null,
+      "quote": "WETH",
+      "price_usd": "234.54",
+      "dexscreener_liquidity_usd": 10660.15,
+      "volume_h24_usd": 16308.56
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0xc509aaae757c89d878a910ccb4e391a3689f1a20b6ef97dbff9a798285abf1a7",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "234.30",
+      "dexscreener_liquidity_usd": 11703.61,
+      "volume_h24_usd": 13064.95
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0x0092f73B6821098F66eEa758cf7eeB0F834C2303",
+      "dex": "0x5481864ddd46a2D798Df0925C23B7846e776E5E3",
+      "labels": null,
+      "quote": "USDG",
+      "price_usd": "234.47",
+      "dexscreener_liquidity_usd": 9185.25,
+      "volume_h24_usd": 9760.42
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0x960aDE7ad6966742164E833dfc1344B3BcFa801C",
+      "dex": "topaz",
+      "labels": null,
+      "quote": "USDG",
+      "price_usd": "234.41",
+      "dexscreener_liquidity_usd": 5858.57,
+      "volume_h24_usd": 11135.89
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0xDc52e8EDb026491ce4C1073c41aFf887D2Fd5488",
+      "dex": "giga",
+      "labels": [
+        "v3"
+      ],
+      "quote": "frxUSD",
+      "price_usd": "234.77",
+      "dexscreener_liquidity_usd": 7458.04,
+      "volume_h24_usd": 1022.41
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0x8b6a6416A5d1040EfCfa6234dA6AA1265DfE123e",
+      "dex": "uniswap",
+      "labels": [
+        "v3"
+      ],
+      "quote": "WETH",
+      "price_usd": "234.42",
+      "dexscreener_liquidity_usd": 5235.08,
+      "volume_h24_usd": 1311.98
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0x55c2dddc6c6b85897009759787655c6fad1e1c4d5c63d33e38bd7e18c55000d2",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "234.86",
+      "dexscreener_liquidity_usd": 4574.45,
+      "volume_h24_usd": 2552.67
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0x98dbe86895a576f964c039c9e35c50a24f02de508e308207ec38efbe8b63f35e",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "234.71",
+      "dexscreener_liquidity_usd": 1944.39,
+      "volume_h24_usd": 3524.76
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0xF253847c7F46c7Ba100cdC316a0Df6B0e9b0A840",
+      "dex": "alandale",
+      "labels": null,
+      "quote": "USDG",
+      "price_usd": "234.44",
+      "dexscreener_liquidity_usd": 891.65,
+      "volume_h24_usd": 12905.54
+    },
+    {
+      "asset": "NVDA",
+      "pool": "0x84e2847d2fe2dab492ca065326efa51b6f7e0924f200f983b9939530834df815",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "234.66",
+      "dexscreener_liquidity_usd": 601.92,
+      "volume_h24_usd": 641.73
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0x8bb3514e2204E1cDF3Ac149EFEe7Ff04D91B719f",
+      "dex": "uniswap",
+      "labels": [
+        "v3"
+      ],
+      "quote": "WETH",
+      "price_usd": "333.63",
+      "dexscreener_liquidity_usd": 195098.52,
+      "volume_h24_usd": 874660
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0xAae0d815EE56e4092a5E5C2911E676Fea50B2d6D",
+      "dex": "uniswap",
+      "labels": [
+        "v3"
+      ],
+      "quote": "USDG",
+      "price_usd": "333.68",
+      "dexscreener_liquidity_usd": 347168,
+      "volume_h24_usd": 922145.43,
+      "active_range_quote_virtual_usd": 11398415.221996589,
+      "slippage_pct_by_size": {
+        "10000": 0.088,
+        "100000": 0.87,
+        "1000000": 8.066
+      }
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0xeab0adac76db99a233ed077ca6be7a3f708baee6f98b17df69f7e1a07d1dc2e4",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "SPY",
+      "price_usd": "333.77",
+      "dexscreener_liquidity_usd": 538390.6,
+      "volume_h24_usd": 854703.39
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0xa2347ba69167e5602f74640ffbf737ee7cdd825e4726d3462564fc6533070147",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "333.73",
+      "dexscreener_liquidity_usd": 309630.13,
+      "volume_h24_usd": 275211.72
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0x19D55ABa3E5d2C389B7011c634725136dFDcaE33",
+      "dex": "up",
+      "labels": [
+        "v3"
+      ],
+      "quote": "USDG",
+      "price_usd": "333.62",
+      "dexscreener_liquidity_usd": 108095.69,
+      "volume_h24_usd": 164679.08,
+      "rpc_error": "Error: could not decode output; did you specify the wrong function return data type?\n\nContext:\n- ABI decoding failed: buffer overrun while deserializing"
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0xc748f4671a867db48b552f6b7650bf3255e05f80f00e3f7aad1b17ccb7898fdb",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "333.28",
+      "dexscreener_liquidity_usd": 743203.01,
+      "volume_h24_usd": 192422.31
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0x7458bf9fb741da112910cd1ff786d5ee95bcb729fc3dcda258e8bc0956f3d5ef",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "ETH",
+      "price_usd": "334.018",
+      "dexscreener_liquidity_usd": 105719.77,
+      "volume_h24_usd": 30830.35
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0x783C9bbB765047CFdD2b84b92b2Ca9F11D34b7Ed",
+      "dex": "uniswap",
+      "labels": [
+        "v3"
+      ],
+      "quote": "USDG",
+      "price_usd": "333.15",
+      "dexscreener_liquidity_usd": 128389.83,
+      "volume_h24_usd": 22947.11,
+      "active_range_quote_virtual_usd": 1835322.5552424307,
+      "slippage_pct_by_size": {
+        "10000": 0.542,
+        "100000": 5.167,
+        "1000000": 35.269
+      }
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0xF9BB10A8277b44D30D5A4338a73E1c30d8E659D5",
+      "dex": "alandale",
+      "labels": null,
+      "quote": "USDG",
+      "price_usd": "333.84",
+      "dexscreener_liquidity_usd": 28536.7,
+      "volume_h24_usd": 110757.65
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0x6f7368F0dd18a4E1db631095363d109E6aDe9293",
+      "dex": "ramses",
+      "labels": [
+        "v3"
+      ],
+      "quote": "USDG",
+      "price_usd": "333.62",
+      "dexscreener_liquidity_usd": 16645.53,
+      "volume_h24_usd": 98567.16,
+      "active_range_quote_virtual_usd": 812767.5230825744,
+      "slippage_pct_by_size": {
+        "10000": 1.215,
+        "100000": 10.956,
+        "1000000": 55.164
+      }
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0x845b21902932be7f77f8ccbf793c17494f0ce7c6ffdcdb675d4dec701bc7601a",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "333.78",
+      "dexscreener_liquidity_usd": 18068.66,
+      "volume_h24_usd": 10290.86
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0x41242819331898fd61aa85a9dc36fe2072baee15778b9f640c31ac1dcefe1c4a",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "ETH",
+      "price_usd": "333.61",
+      "dexscreener_liquidity_usd": 8990.88,
+      "volume_h24_usd": 9224.1
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0xfcb1ad7c577599cd1831ae239da38cced8a833ad488f924e080a8066ab3f469f",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "NVDA",
+      "price_usd": "335.58",
+      "dexscreener_liquidity_usd": 11939.14,
+      "volume_h24_usd": 4020.86
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0x25bd4876baa45bece6fe619b03c3c976ea52deab9279ec1161c8908293d6c483",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "SPCX",
+      "price_usd": "332.095",
+      "dexscreener_liquidity_usd": 3891.64,
+      "volume_h24_usd": 609.25
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0x256b72F2CB1f761082827129d63bb0CC884C25C1",
+      "dex": "uniswap",
+      "labels": [
+        "v3"
+      ],
+      "quote": "SPY",
+      "price_usd": "334.0071",
+      "dexscreener_liquidity_usd": 2693.9,
+      "volume_h24_usd": 1961.94
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0xf4dda6b92ccfaa5db9d241651557195e3ef3959f1bbedb2acc38c57919a18052",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "ETH",
+      "price_usd": "336.39",
+      "dexscreener_liquidity_usd": 3330.5,
+      "volume_h24_usd": 118.31
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0xb6EEf8911DAB8D65579ff7f9FdFb3dc27b3ee71D",
+      "dex": "0x5481864ddd46a2D798Df0925C23B7846e776E5E3",
+      "labels": null,
+      "quote": "USDG",
+      "price_usd": "333.52",
+      "dexscreener_liquidity_usd": 2267.13,
+      "volume_h24_usd": 1720.58
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0x3714aa8105DE1f384481B425788Af413748C1837",
+      "dex": "uniswap",
+      "labels": [
+        "v3"
+      ],
+      "quote": "USDG",
+      "price_usd": "331.93",
+      "dexscreener_liquidity_usd": 2556.21,
+      "volume_h24_usd": 87.97,
+      "active_range_quote_virtual_usd": 23705.901061946177,
+      "slippage_pct_by_size": {
+        "10000": 29.668,
+        "100000": 80.837,
+        "1000000": 97.684
+      }
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0xa3c5cf4153f2d6ecdc917270e420842197d2fc02e26731afd8e81c7fe9fc724e",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "ETH",
+      "price_usd": "333.097",
+      "dexscreener_liquidity_usd": 776.93,
+      "volume_h24_usd": 112.26
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0x496d48b9c1256a5b4f3c85f85776aff8e75cf847397cc8174242f97ae99b6d71",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "333.52",
+      "dexscreener_liquidity_usd": 971.69,
+      "volume_h24_usd": 175.47
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0xe5b9112909fde74416b44bb2169bb89870a1363e9897151a90126aa8e140d54f",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "333.14",
+      "dexscreener_liquidity_usd": 62.79,
+      "volume_h24_usd": 10.24
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0xfe51cD08fce50F2b7568bAA976010955F31f1610",
+      "dex": "sheriff",
+      "labels": [
+        "v4"
+      ],
+      "quote": "WETH",
+      "price_usd": "334.11",
+      "dexscreener_liquidity_usd": 263.43,
+      "volume_h24_usd": 3.91
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0xa3C03Eb3578bEDd5F20F47495EBabbb33C568350",
+      "dex": "0x70Fb47DB7Ca14a04CAE64DD4bDC2e86C8656943d",
+      "labels": null,
+      "quote": "USDG",
+      "price_usd": "333.24",
+      "dexscreener_liquidity_usd": 429.08,
+      "volume_h24_usd": 58.04
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0x246725ccce4359cae5eeaf85389b3b21f0a19a061553f7609a0bd1d7979731d9",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "ETH",
+      "price_usd": "331.63",
+      "dexscreener_liquidity_usd": 57.59,
+      "volume_h24_usd": 0.56
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0x62da4eb35fc4139536218f13edbb1e47001cb39132ba774f9f0fde7f307ee8e6",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "QQQ",
+      "price_usd": "333.55",
+      "dexscreener_liquidity_usd": 540.93,
+      "volume_h24_usd": 62.84
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0xab946accc83201ad85dc0f44eebb7ba9140b5fb347845cdee057042008e959d8",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "334.31",
+      "dexscreener_liquidity_usd": 500.33,
+      "volume_h24_usd": 57.08
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0xda4116b5894ee7479e64eae9276e1a2944ef0e5ce863a299d296a15618deee01",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "330.54",
+      "dexscreener_liquidity_usd": 859.76,
+      "volume_h24_usd": 2.36
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0x00428e0447f56baf7CBb915868787119ac896cEA",
+      "dex": "uniswap",
+      "labels": [
+        "v3"
+      ],
+      "quote": "DELTA",
+      "price_usd": "355.48",
+      "dexscreener_liquidity_usd": 5.61,
+      "volume_h24_usd": 0.02
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0xfbF0B1E303a69a64645Ffb1F0394AdbeD02f66AC",
+      "dex": "0x5c98b2d892b37c9a1D3b69472bdDc172A64CdC09",
+      "labels": null,
+      "quote": "WETH",
+      "price_usd": "337.73",
+      "dexscreener_liquidity_usd": 0.26,
+      "volume_h24_usd": 0
+    },
+    {
+      "asset": "AAPL",
+      "pool": "0x7e271c400427ecb727f5fbb27dec69254bce7c4219e95e3535d0ed128f79648a",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "AAPL",
+      "price_usd": "0.004090",
+      "dexscreener_liquidity_usd": 659580.69,
+      "volume_h24_usd": 474840.31
+    },
+    {
+      "asset": "SPY",
+      "pool": "0xDDCBBa3666f578E3F09516f21Ff85BFee859AB5e",
+      "dex": "uniswap",
+      "labels": [
+        "v3"
+      ],
+      "quote": "WETH",
+      "price_usd": "770.98",
+      "dexscreener_liquidity_usd": 1769726.21,
+      "volume_h24_usd": 5243362.87
+    },
+    {
+      "asset": "SPY",
+      "pool": "0x05E146F995aA70d0BF8481Ee3D27368A537a8e0D",
+      "dex": "alandale",
+      "labels": null,
+      "quote": "USDG",
+      "price_usd": "770.88",
+      "dexscreener_liquidity_usd": 189575.62,
+      "volume_h24_usd": 2668977.75
+    },
+    {
+      "asset": "SPY",
+      "pool": "0x3e1afDe90341F843c941fF4077d915bDE3008c7E",
+      "dex": "ramses",
+      "labels": [
+        "v3"
+      ],
+      "quote": "WETH",
+      "price_usd": "770.96",
+      "dexscreener_liquidity_usd": 158277.66,
+      "volume_h24_usd": 801643.51
+    },
+    {
+      "asset": "SPY",
+      "pool": "0x38453c115607463Ac284820Ce959831042f3Df4E",
+      "dex": "ramses",
+      "labels": [
+        "v3"
+      ],
+      "quote": "USDG",
+      "price_usd": "770.90",
+      "dexscreener_liquidity_usd": 476014.43,
+      "volume_h24_usd": 3055391.55,
+      "active_range_quote_virtual_usd": 27078487.307753183,
+      "slippage_pct_by_size": {
+        "10000": 0.037,
+        "100000": 0.368,
+        "1000000": 3.561
+      }
+    },
+    {
+      "asset": "SPY",
+      "pool": "0x43343e5881C9382BbDC7b8FB44e837D7A6C254Ad",
+      "dex": "alandale",
+      "labels": null,
+      "quote": "WETH",
+      "price_usd": "770.98",
+      "dexscreener_liquidity_usd": 115149.43,
+      "volume_h24_usd": 1124466.35
+    },
+    {
+      "asset": "SPY",
+      "pool": "0xaBE817Af4fE3420152Ab1464a45dc971e7EaaeAE",
+      "dex": "giga",
+      "labels": [
+        "v3"
+      ],
+      "quote": "USDG",
+      "price_usd": "770.82",
+      "dexscreener_liquidity_usd": 106087.06,
+      "volume_h24_usd": 1282443.1,
+      "active_range_quote_virtual_usd": 6356322.49399657,
+      "slippage_pct_by_size": {
+        "10000": 0.157,
+        "100000": 1.549,
+        "1000000": 13.594
+      }
+    },
+    {
+      "asset": "SPY",
+      "pool": "0xe5923c8a8be481ec89a2ca784a2bbfa4235de6d88f92260fd66b660c4babf907",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "770.79",
+      "dexscreener_liquidity_usd": 645246.87,
+      "volume_h24_usd": 1795003.13
+    },
+    {
+      "asset": "SPY",
+      "pool": "0xda14bf8a87711e1f30dbe620f2df3fdf371f7503f1a72202d15631f657651ec0",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "NVDA",
+      "price_usd": "771.78",
+      "dexscreener_liquidity_usd": 459325.6,
+      "volume_h24_usd": 986214.21
+    },
+    {
+      "asset": "SPY",
+      "pool": "0x509c6c6826ef06e0e29f24f18d9389533c52358a3b385d99a67a2afbb07f23c6",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "ETH",
+      "price_usd": "770.42",
+      "dexscreener_liquidity_usd": 722874.65,
+      "volume_h24_usd": 452187
+    },
+    {
+      "asset": "SPY",
+      "pool": "0x8674c1c5544f3c9563565b5d4bd5916701d90b3559b072acf7cef5b4fc5b8dcd",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "770.62",
+      "dexscreener_liquidity_usd": 1900444.44,
+      "volume_h24_usd": 1340634.56
+    },
+    {
+      "asset": "SPY",
+      "pool": "0xfe2a80bb5618fd14984b92ca6d45bf5ba67443ddb1435e28b2e48df2fc1526cd",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "770.89",
+      "dexscreener_liquidity_usd": 3549800.54,
+      "volume_h24_usd": 857521.45
+    },
+    {
+      "asset": "SPY",
+      "pool": "0xa7Bb1AC63BBaB0C44316E6c8C455213441689167",
+      "dex": "uniswap",
+      "labels": [
+        "v3"
+      ],
+      "quote": "USDG",
+      "price_usd": "770.81",
+      "dexscreener_liquidity_usd": 359298.95,
+      "volume_h24_usd": 425089.55,
+      "active_range_quote_virtual_usd": 14105346.244037243,
+      "slippage_pct_by_size": {
+        "10000": 0.071,
+        "100000": 0.704,
+        "1000000": 6.62
+      }
+    },
+    {
+      "asset": "SPY",
+      "pool": "0x8dc0387af606d84be8e4c2fc1da7bdc6d467337e9f3e075113f968922a190847",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "META",
+      "price_usd": "772.12",
+      "dexscreener_liquidity_usd": 204723.51,
+      "volume_h24_usd": 443870.5
+    },
+    {
+      "asset": "SPY",
+      "pool": "0xbc732a1a0baabce2574ec2bca24fccad8e2c38a061a37cefc17a2fd12809394f",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "NVDA",
+      "price_usd": "771.60",
+      "dexscreener_liquidity_usd": 670892.38,
+      "volume_h24_usd": 774860.12
+    },
+    {
+      "asset": "SPY",
+      "pool": "0xe6b713cf680868a40aafca45810b0c894eb5c696f5a2230d4816e6695e90e681",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "META",
+      "price_usd": "771.91",
+      "dexscreener_liquidity_usd": 443894.12,
+      "volume_h24_usd": 162093.24
+    },
+    {
+      "asset": "SPY",
+      "pool": "0x47A2a145308d55eaa957920876Ab626730eAF90b",
+      "dex": "ramses",
+      "labels": [
+        "v3"
+      ],
+      "quote": "USDG",
+      "price_usd": "770.79",
+      "dexscreener_liquidity_usd": 258215.32,
+      "volume_h24_usd": 133915.62,
+      "active_range_quote_virtual_usd": 7778179.374218641,
+      "slippage_pct_by_size": {
+        "10000": 0.128,
+        "100000": 1.269,
+        "1000000": 11.392
+      }
+    },
+    {
+      "asset": "SPY",
+      "pool": "0x3B337FCb8aD70e95c2948849900F5849456D1Ff9",
+      "dex": "kittenswap",
+      "labels": null,
+      "quote": "USDG",
+      "price_usd": "770.98",
+      "dexscreener_liquidity_usd": 85505.27,
+      "volume_h24_usd": 736911.09
+    },
+    {
+      "asset": "SPY",
+      "pool": "0x01d698975bb4dc4f2ee3e2ea31c40f43c76d3e4fa25e3a0f318e0473963e4344",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "770.29",
+      "dexscreener_liquidity_usd": 17544.8,
+      "volume_h24_usd": 17468.82
+    },
+    {
+      "asset": "SPY",
+      "pool": "0x5aD1A528CD9DE3962CB6C75fF250e434887479C1",
+      "dex": "up",
+      "labels": [
+        "v3"
+      ],
+      "quote": "USDG",
+      "price_usd": "770.99",
+      "dexscreener_liquidity_usd": 19513.02,
+      "volume_h24_usd": 158871.09,
+      "rpc_error": "Error: could not decode output; did you specify the wrong function return data type?\n\nContext:\n- ABI decoding failed: buffer overrun while deserializing"
+    },
+    {
+      "asset": "SPY",
+      "pool": "0x2df63847bE60e92505579038eF572F707df15016",
+      "dex": "giga",
+      "labels": [
+        "v3"
+      ],
+      "quote": "GIGA",
+      "price_usd": "763.89",
+      "dexscreener_liquidity_usd": 37998.37,
+      "volume_h24_usd": 2558.25
+    },
+    {
+      "asset": "SPY",
+      "pool": "0x988f3b6ceec4795e0d6d28a054af87ffbcbdeee2566f72ae391da5f109bd485f",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "NVDA",
+      "price_usd": "771.71",
+      "dexscreener_liquidity_usd": 31692.51,
+      "volume_h24_usd": 16541.95
+    },
+    {
+      "asset": "SPY",
+      "pool": "0xf23b4f9874fd2db2d6e244ab705f0d2188418f307a49fb615d16261c85e103a8",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "META",
+      "price_usd": "770.81",
+      "dexscreener_liquidity_usd": 5703.68,
+      "volume_h24_usd": 899.43
+    },
+    {
+      "asset": "SPY",
+      "pool": "0x008f06cd38b13ddd7712ba63fb3caff0fc7c969aa32d0407f1868539f3f688c2",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "770.90",
+      "dexscreener_liquidity_usd": 26687.34,
+      "volume_h24_usd": 9797.58
+    },
+    {
+      "asset": "SPY",
+      "pool": "0xA43b424Bc609495AED4BCD88d654934b510B0aD9",
+      "dex": "uniswap",
+      "labels": [
+        "v3"
+      ],
+      "quote": "USDG",
+      "price_usd": "771.39",
+      "dexscreener_liquidity_usd": 26379.22,
+      "volume_h24_usd": 3201.97,
+      "active_range_quote_virtual_usd": 699772.5578857078,
+      "slippage_pct_by_size": {
+        "10000": 1.409,
+        "100000": 12.504,
+        "1000000": 58.831
+      }
+    },
+    {
+      "asset": "SPY",
+      "pool": "0xc46E3b7024F322a1AE3C90A11C89A7189fd6f857",
+      "dex": "uniswap",
+      "labels": [
+        "v3"
+      ],
+      "quote": "SPCX",
+      "price_usd": "772.22",
+      "dexscreener_liquidity_usd": 7846.5,
+      "volume_h24_usd": 11544.35
+    },
+    {
+      "asset": "SPY",
+      "pool": "0xE59087890579AfEC2CC316c7Db230B2d0945569F",
+      "dex": "uniswap",
+      "labels": [
+        "v2"
+      ],
+      "quote": "USDG",
+      "price_usd": "769.92",
+      "dexscreener_liquidity_usd": 10034.81,
+      "volume_h24_usd": 200.38
+    },
+    {
+      "asset": "SPY",
+      "pool": "0xd89cAc2dD5cE9F8D655d9F6E20EEed18Efc9DAEF",
+      "dex": "giga",
+      "labels": [
+        "v3"
+      ],
+      "quote": "USDG",
+      "price_usd": "770.82",
+      "dexscreener_liquidity_usd": 3037.45,
+      "volume_h24_usd": 12858.11,
+      "active_range_quote_virtual_usd": 127046.36803156936,
+      "slippage_pct_by_size": {
+        "10000": 7.297,
+        "100000": 44.044,
+        "1000000": 88.727
+      }
+    },
+    {
+      "asset": "SPY",
+      "pool": "0xb600cfC98B6032FFD70896711cE24ed25A2FF8b0",
+      "dex": "0x5481864ddd46a2D798Df0925C23B7846e776E5E3",
+      "labels": null,
+      "quote": "USDG",
+      "price_usd": "770.78",
+      "dexscreener_liquidity_usd": 5487.9,
+      "volume_h24_usd": 5130.63
+    },
+    {
+      "asset": "SPY",
+      "pool": "0xcb410a0728986ba05737420556d5fe128ffd6739823cc92fc745d37bad4b313f",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "USDG",
+      "price_usd": "770.94",
+      "dexscreener_liquidity_usd": 4206.46,
+      "volume_h24_usd": 4837.83
+    },
+    {
+      "asset": "SPY",
+      "pool": "0x7d32bc830f40a330af8723b8bb50d4d6b0152297d659e9898e6a47b785686459",
+      "dex": "uniswap",
+      "labels": [
+        "v4"
+      ],
+      "quote": "ETH",
+      "price_usd": "767.051",
+      "dexscreener_liquidity_usd": 4634.04,
+      "volume_h24_usd": 584.89
+    }
+  ]
+}
