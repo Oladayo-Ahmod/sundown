@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Enforces single-line Conventional Commits with no tool attribution.
+set -u
+
+msg_file="$1"
+# Ignore git comment lines; strip trailing blank lines.
+msg="$(grep -v '^#' "$msg_file" | sed -e :a -e '/^\n*$/{$d;N;ba' -e '}')"
+
+fail() {
+  echo "commit-msg: rejected: $1" >&2
+  echo "  message: $msg" >&2
+  exit 1
+}
+
+[ -n "$msg" ] || fail "empty message"
+
+lines="$(printf '%s\n' "$msg" | wc -l)"
+[ "$lines" -eq 1 ] || fail "must be a single line (no body or trailers)"
+
+printf '%s\n' "$msg" | grep -Eq '^(feat|fix|docs|test|refactor|chore|perf|ci|build)(\([a-z0-9-]+\))?: .{1,72}$' \
+  || fail "must match <type>(<scope>)?: <subject> with a subject of 1-72 chars"
+
+if printf '%s\n' "$msg" | grep -Eiq 'claude|anthropic|co-authored-by|generated|assistant|ai-'; then
+  fail "contains forbidden attribution wording"
+fi
+
+exit 0

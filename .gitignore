@@ -1,0 +1,39 @@
+# env / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+keystore/
+.secrets/
+
+# foundry
+contracts/out/
+contracts/cache/
+out/
+cache/
+# broadcast logs can embed private keys / RPC URLs; never commit
+broadcast/
+contracts/broadcast/
+
+# node
+node_modules/
+.next/
+*.tsbuildinfo
+
+# python
+.venv/
+__pycache__/
+*.pyc
+.ruff_cache/
+.pytest_cache/
+
+# research: never commit raw vendor data
+research/data/raw/
+
+# rust / stylus scratch
+target/
+
+# os / editor
+.DS_Store
+.idea/
