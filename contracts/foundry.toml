@@ -5,8 +5,8 @@ script = "script"
 out = "out"
 libs = ["lib"]
 solc = "0.8.28"
-# shanghai: PUSH0 supported on Arbitrum; cancun on Robinhood Chain is unverified (see docs/DISCOVERY.md)
-evm_version = "shanghai"
+# cancun opcodes (PUSH0/TLOAD/MCOPY) verified by eth_call on Arbitrum One/Sepolia and Robinhood mainnet/testnet (docs/DISCOVERY.md)
+evm_version = "cancun"
 optimizer = true
 optimizer_runs = 200
 bytecode_hash = "none"
