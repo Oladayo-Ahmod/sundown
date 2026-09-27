@@ -1,0 +1,4 @@
+cls,ticker,q,n,violations,rate,target,kupiec_p,christoffersen_ind_p,rate_ci_lo,rate_ci_hi,es_over_var,mean_var_bps
+Short,ALL,0.99,288,13,0.0451389,0.01,1.11143e-05,0.256843,,,1.33382,235.179
+Weekend,ALL,0.99,4752,89,0.018729,0.01,6.8763e-08,3.88366e-05,,,1.56173,401.109
+Long,ALL,0.99,732,8,0.010929,0.01,0.803459,0.671563,,,1.68167,413.969

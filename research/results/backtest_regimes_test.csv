@@ -1,0 +1,25 @@
+regime,q,n,violations,rate
+Aug-2015 China devaluation/flash crash,0.95,0,0,
+Dec-2018 selloff,0.95,120,19,0.158333
+Mar-2020 COVID,0.95,120,36,0.3
+2022 rate shock (full year),0.95,636,59,0.0927673
+Apr-2025 tariff shock,0.95,84,14,0.166667
+all other test windows,0.95,4812,249,0.0517456
+Aug-2015 China devaluation/flash crash,0.99,0,0,
+Dec-2018 selloff,0.99,120,7,0.0583333
+Mar-2020 COVID,0.99,120,29,0.241667
+2022 rate shock (full year),0.99,636,9,0.0141509
+Apr-2025 tariff shock,0.99,84,5,0.0595238
+all other test windows,0.99,4812,61,0.0126766
+Aug-2015 China devaluation/flash crash,0.995,0,0,
+Dec-2018 selloff,0.995,120,5,0.0416667
+Mar-2020 COVID,0.995,120,16,0.133333
+2022 rate shock (full year),0.995,636,0,0
+Apr-2025 tariff shock,0.995,84,2,0.0238095
+all other test windows,0.995,4812,25,0.00519534
+Aug-2015 China devaluation/flash crash,0.999,0,0,
+Dec-2018 selloff,0.999,120,0,0
+Mar-2020 COVID,0.999,120,0,0
+2022 rate shock (full year),0.999,636,0,0
+Apr-2025 tariff shock,0.999,84,0,0
+all other test windows,0.999,4812,3,0.000623441

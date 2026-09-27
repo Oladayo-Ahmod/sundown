@@ -2,5 +2,7 @@ exchange_calendars
 pandas
 numpy
 scipy
+yfinance
+matplotlib
 ruff
 pytest

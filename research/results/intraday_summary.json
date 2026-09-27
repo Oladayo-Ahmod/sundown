@@ -1,0 +1,144 @@
+{
+  "n_windows": 1344,
+  "span": [
+    "2024-10-04",
+    "2026-09-28"
+  ],
+  "by_class": {
+    "Long": 156,
+    "Short": 96,
+    "Weekend": 1092
+  },
+  "proxy_vs_extended": {
+    "rms_proxy_bps": 142.6719510550126,
+    "rms_extended_bps": 108.83757626479176,
+    "var_ratio_ext_over_proxy": 0.581943099673837,
+    "rms_visible_post_16_20_bps": 33.80862907859546,
+    "rms_visible_premarket_04_0930_bps": 86.4091479043268,
+    "q99_loss_proxy_bps": 418.4845550261653,
+    "q99_loss_extended_bps": 342.46626348121606,
+    "corr_proxy_ext": 0.757940831324394
+  },
+  "oracle_noise": {
+    "abs_err_bps_quantiles": {
+      "0.5": 7.182062379067087,
+      "0.9": 26.225069735012465,
+      "0.95": 32.806955641477025,
+      "0.99": 42.27163907556389,
+      "1.0": 48.97699870083088
+    },
+    "adverse_err_bps_quantiles": {
+      "0.5": 0.0,
+      "0.9": 18.49230401837821,
+      "0.95": 26.23073666314898,
+      "0.99": 41.076125570798965,
+      "1.0": 48.486300680789086
+    },
+    "share_adverse_gt_25bps": 0.05654761904761905,
+    "share_adverse_gt_40bps": 0.011160714285714286,
+    "deviation_bound_bps": 50
+  },
+  "censoring_B_prime_no_reopen_push": {
+    "n": 1344,
+    "share_deviation_triggered": 0.9955357142857143,
+    "share_heartbeat_triggered": 0.004464285714285714,
+    "lag_hours_quantiles": {
+      "0.5": 0.0,
+      "0.9": 5.0,
+      "0.95": 5.5,
+      "0.99": 12.0,
+      "1.0": 72.0
+    },
+    "recorded_minus_reference_bps_mean": -2.1478359927717015,
+    "recorded_minus_reference_bps_abs_q90": 55.426218820723086,
+    "share_reference_below_threshold": 0.5483630952380952,
+    "recorded_downside_understates_reference_by_gt_50bps": 0.046130952380952384
+  },
+  "per_asset": {
+    "AAPL": {
+      "n": 112,
+      "rms_proxy_bps": 142.0131950699018,
+      "var_ratio_ext_over_proxy": 0.5034668820054348,
+      "adverse_feed_err_q99_bps": 40.51621357646722,
+      "adverse_feed_err_max_bps": 42.5587877490524
+    },
+    "AMZN": {
+      "n": 112,
+      "rms_proxy_bps": 151.4140623014363,
+      "var_ratio_ext_over_proxy": 0.6616935555544331,
+      "adverse_feed_err_q99_bps": 37.08183772100006,
+      "adverse_feed_err_max_bps": 39.147729051688316
+    },
+    "GOOGL": {
+      "n": 112,
+      "rms_proxy_bps": 136.9200125253478,
+      "var_ratio_ext_over_proxy": 0.49304679859608075,
+      "adverse_feed_err_q99_bps": 36.73449964370106,
+      "adverse_feed_err_max_bps": 37.39690897052716
+    },
+    "JPM": {
+      "n": 112,
+      "rms_proxy_bps": 86.91338252156048,
+      "var_ratio_ext_over_proxy": 0.6617163856830279,
+      "adverse_feed_err_q99_bps": 39.501385147722864,
+      "adverse_feed_err_max_bps": 41.295640645788026
+    },
+    "META": {
+      "n": 112,
+      "rms_proxy_bps": 142.79037001209403,
+      "var_ratio_ext_over_proxy": 0.6174197322663061,
+      "adverse_feed_err_q99_bps": 33.613817648946565,
+      "adverse_feed_err_max_bps": 40.86201327481958
+    },
+    "MSFT": {
+      "n": 112,
+      "rms_proxy_bps": 105.26336613816905,
+      "var_ratio_ext_over_proxy": 0.5997593301289401,
+      "adverse_feed_err_q99_bps": 27.319785116186054,
+      "adverse_feed_err_max_bps": 44.571998852515115
+    },
+    "NVDA": {
+      "n": 112,
+      "rms_proxy_bps": 213.0029833225851,
+      "var_ratio_ext_over_proxy": 0.43063047250857567,
+      "adverse_feed_err_q99_bps": 38.627452528552006,
+      "adverse_feed_err_max_bps": 41.56240529763353
+    },
+    "QQQ": {
+      "n": 112,
+      "rms_proxy_bps": 104.19148161865162,
+      "var_ratio_ext_over_proxy": 0.8998144398427081,
+      "adverse_feed_err_q99_bps": 42.13307132998168,
+      "adverse_feed_err_max_bps": 42.38208791638359
+    },
+    "SPY": {
+      "n": 112,
+      "rms_proxy_bps": 77.26190847668408,
+      "var_ratio_ext_over_proxy": 0.68019445370157,
+      "adverse_feed_err_q99_bps": 34.28442467029495,
+      "adverse_feed_err_max_bps": 41.90175349136232
+    },
+    "TSLA": {
+      "n": 112,
+      "rms_proxy_bps": 246.90474809464703,
+      "var_ratio_ext_over_proxy": 0.47050841305054736,
+      "adverse_feed_err_q99_bps": 46.5341367432583,
+      "adverse_feed_err_max_bps": 48.486300680789086
+    },
+    "WMT": {
+      "n": 112,
+      "rms_proxy_bps": 83.99231882988016,
+      "var_ratio_ext_over_proxy": 0.8745456470848579,
+      "adverse_feed_err_q99_bps": 37.81812603758562,
+      "adverse_feed_err_max_bps": 42.89668779907684
+    },
+    "XOM": {
+      "n": 112,
+      "rms_proxy_bps": 114.83364997055612,
+      "var_ratio_ext_over_proxy": 1.1472359389399882,
+      "adverse_feed_err_q99_bps": 27.456834097712633,
+      "adverse_feed_err_max_bps": 38.863298853715136
+    }
+  },
+  "generated_utc": "2026-10-02T18:56:04+00:00"
+}
