@@ -603,5 +603,20 @@ contract UsMarketCalendarPropertyTest is CalendarBase {
         g = gasleft();
         h.isEarlyClose(outWin);
         console.log("gas isEarlyClose          ", g - gasleft());
+        // worst case: a 12-day closed run (10 ad-hoc days incl. one weekend + the surrounding weekend)
+        uint256 d0 = Cal.dayIndex(2030, 3, 4);
+        for (uint256 i; i < 10; ++i) {
+            h.setAdHoc(d0 + i, true);
+        }
+        uint256 mid = (d0 + 4) * 1 days + 17 hours;
+        g = gasleft();
+        h.blindWindowAt(mid);
+        console.log("gas blindWindowAt (12d run)", g - gasleft());
+        g = gasleft();
+        h.windowId(mid);
+        console.log("gas windowId (12d run)     ", g - gasleft());
+        g = gasleft();
+        h.secondsUntilBlind(d0 * 1 days - 3 days);
+        console.log("gas secondsUntilBlind (pre)", g - gasleft());
     }
 }

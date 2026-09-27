@@ -37,3 +37,6 @@ target/
 # os / editor
 .DS_Store
 .idea/
+
+# claude code scheduler lock
+.claude/scheduled_tasks.lock
