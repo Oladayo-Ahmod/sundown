@@ -418,6 +418,15 @@ Targets (to be measured and held with `forge snapshot`): `deposit`/`redeem` <= 1
 | A11 | Deployment scope vs measured depth (section 12) | **decided (D15): all four at demonstration scale on Arbitrum Sepolia with `SimEquityFeed`** |
 | A12 | `minDebt` dust floor and `closeFactor`/`criticalHealth` defaults (50 % / 0.95) | yes, tune in 3b with the Python reference |
 
+## 17b. Implementation notes (step 3b-1; none change the direction)
+
+- `liquidate` **clamps** `repayAssets` to the close-factor maximum (and to the debt) instead of reverting; the returned `repaid` is the amount actually pulled.
+- The `maxWithdraw` override was dropped: in OpenZeppelin v5 `maxWithdraw = previewRedeem(maxRedeem(owner))`, so the `maxRedeem` override (balance and idle) already bounds it. The `NotActive` check in `_deposit` and the `InsufficientIdle` check in `_withdraw` were removed as unreachable (`maxDeposit`/`maxMint` are 0 unless Active; the max checks bound withdrawals by idle).
+- `repay` returns `(assetsPaid, sharesBurned)`; `repayShares` returns `assetsPaid`.
+- Validation of parameters lives in `SundownMarket.initialize` (single source); the factory only creates, registers and initializes (it zero-checks the implementation and initializes last).
+- `resume()` by the guardian currently supports guardian halts only (`_probesPass` is a documented placeholder until the issuer-failure probes land in 3b-3; non-guardian halt reasons cannot occur before then).
+- Slither's `reentrancy-no-eth` finding on `liquidate` is the unavoidable oracle read before state writes: the oracle and guard are governance-chosen and fixed at creation, every state-changing external function is `nonReentrant`; a hostile oracle could only observe mid-state through view functions. Accepted, trust-bounded (threat model, guard/oracle row).
+
 ## 18. Proposed step 3b order and estimate
 
 1. **3b-1 core** (~7-9 h): `KinkedRate`/`SharesMath` libs + Python reference and fixtures; `SundownMarket` vault and positions with `FlatGuard` and `MockEquityOracle`; factory and clones; unit and reference tests.
