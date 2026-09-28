@@ -1,0 +1,217 @@
+{
+ "source": [
+  "deployments/risk_params.json"
+ ],
+ "data_through": "2026-10-01",
+ "estimator": {
+  "name": "pooled-scaled EWMA, lambda=0.9",
+  "recurrence": "num' = lambda*num + (loss/k_c)^2 ; den' = lambda*den + 1 ; sigma2 = num/den (bps^2, weekend units)",
+  "forecast": "gapVaR_c = multiplier_c * z_q * k_c * sqrt(sigma2)  [round up]",
+  "min_prior_observations": 8,
+  "state_per_asset": "one (num, den) pair"
+ },
+ "global": {
+  "stress_rule": "maxBorrowLTV = min(LLTV, 1 - gapVaR_q - oracleBuffer - safetyBuffer)",
+  "quantile_default_bps": 9900,
+  "oracle_buffer_bps": 50,
+  "oracle_buffer_basis": "feed deviation threshold (irreducible allowance, N1)",
+  "safety_buffer_bps": 100,
+  "lookahead_hours": 24,
+  "early_close_shifts_window": false,
+  "early_close_label": "UNVERIFIED (D1)",
+  "multiplier_floor": 1.0,
+  "lltv_ceiling_bps": 8600
+ },
+ "status": "RESEARCH OUTPUT. Calibrated on daily proxy gaps (conservative superset of the oracle-blind exposure); not an audited or governance-approved set.",
+ "assets": {
+  "TSLA": {
+   "seed_sigma2_bps2": 13722.51,
+   "classes": {
+    "Short": {
+     "class_scale_k": 0.7572,
+     "floor_bps_train95": 131.1,
+     "q9900": {
+      "multiplier": 1.8266,
+      "gap_var_bps_at_data_end": 376.9,
+      "stress_ltv_cap_bps": 9473
+     },
+     "q9950": {
+      "multiplier": 1.7298,
+      "gap_var_bps_at_data_end": 395.2,
+      "stress_ltv_cap_bps": 9454
+     }
+    },
+    "Weekend": {
+     "class_scale_k": 1.0,
+     "floor_bps_train95": 204.7,
+     "q9900": {
+      "multiplier": 1.5523,
+      "gap_var_bps_at_data_end": 423.0,
+      "stress_ltv_cap_bps": 9426
+     },
+     "q9950": {
+      "multiplier": 1.8463,
+      "gap_var_bps_at_data_end": 557.1,
+      "stress_ltv_cap_bps": 9292
+     }
+    },
+    "Long": {
+     "class_scale_k": 0.9215,
+     "floor_bps_train95": 287.3,
+     "q9900": {
+      "multiplier": 1.6132,
+      "gap_var_bps_at_data_end": 405.1,
+      "stress_ltv_cap_bps": 9444
+     },
+     "q9950": {
+      "multiplier": 2.2709,
+      "gap_var_bps_at_data_end": 631.4,
+      "stress_ltv_cap_bps": 9218
+     }
+    }
+   }
+  },
+  "NVDA": {
+   "seed_sigma2_bps2": 22195.0,
+   "classes": {
+    "Short": {
+     "class_scale_k": 0.7572,
+     "floor_bps_train95": 78.8,
+     "q9900": {
+      "multiplier": 1.8266,
+      "gap_var_bps_at_data_end": 479.4,
+      "stress_ltv_cap_bps": 9370
+     },
+     "q9950": {
+      "multiplier": 1.7298,
+      "gap_var_bps_at_data_end": 502.7,
+      "stress_ltv_cap_bps": 9347
+     }
+    },
+    "Weekend": {
+     "class_scale_k": 1.0,
+     "floor_bps_train95": 162.1,
+     "q9900": {
+      "multiplier": 1.5523,
+      "gap_var_bps_at_data_end": 538.0,
+      "stress_ltv_cap_bps": 9311
+     },
+     "q9950": {
+      "multiplier": 1.8463,
+      "gap_var_bps_at_data_end": 708.5,
+      "stress_ltv_cap_bps": 9141
+     }
+    },
+    "Long": {
+     "class_scale_k": 0.9215,
+     "floor_bps_train95": 211.1,
+     "q9900": {
+      "multiplier": 1.6132,
+      "gap_var_bps_at_data_end": 515.2,
+      "stress_ltv_cap_bps": 9334
+     },
+     "q9950": {
+      "multiplier": 2.2709,
+      "gap_var_bps_at_data_end": 803.1,
+      "stress_ltv_cap_bps": 9046
+     }
+    }
+   }
+  },
+  "AAPL": {
+   "seed_sigma2_bps2": 5554.86,
+   "classes": {
+    "Short": {
+     "class_scale_k": 0.7572,
+     "floor_bps_train95": 46.1,
+     "q9900": {
+      "multiplier": 1.8266,
+      "gap_var_bps_at_data_end": 239.8,
+      "stress_ltv_cap_bps": 9610
+     },
+     "q9950": {
+      "multiplier": 1.7298,
+      "gap_var_bps_at_data_end": 251.5,
+      "stress_ltv_cap_bps": 9598
+     }
+    },
+    "Weekend": {
+     "class_scale_k": 1.0,
+     "floor_bps_train95": 95.6,
+     "q9900": {
+      "multiplier": 1.5523,
+      "gap_var_bps_at_data_end": 269.1,
+      "stress_ltv_cap_bps": 9580
+     },
+     "q9950": {
+      "multiplier": 1.8463,
+      "gap_var_bps_at_data_end": 354.5,
+      "stress_ltv_cap_bps": 9495
+     }
+    },
+    "Long": {
+     "class_scale_k": 0.9215,
+     "floor_bps_train95": 243.1,
+     "q9900": {
+      "multiplier": 1.6132,
+      "gap_var_bps_at_data_end": 257.8,
+      "stress_ltv_cap_bps": 9592
+     },
+     "q9950": {
+      "multiplier": 2.2709,
+      "gap_var_bps_at_data_end": 401.7,
+      "stress_ltv_cap_bps": 9448
+     }
+    }
+   }
+  },
+  "SPY": {
+   "seed_sigma2_bps2": 2739.95,
+   "classes": {
+    "Short": {
+     "class_scale_k": 0.7572,
+     "floor_bps_train95": 48.2,
+     "q9900": {
+      "multiplier": 1.8266,
+      "gap_var_bps_at_data_end": 168.4,
+      "stress_ltv_cap_bps": 9681
+     },
+     "q9950": {
+      "multiplier": 1.7298,
+      "gap_var_bps_at_data_end": 176.6,
+      "stress_ltv_cap_bps": 9673
+     }
+    },
+    "Weekend": {
+     "class_scale_k": 1.0,
+     "floor_bps_train95": 88.4,
+     "q9900": {
+      "multiplier": 1.5523,
+      "gap_var_bps_at_data_end": 189.0,
+      "stress_ltv_cap_bps": 9660
+     },
+     "q9950": {
+      "multiplier": 1.8463,
+      "gap_var_bps_at_data_end": 248.9,
+      "stress_ltv_cap_bps": 9601
+     }
+    },
+    "Long": {
+     "class_scale_k": 0.9215,
+     "floor_bps_train95": 112.8,
+     "q9900": {
+      "multiplier": 1.6132,
+      "gap_var_bps_at_data_end": 181.0,
+      "stress_ltv_cap_bps": 9668
+     },
+     "q9950": {
+      "multiplier": 2.2709,
+      "gap_var_bps_at_data_end": 282.2,
+      "stress_ltv_cap_bps": 9567
+     }
+    }
+   }
+  }
+ },
+ "generated_utc": "2026-10-02T21:31:27+00:00"
+}

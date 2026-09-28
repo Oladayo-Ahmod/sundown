@@ -76,3 +76,23 @@ Model (see `liquidation.py`): Uniswap-v3-in-range constant-product slippage `N/(
 2. **Product:** boosted tier only for SPY (and AAPL <= 90 %), standard tier otherwise; TSLA/NVDA stay standard (<= 77 %). Boosted tier needs the cure window and the deleveraging path already specified in M2.1.
 3. **DISCOVERY (D5 exit liquidity):** add the per-asset caps table and snapshot numbers; the 1 % slippage single-liquidation size is only ~$8k on TSLA/AAPL under the pessimistic reading.
 4. **Open evidence needed before claiming more:** live keeper participation at <= 3 % bonus, measured USDG borrow APR on Morpho/Robinhood, per-asset depth beyond the 4-asset deploy set, route-level (RFQ) exit liquidity.
+
+---
+
+# M7a update: measured USDG borrow rates (replaces the assumed 5 % APR)
+
+Source: `results/morpho_rates_snapshot.json`, **read on-chain** (Morpho Blue `0x9D53...1010` on chain 4663; `market()`, `idToMarketParams()` and the IRM's `borrowRateView()` at the block recorded in the file; market ids enumerated from the Morpho API). One point-in-time reading; the IRM is an adaptive curve, so rates move with utilisation.
+
+| Market (USDG loan) | LLTV | Utilisation | Borrowed | Measured borrow APR |
+|---|---|---|---|---|
+| AAPL | 62.5 % | 99.99 % | $197k | **7.83 %** |
+| NVDA | 62.5 % | 98.5 % | $614k | 10.92 % |
+| GOOGL | 62.5 % | 96.6 % | $204k | 6.14 % |
+| SPY | 62.5 % | 42.2 % | $4.7k | **0.06 %** |
+| Reference: USDe collateral / syrupUSDG collateral | 91.5 % | 89 % / 90 % | $308M / $117M | 4.07 % / 4.10 % |
+
+| # | Claim | Evidence | Numbers | Status |
+|---|---|---|---|---|
+| 23 | Boosted-tier break-even APR (claim 21) versus the measured rate | break-even from `two_tier.csv`, rates from `morpho_rates_snapshot.json` | **SPY:** break-even 0.67 / 1.8 % (90 %) and 1.36 / 3.6 % (93 %), uniform / clustered borrowers. Covered by the ~4.1 % large-market rate and the 6-11 % stock-market rates, **not covered by the SPY market's own current 0.06 %** (42 % utilisation, $4.7k borrowed). **AAPL 90 %:** 1.4 / 3.7 % vs measured 7.83 %: covered. AAPL 93 %: 3.3 / 8.6 % vs 7.83 %: covered only for uniform borrowers | Partially supported. The comparison is expected value at one snapshot of an adaptive-curve rate; it ignores tail clustering and reserve funding. The SPY boosted tier is economic only if boosted borrowers pay about the large-market rate or higher, not the idle-market rate. AAPL's 7.83 % reflects ~100 % utilisation and would fall if supply grew |
+
+Not claimed: any rate time series, any statement about the rate a future Sundown market would clear at, or that the break-even covers tail-driven reserve needs.

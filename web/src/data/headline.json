@@ -1,0 +1,261 @@
+{
+ "source": [
+  "research/results/credit_frontier_datecluster.csv",
+  "research/results/credit_summary.csv",
+  "research/results/bad_debt_regime_concentration.csv",
+  "research/results/backtest_test_chosen.csv",
+  "research/results/m22_headline_ci.csv",
+  "research/results/morpho_rates_snapshot.json"
+ ],
+ "flat": {
+  "bps_yr_86": {
+   "est": 4.4569,
+   "lo": 0.7195,
+   "hi": 9.7092
+  },
+  "bps_yr_77": 0.0783,
+  "worst_window_pct_86": 1.1738,
+  "mar2020_share_pct_86": 63.303,
+  "ci_cluster": "date (window open date), 2,000 resamples"
+ },
+ "stress": {
+  "morpho_86": {
+   "flat_bps_yr": 4.4569,
+   "stress_bps_yr": 3.8744,
+   "reduction_bps_yr": 0.5826,
+   "reduction_ci": [
+    0.0,
+    1.6999
+   ],
+   "reduction_pct": 13.0708,
+   "ltv_gain_pp": 0.5417,
+   "ltv_gain_ci": [
+    0.0,
+    0.9215
+   ],
+   "ltv_gain_ci_month": [
+    0.0,
+    0.7817
+   ]
+  },
+  "cf_90": {
+   "flat_bps_yr": 12.5755,
+   "stress_bps_yr": 9.4188,
+   "reduction_bps_yr": 3.1568,
+   "reduction_ci": [
+    0.038,
+    8.5384
+   ],
+   "reduction_pct": 25.1025,
+   "ltv_gain_pp": 1.239,
+   "ltv_gain_ci": [
+    0.0395,
+    1.9843
+   ],
+   "ltv_gain_ci_month": [
+    0.0044,
+    1.813
+   ]
+  },
+  "cf_93": {
+   "flat_bps_yr": 23.9757,
+   "stress_bps_yr": 14.0319,
+   "reduction_bps_yr": 9.9439,
+   "reduction_ci": [
+    1.6144,
+    23.8213
+   ],
+   "reduction_pct": 41.4747,
+   "ltv_gain_pp": 2.5543,
+   "ltv_gain_ci": [
+    0.9248,
+    4.1172
+   ],
+   "ltv_gain_ci_month": [
+    0.7241,
+    3.5053
+   ]
+  },
+  "cf_95": {
+   "flat_bps_yr": 36.7799,
+   "stress_bps_yr": 17.2881,
+   "reduction_bps_yr": 19.4918,
+   "reduction_ci": [
+    6.0129,
+    40.8836
+   ],
+   "reduction_pct": 52.9958,
+   "ltv_gain_pp": 3.6113,
+   "ltv_gain_ci": [
+    1.6063,
+    5.4979
+   ],
+   "ltv_gain_ci_month": [
+    1.3226,
+    4.9155
+   ]
+  }
+ },
+ "bonus": {
+  "lltv86": {
+   "reduction": {
+    "est": 8.803,
+    "lo": 2.025,
+    "hi": 17.72
+   },
+   "at_5_5": {
+    "est": 12.45,
+    "lo": 2.958,
+    "hi": 24.65
+   },
+   "at_2": {
+    "est": 3.646,
+    "lo": 0.7567,
+    "hi": 7.218
+   }
+  },
+  "lltv93": {
+   "reduction": {
+    "est": 76.3,
+    "lo": 49.39,
+    "hi": 106.4
+   },
+   "at_5_5": {
+    "est": 119.8,
+    "lo": 64.7,
+    "hi": 186.2
+   },
+   "at_2": {
+    "est": 43.46,
+    "lo": 13.66,
+    "hi": 81.26
+   }
+  }
+ },
+ "boosted_breakeven_apr_pct": {
+  "SPY": {
+   "90": {
+    "uniform": {
+     "est": 0.6714,
+     "lo": 0.0,
+     "hi": 1.923
+    },
+    "clustered": {
+     "est": 1.806,
+     "lo": 0.0,
+     "hi": 5.144
+    }
+   },
+   "93": {
+    "uniform": {
+     "est": 1.358,
+     "lo": 0.2062,
+     "hi": 3.08
+    },
+    "clustered": {
+     "est": 3.564,
+     "lo": 0.5616,
+     "hi": 8.011
+    }
+   }
+  },
+  "AAPL": {
+   "90": {
+    "uniform": {
+     "est": 1.412,
+     "lo": 0.1295,
+     "hi": 3.258
+    },
+    "clustered": {
+     "est": 3.72,
+     "lo": 0.3529,
+     "hi": 8.512
+    }
+   },
+   "93": {
+    "uniform": {
+     "est": 3.319,
+     "lo": 1.319,
+     "hi": 5.943
+    },
+    "clustered": {
+     "est": 8.642,
+     "lo": 3.573,
+     "hi": 15.28
+    }
+   }
+  },
+  "TSLA": {
+   "90": {
+    "uniform": {
+     "est": 2.628,
+     "lo": 0.3987,
+     "hi": 5.69
+    },
+    "clustered": {
+     "est": 6.788,
+     "lo": 1.086,
+     "hi": 14.75
+    }
+   },
+   "93": {
+    "uniform": {
+     "est": 4.721,
+     "lo": 1.954,
+     "hi": 8.289
+    },
+    "clustered": {
+     "est": 12.01,
+     "lo": 5.141,
+     "hi": 20.74
+    }
+   }
+  },
+  "NVDA": {
+   "90": {
+    "uniform": {
+     "est": 4.189,
+     "lo": 1.195,
+     "hi": 8.112
+    },
+    "clustered": {
+     "est": 10.88,
+     "lo": 3.162,
+     "hi": 20.89
+    }
+   },
+   "93": {
+    "uniform": {
+     "est": 7.238,
+     "lo": 3.157,
+     "hi": 12.37
+    },
+    "clustered": {
+     "est": 18.45,
+     "lo": 8.355,
+     "hi": 31.11
+    }
+   }
+  }
+ },
+ "measured_borrow_apr_pct": {
+  "block": 78552299,
+  "retrieved_utc": "2026-10-02T21:28:23+00:00",
+  "AAPL": 7.8329,
+  "SPY": 0.0602,
+  "NVDA": 10.9164,
+  "large_usdg_markets": 4.0663,
+  "spy_util": 0.4224,
+  "aapl_util": 0.9999
+ },
+ "var99_weekend": {
+  "rate_pct": 1.8729,
+  "ci": [
+   0.9558,
+   3.0867
+  ],
+  "n": 4752,
+  "target_pct": 1.0
+ },
+ "generated_utc": "2026-10-02T21:31:20+00:00"
+}
