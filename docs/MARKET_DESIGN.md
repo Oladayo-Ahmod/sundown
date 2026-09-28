@@ -1,6 +1,6 @@
 # Sundown Market Design (M3 step 3a)
 
-Status: **design only, no contract code**. Written for approval before step 3b. Everything here is a proposal unless it cites evidence; evidence tags follow `DISCOVERY.md` (**[V]** verified on chain or from a primary source in this project, **[D]** documented, **[S]** secondary, **[U]** unverified). Binding inputs: decisions D1-D11 and notes N1-N5 in `DESIGN.md` section 8; M1 (`UsMarketCalendar`, `MarketCalendar`); the M2/M2.1 research (`research/CLAIMS.md`).
+Status: **approved with changes (DESIGN.md D12-D17); implementation in progress (step 3b)**. Changes versus the first draft are marked **[approved change]**: no `collateralScale` and no `windDown()` (D13, D14), accrual resumes by itself 30 days into a halt (D14), flat bonus in [3 %, 5.5 %] default 4 % (D15), guard address immutable (D12). Originally written for approval before step 3b. Everything here is a proposal unless it cites evidence; evidence tags follow `DISCOVERY.md` (**[V]** verified on chain or from a primary source in this project, **[D]** documented, **[S]** secondary, **[U]** unverified). Binding inputs: decisions D1-D11 and notes N1-N5 in `DESIGN.md` section 8; M1 (`UsMarketCalendar`, `MarketCalendar`); the M2/M2.1 research (`research/CLAIMS.md`).
 
 Honest scope statement (D6): this market is infrastructure for a *measured* claim. At real LLTVs <= 86 % the session-aware rule is not distinguishable from zero; the market must therefore be a clean, small, auditable lending core whose guard is swappable, so the control (flat) and treatment (session-aware) markets differ **only** by the guard and the replay can say what the guard is worth. Everything session-related lives behind `IRiskGuard`; the market contains **no session logic**.
 
@@ -54,7 +54,7 @@ struct MarketParams {
 
 Validated by the factory: non-zero addresses; `collateralToken != loanToken`; decimals <= 18 each; `0 < lltvWad <= 0.98e18`; `0 < closeFactorWad <= 1e18`; `criticalHealthWad < 1e18`; `maxBonusWad <= 0.25e18`; `0 < kinkWad < 1e18`; `collateralCap > 0`. A configuration where a full-bonus liquidation of an LLTV-edge position exhausts the collateral is allowed; section 7.5 handles it explicitly. Guardian and governance addresses are immutable (no setter).
 
-Placeholder values (unvalidated, to be set from research in 3b): IRM kink 80 %, base 0 %, slope1 4 % APR, slope2 75 % APR; `closeFactor` 50 %; `criticalHealth` 0.95; control markets at the in-the-wild LLTVs (N5): Morpho 62.5 / 77 / 86 % and a 5.5 % flat bonus (the Aave maximum, **[S]**).
+Placeholder values (unvalidated, to be set from research in 3b): IRM kink 80 %, base 0 %, slope1 4 % APR, slope2 75 % APR; `closeFactor` 50 %; `criticalHealth` 0.95; control markets at the in-the-wild LLTVs (N5): Morpho 62.5 / 77 / 86 %. **[approved change]** The flat bonus is configurable within **[3 %, 5.5 %]** (5.5 % = the Aave maximum **[S]**), default **4 %**; `maxBonusWad` is at most 5.5 % and the `FlatGuard` constructor rejects a bonus outside the range.
 
 ## 4. Interfaces
 
@@ -96,7 +96,7 @@ Status semantics (N1):
 ```solidity
 struct AccountCtx {
     address account;
-    uint256 collateral;        // effective collateral units (after any shortfall scale, section 8.3)
+    uint256 collateral;        // collateral units credited to the account (internal ledger)
     uint256 debtAssets;        // debt in loan units, rounded UP (the state *after* the proposed action for borrow/withdraw)
     uint256 priceWad;
     uint256 haircutWad;
@@ -157,9 +157,7 @@ interface ISundownMarket /* is IERC4626 */ {
     // issuer-control policy (section 8)
     function reportIssuerFailure() external returns (HaltReason);   // permissionless probe
     function guardianHalt() external;
-    function resume() external;                                     // guardian within the freeze limit if probes pass; governance after it
-    function windDown() external;                                   // governance only, after the freeze limit (A9)
-    function reconcileCollateral() external;                        // permissionless, only in CollateralShortfall (A5)
+    function resume() external;                                     // guardian if all probes pass; governance unconditionally
 
     // views
     function debtOf(address) external view returns (uint256);            // rounded up, with pending interest
@@ -181,30 +179,26 @@ Market states (one storage word):
                         v
    +---------+  guardianHalt()                                 +-----------+
    | Active  | ---------------------------------------------> |  Halted   |
-   |         | <--- resume() (guardian, probes pass, <= 30 d)  | reason,   |
-   |         |      resume() (governance, any time)            | haltedAt  |
+   |         | <--- resume() (guardian: all probes pass)       | reason,   |
+   |         |      resume() (governance: unconditional)       | haltedAt  |
    +---------+ --- reportIssuerFailure(): a probe fails -----> +-----------+
-                                                                     | after MAX_FREEZE (30 d), governance only
-                                                                     v
-                                                               +-----------+
-                                                               | WindDown  | terminal: no new borrow/supply,
-                                                               +-----------+ accrual resumes; repay, liquidate,
-                                                                              lender exits stay open
+                                       (incl. collateral shortfall: stays halted until resolved, D13)
+   Accrual is frozen for the first 30 days of a halt; from day 30 it resumes by itself while Halted (D14).
 ```
 
 What each state permits (token transfers permitting; a reverting token reverts the action naturally):
 
-| Action | Active | Halted | WindDown |
-|---|---|---|---|
-| `deposit`/`mint` (lenders) | yes | **no** | no |
-| `withdraw`/`redeem` (up to idle) | yes | yes | yes |
-| `depositCollateral` | yes (cap) | yes (cap) | yes |
-| `withdrawCollateral` | yes | **no** | with zero debt only |
-| `borrow` | yes | **no** | no |
-| `repay`, `repayShares` | yes | **yes (never blocked)** | yes |
-| `liquidate` | yes | **yes** (no halt gate; reverts only if the token reverts or the oracle is Invalid/CorporateAction/SequencerDown) | yes |
-| `realizeBadDebt` | yes | yes | yes |
-| interest accrual | yes | **frozen** | resumes |
+| Action | Active | Halted |
+|---|---|---|
+| `deposit`/`mint` (lenders) | yes | **no** |
+| `withdraw`/`redeem` (up to idle) | yes | yes |
+| `depositCollateral` | yes (cap) | yes (cap) |
+| `withdrawCollateral` | yes | **no** |
+| `borrow` | yes | **no** |
+| `repay`, `repayShares` | yes | **yes (never blocked)** |
+| `liquidate` | yes | **yes** (no halt gate; reverts only if the token reverts or the oracle is Invalid/CorporateAction/SequencerDown) |
+| `realizeBadDebt` | yes | yes |
+| interest accrual | yes | **frozen for 30 days, then resumes** |
 
 Position states (derived, not stored): `NoDebt` -> `Healthy` (debt <= guard capacity) -> `Liquidatable` (guard says so) -> `Insolvent` (collateral value < debt) -> `BadDebt` (collateral 0, debt > 0) -> `realizeBadDebt` -> `NoDebt` (loss socialized to the vault share price, evented).
 
@@ -280,13 +274,13 @@ Any failing probe moves the market to `Halted` with a reason code and emits `Iss
 
 Table in section 5. Interest is frozen (`_accrue` early-returns; at `resume`, `lastAccrual = now`) so borrowers are not charged for something they cannot fix. Repay and lender exits of idle liquidity stay open (if the loan token permits). Liquidation has no halt gate; it fails by itself while the collateral transfer reverts.
 
-### 8.3 Collateral shortfall handling (decision A5, needs approval)
+### 8.3 Collateral shortfall (D13: option B plus halt) **[approved change]**
 
-Option **A (recommended)**: store `collateralScaleWad` (starts `1e18`); every read of a user's collateral is `stored * scale / WAD` (rounded down). `reconcileCollateral()` (permissionless, only when the halt reason is `CollateralShortfall`) sets `scale *= balanceOf(market) / effectiveTotal`, a deterministic pro-rata haircut, so there is no first-come advantage and no phantom collateral; positions are then re-evaluated on the haircut collateral and become liquidatable if they should. Cost: one `mulDiv` per collateral read. Option **B**: no scaling; the first withdrawers/liquidators drain the real balance and later users hold phantom collateral. B is smaller but unsound after an `adminBurn`; A is the minimum that keeps the ledger honest. Either way the loss is *not mitigated*, only bounded by the collateral cap.
+No `collateralScale`. Probe 5 (`collateral.balanceOf(market) < totalCollateral`) puts the market into `Halted(CollateralShortfall)`, which lasts until resolved: no new borrows, withdrawals or supply; repay stays open; liquidations and collateral withdrawals simply revert when the token cannot pay. After an `adminBurn` the ledger holds **phantom collateral** (credited collateral that no longer exists): the first withdrawers or liquidators drain the real balance and the rest are left with phantom claims. This is a **documented residual risk** (THREAT_MODEL.md, UI) bounded only by the collateral cap. **There is no resolution mechanism in v1**: `resume()` re-runs the probes, so it only succeeds if the balance is restored (for example by a donation).
 
-### 8.4 Resumption and the freeze limit
+### 8.4 Resumption and the freeze limit (D14) **[approved change]**
 
-`resume()`: the guardian may call it while `now < haltedAt + MAX_FREEZE` (30 days, constant) and only if all probes currently pass (the call runs them); governance may call it at any time after the limit. Resumption is explicit and evented (`Resumed(by, haltedFor)`); `lastAccrual = now`. If the collateral or loan token is still failing after `MAX_FREEZE`, only governance can act: `resume()` (if it chooses to accept the risk) or `windDown()` (decision A9): terminal; no new borrow or supply; accrual resumes (so borrowers who can repay have an incentive to); repay, liquidation and lender exits stay open. There is no mechanism that seizes collateral the issuer has frozen.
+`resume()`: the guardian may call it only if all probes currently pass (the call runs them); governance (timelock) may call it unconditionally. Resumption is explicit and evented (`Resumed(by, haltedFor)`); interest accrued after day 30 of the halt is booked before the state changes and `lastAccrual = now`. `MAX_FREEZE = 30 days`: accrual is frozen from `haltedAt` to `haltedAt + MAX_FREEZE`; after that **accrual resumes by itself while the halt persists**, so borrowers who can repay have an incentive to. **No `windDown()` in v1.** The gap: if the collateral or loan token keeps failing, collateral-backed loans are unrecoverable and no on-chain mechanism seizes collateral the issuer has frozen.
 
 ### 8.5 What lenders can and cannot recover
 
@@ -314,7 +308,7 @@ Limits stated plainly: a 24 h heartbeat means a `Fresh` price can be hours old (
 slot 0  : state (uint8) | haltReason (uint8) | haltedAt (uint40) | lastAccrual (uint40) | cDec, lDec
 slot 1  : totalBorrowAssets (uint128) | totalBorrowShares (uint128)
 slot 2  : idle (uint128) | badDebtRealized (uint128)
-slot 3  : totalCollateral (uint128) | collateralScaleWad (uint128)
+slot 3  : totalCollateral (uint128) | (spare)
 mapping : position[address] -> { uint128 borrowShares; uint128 collateral }   // one slot per account
 immutable (clone args in storage after init): params (collateralToken, loanToken, oracle, guard, guardian, governance, lltv, ...)
 ```
@@ -350,7 +344,7 @@ State variables: `C_u` effective collateral of user `u`, `S_u` borrow shares, `D
 
 | # | Invariant | Notes |
 |---|---|---|
-| I1 | **Collateral conservation:** `sum_u stored_u == totalCollateral` and `collateral.balanceOf(market) >= totalCollateral * scale / WAD` unless the market is `Halted(CollateralShortfall)` | donations only increase the left side of the inequality |
+| I1 | **Collateral conservation:** `sum_u stored_u == totalCollateral` and `collateral.balanceOf(market) >= totalCollateral` unless the market is `Halted(CollateralShortfall)` (after an `adminBurn`; D13) | donations only increase the left side of the inequality |
 | I2 | **Loan conservation:** `loan.balanceOf(market) >= idle` | |
 | I3 | **Vault accounting identity:** `totalAssets() == idle + totalBorrowAssets` at every externally observable point | `badDebtRealized` is already netted out of `D` |
 | I4 | `sum_u S_u == totalBorrowShares` and `sum_u debt(u) <= totalBorrowAssets + dust` where `dust < 1 asset per account` from round-up | debts are rounded up so the sum can exceed `D` by <1 unit per account, never undercount |
@@ -359,7 +353,7 @@ State variables: `C_u` effective collateral of user `u`, `S_u` borrow shares, `D
 | I7 | **Share price monotone:** `P` never decreases except in a transaction that emits `BadDebtRealized` (interest only increases `D`; the vault rounding favors the vault) | tested for deposit/withdraw/redeem/mint sequences too |
 | I8 | **Repay is never blockable by halt/pause/guard:** `repay` succeeds whenever the loan-token transfer succeeds, in every market state, with no oracle read | the Handler asserts it in all states |
 | I9 | **Liquidation has no halt gate:** in `Halted`, `liquidate` reverts only for a failing token transfer, an invalid/corporate-action/sequencer-down price, a guard refusal, or healthy position | |
-| I10 | Interest accrues only when Active/WindDown and is monotone: `totalBorrowAssets` is non-decreasing across `accrue` | |
+| I10 | Interest accrues only when Active (or Halted after day 30, D14) and is monotone: `totalBorrowAssets` is non-decreasing across `accrue` | |
 | I11 | `totalCollateral <= collateralCap` after any `depositCollateral` | |
 | I12 | Inflation/donation resistance: for any donation `d` and first deposit sequence, a later depositor of `x` can redeem >= `x - 1` assets-equivalent (virtual shares 1e6) | |
 | I13 | Only `realizeBadDebt` removes debt without a payment, only for `collateral == 0` accounts | |
@@ -415,13 +409,13 @@ Targets (to be measured and held with `forge snapshot`): `deposit`/`redeem` <= 1
 | A2 | Market and vault are one contract | yes |
 | A3 | Factory creation is owner-only; guards/oracles from a reviewed set | yes |
 | A4 | Guard trust model (section 4.2): guard authorizes liquidations incl. early/boosted-tier ones, bounded by the market | yes; it is what keeps the tier out of the market |
-| A5 | Collateral shortfall (`adminBurn`) handling: pro-rata `collateralScale` (A) vs none (B) | A |
+| A5 | Collateral shortfall handling | **decided: B plus halt (D13)** |
 | A6 | Collateral cap in token units, immutable, from exit liquidity (0.5 x depth at 3 %) | yes |
 | A7 | The market passes `haircutWad` and uses only the raw price for seizure math; the control ignores the haircut | yes |
 | A8 | `WindowCache` as a shared helper used by oracle and guards (D11) | yes |
-| A9 | `MAX_FREEZE` 30 days; after it only governance may resume; optional terminal `windDown()` | yes |
+| A9 | `MAX_FREEZE` 30 days | **decided (D14): accrual resumes after 30 days; no `windDown()`** |
 | A10 | No protocol fee/reserve factor in this milestone; reserve is an extension point only | yes |
-| A11 | Deployment scope vs measured depth (section 12): NVDA headline + small pilots, or demonstration-scale for all four | your call |
+| A11 | Deployment scope vs measured depth (section 12) | **decided (D15): all four at demonstration scale on Arbitrum Sepolia with `SimEquityFeed`** |
 | A12 | `minDebt` dust floor and `closeFactor`/`criticalHealth` defaults (50 % / 0.95) | yes, tune in 3b with the Python reference |
 
 ## 18. Proposed step 3b order and estimate
