@@ -257,6 +257,18 @@ Accepted by the owner after the M0 handoff.
 
 **D11 - Hot paths.** Cache window bounds and `windowId` at guard level (keyed by `windowId`); do not call `secondsUntilBlind` or `nextBlindWindow` per user action.
 
+**D12 - Market design approvals (MARKET_DESIGN section 17).** A1 yes: `openzeppelin-contracts-upgradeable` v5.7.0, clone-safe ERC-4626 only. A2 yes: market and vault are one contract. A3 yes: factory creation is owner-only. A4 yes, with the **guard address immutable per market** (trust is fixed at creation); the guard is bounded by the market's bonus cap, close factor and non-worsening rule. A6 yes: immutable collateral cap in token units. A7, A8, A10, A12: recommended defaults (market passes `haircutWad` and uses the raw price for seizure; shared `WindowCache`; no fee/reserve; `minDebt` and `closeFactor` 50 % / `criticalHealth` 0.95).
+
+**D13 - Collateral shortfall: option B plus halt (A5).** No `collateralScale` index (complexity and bug risk; no issuer action observed since launch). The issuer-failure probe also detects shortfall (`collateral.balanceOf(market)` below the ledger total) and puts the market into a Halted state that lasts until resolved: no new borrows, withdrawals or supply; liquidations simply revert if the token reverts; repay stays open. Phantom collateral after an `adminBurn` is a documented residual risk (THREAT_MODEL.md, UI). **No resolution mechanism in v1.**
+
+**D14 - Freeze limit (A9).** 30 days: accrual is frozen for the first 30 days of a halt; after that **accrual resumes by itself while the halt persists** until the guardian (probes passing) or governance (timelock) resumes. **No `windDown()` in v1**; the gap is documented (a permanently reverting token leaves collateral-backed loans unrecoverable).
+
+**D15 - Scope cuts and deployment (A11).** No Dutch-ramp bonus, no depth-sized partial liquidation, no empirical-quantile estimator, no Stylus. Liquidation bonus is **flat and configurable within [3 %, 5.5 %], default 4 %**; nothing below 3 % ships without live keeper evidence. Deploy all four markets (SPY, NVDA, AAPL, TSLA) at **demonstration scale on Arbitrum Sepolia with `SimEquityFeed`** (labeled simulation). The exit-liquidity table is published as the **recommended production caps**; no production-scale liquidity claim except NVDA. Any Robinhood Chain use is a read-only validation of the Chainlink adapter against live feeds.
+
+**D16 - Boosted tier.** Configured in the guard per market, for SPY (90 % and 93 %) and AAPL (90 %) only; TSLA and NVDA standard tier only. M4a details it.
+
+**D17 - Execution budget for 3b.** 3b-1 core <= 6 h, 3b-2 oracle <= 3 h (fork test optional, skipped if it costs > 30 min), 3b-3 hardening <= 4 h. Proceed between steps without waiting only if all validations pass and nothing deviates from `MARKET_DESIGN.md`; stop on any deviation, failed validation or direction-changing discovery; report after every step. 3b-3 invariant priority: collateral conservation, vault accounting identity, debts <= totalBorrow, no borrow above guard capacity, liquidation never worsens a position, share price never falls except via `BadDebtRealized`, repay never blockable, halt semantics; any others cut are named in the report.
+
 ### Carry-forward notes (bind M3/M4)
 
 - **N1** Oracle adapter uses calendar-aware freshness: the 0.5 % deviation is an irreducible price-error allowance; add an age-based haircut; distinguish scheduled (calendar) from unscheduled (outage) blindness.
