@@ -6,7 +6,9 @@ Status: **proposal, not implemented**. Every claim about the outside world is ta
 
 Tokenized-stock collateral is priced by a 24/5 oracle that **goes blind over weekends and holidays** and reopens with a gap. Static LTV/LLTV (Aave, Morpho) prices that risk once, forever. Sundown makes the risk **session-aware**: borrow capacity tightens before a blind window, and liquidation after the gap is shaped around the thin, noisy reopen. The design is an isolated market with a pluggable `IRiskGuard`, so a **control market (FlatGuard)** and a **treatment market (SundownGuard)** differ *only* by the guard and can be replayed against the same price path.
 
-Non-goals: a general lending protocol, a price oracle, a DEX, upgradeability of core accounting, governance tokens.
+**Evidence-first framing (D6, after the M2/M2.1 research in `research/CLAIMS.md`).** The measured benefit of the stress rule is *capacity expansion at counterfactual high LLTV*, not protection at conventional LLTV: at real flat LLTVs (<= 86 %) window-gap bad debt is negligible (0 at <= 65 %, 4.5 bps/yr at 86 %) and the rule is not distinguishable from zero. At counterfactual 93 % it buys about +2.6 pp of LTV at equal bad debt (CI [0.9, 4.1], mostly TSLA/NVDA). Sundown does not claim to be safer than Aave/Morpho, and every claim in the product and the UI must trace to a row of `CLAIMS.md`.
+
+Non-goals: a general lending protocol, a price oracle, a DEX, upgradeability of core accounting, governance tokens, a premium-funded gap reserve (claim 13: not supported).
 
 ## 2. Architecture and trust boundaries
 
@@ -74,11 +76,11 @@ Early-close days (13:00): **assumed to NOT move blind-window boundaries** (exten
 
 Observations are **gap returns** r = ln(P_open / P_lastBeforeWindow) in bps, per `WindowClass`.
 
-- State: per asset and class, a ring buffer of the last N=64 observations packed as `int16` bps (4 storage slots) plus EWMA of squared returns.
-- Gap-VaR at confidence c (e.g. 99 %) = `max(floor_class, blend)` with `blend = a * z_c * sigma_ewma + (1 - a) * q_empirical`, `a` ramps with the observation count (`n/(n+k)` on the empirical part) so a cold start uses a governance-seeded prior (calibrated offline in `research/`, not claimed as measured).
-- Cost: quantile over <= 64 values computed **once per record**, cached; reads are O(1). Insertion bounded (64), no unbounded loops.
-- Recording is permissionless and two-phase with replay protection per `windowId`: (1) `snapshotPre(windowId)` callable only inside the blind window, captures the oracle's frozen last price; (2) `recordGap(windowId)` callable after the window ends, once the oracle has produced a post-window update (`updatedAt >= windowEnd`, bounded delay), computes r. Exactly one write per `(asset, windowId)`; missing observations are skipped, never fabricated.
-- Data: only 2026-07-01 onward exists on this chain, so cold-start priors come from `research/` (equity history) and are labelled as offline analysis.
+- **Estimator (binding, D7; supersedes the earlier ring-buffer/quantile blend)**: pooled-scaled EWMA, lambda 0.9. One `(num, den)` pair per asset: `num' = lambda*num + (loss/k_c)^2`, `den' = lambda*den + 1`, `sigma2 = num/den`; `gapVaR_c = multiplier_c * z_q * k_c * sqrt(sigma2)`, rounded up, class multipliers floored at 1, `K_MIN = 8` observations before the data-driven estimate replaces the seed. Class scales `k = {Short 0.76, Weekend 1, Long 0.92}`; **Short uses Weekend parameters** (41 windows per asset is too few). Quantile **q = 99.5 %** (the 99 % VaR realised ~98 % coverage out of sample; claim 5), **oracle buffer 50 bps**, safety buffer 100 bps. State is O(1) per asset: no ring buffer, no sorting. The integer/WAD reference is in `research/estimators.py`; seeds and bounds are in `deployments/risk_params.json` (a research artifact, not governance-approved).
+- Stress rule: `maxBorrowLTV = min(LLTV, 1 - gapVaR_q - oracleBuffer - safetyBuffer)`, lookahead 24 h before a window.
+- Honest limits (claims 5, 6): the estimator under-covers mega-caps (AAPL/GOOGL exceedance ~2.8-3.0 %) and over-covers high-vol names; no estimator forecasts regime breaks (Mar-2020: 24 % exceedance). Do not describe the VaR as calibrated at 99 %.
+- Recording is permissionless and two-phase with replay protection per `windowId`: (1) `snapshotPre(windowId)` callable only inside the blind window, captures the oracle's frozen last price; (2) `recordGap(windowId)` callable after the window ends, once the oracle has produced a post-window update (`updatedAt >= windowEnd`, bounded delay), computes r. Exactly one write per `(asset, windowId)`. **Lag-capped recording (D7/N2)**: the post-window observation is the first update with `updatedAt >= windowEnd`; its **lag is stored**; an observation whose lag exceeds the cap (12 h, covering ~99 % in simulation) is **skipped, never imputed**. M1 measured a lag of 18-85 s in all 84 (window, feed) pairs, so censoring was not observed, but recording must still store the lag. Because early-close behavior is unverified (D10), recording must tolerate either window boundary.
+- Data: the on-chain feed history starts 2026-06-22, so cold-start priors come from `research/` (2010-2026 equity history, daily proxy) and are labelled as offline analysis.
 
 ### 3.3 Oracle layer
 
@@ -99,7 +101,8 @@ Observations are **gap returns** r = ln(P_open / P_lastBeforeWindow) in bps, per
 - Borrow side: per-account `collateral`, `borrowShares`; global `totalBorrowAssets`; kinked rate model (base, slope1, kink, slope2) accruing by `block.timestamp` delta; interest rounds up for borrowers, down for suppliers.
 - Liquidation: partial, bounded close factor; seized collateral = `repaid * (1 + bonus) / price`, rounding in the protocol's favor; liquidator must be able to receive collateral (see transfer-restriction handling).
 - **Bad debt**: when `collateral == 0 && debt > 0` after liquidation, anyone can call `realizeBadDebt(account)`: debt removed from `totalBorrowAssets` and from `totalSupplyAssets`, event emitted (explicit socialization to suppliers; no silent rounding).
-- Caps: supply cap, borrow cap, collateral cap (mirrors Aave's capped rollout; LlamaRisk used caps of $32M/$21M [S]).
+- Caps: supply cap, borrow cap and a **per-market collateral cap derived from measured exit liquidity** (D9; table in `DISCOVERY.md`; mirrors Aave's capped rollout, LlamaRisk $32M/$21M [S]).
+- **Loss-absorbing reserve: extension point only** (D8; claim 13/13b: a premium-funded reserve cannot self-start; it would need external seeding of >= ~2 % of debt at 86 %, >= ~7 % at 93 %). Not built.
 - **Issuer-control failure policy (accepted, D2) [V testnet, U mainnet]**: HALT + FREEZE ACCRUAL.
   - Detection is permissionless and testable: `reportIssuerFailure()` probes the collateral token (pause state if exposed, otherwise a guarded 1-wei transfer probe in try/catch) and the loan token; the guardian can also halt.
   - While halted: no new borrows, no collateral withdrawals, no new supply; interest accrual is frozen (borrowers are not charged for something they cannot fix); repay and loan-token withdrawals stay open if the token permits; liquidation is disabled only while the token actually reverts.
@@ -116,7 +119,7 @@ interface IRiskGuard {
 }
 ```
 
-Hooks are `view` where possible; permissionless recording lives on the guard/risk model, not in the market. The guard may restrict but never relax the market's hard solvency checks.
+*(Interface superseded by `docs/MARKET_DESIGN.md`, which takes account-level context so a standard/boosted tier can live in the guard.)* **Enforcement finding (D8, claims 11-12):** a cap on new borrows/withdrawals alone has *no effect* on bad debt, a priced gap premium is rejected, and the only effective candidate is **hard pre-window deleveraging of existing debt with a cure window**, offered as an **opt-in boosted tier**; at >= 93 % it is heavy in event frequency (about 19 forced events per 100 borrowers per year uniform, 80 clustered). Final decision in M4a after M2.2. Hooks are `view` where possible; permissionless recording lives on the guard/risk model, not in the market. The guard may restrict but never relax the market's hard solvency checks.
 
 - **FlatGuard (control)**: static LTV/LLT, fixed bonus, fixed close factor - an Aave-style parameterization. Revert in blind/stale states mirrors what a standard market does with its oracle (still liquidates on frozen price) - kept *identical* to the control semantics so the comparison is honest.
 - **SundownGuard (treatment)**:
@@ -241,6 +244,18 @@ Accepted by the owner after the M0 handoff.
 **Deferred.** Stylus (M8) stays optional and blocks nothing; no Docker/devnode work now.
 
 **Still open (owner).** Mainnet token source for `0xb35490d6f9163DE4F80d88dc75c3516eb64C5aE2` and `0xe10b6f6B275de231345c20D14Ab812db62151b00` to be pasted; not blocking M1/M2, **needed before M3**.
+
+**D6 - Framing: evidence-first, rigorous, replayable.** Capacity-expansion claims apply only to counterfactual 90-95 % LLTV (about +2.6 pp at 93 %, CI [0.9, 4.1], mostly TSLA/NVDA). At real LLTVs <= 86 % the gap rule is not distinguishable from zero, and we say so. D1's verification coverage is stated exactly as `CALENDAR_NOTES.md` section 11: **12 weekends + 2 Long holiday windows; no EST, no Short, no early-close observations.**
+
+**D7 - Binding research findings.** q = 99.5 % (or a wider buffer); 50 bps oracle buffer; lag-capped observation recording (store the lag, skip over the cap, never impute); calendar-aware freshness. M1 measured a first-update lag of 18-85 s after window end, so N2 censoring was not observed, but recording must still store the lag.
+
+**D8 - Enforcement.** A cap on new borrows alone is useless; a priced premium is rejected; the only candidate is hard pre-window deleveraging with a cure window, as an opt-in boosted tier. Final decision in M4a after the M2.2 results (not started).
+
+**D9 - Liquidation design and exit liquidity are first-class.** Per-market collateral caps derived from pool depth; Dutch-ramp bonus and depth-sized partial liquidations are being evaluated in M2.2.
+
+**D10 - Early-close days.** Until observed, the guard treats window boundaries conservatively (capacity tightening may start earlier than 20:00 ET on early-close days; observation recording tolerates either behavior). Flag for M4a; no change to the calendar library.
+
+**D11 - Hot paths.** Cache window bounds and `windowId` at guard level (keyed by `windowId`); do not call `secondsUntilBlind` or `nextBlindWindow` per user action.
 
 ### Carry-forward notes (bind M3/M4)
 
