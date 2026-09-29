@@ -33,8 +33,10 @@ Vercel: root directory `web`, settings in `web/vercel.json`, manual steps in the
 
 Notes: `next.config.ts` stubs the Base Account and MetaMask SDKs (optional deps are not installed; only injected wallets are used). `pnpm-workspace.yaml` declares four optional native build scripts as not allowed.
 
-## Validation record (M7a)
+## Validation record
 
-- `pnpm typecheck`, `pnpm lint`, `pnpm build`: pass; no build warnings. First-load JS: `/` 108 kB, `/risk` 105 kB, `/replay` 115 kB.
-- Playwright: 13 tests pass (smoke per page, no console errors, sources tagged, no horizontal overflow at 360 px, axe wcag2a/2aa/21aa with zero serious or critical violations in light and dark, theme toggle, navigation, replay filter, wallet stack loads only on request).
-- Lighthouse on `/` (mobile profile, production build, local Chrome): accessibility 100, best-practices 100, SEO 100. **Performance is below the 90 target on this machine**: best run 85, typical 73-81 (TBT 490-1,400 ms, LCP about 2.5 s, CLS 0); a trivial static page measured with the same tooling scores 100, so the tool is valid. The cost is React/Next runtime evaluation plus a heavy first layout under 4x CPU throttling; the machine was also CPU-saturated by unrelated processes during later runs. Not claimed as met; re-measure on a quiet machine or CI.
+**Fresh-clone build (M7b), from the repository, not a mirror.** `git clone` of the repository at commit `eca735c`, then the exact commands in "Build from a fresh clone": `install --frozen-lockfile` (715 packages, 58 s), `typecheck`, `lint`, `build` pass; the build prints no warnings; route sizes: `/` 108 kB, `/risk` 105 kB, `/replay` 115 kB first-load JS. `test:e2e`: 13 of 13 Playwright tests pass from that clone (smoke per page, no console errors, sources tagged, no horizontal overflow at 360 px, axe wcag2a/2aa/21aa with zero serious or critical violations in light and dark, theme toggle, navigation, replay filter, wallet stack loads only on request). After the build the clone's only untracked file was Next's generated `next-env.d.ts`, now ignored by `web/.gitignore`.
+
+**Lighthouse on `/` (mobile profile, production build, local Chrome, M7a):** accessibility 100, best-practices 100, SEO 100. Performance 73-85 on this machine (best 85; TBT 490-1,400 ms, LCP about 2.5 s, CLS 0); a trivial static page scored 100 with the same tooling, so the tool is valid. The cost is React/Next runtime evaluation plus a heavy first layout under 4x CPU throttling, and later runs were distorted by unrelated CPU load. The performance target was dropped; the deployed-URL measurement is {{PENDING:lighthouse_deployed}}.
+
+**Lazy-loading pass (M7b).** The charts are server-rendered SVG with no client JavaScript, and `/` contains no chart; lazy-loading them would add a client bundle rather than remove one, so no change was made. Link prefetch is off on the navigation. A `content-visibility` experiment made `/` slower and was reverted.
