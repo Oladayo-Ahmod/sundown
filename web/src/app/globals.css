@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --muted: #f1f5f9;
+  --muted-foreground: #475569;
+  --border: #cbd5e1;
+  --primary: #1d4ed8;
+  --primary-foreground: #ffffff;
+  --accent: #e2e8f0;
+  --warn-bg: #fef3c7;
+  --warn-fg: #78350f;
+  --warn-border: #b45309;
+  --danger: #b91c1c;
+  --ring: #1d4ed8;
+  --chart-1: #0072b2;
+  --chart-2: #b97700;
+  --chart-3: #00785a;
+  --chart-4: #c2410c;
+  --chart-grid: #e2e8f0;
+  --chart-text: #475569;
+}
+
+.dark {
+  --background: #0b1220;
+  --foreground: #e5e7eb;
+  --card: #0f172a;
+  --muted: #111a2e;
+  --muted-foreground: #a3adbd;
+  --border: #334155;
+  --primary: #7db4ff;
+  --primary-foreground: #0b1220;
+  --accent: #1e293b;
+  --warn-bg: #3a2a07;
+  --warn-fg: #fde68a;
+  --warn-border: #b45309;
+  --danger: #fca5a5;
+  --ring: #93c5fd;
+  --chart-1: #56b4e9;
+  --chart-2: #f0c040;
+  --chart-3: #3ddc97;
+  --chart-4: #ff8f5a;
+  --chart-grid: #26334a;
+  --chart-text: #a3adbd;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-warn-bg: var(--warn-bg);
+  --color-warn-fg: var(--warn-fg);
+  --color-warn-border: var(--warn-border);
+  --color-danger: var(--danger);
+  --color-ring: var(--ring);
+  --font-sans: system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
+}
+
+html {
+  color-scheme: light;
+}
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Charts */
+.chart-text {
+  fill: var(--chart-text);
+  font-size: 13px;
+}
+.chart-grid {
+  stroke: var(--chart-grid);
+  stroke-width: 1;
+}
