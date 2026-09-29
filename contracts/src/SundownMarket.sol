@@ -41,6 +41,10 @@ contract SundownMarket is ISundownMarket, Initializable, ERC4626Upgradeable, Ree
     uint256 public constant MAX_MAX_BONUS_WAD = 0.055e18;
     /// @notice Highest accepted APR parameter (500 %).
     uint256 public constant MAX_APR_WAD = 5e18;
+    /// @notice Gas allowance of each issuer-failure probe call.
+    uint256 public constant PROBE_GAS = 250_000;
+    /// @notice Gas that must be left when probing, so a caller cannot cause a false positive by starving a probe.
+    uint256 public constant MIN_GAS_FOR_PROBES = 1_200_000;
 
     /// @notice Immutable configuration, written once in `initialize`.
     struct Config {
@@ -489,10 +493,82 @@ contract SundownMarket is ISundownMarket, Initializable, ERC4626Upgradeable, Ree
         emit MarketResumed(msg.sender, haltedFor);
     }
 
-    /// @dev Step 3b-1 only supports the guardian halt, which has no token-failure condition to clear. The
-    /// issuer-failure probes arrive in step 3b-3 and replace this.
-    function _probesPass() private view returns (bool) {
-        return haltReason == HaltReason.Guardian;
+    function _probesPass() private returns (bool) {
+        return _runProbes() == HaltReason.None;
+    }
+
+    // ------------------------------------------------------------------ issuer-failure probes (D2, D13)
+
+    /// @inheritdoc ISundownMarket
+    function reportIssuerFailure() external nonReentrant returns (HaltReason reason) {
+        if (state == MarketState.Halted) return haltReason;
+        reason = _runProbes();
+        if (reason != HaltReason.None) {
+            _accrue();
+            state = MarketState.Halted;
+            haltReason = reason;
+            haltedAt = uint40(block.timestamp);
+            emit MarketHalted(reason, msg.sender);
+        }
+    }
+
+    /// @dev Probes the collateral and loan tokens. Every external probe is gas-capped and failure-tolerant: a
+    /// function that does not exist (older token versions, tokens without `paused()`) is simply not a failure.
+    /// Order: collateral pause, collateral blocklist (the registry holds it on Robinhood tokens), collateral
+    /// shortfall (`adminBurn` leaves the ledger above the real balance), a 1-wei self-transfer through the exact
+    /// pause and blocklist modifiers, then the same for the loan token (pause, freeze, self-transfer).
+    function _runProbes() private returns (HaltReason) {
+        if (gasleft() < MIN_GAS_FOR_PROBES) revert InsufficientGas();
+        address col = _cfg.collateralToken;
+        address loan = asset();
+
+        if (_staticFlag(col, abi.encodeWithSignature("paused()"))) return HaltReason.CollateralPaused;
+        address registry = _staticAddress(col, abi.encodeWithSignature("ACCESS_CONTROLLED_REGISTRY()"));
+        if (
+            registry != address(0)
+                && _staticFlag(registry, abi.encodeWithSignature("isBlocked(address)", address(this)))
+        ) {
+            return HaltReason.CollateralBlocked;
+        }
+        (bool ok, uint256 balance) = _staticBalance(col);
+        if (!ok) return HaltReason.ProbeFailure;
+        if (balance < totalCollateral) return HaltReason.CollateralShortfall;
+        if (balance != 0 && !_selfTransferWorks(col)) return HaltReason.ProbeFailure;
+
+        if (_staticFlag(loan, abi.encodeWithSignature("paused()"))) return HaltReason.LoanPaused;
+        if (_staticFlag(loan, abi.encodeWithSignature("isFrozen(address)", address(this)))) {
+            return HaltReason.LoanFrozen;
+        }
+        (ok, balance) = _staticBalance(loan);
+        if (!ok) return HaltReason.ProbeFailure;
+        if (balance != 0 && !_selfTransferWorks(loan)) return HaltReason.ProbeFailure;
+        return HaltReason.None;
+    }
+
+    function _staticFlag(address target, bytes memory data) private view returns (bool) {
+        (bool ok, bytes memory ret) = target.staticcall{gas: PROBE_GAS}(data);
+        return ok && ret.length >= 32 && abi.decode(ret, (uint256)) == 1;
+    }
+
+    function _staticAddress(address target, bytes memory data) private view returns (address) {
+        (bool ok, bytes memory ret) = target.staticcall{gas: PROBE_GAS}(data);
+        if (!ok || ret.length < 32) return address(0);
+        uint256 v = abi.decode(ret, (uint256));
+        return v <= type(uint160).max ? address(uint160(v)) : address(0);
+    }
+
+    function _staticBalance(address token) private view returns (bool ok, uint256 balance) {
+        bytes memory ret;
+        (ok, ret) = token.staticcall{gas: PROBE_GAS}(abi.encodeCall(IERC20.balanceOf, (address(this))));
+        if (!ok || ret.length < 32) return (false, 0);
+        return (true, abi.decode(ret, (uint256)));
+    }
+
+    /// @dev A 1-wei transfer from the market to itself: it goes through the token's pause and blocklist checks for
+    /// sender and receiver with no net balance change. Accepts tokens that return nothing (USDT-style).
+    function _selfTransferWorks(address token) private returns (bool) {
+        (bool ok, bytes memory ret) = token.call{gas: PROBE_GAS}(abi.encodeCall(IERC20.transfer, (address(this), 1)));
+        return ok && (ret.length == 0 || (ret.length >= 32 && abi.decode(ret, (uint256)) == 1));
     }
 
     // ------------------------------------------------------------------ internals

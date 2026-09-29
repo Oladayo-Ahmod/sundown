@@ -81,6 +81,7 @@ interface ISundownMarket {
     error HasCollateral();
     error UnsupportedToken();
     error ProbesFailing();
+    error InsufficientGas();
 
     function depositCollateral(uint256 amount, address onBehalf) external;
     function withdrawCollateral(uint256 amount, address receiver) external;
@@ -92,6 +93,7 @@ interface ISundownMarket {
         returns (uint256 repaid, uint256 seized);
     function realizeBadDebt(address borrower) external returns (uint256 written);
     function accrue() external;
+    function reportIssuerFailure() external returns (HaltReason);
     function guardianHalt() external;
     function resume() external;
 
