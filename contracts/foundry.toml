@@ -25,6 +25,11 @@ int_types = "long"
 quote_style = "double"
 number_underscore = "thousands"
 
+[profile.default.invariant]
+runs = 64
+depth = 250
+fail_on_revert = false
+
 [profile.ci]
 fuzz = { runs = 1000 }
 invariant = { runs = 256, depth = 64 }
