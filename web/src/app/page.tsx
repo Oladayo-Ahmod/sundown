@@ -174,7 +174,7 @@ export default function Home() {
                   Claim 3
                 </Badge>
                 <CardTitle>Liquidation design matters more than the guard</CardTitle>
-                <CardDescription>It also shows where a boosted tier is credible.</CardDescription>
+                <CardDescription>It also shows where a boosted tier is credible: AAPL at 90%.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-2 text-sm leading-relaxed">
                 <p>
@@ -186,16 +186,27 @@ export default function Home() {
                   liquidators still act at 2%.
                 </p>
                 <p>
-                  A boosted tier (90 to 93%) covers its added lender loss at a break-even borrow APR of{" "}
-                  <N src={src.ci22}>{fmt(spy["90"].uniform.est, 1)}</N> to{" "}
-                  <N src={src.ci22}>{fmt(spy["93"].clustered.est, 1)}</N>% for SPY and{" "}
-                  <N src={src.ci22}>{fmt(aapl["90"].uniform.est, 1)}</N> to{" "}
-                  <N src={src.ci22}>{fmt(aapl["93"].clustered.est, 1)}</N>% for AAPL. Measured USDG borrow APR on
-                  Robinhood Chain (block <N src={src.rates}>{m.block}</N>): AAPL market{" "}
-                  <N src={src.rates}>{fmt(m.AAPL, 2)}</N>%, large USDG markets{" "}
-                  <N src={src.rates}>{fmt(m.large_usdg_markets, 2)}</N>%, but the SPY market{" "}
-                  <N src={src.rates}>{fmt(m.SPY, 2)}</N>% (idle, <N src={src.rates}>{pct(100 * m.spy_util, 0)}</N>{" "}
-                  utilised).
+                  <strong>Headline boosted-tier case: AAPL at 90%.</strong> The added lender loss is covered at a
+                  break-even borrow APR of <N src={src.ci22}>{fmt(aapl["90"].uniform.est, 1)}</N>% (CI{" "}
+                  <N src={src.ci22}>{ci(aapl["90"].uniform.lo, aapl["90"].uniform.hi)}</N>) for uniform borrowers,{" "}
+                  <N src={src.ci22}>{fmt(aapl["90"].clustered.est, 1)}</N>% (CI{" "}
+                  <N src={src.ci22}>{ci(aapl["90"].clustered.lo, aapl["90"].clustered.hi)}</N>) for borrowers
+                  clustered near the limit. The measured USDG borrow APR on the AAPL market is{" "}
+                  <N src={src.rates}>{fmt(m.AAPL, 2)}</N>% at <N src={src.rates}>{pct(100 * m.aapl_util, 2)}</N>{" "}
+                  utilisation (block <N src={src.rates}>{m.block}</N>).
+                </p>
+                <p>
+                  Secondary: SPY at 90 to 93% breaks even at <N src={src.ci22}>{fmt(spy["90"].uniform.est, 1)}</N> to{" "}
+                  <N src={src.ci22}>{fmt(spy["93"].clustered.est, 1)}</N>%, but the SPY market is idle (
+                  <N src={src.rates}>{pct(100 * m.spy_util, 0)}</N> utilised, <N src={src.rates}>{fmt(m.SPY, 2)}</N>%
+                  APR). TSLA and NVDA: not recommended for a boosted tier; they have the highest break-even APRs and
+                  the most forced deleveraging events.
+                </p>
+                <p>
+                  Demand evidence: the AAPL and NVDA stock-collateral markets are{" "}
+                  <N src={src.rates}>{pct(100 * m.nvda_util, 1)}</N> to <N src={src.rates}>{pct(100 * m.aapl_util, 2)}</N>{" "}
+                  utilised at <N src={src.rates}>{fmt(m.AAPL, 1)}</N> to <N src={src.rates}>{fmt(m.NVDA, 1)}</N>% borrow
+                  APR; large USDG markets borrow at <N src={src.rates}>{fmt(m.large_usdg_markets, 2)}</N>%.
                 </p>
                 <Sources files={[src.ci22, src.rates]} />
               </CardContent>

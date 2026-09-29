@@ -246,7 +246,8 @@
   "NVDA": 10.9164,
   "large_usdg_markets": 4.0663,
   "spy_util": 0.4224,
-  "aapl_util": 0.9999
+  "aapl_util": 0.9999,
+  "nvda_util": 0.9849
  },
  "var99_weekend": {
   "rate_pct": 1.8729,
@@ -257,5 +258,5 @@
   "n": 4752,
   "target_pct": 1.0
  },
- "generated_utc": "2026-10-02T21:31:20+00:00"
+ "generated_utc": "2026-10-03T06:16:56+00:00"
 }

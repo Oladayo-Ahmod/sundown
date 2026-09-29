@@ -389,8 +389,8 @@ export default function RiskPage() {
         </p>
         <Table aria-label="Break-even borrow APR versus measured rates">
           <TableCaption>
-            Break-even APR % (95% CI, date cluster) for uniform and clustered-near-max borrowers. Shown for the two
-            assets the boosted tier is proposed for.
+            Break-even APR % (95% CI, date cluster) for uniform and clustered-near-max borrowers. AAPL at 90% is the headline
+            case; SPY is secondary. TSLA and NVDA are not recommended for a boosted tier (highest break-even APRs, most forced events).
           </TableCaption>
           <TableHeader>
             <TableRow>
@@ -404,9 +404,9 @@ export default function RiskPage() {
           <TableBody>
             {(
               [
+                ["AAPL", "90", m.AAPL],
                 ["SPY", "90", m.SPY],
                 ["SPY", "93", m.SPY],
-                ["AAPL", "90", m.AAPL],
               ] as const
             ).map(([a, l, measured]) => {
               const b = headline.boosted_breakeven_apr_pct[a][l];

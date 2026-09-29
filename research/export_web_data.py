@@ -102,6 +102,7 @@ def headline() -> dict:
             "NVDA": num(mk["NVDA"]["borrow_apr_pct"]),
             "large_usdg_markets": num(mk["ref:USDe(91.5%)"]["borrow_apr_pct"]),
             "spy_util": num(mk["SPY"]["utilisation"]), "aapl_util": num(mk["AAPL"]["utilisation"]),
+            "nvda_util": num(mk["NVDA"]["utilisation"]),
         },
         "var99_weekend": {"rate_pct": num(100 * weekend.rate),
                           "ci": [num(100 * weekend.rate_ci_lo), num(100 * weekend.rate_ci_hi)],
