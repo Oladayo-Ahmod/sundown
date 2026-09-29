@@ -269,6 +269,26 @@ Accepted by the owner after the M0 handoff.
 
 **D17 - Execution budget for 3b.** 3b-1 core <= 6 h, 3b-2 oracle <= 3 h (fork test optional, skipped if it costs > 30 min), 3b-3 hardening <= 4 h. Proceed between steps without waiting only if all validations pass and nothing deviates from `MARKET_DESIGN.md`; stop on any deviation, failed validation or direction-changing discovery; report after every step. 3b-3 invariant priority: collateral conservation, vault accounting identity, debts <= totalBorrow, no borrow above guard capacity, liquidation never worsens a position, share price never falls except via `BadDebtRealized`, repay never blockable, halt semantics; any others cut are named in the report.
 
+**D18 - No onchain observation pipeline or EWMA in v1.** GapVaR is a per-asset, per-window-class (Short/Weekend/Long) WAD parameter taken from `deployments/risk_params.json` at q = 99.5 %, settable only through the timelock within hard bounds. The EWMA estimator is documented as roadmap; the integer reference stays offchain and tested.
+
+**D19 - `SundownGuard`.** Replaces `FlatGuard`'s role for boosted markets (`FlatGuard` stays as the control). Per-market parameters: `standardLLTV`, `boostedLLTV` (0 = no boosted tier), `gapVaR[3]`, `oracleBuffer` (50 bps), `safetyBuffer`, flat liquidation bonus in [3 %, 5.5 %] (default 4 %), `deleverageFee` (1 %, <= bonus cap), `preWindowHorizon` (default 6 h), `cureWindow` (default 3 h); all with onchain bounds and timelock-delayed changes. Hot paths read window bounds and `windowId` through `WindowCache` (D11); no per-action calendar scans.
+
+**D20 - Boosted tier entry.** Per-account opt-in via `enterBoosted()`; not allowed during the pre-window horizon or a blind window; exit allowed anytime if the position fits the standard tier. Eligible markets: SPY (90 % and 93 % variants) and AAPL (90 %). TSLA and NVDA markets have `boostedLLTV = 0`.
+
+**D21 - Stress rule and deleveraging.** From `preWindowHorizon` before a blind window the effective borrow cap for boosted accounts is `min(tierLLTV, 1 - gapVaR[class] - oracleBuffer - safetyBuffer)`; new borrows and HF-lowering withdrawals above it revert with a custom error carrying the numbers. Accounts above the stress cap at horizon start are flagged (event). Cure window: flagged borrowers may repay or add collateral. After the cure window ends and before the window starts, anyone may call `deleverage(account)`: it sells only enough collateral to reach the stress cap minus a small margin, charges `deleverageFee` (reduced fee), obeys the market's non-worsening rule and bonus cap, emits an event with the numbers, and is impossible while the market is Halted or the oracle is unscheduled-blind. Standard-tier accounts are never deleveraged.
+
+**D22 - Liquidation otherwise unchanged.** Market rules with the flat bonus; no Dutch ramp, no depth-sized partial liquidation (M2.2 showed no lender benefit).
+
+**D23 - Unscheduled blindness (adapter flag).** Block new borrows and HF-lowering withdrawals for boosted and standard accounts; deleveraging disabled; repay stays open.
+
+**D24 - Governance.** Parameter changes via timelock within bounds. The guardian can only tighten (disable boosted entry, block new borrows) and never loosen or move funds. Every power is tested.
+
+**D10 (restated).** On early-close days capacity tightening may start earlier than 20:00 ET; implemented as a single conservative config and documented as unverified.
+
+**D25 - Replay harness (`sim/`).** Deploy a control market (`FlatGuard` at the boosted LLTV) and a Sundown boosted market from the same implementation with `SimEquityFeed` (simulation), seed the same synthetic borrower population, replay the worst K real AAPL and SPY events from `sim/replay_events.json`, and print lender loss, liquidations, deleverage events and borrower capacity; compare against the Python reference/credit simulation for matching scenarios and report the tolerance honestly. Anvil first; Sepolia broadcast only on the owner's instruction.
+
+**Review rules for M4a/M4b.** M4a may flow into M4b without waiting only after (1) the design is committed, (2) an adversarial self-review is posted with the design summary, and (3) nothing deviates from D18-D25. Stop on a deviation, failed validation or direction-changing discovery. M4b budget <= 5 h; cut list in order: replay polish, extra fuzz, then deleveraging (if cut, report immediately: with no enforcement the product is a measurement tool). No public-network deployment.
+
 ### Carry-forward notes (bind M3/M4)
 
 - **N1** Oracle adapter uses calendar-aware freshness: the 0.5 % deviation is an irreducible price-error allowance; add an age-based haircut; distinguish scheduled (calendar) from unscheduled (outage) blindness.
