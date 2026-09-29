@@ -784,6 +784,133 @@ contract SundownGuardTest is Test {
         guard.executeParams(p);
     }
 
+    function _expectInvalid(SundownGuard.Params memory p, bytes32 field) internal {
+        vm.prank(governance);
+        vm.expectRevert(abi.encodeWithSelector(SundownGuard.InvalidParam.selector, field));
+        guard.queueParams(p);
+    }
+
+    /// @dev Every hard bound, low and high, is enforced on proposals (docs/GUARD_DESIGN.md section 5).
+    function test_everyParameterBoundIsEnforced() public {
+        SundownGuard.Params memory p;
+
+        p = _p();
+        p.standardLltv = 0.29e18;
+        _expectInvalid(p, "standardLltv");
+        p = _p();
+        p.standardLltv = 0.96e18;
+        _expectInvalid(p, "standardLltv");
+        p = _p();
+        p.boostedLltv = 0.85e18; // below the standard tier
+        _expectInvalid(p, "boostedLltv");
+        p = _p();
+        p.boostedLltv = 0.941e18;
+        _expectInvalid(p, "boostedLltv");
+
+        p = _p();
+        p.gapShort = 0.51e18;
+        _expectInvalid(p, "gapVar");
+        p = _p();
+        p.gapWeekend = 0.51e18;
+        _expectInvalid(p, "gapVar");
+        p = _p();
+        p.gapLong = 0.51e18;
+        _expectInvalid(p, "gapVar");
+
+        p = _p();
+        p.oracleBuffer = 0.0005e18;
+        _expectInvalid(p, "oracleBuffer");
+        p = _p();
+        p.oracleBuffer = 0.051e18;
+        _expectInvalid(p, "oracleBuffer");
+        p = _p();
+        p.safetyBuffer = 0.101e18;
+        _expectInvalid(p, "safetyBuffer");
+
+        p = _p();
+        p.bonus = 0.029e18;
+        _expectInvalid(p, "bonus");
+        p = _p();
+        p.bonus = 0.056e18;
+        _expectInvalid(p, "bonus");
+        p = _p();
+        p.deleverageFee = 0.002e18;
+        _expectInvalid(p, "deleverageFee");
+        p = _p();
+        p.deleverageFee = 0.041e18; // above the 4 % bonus
+        _expectInvalid(p, "deleverageFee");
+        p = _p();
+        p.deleverageMargin = 0.051e18;
+        _expectInvalid(p, "deleverageMargin");
+
+        p = _p();
+        p.preWindowHorizon = 30 minutes;
+        p.cureWindow = 0;
+        _expectInvalid(p, "horizon");
+        p = _p();
+        p.preWindowHorizon = 49 hours;
+        _expectInvalid(p, "horizon");
+        p = _p();
+        p.cureWindow = uint32(H - 30 minutes); // leaves less than the minimum deleverage interval
+        _expectInvalid(p, "cureWindow");
+
+        // the boundary values themselves are accepted
+        p = _p();
+        p.standardLltv = 0.3e18;
+        p.boostedLltv = 0;
+        p.gapShort = 0;
+        p.oracleBuffer = 0.001e18;
+        p.safetyBuffer = 0;
+        p.bonus = 0.03e18;
+        p.deleverageFee = 0.0025e18;
+        p.deleverageMargin = 0;
+        p.preWindowHorizon = 1 hours;
+        p.cureWindow = 0;
+        vm.prank(governance);
+        guard.queueParams(p);
+    }
+
+    function test_constructorRejectsZeroAddressesAndBadDecimals() public {
+        SundownGuard.Params memory p = _p();
+        vm.expectRevert(abi.encodeWithSelector(SundownGuard.InvalidParam.selector, bytes32("address")));
+        new SundownGuard(p, address(0), address(cache), governance, guardian, deployer, 2 days, 18, 6);
+        vm.expectRevert(abi.encodeWithSelector(SundownGuard.InvalidParam.selector, bytes32("address")));
+        new SundownGuard(p, address(oracle), address(0), governance, guardian, deployer, 2 days, 18, 6);
+        vm.expectRevert(abi.encodeWithSelector(SundownGuard.InvalidParam.selector, bytes32("address")));
+        new SundownGuard(p, address(oracle), address(cache), address(0), guardian, deployer, 2 days, 18, 6);
+        vm.expectRevert(abi.encodeWithSelector(SundownGuard.InvalidParam.selector, bytes32("address")));
+        new SundownGuard(p, address(oracle), address(cache), governance, address(0), deployer, 2 days, 18, 6);
+        vm.expectRevert(abi.encodeWithSelector(SundownGuard.InvalidParam.selector, bytes32("address")));
+        new SundownGuard(p, address(oracle), address(cache), governance, guardian, address(0), 2 days, 18, 6);
+        vm.expectRevert(abi.encodeWithSelector(SundownGuard.InvalidParam.selector, bytes32("timelock")));
+        new SundownGuard(p, address(oracle), address(cache), governance, guardian, deployer, 15 days, 18, 6);
+        vm.expectRevert(abi.encodeWithSelector(SundownGuard.InvalidParam.selector, bytes32("decimals")));
+        new SundownGuard(p, address(oracle), address(cache), governance, guardian, deployer, 2 days, 19, 6);
+    }
+
+    function test_unusablePriceBlocksExitAndFlag() public {
+        _boostedPosition(bob, 100e18, 5000e6);
+        oracle.setStatus(PriceStatus.Invalid);
+        vm.prank(bob);
+        vm.expectRevert(abi.encodeWithSelector(SundownGuard.PriceUnusable.selector, uint8(PriceStatus.Invalid)));
+        guard.exitBoosted();
+        vm.expectRevert(abi.encodeWithSelector(SundownGuard.PriceUnusable.selector, uint8(PriceStatus.Invalid)));
+        guard.flag(bob);
+    }
+
+    function test_enterBeforeBindingAndQuoteForPlainAccounts() public {
+        SundownGuard g =
+            new SundownGuard(_p(), address(oracle), address(cache), governance, guardian, deployer, 2 days, 18, 6);
+        vm.prank(alice);
+        vm.expectRevert(SundownGuard.NotBound.selector);
+        g.enterBoosted();
+        (bool ok,,,,) = guard.quoteDeleverage(alice); // no debt
+        assertFalse(ok);
+        vm.prank(alice);
+        vm.expectRevert(SundownGuard.NotBoosted.selector);
+        guard.exitBoosted();
+    }
+
     function test_queueRejectsOutOfBoundsAndCancelWorks() public {
         SundownGuard.Params memory p = _p();
         p.gapLong = 0.6e18;

@@ -27,7 +27,7 @@ jobs:
         env:
           FOUNDRY_PROFILE: ci
       - name: Gas snapshot
-        run: forge snapshot --check --no-match-test testFuzz
+        run: forge snapshot --check --no-match-test 'testFuzz|invariant|test_replay'
         continue-on-error: true
       - uses: actions/setup-python@v5
         with:
