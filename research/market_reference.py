@@ -428,7 +428,7 @@ def scenario(rng: random.Random, steps: int = 900) -> dict:
 
 
 def run_script(steps: list[tuple]) -> dict:
-    """Execute a hand-written op list on the reference in the scenario column format. Every step must be valid."""
+    """Run a hand-written op list in the scenario column format (every step must be valid)."""
     m = Market()
     cols: dict[str, list] = {k: [] for k in ("op", "actor", "target", "a", "ret1", "ret2", "snap")}
     for name, actor, target, a in steps:
@@ -469,9 +469,14 @@ def run_script(steps: list[tuple]) -> dict:
 
 
 def bad_debt_scenario() -> dict:
-    """Exact-integer cover for `realizeBadDebt`: three insolvent borrowers at different interest ages, a lender
-    redeeming between realizations (share price drop is exact), and a last tiny-debt borrower whose written-off
-    amount is capped by `totalBorrowAssets`. The random scenario samples this path; this one pins it."""
+    """Exact-integer cover for `realizeBadDebt`.
+
+    Three insolvent borrowers at different interest ages, a lender redeeming between
+    realizations (the share price drop is exact), and a last tiny-debt borrower whose
+    write-off drains `totalBorrowAssets` to zero. The `min(..., totalBorrowAssets)` clamp
+    never binds here: it is unreachable from valid states (the minimum-debt rule leaves no
+    sub-unit residual debt), so it stays as defense in depth.
+    """
     day = 86_400
     steps: list[tuple] = [
         ("deposit", 0, 0, 100_000 * 10**6),
