@@ -828,6 +828,42 @@ contract SundownGuardTest is Test {
         market.repay(1000e6, bob);
     }
 
+    /// @dev A volatile asset: the stress fraction (85.5 %) is below the standard LLTV (86 %), so a standard account
+    /// can sit above the stress cap while healthy. It must never be deleveraged.
+    function test_standardAccountAboveTheStressCapIsNeverDeleveraged() public {
+        SundownGuard.Params memory p = _p();
+        p.gapWeekend = 0.13e18; // 1 - 13 % - 1.5 % = 85.5 %
+        vm.prank(governance);
+        guard.queueParams(p);
+        vm.warp(block.timestamp + 2 days);
+        vm.prank(governance);
+        guard.executeParams(p);
+        assertEq(guard.stressFraction(WEEKEND), 0.855e18);
+
+        vm.startPrank(alice);
+        market.depositCollateral(100e18, alice);
+        market.borrow(8590e6, alice); // 85.9 %: above 85.5 %, below the 86 % threshold
+        vm.stopPrank();
+        _startsIn(1 hours, WEEKEND);
+        (bool ok,,,,) = guard.quoteDeleverage(alice);
+        assertFalse(ok, "standard account is not deleverage-eligible");
+        vm.prank(keeper);
+        vm.expectRevert(ISundownMarket.NotLiquidatable.selector);
+        market.liquidate(alice, 100e6, keeper);
+
+        // the same position as a boosted account (entered before the stress period) IS eligible
+        // entering while above the stress-fit cap is refused (it cannot be used to start in breach)
+        _farWindow();
+        vm.prank(alice);
+        vm.expectRevert(abi.encodeWithSelector(SundownGuard.DoesNotFitStandard.selector, 8590e6, 8550e6));
+        guard.enterBoosted();
+        // an account that entered first and then borrowed up to the boosted cap IS eligible
+        _boostedPosition(bob, 100e18, 8590e6);
+        _startsIn(1 hours, WEEKEND);
+        (ok,,,,) = guard.quoteDeleverage(bob);
+        assertTrue(ok, "boosted account above the stress cap is eligible");
+    }
+
     function test_gasOfTheStressCapPath() public {
         vm.startPrank(bob);
         guard.enterBoosted();
