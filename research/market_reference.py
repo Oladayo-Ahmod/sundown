@@ -228,7 +228,14 @@ class Market:
         return paid
 
     # --- liquidation (FlatGuard)
-    def liquidate(self, borrower: str, repay_assets: int) -> tuple[int, int]:
+    def liquidate(
+        self,
+        borrower: str,
+        repay_assets: int,
+        bonus: int | None = None,
+        force: bool = False,
+    ) -> tuple[int, int]:
+        """`bonus`/`force` let a guard model override the flat bonus and the allowed test (deleverage)."""
         if repay_assets <= 0:
             raise Invalid
         self.accrue()
@@ -238,7 +245,7 @@ class Market:
             raise Invalid
         collateral = pos[1]
         cv = self.cv(collateral)
-        if not debt > cv * self.p.lltv // WAD:  # FlatGuard.liquidationAllowed
+        if not force and not debt > cv * self.p.lltv // WAD:  # FlatGuard.liquidationAllowed
             raise Invalid
         max_repay = ceil_div(debt * self.p.close_factor, WAD)
         if (cv * self.p.lltv // WAD) * WAD < self.p.critical_health * debt:
@@ -247,7 +254,7 @@ class Market:
         rest = debt - repay
         if rest != 0 and rest < self.p.min_debt:
             repay = debt
-        b = min(self.p.bonus, self.p.max_bonus)
+        b = min(self.p.bonus if bonus is None else bonus, self.p.max_bonus)
         if cv > debt:
             b = min(b, cv * WAD // debt - WAD)
         seized = repay * (WAD + b) // WAD * self.p.value_scale // self.price
