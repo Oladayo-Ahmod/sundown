@@ -47,6 +47,14 @@ Scope: `SundownMarket` (vault + isolated lending market), `SundownMarketFactory`
 - Guardian can only halt; resume requires the probes to pass, and governance can resume unconditionally. Governance key compromise therefore means an unconditional resume of a failing market. Use a multisig for any non-demo deployment.
 - The Sepolia demonstration uses `SimEquityFeed` (labelled simulation, keeper-published). It proves integration shape, not oracle security. No production-scale claim except NVDA; Robinhood Chain is used only for read-only adapter validation.
 
+## 5b. Guard risks (SundownGuard, D26-D29; details in `GUARD_DESIGN.md` section 7)
+
+- **No guardian power to raise `gapVaR` in v1 (D27).** Raising a parameter can trigger forced sales (deleveraging) of boosted users, so a compromised or malicious guardian key would become a griefing tool against borrowers. The guardian can only disable boosted entry and block new borrows (no forced sale, no loss). Roadmap: a guardian tightening that takes effect only at the next window boundary, with a snapshot taken at the horizon start.
+- **Calibration is static and through-the-cycle (D26).** Values are the full-sample empirical q99.5 per asset and class; Short and Long are not statistically resolvable at q99.5 (sample maximum). A regime shift beyond the sample is not tracked on chain; changes go through the timelock.
+- **Enforcement depends on a keeper (D29).** If no fee within the bonus cap is profitable at a position size, deleveraging may silently not execute. The demo keeper is the replay script; a production keeper service is out of scope.
+- **Critical-health limitation (D28).** For standard accounts in a boosted market the 100 % close-factor trigger uses the market `lltv`, so it fires later than their own threshold.
+- **Framing.** Session-aware LLTV (boosted weekday capacity, tighter weekend capacity), not loss prevention.
+
 ## 6. Required user-facing disclosures
 
 1. The issuer can pause, block or burn collateral; Sundown halts but cannot prevent loss.
