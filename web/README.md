@@ -12,15 +12,24 @@ All numbers come from `research/` through `research/export_web_data.py`, which w
 cd research && .venv/bin/python export_web_data.py   # refresh src/data from research/results
 ```
 
-## Develop, build, test
+## Build from a fresh clone
+
+`web/` in this repository is the only source of the app; there is no other copy. Requirements: Node >= 20.19 (22 recommended), Git, and Google Chrome only for the e2e tests. The package manager is pinned in the root `package.json` (`pnpm@12.8.1`) and invoked through `npx` so no global install is needed.
 
 ```bash
-pnpm install
-pnpm dev                 # http://localhost:3000
-pnpm typecheck && pnpm lint && pnpm build
-pnpm test:e2e            # Playwright (installed Chrome): smoke, 360px overflow, axe (light+dark), theme, nav, filter, lazy wallet
-SHOTS=1 pnpm exec playwright test tests/screenshots.spec.ts   # writes docs/figures/web/*.png (1280 and 390 px)
+git clone <repository-url> sundown && cd sundown        # submodules are NOT needed for web/
+npx -y pnpm@12.8.1 install --frozen-lockfile            # run at the repository ROOT (workspace lockfile lives there)
+cd web
+npx -y pnpm@12.8.1 typecheck
+npx -y pnpm@12.8.1 lint
+npx -y pnpm@12.8.1 build
+npx -y pnpm@12.8.1 test:e2e                             # starts the built app on :3100 and runs Playwright with the installed Chrome
+npx next start -p 3100                                  # serve the production build manually
 ```
+
+Develop: `npx -y pnpm@12.8.1 dev` (http://localhost:3000). Screenshots (1280 and 390 px) are written to `docs/figures/web/` with `SHOTS=1 npx -y pnpm@12.8.1 exec playwright test tests/screenshots.spec.ts`. Refresh the data: `cd ../research && .venv/bin/python export_web_data.py`.
+
+Vercel: root directory `web`, settings in `web/vercel.json`, manual steps in the root `DEPLOY.md`. No environment variables are needed (`web/.env.example` states the policy).
 
 Notes: `next.config.ts` stubs the Base Account and MetaMask SDKs (optional deps are not installed; only injected wallets are used). `pnpm-workspace.yaml` declares four optional native build scripts as not allowed.
 
