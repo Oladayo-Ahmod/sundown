@@ -47,7 +47,7 @@ Sources: <https://docs.robinhood.com/chain/connecting>, <https://docs.robinhood.
 - Registry: `GET https://api.robinhood.com/rhj/assets` -> **194 assets, all status ACTIVE, all deployed only on chain 4663**, all `tokenDecimals = 18`, all report `TRADING_STATUS_TRADABLE` for the overnight session (verified-api).
 - Examples (address, from the registry; all verified-onchain for `decimals()==18`): AAPL `0xaF3D76f1834A1d425780943C99Ea8A608f8a93f9`, NVDA `0xd0601CE157Db5bdC3162BbaC2a2C8aF5320D9EEC`, TSLA `0x322F0929c4625eD5bAd873c95208D54E1c003b2d`, MSFT `0xe93237C50D904957Cf27E7B1133b510C669c2e74`, SPY `0x117cc2133c37B721F49dE2A7a74833232B3B4C0C`, QQQ `0xD5f3879160bc7c32ebb4dC785F8a4F505888de68`, GOOGL `0x2e0847E8910a9732eB3fb1bb4b70a580ADAD4FE3`, AMZN `0x12f190a9F9d7D37a250758b26824B97CE941bF54`, META `0xc0D6457C16Cc70d6790Dd43521C899C87ce02f35`, COIN `0x6330D8C3178a418788dF01a47479c0ce7CCF450b`.
 - Docs warn: only addresses on the Token Contracts page / registry are canonical; same-ticker tokens at other addresses are not Robinhood Stock Tokens (documented).
-- Loan token candidate: **USDG** `0x5fc5360D0400a0Fd4f2af552ADD042D716F1d168`, **6 decimals** (verified-onchain), WETH `0x0Bd7D308f8E1639FAb988df18A8011f41EAcAD73`. The 18-decimal collateral / 6-decimal loan / 8-decimal price mix must be handled explicitly.
+- Loan token candidate: **USDG** `0x5fc5360D0400a0Fd4f2af552ADD042D716F1d168`, **6 decimals** (verified-onchain), WETH `0x0Bd7D308f8E1639FAb988df18A8011f41EAcAD73`. The 18-decimal collateral / 6-decimal loan / 8-decimal price mix must be handled explicitly. USDG ("Global Dollar") is itself an **ERC-1967 proxy** (implementation `0x68184c449e1a8f34fa18d289737129fd27b66f8f`, 99-byte proxy, no admin slot set), total supply ~$700M, and exposes `paused()` (false), `isFrozen(address)` (false for `0xdEaD`) and `owner()` `0xcFA0388f5ddf905FdC08c45c716C15Dc10A14C6F` (all verified-onchain); implementation source not checked. So the loan token can also be paused or have an address frozen by its issuer: the market's issuer-failure probe covers it (D2).
 - Stock tokens are **tokenised debt securities** issued by Robinhood Assets (Jersey) Ltd; not offered to US persons (documented). Eligibility/KYC applies to the *primary market and the Robinhood app*; the token itself is a plain ERC-20 that anyone can hold on-chain (Chainlink's SVR doc: "once the tokens are onchain, anyone can hold them and anyone can liquidate").
 
 ### Corporate-action multiplier (ERC-8056) - documented + verified-onchain
@@ -62,16 +62,31 @@ Sources: <https://docs.robinhood.com/chain/connecting>, <https://docs.robinhood.
 - Primary mint/burn by Authorised Participants (at launch only BBVI), KYB-onboarded: **Mon 02:00 CET/CEST -> Sat 02:00 CET/CEST** (DST-dependent). Outside this window no mint/burn; users can still trade on secondary venues.
 - Secondary venues: RFQ aggregators (0x RFQ, 1inch Fusion, LiFi), Uniswap-style AMMs, propAMM (Rialto), Lighter orderbook (documented). "Tokenized stocks trade via RFQ at launch" -> on-chain AMM liquidity may be thin. **Liquidation liquidity is unverified** (see Threat model).
 
-### Transfer restrictions that affect a lending market (important)
+### Transfer restrictions that affect a lending market (important) - now verified on mainnet source
 
-Source for the logic: the **testnet** implementation `Stock` (`0xBd14156E05c6AF28ad39aA53a2AB8eB9CDf657DA`, verified source on the testnet explorer, solc 0.8.33):
+Sources (all **verified-api**, fetched 2026-10-02 from Sourcify v2, `exact_match` for both creation and runtime bytecode, solc 0.8.33, verified 2026-09-08):
+`https://sourcify.dev/server/v2/contract/4663/0xb35490d6f9163DE4F80d88dc75c3516eb64C5aE2?fields=all` (implementation `Stock`) and
+`https://sourcify.dev/server/v2/contract/4663/0xe10b6f6B275de231345c20D14Ab812db62151b00?fields=all` (`AccessControlsRegistry`).
+Browser links for the same contracts: <https://robinhoodchain.blockscout.com/address/0xb35490d6f9163DE4F80d88dc75c3516eb64C5aE2?tab=contract> and <https://robinhoodchain.blockscout.com/address/0xe10b6f6B275de231345c20D14Ab812db62151b00?tab=contract> (Blockscout itself returns 403 to automation).
 
-- `transfer`, `transferFrom`, `approve`, `permit`, `mint`, `burn` all revert if the token is **paused** (`IsPaused`) or if **any of `from`, `to`, `msg.sender`** is **blocked** in an external `AccessControlsRegistry`. -> *A blocked or paused state can make liquidation transfers revert, including transfers to/from the lending market contract or a liquidator.*
-- `paused()` = token flag OR registry-wide pause flag. One registry pause freezes all tokens.
-- `adminBurn(address from, uint256 amount)` guarded by `ADMIN_BURNER_ROLE` can burn from **any** address, with no balance/allowance condition -> *the issuer can burn collateral held by the lending market.*
-- Tokens are **beacon proxies** (EIP-1967 beacon slot). On mainnet the beacon slot of AAPL/NVDA points to `0xe10b6f6B275de231345c20D14Ab812db62151b00`, which is **also** the `ACCESS_CONTROLLED_REGISTRY()` (verified-onchain). It returns `implementation() = 0xb35490d6f9163DE4F80d88dc75c3516eb64C5aE2` (verified-onchain). So **one contract controls the implementation, the global pause and the blocklist for all 194 tokens**.
-- Mainnet live state (verified-onchain): registry `paused() == false`, `tokenPaused() == false` for AAPL/NVDA/TSLA/MSFT/SPY/QQQ/GOOGL; the registry does **not** block Morpho Blue `0x9D53d5E3bd5E8d4Cbfa6DB1ca238AEA02E651010` nor `0xdEaD`.
-- **Unverified:** the mainnet implementation source (Blockscout returns 403 to automation). The mainnet bytecode contains `mint`, `burn(address,uint256)`, `pause/unpause`, `hasRole`, `permit`, `uiMultiplier` family, `oraclePaused/pauseOracle/unpauseOracle`, `uid` selectors (verified-onchain selector scan), but I did not confirm that blocklist/pause gating in `transfer` is identical to the testnet code or that `adminBurn` exists on mainnet. **ACTION FOR YOU:** open `https://robinhoodchain.blockscout.com/address/0xb35490d6f9163DE4F80d88dc75c3516eb64C5aE2?tab=contract` and `.../0xe10b6f6B275de231345c20D14Ab812db62151b00?tab=contract`, paste the verified source (or at least the function list and the `_update`/`transfer` modifiers) so I can close this.
+`Stock` (mainnet implementation) behaves as the testnet code did:
+
+- `transfer`, `transferFrom`, `approve`, `permit`, `mint`, `burn` all revert with `IsPaused()` when `paused()` is true, and with `Blocked(account)` when **any of `from`, `to` or `msg.sender`** (and `spender` for approve/permit) is blocked. *A pause or a block can make liquidation transfers revert, including to/from the lending market and a liquidator.*
+- `paused()` = the token's own flag OR the registry-wide flag, so **one registry call (`pause()`, `PAUSER_ROLE`) freezes all 194 tokens**. `tokenPaused()` exposes only the token flag. `pause()/unpause()` on a token need `TOKEN_PAUSER_ROLE`.
+- `adminBurn(address from, uint256 amount)` (`ADMIN_BURNER_ROLE`) burns from **any** address with no pause, block, balance-vs-allowance or approval condition. *The issuer can burn the collateral held by the market.* `burn(from, amount)` (`BURNER_ROLE`) is subject to pause/block.
+- `updateMultiplier(...)` (`MULTIPLIER_UPDATER_ROLE`, reverts while paused), `pauseOracle()/unpauseOracle()` (`ORACLE_PAUSER_ROLE`), `setMetadata` (`METADATA_UPDATER_ROLE`).
+- `decimals()` is the OZ default 18 (no override in `Stock.sol`). `terms()` returns `https://robinhood.com/stocktoken/rhj`.
+- Transfers are ordinary otherwise: no allowlist, no transfer fee, no hook that calls the receiver.
+
+`AccessControlsRegistry` (`0xe10b6f6B275de231345c20D14Ab812db62151b00`) is **both** the EIP-1967 beacon (`implementation()`, `upgradeTo` by `BEACON_UPGRADER_ROLE`) and the access-control/blocklist/global-pause contract (`blockAccounts/unblockAccounts` by `BLOCKER_ROLE`, `pause/unpause` by `PAUSER_ROLE`, plain OpenZeppelin `AccessControl`). Its `implementation()` is `0xb35490d6f9163DE4F80d88dc75c3516eb64C5aE2`. Tokens are beacon proxies, so **one upgrade changes the logic of all tokens at once**; there is no timelock in the registry code.
+
+**Role holders (verified-onchain, from the registry's `RoleGranted/RoleRevoked` logs over the whole chain history, current state):** every privileged role is held by an **EOA**, not a multisig or timelock contract (checked with `eth_getCode`): `DEFAULT_ADMIN_ROLE` `0xd6f8378f8e440c65f8382f5f2728c78dfd55b66d`; `BEACON_UPGRADER_ROLE` `0xcd8c6182e7c6ca3b5156d6a90a67719d7e2be094`; `BLOCKER_ROLE` `0x913ca87347391218e5de2c17c5a0aeba8b0b28fd`; `ADMIN_BURNER_ROLE` `0x957b6de6525c63349f7619743ef1e0ad93cd74d4`; `PAUSER_ROLE` `0xe7bcb188254bc6ebbff63014dfed4cd4a024f22a`; `TOKEN_PAUSER_ROLE` `0xfccf56b674113d9c4eb0f9b3370930ced9e6ab23`; `ORACLE_PAUSER_ROLE` `0x7369d100c00f28e45d779ac9d4b1c7afa61e4abc`; `MULTIPLIER_UPDATER_ROLE` `0x92905e8d0e2301ba143215b8d86d63ffd4188143`; `MINTER_ROLE` `0x2b94105fff37630f98e1f24811dad588fc5c3a87`; `BURNER_ROLE` `0x6e40b50a40c1db42a85a0e8fe8ff7d9cbfc2d8c1`; `METADATA_UPDATER_ROLE` `0xcba16c2b9048af033c5b34e43dd1d47d1358524a`; `TOKEN_DEPLOYER_ROLE` `0x5516b3451d4d6c9f63353fe7bc9537477ecce000`; `FACTORY_UPGRADER_ROLE` `0x697e774d60c1a3769f2ed0b919aacf17be0ae553`. (An EOA could itself be a 7702-style delegate; not checked.) The default admin can grant any role to anyone.
+
+**Registry history (verified-onchain):** registry deployed ~2026-05-21 (`Upgraded` block 7,796 to the current implementation); `Blocked` was emitted 246 times between 2026-06-08 and 2026-06-29 (175 addresses are blocked now, 177 ever; 4 `Unblocked`); one global `Paused` on 2026-06-30 17:01Z for about one minute (launch-day), then `Unpaused`; `Upgraded` again 2026-07-01 00:38Z to the **same** implementation address; **no pause, upgrade or block events since launch** (through block 78.5M). So issuer controls exist, were exercised before and at launch, and have been quiet for three months. This does not bound the risk.
+
+Live state (verified-onchain 2026-10-02): registry `paused() == false`, `tokenPaused() == false` for AAPL/NVDA/TSLA/MSFT/SPY/QQQ/GOOGL; the registry does **not** block Morpho Blue `0x9D53d5E3bd5E8d4Cbfa6DB1ca238AEA02E651010`, the Uniswap v3 factory-created pools were not checked for blocking, `0xdEaD` is not blocked.
+
+**What the market needs from this (feeds D2 and MARKET_DESIGN):** pause state (`paused()` is exposed: cheap, exact probe), blocklist (`isBlocked` lives on the *registry*, not the token; probe by `registry.isBlocked(market)` where `registry = token.ACCESS_CONTROLLED_REGISTRY()`, or by a try/catch 1-wei transfer), `adminBurn` (not detectable ahead of time; only observable as a balance drop, so the market must account collateral internally and tolerate `balanceOf(market) < sum(collateral)`), transfer hooks (none beyond pause/block), upgrade authority (one EOA-held beacon upgrader for all tokens), decimals (18).
 
 ## c. Oracles
 
@@ -171,6 +186,28 @@ Aave and Morpho are **complementary** reference points; none of the below is Sun
 
 Both venues manage weekend risk with **static** parameters (a conservative LTV/LLTV and a fixed bonus cap). Sundown's proposed contribution is *dynamic, calendar-aware* risk (stress-based borrow capacity tightening before a blind window, a post-gap settling window), implemented as an isolated market with a pluggable guard so it can be A/B tested against a static guard. It should be presented as complementary: a risk layer and a measurement tool, not as "safer than Aave" until the replay evidence exists.
 
+## g. Exit liquidity (decision D5, M3 step 3a)
+
+**Method (verified-onchain, `research/exit_liquidity.py`, results in `research/results/exit_liquidity.json`, RPC head block 78,536,996 = Fri 2026-10-02 21:01Z = 17:01 ET, i.e. just after the regular close).** Pools are discovered on-chain with the Uniswap v3 factory `0x1f7d7550b1b028f7571e69a784071f0205fd2efa` (`getPool(stock, USDG, fee)` for fee tiers 100/500/3000/10000; no third-party index). For each pool: `slot0`, `liquidity`, `tickSpacing`, `fee`, `tickBitmap` and `ticks(liquidityNet)` within +/-3 bitmap words. The simulator sells the stock for USDG through the exact v3 swap (tick crossing, fee on input); it is unit-tested (`research/tests/test_exit_liquidity.py`: closed form, numerical integration across tick boundaries in both directions, monotonicity, fee and oracle-basis effects) and the tests caught two bugs in my first version (an exhausted-range error and floating-point cancellation), fixed before these numbers. **Slippage is measured against the Chainlink oracle price** (what the lender marks collateral at), so fee + price impact + pool-to-oracle basis are all included. Depth that cannot absorb the size inside the scanned window is treated as zero (conservative).
+
+**Maximum position notional (USD, at the oracle price) that can be sold with slippage <= s, summed over v3 pools** (each pool at its own slippage, so the aggregate average slippage is <= s):
+
+| Asset | v3 pools (live) | s <= 1 % | s <= 3 % | s <= 5 % | Share of the 3 % figure from the deepest pool | Oracle age at read |
+|---|---|---|---|---|---|---|
+| TSLA | 3 of 4 tiers | $50.6k | $189.9k | $304.0k | 95 % (`0xf4ac...e3`, fee 0.3 %) | 1.1 h |
+| NVDA | 4 of 4 | $262.4k | $1.119M | $1.861M | 99 % (`0xd4eb...a3`, fee 0.05 %) | 3.9 h |
+| AAPL | 3 of 4 | $85.8k | $196.6k | $220.0k | 78 % (`0xaae0...d6d`, fee 0.05 %) | 4.4 h |
+| SPY | 2 of 4 | $143.6k | $249.9k | $250.5k | 94 % (`0xa7bb...167`, fee 0.05 %) | 8.5 h |
+
+Per-pool numbers, ticks scanned, ladder slippage at $10k-$1M and the pool addresses are in the JSON. Observations:
+
+- **Depth is thin and concentrated in one pool per asset.** Even NVDA, the deepest, absorbs about $1.1M at 3 %; TSLA, AAPL and SPY about $0.2M each. A full liquidation of a collateral pool larger than that exceeds what v3 can absorb at an acceptable price.
+- **Basis matters:** an NVDA fee-0.01 % pool (`0xb75d...333`) sits **11.8 % below** the oracle and contributes nothing at <= 5 %; AAPL pools sit 0.1-0.6 % below the oracle; the oracle ages were 1-8.5 h (heartbeat/deviation behavior, see section c), and after hours both sides move.
+- **Not covered, stated plainly:** Uniswap v4 pools (DexScreener lists many; they only add depth, so these are lower bounds for those venues), RFQ/aggregator routing, other DEXes, liquidity outside the scanned ticks, and the fact that liquidity changes minute to minute. Weekend/holiday depth is likely worse (market makers quote off a frozen oracle) and is unmeasured.
+- **Comparison with the secondary snapshot** (`research/results/pool_depth_snapshot.json`, DexScreener TVL: TSLA $1.59M over 11 pools, NVDA $4.82M over 21, AAPL $1.71M over 15, SPY $7.68M over 17): TVL counts non-USDG quote pairs and v4 pools and overstates *USDG exit depth*; the exact v3 USDG figures above are the ones to use for caps.
+
+**Derived per-market collateral-cap rule (proposal, for approval in MARKET_DESIGN):** `collateralCapUsd = alpha * maxNotional(3 %)`, with `alpha = 0.5` initially. Rationale: a liquidator's margin is `(1 + bonus) * (1 - s) - 1`; at the 5.5 % Aave-style bonus, `s = 3 %` leaves ~2.4 % margin, and `alpha = 0.5` leaves headroom for a partial liquidation of the whole book plus other sellers. With today's numbers this gives caps of about TSLA $95k, NVDA $560k, AAPL $98k, SPY $125k, **about $0.9M of collateral across the four candidate markets**. This is the honest size of the opportunity on current on-chain liquidity and it should be shown to users; Morpho's AAPL/USDG market already has ~$197k supplied (section f).
+
 ---
 
 ## Findings that change or constrain the plan (summary)
@@ -180,13 +217,14 @@ Both venues manage weekend risk with **static** parameters (a conservative LTV/L
 3. **Stock tokens carry issuer controls** (global pause, per-address blocklist, `adminBurn`, beacon-upgradeable). These are first-class threat-model items and need `Sim*` hooks in tests.
 4. **Only 32 of 194 tokens have a Chainlink feed**; scope the market to feed-backed tokens (start with 4-6 liquid names).
 5. **No sequencer uptime feed on Robinhood Chain** -> optional/configurable.
-6. **Testnet cannot validate the production oracle path**; fork tests against mainnet are the only real-feed evidence. Chain-level RPC is non-archive so fork tests need an archive provider (Alchemy) for historical blocks.
+6. **Testnet cannot validate the production oracle path**; fork tests against mainnet are the only real-feed evidence. The public RPC is non-archive: fork tests run at the latest block, unpinned, and are optional/skipped without RPC env (decision D4); an archive key is used only if present.
 7. **USDG has 6 decimals** vs 18 (token) vs 8 (feed): decimals normalization is a core correctness surface.
-8. Public RPC / Blockscout automation limits mean some evidence requires you to paste data (see actions above).
+8. **Mainnet token source is now verified** (Sourcify): the issuer controls (global pause, blocklist, `adminBurn`, beacon upgrade) exist on mainnet exactly as on testnet and every privileged role is held by an EOA.
+9. **Exit liquidity is the binding constraint on market size** (about $0.9M of collateral across TSLA/NVDA/AAPL/SPY at a 3 % exit): section g.
 
 ## Open actions for the user
 
-1. Paste the verified source (or function list + transfer modifiers) for mainnet implementation `0xb35490d6f9163DE4F80d88dc75c3516eb64C5aE2` and registry/beacon `0xe10b6f6B275de231345c20D14Ab812db62151b00` from Blockscout (403 for automation).
-2. Start Docker Desktop + enable WSL integration if you want the nitro-devnode check; otherwise Stylus remains unverified on-chain.
-3. If you can: Aave governance/LlamaRisk primary document for the Base Equities Hub parameters.
-4. An archive RPC key (Alchemy) for fork tests (later milestones).
+1. ~~Paste the mainnet token source~~ - resolved via Sourcify (section b).
+2. Start Docker Desktop + enable WSL integration only if you want the Stylus devnode check (deferred; blocks nothing).
+3. If you can: Aave governance/LlamaRisk primary document for the Base Equities Hub parameters (still secondary-source).
+4. ~~Archive RPC key~~ - not required (D4).

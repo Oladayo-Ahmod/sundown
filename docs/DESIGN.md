@@ -6,7 +6,9 @@ Status: **proposal, not implemented**. Every claim about the outside world is ta
 
 Tokenized-stock collateral is priced by a 24/5 oracle that **goes blind over weekends and holidays** and reopens with a gap. Static LTV/LLTV (Aave, Morpho) prices that risk once, forever. Sundown makes the risk **session-aware**: borrow capacity tightens before a blind window, and liquidation after the gap is shaped around the thin, noisy reopen. The design is an isolated market with a pluggable `IRiskGuard`, so a **control market (FlatGuard)** and a **treatment market (SundownGuard)** differ *only* by the guard and can be replayed against the same price path.
 
-Non-goals: a general lending protocol, a price oracle, a DEX, upgradeability of core accounting, governance tokens.
+**Evidence-first framing (D6, after the M2/M2.1 research in `research/CLAIMS.md`).** The measured benefit of the stress rule is *capacity expansion at counterfactual high LLTV*, not protection at conventional LLTV: at real flat LLTVs (<= 86 %) window-gap bad debt is negligible (0 at <= 65 %, 4.5 bps/yr at 86 %) and the rule is not distinguishable from zero. At counterfactual 93 % it buys about +2.6 pp of LTV at equal bad debt (CI [0.9, 4.1], mostly TSLA/NVDA). Sundown does not claim to be safer than Aave/Morpho, and every claim in the product and the UI must trace to a row of `CLAIMS.md`.
+
+Non-goals: a general lending protocol, a price oracle, a DEX, upgradeability of core accounting, governance tokens, a premium-funded gap reserve (claim 13: not supported).
 
 ## 2. Architecture and trust boundaries
 
@@ -64,21 +66,21 @@ Session mapping, side by side (ET; our enum | Chainlink Data Streams `marketStat
 
 `marketStatus` is **only in Data Streams reports, not in the push AggregatorV3 feed** [D], so on-chain session knowledge comes from this calendar. Halts are not in `marketStatus` [D].
 
-**CHANGE (`WindowClass`)**: the brief's `{Overnight, Weekend, LongWeekend}` assumed weeknight overnight is blind. For the 24/5 feed it is **not** blind (it is a thin session, the feed can update) [V by documentation + measured updates during 20:00-04:00 ET]. Proposed classes by **blind duration**: `Short` (< 36 h, single-day mid-week holiday), `Weekend` (~48 h), `Long` (>= 72 h, holiday weekends). A separate non-blind "thin overnight" risk can be handled by the guard via a session haircut, not via blind windows. Needs your approval.
+**`WindowClass` (accepted, D1)**: the original `{Overnight, Weekend, LongWeekend}` assumed weeknight overnight is blind. For the 24/5 feed it is **not** (thin session, the feed can update). For consecutive trading days D1 < D2 the blind window is `[20:00 ET on D1, 20:00 ET on (D2 - 1 calendar day))`; consecutive weekdays give a zero-length window (no blindness). Class is by closed calendar days `n = D2 - D1 - 1`, **not by hours** (DST makes weekends 47 h or 49 h): `n=1` Short (mid-week holiday), `n=2` Weekend, `n>=3` Long (holiday weekends, Good Friday). A non-blind "thin overnight" risk is handled by the guard via a session haircut, not via blind windows. Verified only on post-launch history (see 8, D1 caveat).
 
-**Blind-window start is a schedule bound, not the last price time** [V]: updates are deviation-triggered (0.5 %) with 24 h heartbeat; the last pre-closure update was hours before 20:00 ET (AAPL Fri 15:51 ET; NVDA 13:46 ET). `blindWindow(ts)` returns the *scheduled* interval; consumers anchor risk on the oracle's actual `updatedAt`. `windowId(ts)`: monotone id = a counter of closed-runs since a fixed epoch, computed in O(1) from the trading-day index.
+**Blind-window start is a schedule bound, not the last price time** [V]: updates are deviation-triggered (0.5 %) with 24 h heartbeat; the last pre-closure update was hours before 20:00 ET (AAPL Fri 15:51 ET; NVDA 13:46 ET). `blindWindowAt(ts)` / `nextBlindWindow(ts)` return the *scheduled* interval; consumers anchor risk on the oracle's actual `updatedAt`. `windowId(ts)`: monotone id = a counter of closed-runs since a fixed epoch, computed in O(1) from the trading-day index.
 
-Open point [U]: early-close days (13:00) - does the 24/5 feed pause earlier, and when does the post-market/overnight resume? Test hypothesis in M1 fixtures, document as unverified if the feed history lacks an example before M1 ends (first candidates: 2026-11-27, 2026-12-24).
+Early-close days (13:00): **assumed to NOT move blind-window boundaries** (extended sessions still run to 20:00 ET). **UNVERIFIED**; implemented as a single config constant so it can be flipped (accepted, D1). First real tests: 2026-11-27, 2026-12-24. The API is `blindWindowAt` / `nextBlindWindow` / `windowId` / `isBlind` / `secondsUntilBlind`; `sessionAt` is display-only and must never feed risk logic.
 
 ### 3.2 GapRiskModel
 
 Observations are **gap returns** r = ln(P_open / P_lastBeforeWindow) in bps, per `WindowClass`.
 
-- State: per asset and class, a ring buffer of the last N=64 observations packed as `int16` bps (4 storage slots) plus EWMA of squared returns.
-- Gap-VaR at confidence c (e.g. 99 %) = `max(floor_class, blend)` with `blend = a * z_c * sigma_ewma + (1 - a) * q_empirical`, `a` ramps with the observation count (`n/(n+k)` on the empirical part) so a cold start uses a governance-seeded prior (calibrated offline in `research/`, not claimed as measured).
-- Cost: quantile over <= 64 values computed **once per record**, cached; reads are O(1). Insertion bounded (64), no unbounded loops.
-- Recording is permissionless and two-phase with replay protection per `windowId`: (1) `snapshotPre(windowId)` callable only inside the blind window, captures the oracle's frozen last price; (2) `recordGap(windowId)` callable after the window ends, once the oracle has produced a post-window update (`updatedAt >= windowEnd`, bounded delay), computes r. Exactly one write per `(asset, windowId)`; missing observations are skipped, never fabricated.
-- Data: only 2026-07-01 onward exists on this chain, so cold-start priors come from `research/` (equity history) and are labelled as offline analysis.
+- **Estimator (binding, D7; supersedes the earlier ring-buffer/quantile blend)**: pooled-scaled EWMA, lambda 0.9. One `(num, den)` pair per asset: `num' = lambda*num + (loss/k_c)^2`, `den' = lambda*den + 1`, `sigma2 = num/den`; `gapVaR_c = multiplier_c * z_q * k_c * sqrt(sigma2)`, rounded up, class multipliers floored at 1, `K_MIN = 8` observations before the data-driven estimate replaces the seed. Class scales `k = {Short 0.76, Weekend 1, Long 0.92}`; **Short uses Weekend parameters** (41 windows per asset is too few). Quantile **q = 99.5 %** (the 99 % VaR realised ~98 % coverage out of sample; claim 5), **oracle buffer 50 bps**, safety buffer 100 bps. State is O(1) per asset: no ring buffer, no sorting. The integer/WAD reference is in `research/estimators.py`; seeds and bounds are in `deployments/risk_params.json` (a research artifact, not governance-approved).
+- Stress rule: `maxBorrowLTV = min(LLTV, 1 - gapVaR_q - oracleBuffer - safetyBuffer)`, lookahead 24 h before a window.
+- Honest limits (claims 5, 6): the estimator under-covers mega-caps (AAPL/GOOGL exceedance ~2.8-3.0 %) and over-covers high-vol names; no estimator forecasts regime breaks (Mar-2020: 24 % exceedance). Do not describe the VaR as calibrated at 99 %.
+- Recording is permissionless and two-phase with replay protection per `windowId`: (1) `snapshotPre(windowId)` callable only inside the blind window, captures the oracle's frozen last price; (2) `recordGap(windowId)` callable after the window ends, once the oracle has produced a post-window update (`updatedAt >= windowEnd`, bounded delay), computes r. Exactly one write per `(asset, windowId)`. **Lag-capped recording (D7/N2)**: the post-window observation is the first update with `updatedAt >= windowEnd`; its **lag is stored**; an observation whose lag exceeds the cap (12 h, covering ~99 % in simulation) is **skipped, never imputed**. M1 measured a lag of 18-85 s in all 84 (window, feed) pairs, so censoring was not observed, but recording must still store the lag. Because early-close behavior is unverified (D10), recording must tolerate either window boundary.
+- Data: the on-chain feed history starts 2026-06-22, so cold-start priors come from `research/` (2010-2026 equity history, daily proxy) and are labelled as offline analysis.
 
 ### 3.3 Oracle layer
 
@@ -86,7 +88,11 @@ Observations are **gap returns** r = ln(P_open / P_lastBeforeWindow) in bps, per
 - `ChainlinkEquityOracle` (production path; claim "integrated" only after a mainnet fork test): reads `latestRoundData()`; requires `answer > 0`, `updatedAt != 0`, `updatedAt <= block.timestamp`, per-asset absolute min/max bounds (guards the zero/atypical thin-session prints [D]); normalizes `decimals()` (never hardcoded; 8 on all observed feeds [V]); handles loan-token decimals (USDG 6 dp [V]); reads token `oraclePaused()` and `uiMultiplier()/newUIMultiplier()/effectiveAt()` to flag corporate actions [V on mainnet AAPL/NVDA/TSLA/SPY]; optional sequencer feed with grace period.
 - **CHANGE (freshness)**: heartbeat staleness cannot detect closure [V]: 24 h heartbeat and quiet liquid names show 1-4 h ages in open sessions (SPY 4.4 h during regular hours). `Stale` is therefore defined as `age > maxAge` with `maxAge = heartbeat + grace` **only when the calendar says Live**; inside a scheduled blind window the status is `ScheduledBlind` regardless of age. Between them the guard applies an **age haircut** (monotone in age) rather than a binary cut-off. Parameters per asset, set by timelock.
 - **CHANGE (sequencer)**: Chainlink lists no uptime feed for Robinhood Chain [D]; the sequencer feed is an **optional** constructor argument (Arbitrum One has one [V]). Robinhood Chain deployments run without it, compensated by a conservative grace window after any detected L2 block-time discontinuity [U design].
-- Loan-token price: **assumption** USDG = $1 by construction in v1 (no USDG/USD feed verified [U]); documented, with a depeg circuit via guardian-pause.
+- Loan-token price: USDG is **exactly 1 USD by explicit, documented assumption** (accepted, D3). No loan-token oracle is built; the guardian can halt on a depeg. Documented in the threat model and README.
+- **Freshness (binding note N1)**: outside blind windows age alone cannot signal trouble (24 h heartbeat). The adapter treats the 0.5 % deviation as an irreducible price-error allowance, adds an age-based haircut, and distinguishes *scheduled* blindness (calendar) from *unscheduled* blindness (outage).
+- **Sequencer (N3)**: optional config; downtime is modeled as unscheduled blindness. Arbitrum One keeps the Chainlink sequencer feed.
+- **Eligible collateral (N4)**: only the 32 tokens with a Chainlink feed.
+- **Censored observations (N2)**: the first update after a window may be late if the price moved less than the 0.5 % threshold. `recordPostWindow` (M4 design) must handle this and record the lag; M2 must quantify the effect.
 - `SimEquityFeed` (test fixture, `contracts/test/mocks`): AggregatorV3-shaped, replays deviation-triggered updates and blind windows per the measured behavior. Named `Sim*`, never used in deployment config for Robinhood mainnet.
 
 ### 3.4 SundownMarket (isolated, one collateral, one loan token)
@@ -95,8 +101,13 @@ Observations are **gap returns** r = ln(P_open / P_lastBeforeWindow) in bps, per
 - Borrow side: per-account `collateral`, `borrowShares`; global `totalBorrowAssets`; kinked rate model (base, slope1, kink, slope2) accruing by `block.timestamp` delta; interest rounds up for borrowers, down for suppliers.
 - Liquidation: partial, bounded close factor; seized collateral = `repaid * (1 + bonus) / price`, rounding in the protocol's favor; liquidator must be able to receive collateral (see transfer-restriction handling).
 - **Bad debt**: when `collateral == 0 && debt > 0` after liquidation, anyone can call `realizeBadDebt(account)`: debt removed from `totalBorrowAssets` and from `totalSupplyAssets`, event emitted (explicit socialization to suppliers; no silent rounding).
-- Caps: supply cap, borrow cap, collateral cap (mirrors Aave's capped rollout; LlamaRisk used caps of $32M/$21M [S]).
-- **Issuer-control handling [V testnet, U mainnet]**: before pulling/pushing collateral the market uses `try/catch` around transfers; on revert in liquidation it surfaces a specific error; a market-level `collateralFrozen` flag (set by guardian or auto when `paused()`) halts new borrows and pauses interest accrual on affected debt only if a governance-approved policy is set (open decision, see 8).
+- Caps: supply cap, borrow cap and a **per-market collateral cap derived from measured exit liquidity** (D9; table in `DISCOVERY.md`; mirrors Aave's capped rollout, LlamaRisk $32M/$21M [S]).
+- **Loss-absorbing reserve: extension point only** (D8; claim 13/13b: a premium-funded reserve cannot self-start; it would need external seeding of >= ~2 % of debt at 86 %, >= ~7 % at 93 %). Not built.
+- **Issuer-control failure policy (accepted, D2) [V testnet, U mainnet]**: HALT + FREEZE ACCRUAL.
+  - Detection is permissionless and testable: `reportIssuerFailure()` probes the collateral token (pause state if exposed, otherwise a guarded 1-wei transfer probe in try/catch) and the loan token; the guardian can also halt.
+  - While halted: no new borrows, no collateral withdrawals, no new supply; interest accrual is frozen (borrowers are not charged for something they cannot fix); repay and loan-token withdrawals stay open if the token permits; liquidation is disabled only while the token actually reverts.
+  - Resumption is explicit and evented. A maximum freeze duration applies, after which the timelock must act; what lenders can and cannot recover is documented.
+  - `adminBurn` and blocklisting are **not mitigable on-chain**: residual risk in `THREAT_MODEL.md`, disclosed in the UI, bounded only by per-market collateral caps.
 
 ### 3.5 IRiskGuard and the control/treatment pair
 
@@ -108,7 +119,7 @@ interface IRiskGuard {
 }
 ```
 
-Hooks are `view` where possible; permissionless recording lives on the guard/risk model, not in the market. The guard may restrict but never relax the market's hard solvency checks.
+*(Interface superseded by `docs/MARKET_DESIGN.md`, which takes account-level context so a standard/boosted tier can live in the guard.)* **Enforcement finding (D8, claims 11-12):** a cap on new borrows/withdrawals alone has *no effect* on bad debt, a priced gap premium is rejected, and the only effective candidate is **hard pre-window deleveraging of existing debt with a cure window**, offered as an **opt-in boosted tier**; at >= 93 % it is heavy in event frequency (about 19 forced events per 100 borrowers per year uniform, 80 clustered). Final decision in M4a after M2.2. Hooks are `view` where possible; permissionless recording lives on the guard/risk model, not in the market. The guard may restrict but never relax the market's hard solvency checks.
 
 - **FlatGuard (control)**: static LTV/LLT, fixed bonus, fixed close factor - an Aave-style parameterization. Revert in blind/stale states mirrors what a standard market does with its oracle (still liquidates on frozen price) - kept *identical* to the control semantics so the comparison is honest.
 - **SundownGuard (treatment)**:
@@ -211,15 +222,89 @@ Risk model
 
 Default **NO-GO**. GO only if **all** hold: (1) `cargo stylus check`/deploy is verified on a devnode or private RPC on the target chain (currently **unverified**: both public RPCs reject the check); (2) a Solidity reference implementation exists and the Stylus version is **bit-identical** under differential fuzz; (3) a *measured* benefit that matters (e.g. the 64-element quantile record function exceeds a practical gas budget or is >= 5x cheaper) rather than novelty; (4) no new trust assumption, no extra admin power; (5) the time to integrate is <= 3 h with M3-M9 unaffected. If any fails, ship Solidity and document the Stylus experiment as research.
 
-## 8. Decisions I need from you before M1
+## 8. Accepted decisions
 
-1. Approve the **trading-day blind-window rule** and the **`WindowClass` rename** (Short/Weekend/Long) in 3.1.
-2. For issuer-control failure (pause/blocklist), prefer: (a) halt the market and freeze accrual for affected debt, or (b) keep accruing and accept liquidation reverts. I recommend (a) with guardian control.
-3. USDG treated as $1 in v1, or do you know of a USDG/USD feed? (unverified)
-4. Fork-test RPC: Alchemy archive key for Robinhood mainnet available?
-5. Docker Desktop on for Stylus devnode check, or accept Stylus as research-only.
-6. Initial feed-backed collateral set to support in the demo (suggest AAPL, NVDA, TSLA, SPY, QQQ, MSFT; all have feeds [V]).
+Accepted by the owner after the M0 handoff.
+
+**D1 - Blind-window rule and classes: APPROVED.**
+- A trading day D opens at 20:00 ET on the calendar day before D and closes at 20:00 ET on D. Weekends and NYSE holidays are closed trading days.
+- For consecutive trading days D1 < D2 the blind window is `[20:00 ET on D1, 20:00 ET on (D2 - 1 calendar day))`. Consecutive weekdays give a zero-length window.
+- Class by closed calendar days `n = D2 - D1 - 1`: n=1 Short, n=2 Weekend, n>=3 Long. By calendar-day count, **not hours** (weekends are 47 h / 49 h across DST).
+- Caveat: verified only on post-launch history (Robinhood mainnet launched 2026-07-01: two holidays plus ~13 weekends). M1 adds an empirical feed-consistency test.
+- Early-close days: assume **no** change to window boundaries. **UNVERIFIED**; one-line config constant.
+
+**D2 - Issuer-control failure: HALT + FREEZE ACCRUAL**, with the refinements in 3.4.
+
+**D3 - USDG = exactly 1 USD** (explicit assumption, no loan-token feed; guardian halt on depeg; documented in threat model and README).
+
+**D4 - No archive RPC required.** Fork tests run against public RPCs at the latest block (unpinned) and are optional/skipped when no RPC env is set. Historical evidence comes from `Sim*` replays and research data. An archive key in `.env` is used opportunistically.
+
+**D5 - Collateral set.** Research universe: AAPL, NVDA, TSLA, SPY, QQQ, MSFT plus ~6 more large caps. Deployed markets: a subset of 4 (target TSLA, NVDA, AAPL, SPY) that **must** be among the 32 feed-backed tokens and have meaningful on-chain liquidity; exit-liquidity depth is to be recorded in `DISCOVERY.md` (not yet done).
+
+**Deferred.** Stylus (M8) stays optional and blocks nothing; no Docker/devnode work now.
+
+**Still open (owner).** Mainnet token source for `0xb35490d6f9163DE4F80d88dc75c3516eb64C5aE2` and `0xe10b6f6B275de231345c20D14Ab812db62151b00` to be pasted; not blocking M1/M2, **needed before M3**.
+
+**D6 - Framing: evidence-first, rigorous, replayable.** Capacity-expansion claims apply only to counterfactual 90-95 % LLTV (about +2.6 pp at 93 %, CI [0.9, 4.1], mostly TSLA/NVDA). At real LLTVs <= 86 % the gap rule is not distinguishable from zero, and we say so. D1's verification coverage is stated exactly as `CALENDAR_NOTES.md` section 11: **12 weekends + 2 Long holiday windows; no EST, no Short, no early-close observations.**
+
+**D7 - Binding research findings.** q = 99.5 % (or a wider buffer); 50 bps oracle buffer; lag-capped observation recording (store the lag, skip over the cap, never impute); calendar-aware freshness. M1 measured a first-update lag of 18-85 s after window end, so N2 censoring was not observed, but recording must still store the lag.
+
+**D8 - Enforcement.** A cap on new borrows alone is useless; a priced premium is rejected; the only candidate is hard pre-window deleveraging with a cure window, as an opt-in boosted tier. Final decision in M4a after the M2.2 results (not started).
+
+**D9 - Liquidation design and exit liquidity are first-class.** Per-market collateral caps derived from pool depth; Dutch-ramp bonus and depth-sized partial liquidations are being evaluated in M2.2.
+
+**D10 - Early-close days.** Until observed, the guard treats window boundaries conservatively (capacity tightening may start earlier than 20:00 ET on early-close days; observation recording tolerates either behavior). Flag for M4a; no change to the calendar library.
+
+**D11 - Hot paths.** Cache window bounds and `windowId` at guard level (keyed by `windowId`); do not call `secondsUntilBlind` or `nextBlindWindow` per user action.
+
+**D12 - Market design approvals (MARKET_DESIGN section 17).** A1 yes: `openzeppelin-contracts-upgradeable` v5.7.0, clone-safe ERC-4626 only. A2 yes: market and vault are one contract. A3 yes: factory creation is owner-only. A4 yes, with the **guard address immutable per market** (trust is fixed at creation); the guard is bounded by the market's bonus cap, close factor and non-worsening rule. A6 yes: immutable collateral cap in token units. A7, A8, A10, A12: recommended defaults (market passes `haircutWad` and uses the raw price for seizure; shared `WindowCache`; no fee/reserve; `minDebt` and `closeFactor` 50 % / `criticalHealth` 0.95).
+
+**D13 - Collateral shortfall: option B plus halt (A5).** No `collateralScale` index (complexity and bug risk; no issuer action observed since launch). The issuer-failure probe also detects shortfall (`collateral.balanceOf(market)` below the ledger total) and puts the market into a Halted state that lasts until resolved: no new borrows, withdrawals or supply; liquidations simply revert if the token reverts; repay stays open. Phantom collateral after an `adminBurn` is a documented residual risk (THREAT_MODEL.md, UI). **No resolution mechanism in v1.**
+
+**D14 - Freeze limit (A9).** 30 days: accrual is frozen for the first 30 days of a halt; after that **accrual resumes by itself while the halt persists** until the guardian (probes passing) or governance (timelock) resumes. **No `windDown()` in v1**; the gap is documented (a permanently reverting token leaves collateral-backed loans unrecoverable).
+
+**D15 - Scope cuts and deployment (A11).** No Dutch-ramp bonus, no depth-sized partial liquidation, no empirical-quantile estimator, no Stylus. Liquidation bonus is **flat and configurable within [3 %, 5.5 %], default 4 %**; nothing below 3 % ships without live keeper evidence. Deploy all four markets (SPY, NVDA, AAPL, TSLA) at **demonstration scale on Arbitrum Sepolia with `SimEquityFeed`** (labeled simulation). The exit-liquidity table is published as the **recommended production caps**; no production-scale liquidity claim except NVDA. Any Robinhood Chain use is a read-only validation of the Chainlink adapter against live feeds.
+
+**D16 - Boosted tier.** Configured in the guard per market, for SPY (90 % and 93 %) and AAPL (90 %) only; TSLA and NVDA standard tier only. M4a details it.
+
+**D17 - Execution budget for 3b.** 3b-1 core <= 6 h, 3b-2 oracle <= 3 h (fork test optional, skipped if it costs > 30 min), 3b-3 hardening <= 4 h. Proceed between steps without waiting only if all validations pass and nothing deviates from `MARKET_DESIGN.md`; stop on any deviation, failed validation or direction-changing discovery; report after every step. 3b-3 invariant priority: collateral conservation, vault accounting identity, debts <= totalBorrow, no borrow above guard capacity, liquidation never worsens a position, share price never falls except via `BadDebtRealized`, repay never blockable, halt semantics; any others cut are named in the report.
+
+**D18 - No onchain observation pipeline or EWMA in v1.** GapVaR is a per-asset, per-window-class (Short/Weekend/Long) WAD parameter taken from `deployments/risk_params.json` at q = 99.5 %, settable only through the timelock within hard bounds. The EWMA estimator is documented as roadmap; the integer reference stays offchain and tested.
+
+**D19 - `SundownGuard`.** Replaces `FlatGuard`'s role for boosted markets (`FlatGuard` stays as the control). Per-market parameters: `standardLLTV`, `boostedLLTV` (0 = no boosted tier), `gapVaR[3]`, `oracleBuffer` (50 bps), `safetyBuffer`, flat liquidation bonus in [3 %, 5.5 %] (default 4 %), `deleverageFee` (1 %, <= bonus cap), `preWindowHorizon` (default 6 h), `cureWindow` (default 3 h); all with onchain bounds and timelock-delayed changes. Hot paths read window bounds and `windowId` through `WindowCache` (D11); no per-action calendar scans.
+
+**D20 - Boosted tier entry.** Per-account opt-in via `enterBoosted()`; not allowed during the pre-window horizon or a blind window; exit allowed anytime if the position fits the standard tier. Eligible markets: SPY (90 % and 93 % variants) and AAPL (90 %). TSLA and NVDA markets have `boostedLLTV = 0`.
+
+**D21 - Stress rule and deleveraging.** From `preWindowHorizon` before a blind window the effective borrow cap for boosted accounts is `min(tierLLTV, 1 - gapVaR[class] - oracleBuffer - safetyBuffer)`; new borrows and HF-lowering withdrawals above it revert with a custom error carrying the numbers. Accounts above the stress cap at horizon start are flagged (event). Cure window: flagged borrowers may repay or add collateral. After the cure window ends and before the window starts, anyone may call `deleverage(account)`: it sells only enough collateral to reach the stress cap minus a small margin, charges `deleverageFee` (reduced fee), obeys the market's non-worsening rule and bonus cap, emits an event with the numbers, and is impossible while the market is Halted or the oracle is unscheduled-blind. Standard-tier accounts are never deleveraged.
+
+**D22 - Liquidation otherwise unchanged.** Market rules with the flat bonus; no Dutch ramp, no depth-sized partial liquidation (M2.2 showed no lender benefit).
+
+**D23 - Unscheduled blindness (adapter flag).** Block new borrows and HF-lowering withdrawals for boosted and standard accounts; deleveraging disabled; repay stays open.
+
+**D24 - Governance.** Parameter changes via timelock within bounds. The guardian can only tighten (disable boosted entry, block new borrows) and never loosen or move funds. Every power is tested.
+
+**D10 (restated).** On early-close days capacity tightening may start earlier than 20:00 ET; implemented as a single conservative config and documented as unverified.
+
+**D25 - Replay harness (`sim/`).** Deploy a control market (`FlatGuard` at the boosted LLTV) and a Sundown boosted market from the same implementation with `SimEquityFeed` (simulation), seed the same synthetic borrower population, replay the worst K real AAPL and SPY events from `sim/replay_events.json`, and print lender loss, liquidations, deleverage events and borrower capacity; compare against the Python reference/credit simulation for matching scenarios and report the tolerance honestly. Anvil first; Sepolia broadcast only on the owner's instruction.
+
+**Review rules for M4a/M4b.** M4a may flow into M4b without waiting only after (1) the design is committed, (2) an adversarial self-review is posted with the design summary, and (3) nothing deviates from D18-D25. Stop on a deviation, failed validation or direction-changing discovery. M4b budget <= 5 h; cut list in order: replay polish, extra fuzz, then deleveraging (if cut, report immediately: with no enforcement the product is a measurement tool). No public-network deployment.
+
+**D26 - Calibration: through-the-cycle static `gapVaR` (GUARD_DESIGN section 11, option 2).** Per asset and window class (Short/Weekend/Long), the full-sample empirical q99.5 downside gap, read-only from `research/results/class_stats.csv` (column `loss_q99.5_bps`; method: `np.quantile(x, 1 - q, method="lower")` of the log gap `ln(open_D2 / close_D1)` in bps, loss = -gap; sample 2010-01-04 to 2026-10-01, includes March 2020; split-adjusted daily proxy, a conservative superset of blind exposure). Never invented; if absent, stop. Product framing everywhere: **"session-aware LLTV: boosted weekday capacity, tighter weekend capacity"**, not loss prevention. Report per asset and tier the resulting stress cap and whether it binds. Deploy only boosted variants where the cap binds; a non-binding 90 % variant is not deployed as boosted (labeled unenforced if kept). TSLA and NVDA stay standard-tier only.
+
+**D27 - Option 3 deferred.** No guardian power to raise `gapVaR` in v1: tightening a parameter can trigger forced sales of boosted users (griefing / compromised-key risk). Roadmap: a guardian tightening that takes effect only at the next window boundary, with a snapshot taken at the horizon start (`THREAT_MODEL.md`).
+
+**D28 - Deleverage realization approved as built.** Deleverage = guard-authorized `market.liquidate` plus a `quoteDeleverage` view; no wrapper. The critical-health limitation for standard accounts in a boosted market (the 100 % close-factor trigger uses the market `lltv`) is accepted and documented.
+
+**D29 - Deleverage fee and keeper economics (A16).** The replay computes the keeper break-even per market: the fee required to cover exit slippage at the demonstration position size (from the depth table) plus gas. Default fee = `max(2 %, break-even)` bounded by the bonus cap. If no fee within the bonus cap is profitable at a position size, state the position-size / collateral cap that makes it viable, or state that enforcement may silently not execute at that size. Enforcement depends on a keeper; the demo keeper is the replay script; a production keeper service is out of scope and listed as a limitation. (Supersedes the 1 % default in D19.)
+
+### Carry-forward notes (bind M3/M4)
+
+- **N1** Oracle adapter uses calendar-aware freshness: the 0.5 % deviation is an irreducible price-error allowance; add an age-based haircut; distinguish scheduled (calendar) from unscheduled (outage) blindness.
+- **N2** Post-window observations are censored by the deviation/heartbeat rule; `recordPostWindow` must handle a late first update and record the lag; M2 quantifies it. *M1 evidence (docs/CALENDAR_NOTES.md section 11): in 14 observed windows x 6 feeds the first update arrived 18-85 s after the window end, so censoring was not observed; it remains possible on a quiet open and must still be handled.*
+- **N3** No sequencer-uptime feed on Robinhood Chain: optional config; downtime = unscheduled blindness. Arbitrum One keeps the Chainlink feed.
+- **N4** Only the 32 feed-backed tokens are eligible collateral.
+- **N5** The flat-LLTV control uses the **real** in-the-wild parameters: Morpho on Robinhood (38.5 %, 62.5 %, 77 %, 86 % LLTV) and Aave's reported 65-79 % collateral factor with 5.5 % max bonus (**secondary-source**, label as such).
 
 ## 9. Recommended next milestone
 
-**M1 - `UsMarketCalendar`**: it has no dependencies, is fully verifiable against an independent implementation, and everything downstream (blind windows, window ids, gap classes, guard timing) rests on its correctness. The trading-day model should be locked in M1 so M2/M5 don't build on a wrong blind-window definition.
+**M1 - `UsMarketCalendar`** (approved, in progress): it has no dependencies, is fully verifiable against an independent implementation, and everything downstream (blind windows, window ids, gap classes, guard timing) rests on its correctness. The trading-day model should be locked in M1 so M2/M5 don't build on a wrong blind-window definition.

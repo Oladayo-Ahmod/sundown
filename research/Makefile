@@ -1,6 +1,6 @@
 PY ?= .venv/bin/python
 
-.PHONY: venv test lint data intraday backtest m21 m22 pools all
+.PHONY: venv test lint data intraday backtest m21 m22 pools exit-liquidity all
 
 venv:
 	uv venv --python 3.11 .venv
@@ -25,12 +25,13 @@ backtest:
 	$(PY) run_backtest.py
 	$(PY) figures.py
 
-# M2.1: per-asset results, mechanisms, slippage grid, clustered frontier (offline; needs backtest)
+# M2.2: liquidation designs under depth-driven slippage, market caps, two-tier (offline; needs m21)
 m22: m21
 	$(PY) m22_analysis.py
 	$(PY) m22_ci.py
 	$(PY) figures_m22.py
 
+# M2.1: per-asset results, mechanisms, slippage grid, clustered frontier (offline; needs backtest)
 m21: backtest
 	$(PY) m21_analysis.py
 	$(PY) figures_m21.py
@@ -38,5 +39,9 @@ m21: backtest
 # Network step: Robinhood Chain pool depth snapshot (DexScreener + public RPC, needs cast).
 pools:
 	PATH="$$HOME/.foundry/bin:$$PATH" $(PY) pool_depth.py
+
+# Network step: exact on-chain Uniswap v3 exit-liquidity depth (RPC only, needs cast); M3 step 3a.
+exit-liquidity:
+	PATH="$$HOME/.foundry/bin:$$PATH" $(PY) exit_liquidity.py
 
 all: venv test backtest m21

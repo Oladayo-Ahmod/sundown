@@ -10,7 +10,12 @@ evm_version = "cancun"
 optimizer = true
 optimizer_runs = 200
 bytecode_hash = "none"
-fs_permissions = [{ access = "read", path = "./test/fixtures" }]
+# exhaustive differential tests iterate tens of thousands of fixture rows
+gas_limit = 9223372036854775807
+memory_limit = 1073741824
+fs_permissions = [{ access = "read", path = "./test/fixtures" }, { access = "read", path = "../deployments" }, { access = "read", path = "../sim" }]
+# the simulation-only feed lives in ../sim and is imported by tests and deploy scripts only
+allow_paths = ["../sim"]
 
 [profile.default.fmt]
 line_length = 120
@@ -19,6 +24,11 @@ bracket_spacing = false
 int_types = "long"
 quote_style = "double"
 number_underscore = "thousands"
+
+[profile.default.invariant]
+runs = 64
+depth = 250
+fail_on_revert = false
 
 [profile.ci]
 fuzz = { runs = 1000 }

@@ -1,0 +1,292 @@
+{
+ "kind": "SIMULATION INPUTS derived from real daily gaps and a v3 depth snapshot; not a live feed",
+ "events_source": "sim/replay_events.json",
+ "depth_source": "research/results/exit_liquidity.json (aggregate_max_notional_usd, v3 only)",
+ "k": 10,
+ "events": [
+  {
+   "asset": "AAPL",
+   "date": "2020-03-16",
+   "cls": 1,
+   "windowSeconds": 172800,
+   "ratioWad": 870417671000000000,
+   "lossBps": 1388
+  },
+  {
+   "asset": "AAPL",
+   "date": "2015-08-24",
+   "cls": 1,
+   "windowSeconds": 172800,
+   "ratioWad": 897031014000000000,
+   "lossBps": 1087
+  },
+  {
+   "asset": "AAPL",
+   "date": "2024-08-05",
+   "cls": 1,
+   "windowSeconds": 172800,
+   "ratioWad": 905530792000000000,
+   "lossBps": 992
+  },
+  {
+   "asset": "AAPL",
+   "date": "2020-03-09",
+   "cls": 1,
+   "windowSeconds": 169200,
+   "ratioWad": 912535031000000000,
+   "lossBps": 915
+  },
+  {
+   "asset": "AAPL",
+   "date": "2025-04-07",
+   "cls": 1,
+   "windowSeconds": 172800,
+   "ratioWad": 940651874000000000,
+   "lossBps": 612
+  },
+  {
+   "asset": "AAPL",
+   "date": "2020-09-08",
+   "cls": 2,
+   "windowSeconds": 259200,
+   "ratioWad": 942046958000000000,
+   "lossBps": 597
+  },
+  {
+   "asset": "AAPL",
+   "date": "2011-01-18",
+   "cls": 2,
+   "windowSeconds": 259200,
+   "ratioWad": 945595668000000000,
+   "lossBps": 559
+  },
+  {
+   "asset": "AAPL",
+   "date": "2020-02-24",
+   "cls": 1,
+   "windowSeconds": 172800,
+   "ratioWad": 949560773000000000,
+   "lossBps": 518
+  },
+  {
+   "asset": "AAPL",
+   "date": "2019-05-13",
+   "cls": 1,
+   "windowSeconds": 172800,
+   "ratioWad": 951972817000000000,
+   "lossBps": 492
+  },
+  {
+   "asset": "AAPL",
+   "date": "2019-05-06",
+   "cls": 1,
+   "windowSeconds": 172800,
+   "ratioWad": 964769776000000000,
+   "lossBps": 359
+  },
+  {
+   "asset": "SPY",
+   "date": "2020-03-16",
+   "cls": 1,
+   "windowSeconds": 172800,
+   "ratioWad": 895514629000000000,
+   "lossBps": 1104
+  },
+  {
+   "asset": "SPY",
+   "date": "2020-03-09",
+   "cls": 1,
+   "windowSeconds": 169200,
+   "ratioWad": 925502589000000000,
+   "lossBps": 774
+  },
+  {
+   "asset": "SPY",
+   "date": "2015-08-24",
+   "cls": 1,
+   "windowSeconds": 172800,
+   "ratioWad": 947732902000000000,
+   "lossBps": 537
+  },
+  {
+   "asset": "SPY",
+   "date": "2024-08-05",
+   "cls": 1,
+   "windowSeconds": 172800,
+   "ratioWad": 960105085000000000,
+   "lossBps": 407
+  },
+  {
+   "asset": "SPY",
+   "date": "2025-04-07",
+   "cls": 1,
+   "windowSeconds": 172800,
+   "ratioWad": 968156270000000000,
+   "lossBps": 324
+  },
+  {
+   "asset": "SPY",
+   "date": "2020-02-24",
+   "cls": 1,
+   "windowSeconds": 172800,
+   "ratioWad": 968993643000000000,
+   "lossBps": 315
+  },
+  {
+   "asset": "SPY",
+   "date": "2011-09-06",
+   "cls": 2,
+   "windowSeconds": 259200,
+   "ratioWad": 970640645000000000,
+   "lossBps": 298
+  },
+  {
+   "asset": "SPY",
+   "date": "2011-08-08",
+   "cls": 1,
+   "windowSeconds": 172800,
+   "ratioWad": 973600933000000000,
+   "lossBps": 268
+  },
+  {
+   "asset": "SPY",
+   "date": "2022-06-13",
+   "cls": 1,
+   "windowSeconds": 172800,
+   "ratioWad": 974474089000000000,
+   "lossBps": 259
+  },
+  {
+   "asset": "SPY",
+   "date": "2025-01-27",
+   "cls": 1,
+   "windowSeconds": 172800,
+   "ratioWad": 978354195000000000,
+   "lossBps": 219
+  }
+ ],
+ "cols": {
+  "asset": [
+   "AAPL",
+   "AAPL",
+   "AAPL",
+   "AAPL",
+   "AAPL",
+   "AAPL",
+   "AAPL",
+   "AAPL",
+   "AAPL",
+   "AAPL",
+   "SPY",
+   "SPY",
+   "SPY",
+   "SPY",
+   "SPY",
+   "SPY",
+   "SPY",
+   "SPY",
+   "SPY",
+   "SPY"
+  ],
+  "date": [
+   "2020-03-16",
+   "2015-08-24",
+   "2024-08-05",
+   "2020-03-09",
+   "2025-04-07",
+   "2020-09-08",
+   "2011-01-18",
+   "2020-02-24",
+   "2019-05-13",
+   "2019-05-06",
+   "2020-03-16",
+   "2020-03-09",
+   "2015-08-24",
+   "2024-08-05",
+   "2025-04-07",
+   "2020-02-24",
+   "2011-09-06",
+   "2011-08-08",
+   "2022-06-13",
+   "2025-01-27"
+  ],
+  "cls": [
+   1,
+   1,
+   1,
+   1,
+   1,
+   2,
+   2,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   2,
+   1,
+   1,
+   1
+  ],
+  "windowSeconds": [
+   172800,
+   172800,
+   172800,
+   169200,
+   172800,
+   259200,
+   259200,
+   172800,
+   172800,
+   172800,
+   172800,
+   169200,
+   172800,
+   172800,
+   172800,
+   172800,
+   259200,
+   172800,
+   172800,
+   172800
+  ],
+  "ratioWad": [
+   870417671000000000,
+   897031014000000000,
+   905530792000000000,
+   912535031000000000,
+   940651874000000000,
+   942046958000000000,
+   945595668000000000,
+   949560773000000000,
+   951972817000000000,
+   964769776000000000,
+   895514629000000000,
+   925502589000000000,
+   947732902000000000,
+   960105085000000000,
+   968156270000000000,
+   968993643000000000,
+   970640645000000000,
+   973600933000000000,
+   974474089000000000,
+   978354195000000000
+  ]
+ },
+ "depthUsd": {
+  "AAPL": {
+   "d1": 85822,
+   "d3": 196590,
+   "d5": 220049
+  },
+  "SPY": {
+   "d1": 143642,
+   "d3": 249927,
+   "d5": 250516
+  }
+ }
+}

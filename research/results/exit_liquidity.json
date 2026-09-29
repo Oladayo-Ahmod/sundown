@@ -1,0 +1,369 @@
+{
+  "retrieved_utc": "2026-10-02T21:01:54+00:00",
+  "chain_id": 4663,
+  "block": 78536996,
+  "block_timestamp": 1790974912,
+  "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+  "method": "uniswap v3 factory.getPool + slot0/liquidity/tickBitmap/ticks over public RPC; exact swap simulation selling stock for USDG (fee included)",
+  "scan_words": 3,
+  "assets": {
+    "TSLA": {
+      "token": "0x322F0929c4625eD5bAd873c95208D54E1c003b2d",
+      "chainlink_price_usd": 370.448,
+      "chainlink_updated_at": 1790970931,
+      "chainlink_age_s": 3981,
+      "ui_multiplier": 1.0,
+      "pools": [
+        {
+          "pool": "0x7868622ff2c3b1b6c8acb15fe0bdaebf043dda48",
+          "fee_tier": 100,
+          "empty": true
+        },
+        {
+          "pool": "0xc4f0172d6ac8dd294dd1137d047d5e1893760236",
+          "fee_tier": 500,
+          "tick": -217172,
+          "tick_spacing": 10,
+          "active_liquidity": 15834024284535471,
+          "mid_usd": 370.5200045155031,
+          "basis_vs_oracle_pct": 0.019,
+          "initialized_ticks_scanned": 48,
+          "ladder_slippage_pct": {
+            "10000": 3.179,
+            "50000": null,
+            "100000": null,
+            "250000": null,
+            "500000": null,
+            "1000000": null
+          },
+          "max_notional_usd": {
+            "1pct": 2992,
+            "3pct": 9410,
+            "5pct": 15861
+          }
+        },
+        {
+          "pool": "0xf4acdaeeb7022862a763c9b1b885e11191c889e3",
+          "fee_tier": 3000,
+          "tick": -217173,
+          "tick_spacing": 60,
+          "active_liquidity": 329393801608142726,
+          "mid_usd": 370.5057229946075,
+          "basis_vs_oracle_pct": 0.016,
+          "initialized_ticks_scanned": 106,
+          "ladder_slippage_pct": {
+            "10000": 0.441,
+            "50000": 1.035,
+            "100000": 1.782,
+            "250000": 4.181,
+            "500000": null,
+            "1000000": null
+          },
+          "max_notional_usd": {
+            "1pct": 47603,
+            "3pct": 180309,
+            "5pct": 287008
+          }
+        },
+        {
+          "pool": "0xb349fb08c2712f3a70bad40a4d006b68d67e888b",
+          "fee_tier": 10000,
+          "tick": -217154,
+          "tick_spacing": 200,
+          "active_liquidity": 181620673677260,
+          "mid_usd": 371.1936885596017,
+          "basis_vs_oracle_pct": 0.201,
+          "initialized_ticks_scanned": 8,
+          "ladder_slippage_pct": {
+            "10000": null,
+            "50000": null,
+            "100000": null,
+            "250000": null,
+            "500000": null,
+            "1000000": null
+          },
+          "max_notional_usd": {
+            "1pct": 7,
+            "3pct": 150,
+            "5pct": 1101
+          }
+        }
+      ],
+      "aggregate_max_notional_usd": {
+        "1pct": 50602,
+        "3pct": 189869,
+        "5pct": 303970
+      },
+      "pool_mid_range_usd": [
+        370.5057229946075,
+        371.1936885596017
+      ]
+    },
+    "NVDA": {
+      "token": "0xd0601CE157Db5bdC3162BbaC2a2C8aF5320D9EEC",
+      "chainlink_price_usd": 234.99711907,
+      "chainlink_updated_at": 1790960852,
+      "chainlink_age_s": 14060,
+      "ui_multiplier": 1.0007751591646306,
+      "pools": [
+        {
+          "pool": "0xb75d2d02b0ec3de50d32e40a4f1a8dae8acc4333",
+          "fee_tier": 100,
+          "tick": 222985,
+          "tick_spacing": 1,
+          "active_liquidity": 14297015922504961,
+          "mid_usd": 207.1899419684993,
+          "basis_vs_oracle_pct": -11.833,
+          "initialized_ticks_scanned": 2,
+          "ladder_slippage_pct": {
+            "10000": null,
+            "50000": null,
+            "100000": null,
+            "250000": null,
+            "500000": null,
+            "1000000": null
+          },
+          "max_notional_usd": {
+            "1pct": 0,
+            "3pct": 0,
+            "5pct": 0
+          }
+        },
+        {
+          "pool": "0xd4eb21209c4d6093f80b5b84f5c45cc093ea14a3",
+          "fee_tier": 500,
+          "tick": 221763,
+          "tick_spacing": 10,
+          "active_liquidity": 4172964727855726045,
+          "mid_usd": 234.09596946855754,
+          "basis_vs_oracle_pct": -0.383,
+          "initialized_ticks_scanned": 486,
+          "ladder_slippage_pct": {
+            "10000": 0.449,
+            "50000": 0.532,
+            "100000": 0.648,
+            "250000": 0.979,
+            "500000": 1.548,
+            "1000000": 2.744
+          },
+          "max_notional_usd": {
+            "1pct": 259313,
+            "3pct": 1105600,
+            "5pct": 1840647
+          }
+        },
+        {
+          "pool": "0xb944cec30bd4175855215d767adc81f39e5f7e2b",
+          "fee_tier": 3000,
+          "tick": 221737,
+          "tick_spacing": 60,
+          "active_liquidity": 33792596139833496,
+          "mid_usd": 234.71235306704776,
+          "basis_vs_oracle_pct": -0.121,
+          "initialized_ticks_scanned": 47,
+          "ladder_slippage_pct": {
+            "10000": 2.304,
+            "50000": null,
+            "100000": null,
+            "250000": null,
+            "500000": null,
+            "1000000": null
+          },
+          "max_notional_usd": {
+            "1pct": 3043,
+            "3pct": 13630,
+            "5pct": 19872
+          }
+        },
+        {
+          "pool": "0xc277560df3689a401ba7dedd7626168b234ceb5e",
+          "fee_tier": 10000,
+          "tick": 221725,
+          "tick_spacing": 200,
+          "active_liquidity": 18001700290564,
+          "mid_usd": 234.99298525335664,
+          "basis_vs_oracle_pct": -0.002,
+          "initialized_ticks_scanned": 2,
+          "ladder_slippage_pct": {
+            "10000": null,
+            "50000": null,
+            "100000": null,
+            "250000": null,
+            "500000": null,
+            "1000000": null
+          },
+          "max_notional_usd": {
+            "1pct": 0,
+            "3pct": 6,
+            "5pct": 12
+          }
+        }
+      ],
+      "aggregate_max_notional_usd": {
+        "1pct": 262356,
+        "3pct": 1119236,
+        "5pct": 1860531
+      },
+      "pool_mid_range_usd": [
+        207.1899419684993,
+        234.99298525335664
+      ]
+    },
+    "AAPL": {
+      "token": "0xaF3D76f1834A1d425780943C99Ea8A608f8a93f9",
+      "chainlink_price_usd": 333.82386412,
+      "chainlink_updated_at": 1790959180,
+      "chainlink_age_s": 15732,
+      "ui_multiplier": 1.0005660800610925,
+      "pools": [
+        {
+          "pool": "0xaae0d815ee56e4092a5e5c2911e676fea50b2d6d",
+          "fee_tier": 500,
+          "tick": 218225,
+          "tick_spacing": 10,
+          "active_liquidity": 522384289947288603,
+          "mid_usd": 333.4580721968447,
+          "basis_vs_oracle_pct": -0.11,
+          "initialized_ticks_scanned": 185,
+          "ladder_slippage_pct": {
+            "10000": 0.264,
+            "50000": 0.696,
+            "100000": 1.292,
+            "250000": null,
+            "500000": null,
+            "1000000": null
+          },
+          "max_notional_usd": {
+            "1pct": 76484,
+            "3pct": 153439,
+            "5pct": 156789
+          }
+        },
+        {
+          "pool": "0x783c9bbb765047cfdd2b84b92b2ca9f11d34b7ed",
+          "fee_tier": 3000,
+          "tick": 218234,
+          "tick_spacing": 60,
+          "active_liquidity": 100551201152888351,
+          "mid_usd": 333.15817816467955,
+          "basis_vs_oracle_pct": -0.199,
+          "initialized_ticks_scanned": 51,
+          "ladder_slippage_pct": {
+            "10000": 1.035,
+            "50000": 3.656,
+            "100000": 10.255,
+            "250000": null,
+            "500000": null,
+            "1000000": null
+          },
+          "max_notional_usd": {
+            "1pct": 9338,
+            "3pct": 42816,
+            "5pct": 62503
+          }
+        },
+        {
+          "pool": "0x3714aa8105de1f384481b425788af413748c1837",
+          "fee_tier": 10000,
+          "tick": 218271,
+          "tick_spacing": 200,
+          "active_liquidity": 1301150973309532,
+          "mid_usd": 331.938443476796,
+          "basis_vs_oracle_pct": -0.565,
+          "initialized_ticks_scanned": 15,
+          "ladder_slippage_pct": {
+            "10000": 81.161,
+            "50000": 96.23,
+            "100000": 98.115,
+            "250000": 99.246,
+            "500000": 99.623,
+            "1000000": 99.811
+          },
+          "max_notional_usd": {
+            "1pct": 0,
+            "3pct": 335,
+            "5pct": 757
+          }
+        }
+      ],
+      "aggregate_max_notional_usd": {
+        "1pct": 85822,
+        "3pct": 196590,
+        "5pct": 220049
+      },
+      "pool_mid_range_usd": [
+        331.938443476796,
+        333.4580721968447
+      ]
+    },
+    "SPY": {
+      "token": "0x117cc2133c37B721F49dE2A7a74833232B3B4C0C",
+      "chainlink_price_usd": 770.71210575,
+      "chainlink_updated_at": 1790944238,
+      "chainlink_age_s": 30674,
+      "ui_multiplier": 1.001717991187472,
+      "pools": [
+        {
+          "pool": "0x62fde201c424d6d07730b77450dd73928ebac5f5",
+          "fee_tier": 100,
+          "empty": true
+        },
+        {
+          "pool": "0xa7bb1ac63bbab0c44316e6c8c455213441689167",
+          "fee_tier": 500,
+          "tick": -209847,
+          "tick_spacing": 10,
+          "active_liquidity": 492692452263746359,
+          "mid_usd": 770.7999506470594,
+          "basis_vs_oracle_pct": 0.011,
+          "initialized_ticks_scanned": 97,
+          "ladder_slippage_pct": {
+            "10000": 0.112,
+            "50000": 0.376,
+            "100000": 0.691,
+            "250000": null,
+            "500000": null,
+            "1000000": null
+          },
+          "max_notional_usd": {
+            "1pct": 138058,
+            "3pct": 234254,
+            "5pct": 234254
+          }
+        },
+        {
+          "pool": "0xa43b424bc609495aed4bcd88d654934b510b0ad9",
+          "fee_tier": 3000,
+          "tick": -209839,
+          "tick_spacing": 60,
+          "active_liquidity": 25195251330636495,
+          "mid_usd": 771.3942986856405,
+          "basis_vs_oracle_pct": 0.089,
+          "initialized_ticks_scanned": 35,
+          "ladder_slippage_pct": {
+            "10000": 1.646,
+            "50000": null,
+            "100000": null,
+            "250000": null,
+            "500000": null,
+            "1000000": null
+          },
+          "max_notional_usd": {
+            "1pct": 5584,
+            "3pct": 15673,
+            "5pct": 16262
+          }
+        }
+      ],
+      "aggregate_max_notional_usd": {
+        "1pct": 143642,
+        "3pct": 249927,
+        "5pct": 250516
+      },
+      "pool_mid_range_usd": [
+        770.7999506470594,
+        771.3942986856405
+      ]
+    }
+  }
+}
