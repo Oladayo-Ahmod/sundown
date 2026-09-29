@@ -361,6 +361,11 @@ contract SundownGuard is IRiskGuard {
         }
     }
 
+    /// @notice The current parameters as a struct (the public `params` getter returns a tuple).
+    function currentParams() external view returns (Params memory) {
+        return params;
+    }
+
     /// @notice Stress fraction `1 - gapVaR - oracleBuffer - safetyBuffer` (floored at 0) for a window class.
     /// @param cls 0 Short, 1 Weekend, 2 Long.
     function stressFraction(uint8 cls) external view returns (uint256) {
