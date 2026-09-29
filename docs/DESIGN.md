@@ -289,6 +289,14 @@ Accepted by the owner after the M0 handoff.
 
 **Review rules for M4a/M4b.** M4a may flow into M4b without waiting only after (1) the design is committed, (2) an adversarial self-review is posted with the design summary, and (3) nothing deviates from D18-D25. Stop on a deviation, failed validation or direction-changing discovery. M4b budget <= 5 h; cut list in order: replay polish, extra fuzz, then deleveraging (if cut, report immediately: with no enforcement the product is a measurement tool). No public-network deployment.
 
+**D26 - Calibration: through-the-cycle static `gapVaR` (GUARD_DESIGN section 11, option 2).** Per asset and window class (Short/Weekend/Long), the full-sample empirical q99.5 downside gap, read-only from `research/results/class_stats.csv` (column `loss_q99.5_bps`; method: `np.quantile(x, 1 - q, method="lower")` of the log gap `ln(open_D2 / close_D1)` in bps, loss = -gap; sample 2010-01-04 to 2026-10-01, includes March 2020; split-adjusted daily proxy, a conservative superset of blind exposure). Never invented; if absent, stop. Product framing everywhere: **"session-aware LLTV: boosted weekday capacity, tighter weekend capacity"**, not loss prevention. Report per asset and tier the resulting stress cap and whether it binds. Deploy only boosted variants where the cap binds; a non-binding 90 % variant is not deployed as boosted (labeled unenforced if kept). TSLA and NVDA stay standard-tier only.
+
+**D27 - Option 3 deferred.** No guardian power to raise `gapVaR` in v1: tightening a parameter can trigger forced sales of boosted users (griefing / compromised-key risk). Roadmap: a guardian tightening that takes effect only at the next window boundary, with a snapshot taken at the horizon start (`THREAT_MODEL.md`).
+
+**D28 - Deleverage realization approved as built.** Deleverage = guard-authorized `market.liquidate` plus a `quoteDeleverage` view; no wrapper. The critical-health limitation for standard accounts in a boosted market (the 100 % close-factor trigger uses the market `lltv`) is accepted and documented.
+
+**D29 - Deleverage fee and keeper economics (A16).** The replay computes the keeper break-even per market: the fee required to cover exit slippage at the demonstration position size (from the depth table) plus gas. Default fee = `max(2 %, break-even)` bounded by the bonus cap. If no fee within the bonus cap is profitable at a position size, state the position-size / collateral cap that makes it viable, or state that enforcement may silently not execute at that size. Enforcement depends on a keeper; the demo keeper is the replay script; a production keeper service is out of scope and listed as a limitation. (Supersedes the 1 % default in D19.)
+
 ### Carry-forward notes (bind M3/M4)
 
 - **N1** Oracle adapter uses calendar-aware freshness: the 0.5 % deviation is an irreducible price-error allowance; add an age-based haircut; distinguish scheduled (calendar) from unscheduled (outage) blindness.

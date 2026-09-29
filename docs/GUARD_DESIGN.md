@@ -1,6 +1,6 @@
 # SundownGuard design (M4a)
 
-Implements D18-D25 (`DESIGN.md` section 8) behind the existing `IRiskGuard` and `SundownMarket`. Status: **design, not implemented**. Control: `FlatGuard` (unchanged).
+Implements D18-D25 (`DESIGN.md` section 8) behind the existing `IRiskGuard` and `SundownMarket`. Status: design; implementation in M4b. Control: `FlatGuard` (unchanged).
 
 ## 0. Headline finding: calibration decides whether the guard does anything
 
@@ -83,11 +83,11 @@ Transitions: `enterBoosted()` Standard -> Boosted; `exitBoosted()` Boosted -> St
 |---|---|---|
 | `standardLLTV` | [0.30, 0.95] | per market (research: 0.77 / 0.86 for the control) |
 | `boostedLLTV` | 0 or [standardLLTV, 0.94] (`lltv * (1 + 5.5 %) < 1`) | 0.90 / 0.93 (SPY), 0.90 (AAPL), 0 (TSLA, NVDA) |
-| `gapVaR[3]` | [0, 0.50] each | calibration, section 11 |
+| `gapVaR[3]` | [0, 0.50] each | D26 table, section 11 |
 | `oracleBuffer` | [0.1 %, 5 %] | 0.5 % |
 | `safetyBuffer` | [0, 10 %] | 1 % |
 | `bonus` | [3 %, 5.5 %] | 4 % |
-| `deleverageFee` | [0.25 %, bonus] | 1 % |
+| `deleverageFee` | [0.25 %, bonus] | `max(2 %, keeper break-even)` capped at the bonus (D29) |
 | `deleverageMargin` | [0, 5 %] | 0.5 % |
 | `preWindowHorizon` | [1 h, 48 h] | 6 h |
 | `cureWindow` | [0, horizon - 1 h] | 3 h |
@@ -122,7 +122,7 @@ G1 No borrow or withdrawal leaves a boosted account's debt above `floor(cv * str
 | A13 | Early close moves the window (D10) | Single calendar config; the horizon follows the cache; UNVERIFIED | documented |
 | A14 | Standard accounts' critical-health uses market `lltv` | Documented limitation (section 3) | unit |
 | A15 | Poke spam on `flag` | Only emits if truly above the cap; one write per (account, window) | unit |
-| A16 | **No keeper calls `deleverage`**: a 1 % fee may not cover gas plus exit slippage (`DISCOVERY.md` section g: 1-3 % slippage at the capped size), so enforcement could silently not happen | Not refuted. `deleverageFee` is timelock-settable up to the bonus cap (5.5 %); the replay reports keeper break-even at the measured depth; production needs a funded keeper or a protocol-run deleverager. This is the largest residual risk after calibration | replay harness, documented |
+| A16 | **No keeper calls `deleverage`**: a small fee may not cover gas plus exit slippage (D29 sets the default at max(2 %, break-even)) (`DISCOVERY.md` section g: 1-3 % slippage at the capped size), so enforcement could silently not happen | Not refuted. `deleverageFee` is timelock-settable up to the bonus cap (5.5 %); the replay reports keeper break-even at the measured depth; production needs a funded keeper or a protocol-run deleverager. This is the largest residual risk after calibration | replay harness, documented |
 
 ## 8. Test plan (M4b)
 
@@ -136,10 +136,33 @@ Foundry script on anvil: deploy `SimEquityFeed` (simulation), a `FlatGuard` cont
 
 Onchain EWMA or observation pipeline (D18, roadmap), Dutch ramp, depth-sized partial liquidation, priced premium, boosted tiers for TSLA and NVDA, a periphery sell-and-repay wrapper.
 
-## 11. Calibration options (decision needed before M4b)
+## 11. Calibration decision (D26-D29)
 
-1. **Data-end static (literal D18).** Cap never binds for SPY/AAPL. Zero enforcement; boosted = control at the boosted LLTV. The replay will show lender loss equal to the control in the 2020 and 2015 events. Label the product a measurement tool.
-2. **Through-the-cycle static.** Set `gapVaR` to a stress-regime constant per asset and class (e.g. the historical peak of the research forecast, or an unconditional q99.5 of gaps). For the cap to bind a 93 % tier, SPY needs >= 5.5 % and AAPL >= 5.5 %; for 90 %, >= 8.5 %. The cap then binds at every window and boosted accounts deleverage to ~91 % every weekend: capacity expansion is Monday to Friday only, with a recurring borrower cost (`mech_b` reports about 5 bps per year borrower cost at 90 % under the dynamic estimator; static would be higher).
-3. **Tighten-fast, loosen-slow gapVaR.** Keep the calm default but let the guardian *raise* `gapVaR` immediately (a tighten-only power, extending D24) while lowering it needs the timelock. An offchain keeper or operator reacts to regime shifts. Needs your approval because it adds a guardian power.
+**Decided: option 2, through-the-cycle static gapVaR.** Option 3 (guardian raises gapVaR) is deferred (D27); the roadmap is a guardian tightening that takes effect only at the next window boundary using a snapshot taken at the horizon start. Product framing in docs, comments and events: **"session-aware LLTV: boosted weekday capacity, tighter weekend capacity"**, not loss prevention.
 
-Recommendation: **option 2 for the demonstration deployment, with option 3 proposed as the production path**, and the replay reporting control, option 1 and option 2 side by side so the claim in the UI matches the measured behavior.
+**Source (read-only).** `research/results/class_stats.csv`, column `loss_q99.5_bps`. Method (`research/gap_stats.py`): `-np.quantile(x, 1 - q, method="lower")` of the log gap `x = ln(open_D2 / close_D1)` in bps (the more conservative order statistic), by ticker and window class, split-adjusted daily proxy (a conservative superset of the oracle-blind exposure). Sample: **2010-01-04 to 2026-10-01** (TSLA from 2010-06-29), includes March 2020. Raw prices are not committed; the derived per-pair returns are in `research/data/derived/`. `gapVaR` WAD = `bps * 1e14`.
+
+Honesty about resolution: q99.5 is statistically resolvable only for the **Weekend** class (n = 758, 737 for TSLA). For **Short** (n = 41) and **Long** (n = 115, 111 for TSLA) the file's own `q_resolvable` column excludes 0.995, so those values equal the sample maximum (a conservative, noisy estimate). SPY's Long value (298 bps) is below its Weekend value (407 bps) although Long windows are longer: sample noise, not a property. The guard uses the numbers as measured; no monotone envelope was imposed.
+
+| Asset | Class | n | gapVaR (bps) | Stress cap (bps)* | Binds 90 % | Binds 93 % |
+|---|---|---|---|---|---|---|
+| SPY | Short | 41 | 161.52 | 9688.5 | no | no |
+| SPY | Weekend | 758 | 407.13 | 9442.9 | no | no |
+| SPY | Long | 115 | 297.99 | 9552.0 | no | no |
+| AAPL | Short | 41 | 282.99 | 9567.0 | no | no |
+| AAPL | Weekend | 758 | 915.29 | 8934.7 | **yes** | **yes** |
+| AAPL | Long | 115 | 597.00 | 9253.0 | no | **yes** |
+| NVDA | Short / Weekend / Long | 41 / 758 / 115 | 367.57 / 1256.14 / 729.48 | 9482 / 8594 / 9121 | standard tier only | standard tier only |
+| TSLA | Short / Weekend / Long | 41 / 737 / 111 | 836.30 / 1144.06 / 1613.16 | 9014 / 8706 / 8237 | standard tier only | standard tier only |
+
+\* `10000 - gapVaR - 50 (oracle buffer) - 100 (safety buffer)` bps.
+
+**Consequence under D26's deployment rule (deploy boosted only where the cap binds):**
+- **SPY: no boosted variant.** Neither 90 % nor 93 % binds in any class (the Weekend cap is 94.4 %). This differs from the expectation that SPY 93 % would bind. SPY stays standard-tier; an unenforced 93 % SPY variant exists only as a labeled comparison in the replay.
+- **AAPL 93 %: boosted, binds** in Weekend (cap 89.35 %, -3.65 pp) and Long (92.53 %, -0.47 pp), not in Short.
+- **AAPL 90 %: binds only in Weekend, by 65 bps** (cap 89.35 % vs 90 %). It meets the rule literally and is deployed as a weakly enforced variant, labeled as such; it is the first candidate to drop if you prefer.
+- **TSLA, NVDA: standard tier only** (`boostedLLTV = 0`).
+
+Where the SPY and AAPL numbers sit relative to history: SPY's 2020-03-16 gap (11.04 %) and 2020-03-09 (7.74 %) are beyond its q99.5 (4.07 %) and above the 93 % tier's 7 % insolvency threshold, so an enforced SPY tier would need a higher quantile (q99.9 Weekend: 1103.57 bps would give a cap of 83.9 %, below the 86 % standard LLTV). That is a quantile choice for a later decision, not made here.
+
+**Deleverage fee (D29).** Default `max(2 %, keeper break-even)` bounded by the bonus cap; the break-even is computed per market in the replay from the exit-liquidity table plus gas. If no fee within the cap is profitable at a position size, the replay states the viable position size / collateral cap, or that enforcement may silently not execute at that size. The demonstration keeper is the replay script; a production keeper service is out of scope and a listed limitation.
