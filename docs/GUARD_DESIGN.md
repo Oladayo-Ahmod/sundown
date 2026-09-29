@@ -122,6 +122,7 @@ G1 No borrow or withdrawal leaves a boosted account's debt above `floor(cv * str
 | A13 | Early close moves the window (D10) | Single calendar config; the horizon follows the cache; UNVERIFIED | documented |
 | A14 | Standard accounts' critical-health uses market `lltv` | Documented limitation (section 3) | unit |
 | A15 | Poke spam on `flag` | Only emits if truly above the cap; one write per (account, window) | unit |
+| A16 | **No keeper calls `deleverage`**: a 1 % fee may not cover gas plus exit slippage (`DISCOVERY.md` section g: 1-3 % slippage at the capped size), so enforcement could silently not happen | Not refuted. `deleverageFee` is timelock-settable up to the bonus cap (5.5 %); the replay reports keeper break-even at the measured depth; production needs a funded keeper or a protocol-run deleverager. This is the largest residual risk after calibration | replay harness, documented |
 
 ## 8. Test plan (M4b)
 
