@@ -69,29 +69,52 @@ contract MarketReferenceTest is MarketBase {
     /// @dev Replays the randomized scenario against the real market and checks every global and per-actor value
     /// after each operation, plus the returned amounts of redeem, repay, liquidate and realizeBadDebt.
     function test_scenarioReplayMatchesReference() public {
-        uint256[] memory op = vm.parseJsonUintArray(fx, ".scenario.cols.op");
-        uint256[] memory actor = vm.parseJsonUintArray(fx, ".scenario.cols.actor");
-        uint256[] memory target = vm.parseJsonUintArray(fx, ".scenario.cols.target");
-        uint256[] memory amt = vm.parseJsonUintArray(fx, ".scenario.cols.a");
-        uint256[] memory ret1 = vm.parseJsonUintArray(fx, ".scenario.cols.ret1");
-        uint256[] memory ret2 = vm.parseJsonUintArray(fx, ".scenario.cols.ret2");
-        uint256[] memory snap = vm.parseJsonUintArray(fx, ".scenario.cols.snap");
-        assertEq(snap.length, op.length * STRIDE);
-        assertGt(op.length, 800);
-        uint256 liquidations;
-        uint256 realized;
-        for (uint256 i; i < op.length; ++i) {
+        (uint256 steps, uint256 liquidations, uint256 realized,) = _replay(".scenario");
+        assertGt(steps, 800);
+        assertGt(liquidations, 8, "scenario exercises liquidations");
+        assertGt(realized, 0, "scenario exercises bad-debt realization");
+    }
+
+    /// @dev Pins `realizeBadDebt` to exact integers: three insolvent borrowers at different interest ages with
+    /// lender redemptions in between, and a last borrower whose write-off drains `totalBorrowAssets` to zero. Any
+    /// off-by-one in the write-off, the share burn or the bad-debt counter breaks a snapshot equality.
+    function test_badDebtScenarioMatchesReference() public {
+        (, uint256 liquidations, uint256 realized, uint256 writtenSum) = _replay(".badDebt");
+        assertEq(liquidations, 3);
+        assertEq(realized, 3);
+        assertEq(market.badDebtRealized(), writtenSum, "counter equals the sum of write-offs");
+        assertEq(vm.parseJsonUint(fx, ".badDebt.final_bad_debt"), writtenSum, "reference total");
+        assertEq(market.totalBorrowAssets(), 0, "last write-off drains the book");
+        assertEq(market.totalBorrowShares(), 0, "and the shares");
+        assertEq(market.totalAssets(), market.idleAssets(), "assets are exactly the idle ledger");
+    }
+
+    function _replay(string memory key)
+        internal
+        returns (uint256 steps, uint256 liquidations, uint256 realized, uint256 writtenSum)
+    {
+        uint256[] memory op = vm.parseJsonUintArray(fx, string.concat(key, ".cols.op"));
+        uint256[] memory actor = vm.parseJsonUintArray(fx, string.concat(key, ".cols.actor"));
+        uint256[] memory target = vm.parseJsonUintArray(fx, string.concat(key, ".cols.target"));
+        uint256[] memory amt = vm.parseJsonUintArray(fx, string.concat(key, ".cols.a"));
+        uint256[] memory ret1 = vm.parseJsonUintArray(fx, string.concat(key, ".cols.ret1"));
+        uint256[] memory ret2 = vm.parseJsonUintArray(fx, string.concat(key, ".cols.ret2"));
+        uint256[] memory snap = vm.parseJsonUintArray(fx, string.concat(key, ".cols.snap"));
+        steps = op.length;
+        assertEq(snap.length, steps * STRIDE);
+        for (uint256 i; i < steps; ++i) {
             (uint256 r1, uint256 r2) = _exec(op[i], actors[actor[i]], actors[target[i]], amt[i]);
             if (op[i] == 1 || op[i] == 5 || op[i] == 6 || op[i] == 9) assertEq(r1, ret1[i], "ret1");
             if (op[i] == 6) {
                 assertEq(r2, ret2[i], "ret2");
                 ++liquidations;
             }
-            if (op[i] == 9) ++realized;
+            if (op[i] == 9) {
+                ++realized;
+                writtenSum += r1;
+            }
             _checkSnapshot(snap, i);
         }
-        assertGt(liquidations, 8, "scenario exercises liquidations");
-        assertGt(realized, 0, "scenario exercises bad-debt realization");
     }
 
     function _exec(uint256 op, address a, address t, uint256 v) internal returns (uint256 r1, uint256 r2) {

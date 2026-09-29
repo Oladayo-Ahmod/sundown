@@ -427,6 +427,83 @@ def scenario(rng: random.Random, steps: int = 900) -> dict:
     return {"cols": cols, "stats": stats, "final_bad_debt": m.bad}
 
 
+def run_script(steps: list[tuple]) -> dict:
+    """Execute a hand-written op list on the reference in the scenario column format. Every step must be valid."""
+    m = Market()
+    cols: dict[str, list] = {k: [] for k in ("op", "actor", "target", "a", "ret1", "ret2", "snap")}
+    for name, actor, target, a in steps:
+        who, tgt = ACTORS[actor], ACTORS[target]
+        ret1 = ret2 = 0
+        if name == "deposit":
+            m.deposit(who, a)
+        elif name == "redeem":
+            ret1 = m.redeem(who, a)
+        elif name == "depositCollateral":
+            m.deposit_collateral(who, a)
+        elif name == "borrow":
+            m.borrow(who, a)
+        elif name == "repay":
+            ret1 = m.repay(who, tgt, a)
+        elif name == "liquidate":
+            ret1, ret2 = m.liquidate(tgt, a)
+        elif name == "warp":
+            m.now += a
+        elif name == "setPrice":
+            m.price = a
+        elif name == "realize":
+            ret1 = m.realize_bad_debt(tgt)
+        elif name == "accrue":
+            m.accrue()
+        else:
+            raise ValueError(name)
+        cols["op"].append(OPS[name])
+        cols["actor"].append(actor)
+        cols["target"].append(target)
+        cols["a"].append(a)
+        cols["ret1"].append(ret1)
+        cols["ret2"].append(ret2)
+        cols["snap"].append(snapshot(m))
+    stats = {k: cols["op"].count(v) for k, v in OPS.items()}
+    cols["snap"] = [x for row in cols["snap"] for x in row]
+    return {"cols": cols, "stats": stats, "final_bad_debt": m.bad}
+
+
+def bad_debt_scenario() -> dict:
+    """Exact-integer cover for `realizeBadDebt`: three insolvent borrowers at different interest ages, a lender
+    redeeming between realizations (share price drop is exact), and a last tiny-debt borrower whose written-off
+    amount is capped by `totalBorrowAssets`. The random scenario samples this path; this one pins it."""
+    day = 86_400
+    steps: list[tuple] = [
+        ("deposit", 0, 0, 100_000 * 10**6),
+        ("depositCollateral", 1, 1, 10 * 10**18),
+        ("depositCollateral", 2, 2, 10 * 10**18),
+        ("depositCollateral", 3, 3, 10 * 10**18),
+        ("borrow", 1, 1, 750 * 10**6),
+        ("warp", 0, 0, 7 * day),
+        ("borrow", 2, 2, 700 * 10**6),
+        ("warp", 0, 0, 20 * day),
+        ("borrow", 3, 3, 10 * 10**6),
+        ("warp", 0, 0, 40 * day),
+        ("setPrice", 0, 0, 20 * WAD),
+        # a1: fully insolvent -> liquidated to zero collateral, residual debt realized
+        ("liquidate", 0, 1, 10**15),
+        ("realize", 0, 1, 0),
+        ("warp", 0, 0, 3 * day),
+        ("redeem", 0, 0, 10_000 * 10**12),
+        # a2: realized after another accrual interval
+        ("liquidate", 0, 2, 10**15),
+        ("warp", 0, 0, 90 * day),
+        ("realize", 0, 2, 0),
+        ("redeem", 0, 0, 5_000 * 10**12),
+        # a3: tiny debt, price crash so that seized collateral is worth almost nothing
+        ("setPrice", 0, 0, 10**12),
+        ("liquidate", 0, 3, 10**15),
+        ("warp", 0, 0, 1),
+        ("realize", 0, 3, 0),
+    ]
+    return run_script(steps)
+
+
 def build(seed: int) -> dict:
     rng = random.Random(seed)
     return {
@@ -440,6 +517,7 @@ def build(seed: int) -> dict:
         "compound": compound_cases(),
         "shares": shares_cases(rng),
         "scenario": scenario(rng),
+        "badDebt": bad_debt_scenario(),
     }
 
 
