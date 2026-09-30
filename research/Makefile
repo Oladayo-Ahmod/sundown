@@ -1,6 +1,6 @@
 PY ?= .venv/bin/python
 
-.PHONY: venv test lint data intraday backtest m21 m22 pools exit-liquidity all
+.PHONY: venv test lint data intraday backtest m21 m22 m23 pools exit-liquidity all
 
 venv:
 	uv venv --python 3.11 .venv
@@ -35,6 +35,11 @@ m22: m21
 m21: backtest
 	$(PY) m21_analysis.py
 	$(PY) figures_m21.py
+
+# M2.3: evidence for the shipped static stress rule (offline; needs exit_liquidity.json, morpho snapshot)
+m23:
+	$(PY) static_gapvar.py
+	$(PY) static_rule_analysis.py
 
 # Network step: Robinhood Chain pool depth snapshot (DexScreener + public RPC, needs cast).
 pools:
