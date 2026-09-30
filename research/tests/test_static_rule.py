@@ -87,3 +87,30 @@ def test_static_gapvar_file_matches_class_stats_and_provenance():
     aapl_w = gv[(gv.ticker == "AAPL") & (gv.cls == "Weekend")].iloc[0]
     assert bool(aapl_w.binds_tier90) and bool(aapl_w.binds_tier93)
     assert not gv[gv.ticker == "SPY"][["binds_tier90", "binds_tier93"]].any().any()
+
+
+def test_nonworsening_bonus_cap_only_lowers_losses():
+    x, oc = _events(300, seed=7)
+    gv = np.full_like(x, 915.29)
+    a = sr.simulate_book(x, oc, gv, 0.93, sr.DepthInfinite(), 1e6, rule=False)
+    b = sr.simulate_book(x, oc, gv, 0.93, sr.DepthInfinite(), 1e6, rule=False, nonworsening=True)
+    assert (b.bad <= a.bad + 1e-9).all() and b.bad.sum() < a.bad.sum()
+
+
+def test_matches_session_a_forge_replay_with_the_market_rule():
+    """docs/REPLAY_RESULTS.md: AAPL 93 %, 10 worst events: control 3,823.83 over 4 events,
+    session-aware 1,224.37 over 1, standard 86 % 0. The market rule must reproduce them."""
+    import static_replay_crosscheck as xc
+
+    out, tot = xc.compute()
+    assert tot["python_nonworsening_control"] == pytest.approx(3823.83, rel=2e-3)
+    assert tot["python_nonworsening_session_aware"] == pytest.approx(1224.37, rel=2e-3)
+    assert tot["python_nonworsening_standard_86"] == 0.0
+    assert tot["python_nonworsening_events_with_loss_control"] == 4
+    assert tot["python_nonworsening_events_with_loss_session_aware"] == 1
+    # the deleverage batch Session A reports (about $4,876 per weekend event, 4 accounts)
+    wk = out[out.cls == "Weekend"]
+    assert (wk.python_accounts_flagged == 4).all()
+    assert wk.python_deleverage_notional_usd.iloc[0] == pytest.approx(4876, abs=2)
+    # the M2.2 convention disagrees (overstates), which is why both are reported
+    assert tot["python_control"] > 1.3 * tot["forge_control"]

@@ -140,16 +140,18 @@ class Result:
 
 def simulate_book(x_bps, oc_bps, gap_var_bps, tier_lltv, depth, collateral_usd, *,
                   util="uniform", rule=True, behaviour="naive", fee=FEE_FLOOR, bonus=BONUS,
-                  lltv_override=None, pre_depth=None) -> Result:
+                  lltv_override=None, pre_depth=None, population=None,
+                  nonworsening=False) -> Result:
     """One boosted-tier (or flat) book per window event.
 
     rule=False: flat market at `tier_lltv` (no stress cap, no deleverage). lltv_override lets the
     caller run a flat market at a different LLTV (e.g. the weekend cap level)."""
     n = len(x_bps)
     L = tier_lltv if lltv_override is None else lltv_override
-    w = cs.weights(util)
+    u_grid, w = population if population is not None else (UTIL, cs.weights(util))
+    k = len(u_grid)
     coll = collateral_usd * w[None, :] * np.ones((n, 1))  # collateral USD per bucket, price 1
-    D = coll * (UTIL[None, :] * L)
+    D = coll * (u_grid[None, :] * L)
     T = coll.copy()
     debt_pre = D.sum(1)
     sf = stress_fraction(gap_var_bps)  # (n,)
@@ -169,7 +171,7 @@ def simulate_book(x_bps, oc_bps, gap_var_bps, tier_lltv, depth, collateral_usd, 
         trig = sf[:, None] * T
         flagged0 = D > trig + 1e-9
         flagged_share = (w[None, :] * flagged0).sum(1)
-        target = np.maximum(capfrac - MARGIN, 0.0)[:, None] * np.ones((1, K))
+        target = np.maximum(capfrac - MARGIN, 0.0)[:, None] * np.ones((1, k))
         r_full = required_repay(D, T, target, fee)
         flagged_debt = (np.where(flagged0, r_full, 0.0)).sum(1)
         order = np.argsort(-(D / np.maximum(T, 1e-12)), axis=1, kind="stable")
@@ -198,7 +200,7 @@ def simulate_book(x_bps, oc_bps, gap_var_bps, tier_lltv, depth, collateral_usd, 
                 trimmed_any[:, j] |= seize > 0
             peak_round = np.maximum(peak_round, sold)
         # borrower-weight share trimmed (weights follow the sorted order)
-        ws = np.take_along_axis(np.broadcast_to(w[None, :], (n, K)), order, 1)
+        ws = np.take_along_axis(np.broadcast_to(w[None, :], (n, k)), order, 1)
         executed_share = (ws * trimmed_any).sum(1)
         order = np.argsort(-(Ds / np.maximum(Ts, 1e-12)), axis=1, kind="stable")
         D, T = np.take_along_axis(Ds, order, 1).copy(), np.take_along_axis(Ts, order, 1).copy()
@@ -231,9 +233,10 @@ def simulate_book(x_bps, oc_bps, gap_var_bps, tier_lltv, depth, collateral_usd, 
             cf = np.where(L_arr[:, j] / np.maximum(ltv, 1e-12) < CRITICAL_HEALTH, CF_CRITICAL,
                           CF_NORMAL)
             avail = np.maximum(cap_r - sold, 0.0)
-            want = np.minimum(cf * Dj * (1.0 + bonus), coll_val)
+            b_eff = _bonus_eff(bonus, coll_val, Dj, nonworsening)
+            want = np.minimum(cf * Dj * (1.0 + b_eff), coll_val)
             seize = np.where(liq, np.minimum(want, avail), 0.0)
-            repay = seize / (1.0 + bonus)
+            repay = seize / (1.0 + b_eff)
             D[:, j] = Dj - repay
             T[:, j] = Tj - seize / px
             sold += seize
@@ -242,12 +245,25 @@ def simulate_book(x_bps, oc_bps, gap_var_bps, tier_lltv, depth, collateral_usd, 
     with np.errstate(divide="ignore", invalid="ignore"):
         ltv = np.where(coll_val > 1e-12, D / coll_val, np.where(D > 1e-12, np.inf, 0.0))
     liq = (D > 1e-12) & (ltv >= L_arr)
-    bad = np.where(liq, np.maximum(0.0, D - coll_val / (1.0 + bonus)),
+    b_fin = _bonus_eff(bonus, coll_val, D, nonworsening)
+    bad = np.where(liq, np.maximum(0.0, D - coll_val / (1.0 + b_fin)),
                    np.maximum(0.0, D - coll_val)).sum(1)
     with np.errstate(invalid="ignore", divide="ignore"):
         lr = np.where(debt_post > 0, bad / debt_post, 0.0)
     return Result(lr, debt_pre, debt_post, bad, flagged_share, executed_share, trimmed, fee_paid,
                   flagged_debt, unexec, pre_notional, peak_round)
+
+
+def _bonus_eff(bonus, coll_val, debt, nonworsening):
+    """Market rule (SundownMarket._planLiquidation): when collateral still exceeds debt the bonus is
+    capped at collateral/debt - 1 so a liquidation never raises the loan-to-value. The M2.2/M2.3
+    default (nonworsening=False) charges the full bonus, which overstates losses on accounts that
+    are liquidated between 1/(1+b) and 100 % LTV."""
+    if not nonworsening:
+        return bonus
+    with np.errstate(divide="ignore", invalid="ignore"):
+        cap = np.where(debt > 1e-12, coll_val / np.maximum(debt, 1e-12) - 1.0, bonus)
+    return np.where(coll_val > debt, np.minimum(bonus, cap), bonus)
 
 
 def collateral_cap_usd(depth) -> float:
