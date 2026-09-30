@@ -1,0 +1,81 @@
+case,ticker,tier_lltv_pct,borrowers,A_flat_tier,B_naive,B_rational,C_flat_weekend_cap,naive_fee_pct_debt_yr,rule_binds
+"base (full sample, v3 depth, fee 2%, bonus 4%)",AAPL,90,uniform,10.793,7.1215,9.1456,8.8105,1.1804,True
+"2018+ windows, shipped full-sample gapVaR (in-sample cap)",AAPL,90,uniform,16.107,10.838,13.744,13.078,1.1796,True
+"2018+ windows, pre-2018 gapVaR (out-of-sample cap)",AAPL,90,uniform,16.107,16.107,16.107,16.107,0,False
+constant-product depth on DexScreener TVL (M2.2 model),AAPL,90,uniform,10.793,7.1215,9.1456,8.8105,1.1804,True
+market 4x the collateral cap,AAPL,90,uniform,10.793,7.1215,9.1456,8.8105,1.1804,True
+market 0.25x the collateral cap,AAPL,90,uniform,10.793,7.1215,9.1456,8.8105,1.1804,True
+bonus 3%,AAPL,90,uniform,8.159,4.7222,6.5098,6.1572,1.1804,True
+bonus 5.5%,AAPL,90,uniform,16.163,11.621,14.105,12.849,1.1804,True
+deleverage fee 3.0%,AAPL,90,uniform,10.793,7.0325,9.1456,8.8105,1.9559,True
+deleverage fee 5.5%,AAPL,90,uniform,10.793,6.6971,9.1456,8.8105,4.8569,True
+"base (full sample, v3 depth, fee 2%, bonus 4%)",AAPL,90,high,28.826,19.254,24.366,23.62,3.2157,True
+"2018+ windows, shipped full-sample gapVaR (in-sample cap)",AAPL,90,high,42.776,29.068,36.381,34.898,3.2136,True
+"2018+ windows, pre-2018 gapVaR (out-of-sample cap)",AAPL,90,high,42.776,42.776,42.776,42.776,0,False
+constant-product depth on DexScreener TVL (M2.2 model),AAPL,90,high,28.826,19.254,24.366,23.62,3.2157,True
+market 4x the collateral cap,AAPL,90,high,28.826,19.254,24.366,23.62,3.2157,True
+market 0.25x the collateral cap,AAPL,90,high,28.826,19.254,24.366,23.62,3.2157,True
+bonus 3%,AAPL,90,high,21.91,12.834,17.438,16.654,3.2157,True
+bonus 5.5%,AAPL,90,high,42.923,31.201,37.359,34.238,3.2157,True
+deleverage fee 3.0%,AAPL,90,high,28.826,19.052,24.366,23.62,5.3285,True
+deleverage fee 5.5%,AAPL,90,high,28.826,18.282,24.366,23.62,13.232,True
+"base (full sample, v3 depth, fee 2%, bonus 4%)",AAPL,93,uniform,28.312,10.432,15.061,8.8105,4.3377,True
+"2018+ windows, shipped full-sample gapVaR (in-sample cap)",AAPL,93,uniform,41.127,14.642,20.951,13.078,4.3383,True
+"2018+ windows, pre-2018 gapVaR (out-of-sample cap)",AAPL,93,uniform,41.127,40.225,41.016,41.127,0.14793,True
+constant-product depth on DexScreener TVL (M2.2 model),AAPL,93,uniform,28.312,10.432,15.061,8.8105,4.3377,True
+market 4x the collateral cap,AAPL,93,uniform,28.312,10.432,15.061,8.8105,4.3377,True
+market 0.25x the collateral cap,AAPL,93,uniform,28.312,10.432,15.061,8.8105,4.3377,True
+bonus 3%,AAPL,93,uniform,21.453,6.2537,9.9875,6.1572,4.3377,True
+bonus 5.5%,AAPL,93,uniform,49.244,17.902,24.693,12.849,4.3377,True
+deleverage fee 3.0%,AAPL,93,uniform,28.312,10.078,15.061,8.8105,7.2118,True
+deleverage fee 5.5%,AAPL,93,uniform,28.312,8.6543,15.061,8.8105,18.223,True
+"base (full sample, v3 depth, fee 2%, bonus 4%)",AAPL,93,high,74.522,27.768,38.63,23.62,11.817,True
+"2018+ windows, shipped full-sample gapVaR (in-sample cap)",AAPL,93,high,108.29,38.93,53.625,34.898,11.819,True
+"2018+ windows, pre-2018 gapVaR (out-of-sample cap)",AAPL,93,high,108.29,105.93,107.99,108.29,0.403,True
+constant-product depth on DexScreener TVL (M2.2 model),AAPL,93,high,74.507,27.768,38.614,23.62,11.817,True
+market 4x the collateral cap,AAPL,93,high,74.522,27.768,38.63,23.62,11.817,True
+market 0.25x the collateral cap,AAPL,93,high,74.522,27.768,38.63,23.62,11.817,True
+bonus 3%,AAPL,93,high,56.807,16.638,25.717,16.654,11.817,True
+bonus 5.5%,AAPL,93,high,129.34,47.079,62.765,34.238,11.817,True
+deleverage fee 3.0%,AAPL,93,high,74.522,26.958,38.63,23.62,19.647,True
+deleverage fee 5.5%,AAPL,93,high,74.522,23.542,38.63,23.62,49.647,True
+"base (full sample, v3 depth, fee 2%, bonus 4%)",SPY,90,uniform,3.1041,3.1041,3.1041,3.1041,0,False
+"2018+ windows, shipped full-sample gapVaR (in-sample cap)",SPY,90,uniform,5.9377,5.9377,5.9377,5.9377,0,False
+"2018+ windows, pre-2018 gapVaR (out-of-sample cap)",SPY,90,uniform,5.9377,5.9377,5.9377,5.9377,0,False
+constant-product depth on DexScreener TVL (M2.2 model),SPY,90,uniform,3.1041,3.1041,3.1041,3.1041,0,False
+market 4x the collateral cap,SPY,90,uniform,3.1041,3.1041,3.1041,3.1041,0,False
+market 0.25x the collateral cap,SPY,90,uniform,3.1041,3.1041,3.1041,3.1041,0,False
+bonus 3%,SPY,90,uniform,2.0276,2.0276,2.0276,2.0276,0,False
+bonus 5.5%,SPY,90,uniform,5.1773,5.1773,5.1773,5.1773,0,False
+deleverage fee 3.0%,SPY,90,uniform,3.1041,3.1041,3.1041,3.1041,0,False
+deleverage fee 5.5%,SPY,90,uniform,3.1041,3.1041,3.1041,3.1041,0,False
+"base (full sample, v3 depth, fee 2%, bonus 4%)",SPY,90,high,8.4566,8.4566,8.4566,8.4566,0,False
+"2018+ windows, shipped full-sample gapVaR (in-sample cap)",SPY,90,high,16.176,16.176,16.176,16.176,0,False
+"2018+ windows, pre-2018 gapVaR (out-of-sample cap)",SPY,90,high,16.176,16.176,16.176,16.176,0,False
+constant-product depth on DexScreener TVL (M2.2 model),SPY,90,high,8.4566,8.4566,8.4566,8.4566,0,False
+market 4x the collateral cap,SPY,90,high,8.4566,8.4566,8.4566,8.4566,0,False
+market 0.25x the collateral cap,SPY,90,high,8.4566,8.4566,8.4566,8.4566,0,False
+bonus 3%,SPY,90,high,5.524,5.524,5.524,5.524,0,False
+bonus 5.5%,SPY,90,high,13.907,13.907,13.907,13.907,0,False
+deleverage fee 3.0%,SPY,90,high,8.4566,8.4566,8.4566,8.4566,0,False
+deleverage fee 5.5%,SPY,90,high,8.4566,8.4566,8.4566,8.4566,0,False
+"base (full sample, v3 depth, fee 2%, bonus 4%)",SPY,93,uniform,9.5841,9.5841,9.5841,9.5841,0,False
+"2018+ windows, shipped full-sample gapVaR (in-sample cap)",SPY,93,uniform,16.139,16.139,16.139,16.139,0,False
+"2018+ windows, pre-2018 gapVaR (out-of-sample cap)",SPY,93,uniform,16.139,16.139,16.139,16.139,0,False
+constant-product depth on DexScreener TVL (M2.2 model),SPY,93,uniform,9.5841,9.5841,9.5841,9.5841,0,False
+market 4x the collateral cap,SPY,93,uniform,9.5841,9.5841,9.5841,9.5841,0,False
+market 0.25x the collateral cap,SPY,93,uniform,9.5841,9.5841,9.5841,9.5841,0,False
+bonus 3%,SPY,93,uniform,7.1059,7.1059,7.1059,7.1059,0,False
+bonus 5.5%,SPY,93,uniform,16.986,16.986,16.986,16.986,0,False
+deleverage fee 3.0%,SPY,93,uniform,9.5841,9.5841,9.5841,9.5841,0,False
+deleverage fee 5.5%,SPY,93,uniform,9.5841,9.5841,9.5841,9.5841,0,False
+"base (full sample, v3 depth, fee 2%, bonus 4%)",SPY,93,high,25.416,25.416,25.416,25.416,0,False
+"2018+ windows, shipped full-sample gapVaR (in-sample cap)",SPY,93,high,42.64,42.64,42.64,42.64,0,False
+"2018+ windows, pre-2018 gapVaR (out-of-sample cap)",SPY,93,high,42.64,42.64,42.64,42.64,0,False
+constant-product depth on DexScreener TVL (M2.2 model),SPY,93,high,25.416,25.416,25.416,25.416,0,False
+market 4x the collateral cap,SPY,93,high,25.416,25.416,25.416,25.416,0,False
+market 0.25x the collateral cap,SPY,93,high,25.416,25.416,25.416,25.416,0,False
+bonus 3%,SPY,93,high,18.923,18.923,18.923,18.923,0,False
+bonus 5.5%,SPY,93,high,45.001,45.001,45.001,45.001,0,False
+deleverage fee 3.0%,SPY,93,high,25.416,25.416,25.416,25.416,0,False
+deleverage fee 5.5%,SPY,93,high,25.416,25.416,25.416,25.416,0,False
