@@ -26,7 +26,7 @@ Run: `python sim/prepare_replay.py`, then `cd contracts && forge test --match-te
 ## Limits (read before quoting any number)
 
 - The harness runs in forge's in-process EVM (the same engine anvil runs), not an anvil process; time moves with `vm.warp`. Nothing is broadcast to any network.
-- Blind windows are a window-cache fixture placed at synthetic times with the event's class and length, because the on-chain calendar covers 2024 onward and most of the worst events are older. The oracle, market and guard are the production contracts.
+- Blind windows are a window-cache fixture placed at synthetic times with the event's class and length, because the on-chain calendar library accepts 2020-2040 but is differentially validated against the independent oracle only for 2024-2035, and most of the worst events are older or fall in the unvalidated 2020-2023 range. The oracle, market and guard are the production contracts.
 - Prices are daily previous-close to next-open gaps (a conservative superset of the oracle-blind exposure), applied as one gap at reopen; no intraday path, no slippage on liquidation, no keeper competition.
 - The borrower population is a modelling choice (leverage-seeking, 20 accounts); lender loss scales with it. No borrower cures during the cure window (the conservative case for the mechanism).
 - Gas cost per deleverage transaction is an assumption (`GAS_USD_PER_TX`), not a measurement.
