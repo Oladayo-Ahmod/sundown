@@ -13,7 +13,7 @@ bytecode_hash = "none"
 # exhaustive differential tests iterate tens of thousands of fixture rows
 gas_limit = 9223372036854775807
 memory_limit = 1073741824
-fs_permissions = [{ access = "read", path = "./test/fixtures" }, { access = "read", path = "../deployments" }, { access = "read", path = "../sim" }]
+fs_permissions = [{ access = "read", path = "./test/fixtures" }, { access = "read", path = "../deployments" }, { access = "read", path = "../sim" }, { access = "write", path = "../deployments/421614.json" }]
 # the simulation-only feed lives in ../sim and is imported by tests and deploy scripts only
 allow_paths = ["../sim"]
 
