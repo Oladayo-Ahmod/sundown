@@ -16,7 +16,16 @@ import urllib.request
 
 
 def cast(*a: str) -> str:
-    return subprocess.run(["cast", *a], capture_output=True, text=True).stdout.strip()
+    """Run cast, retrying RPC errors (public endpoints drop connections). Raises if every attempt fails, so a flaky
+    RPC can never be mistaken for an empty result."""
+    err = ""
+    for _ in range(15):
+        p = subprocess.run(["cast", *a], capture_output=True, text=True)
+        if p.returncode == 0:
+            return p.stdout.strip()
+        err = p.stderr.strip()[:200]
+        time.sleep(2)
+    raise RuntimeError(f"cast {' '.join(a[:2])} failed after retries: {err}")
 
 
 def verified(addr: str, key: str) -> bool:
@@ -38,7 +47,11 @@ def main() -> int:
     impl = contracts.get("SundownMarketImplementation", "").lower()
     bad: list[str] = []
     for name, addr in contracts.items():
-        code = cast("code", addr, "--rpc-url", rpc)
+        try:
+            code = cast("code", addr, "--rpc-url", rpc)
+        except RuntimeError as e:
+            bad.append(f"{name}: RPC error, could not read code ({e})")
+            continue
         if len(code) <= 2:
             bad.append(f"{name}: no code at {addr}")
             continue

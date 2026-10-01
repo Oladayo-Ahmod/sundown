@@ -53,10 +53,34 @@ class Cast:
 
     @staticmethod
     def run(cmd: list[str]) -> str:
-        p = subprocess.run(cmd, capture_output=True, text=True)
+        p = Cast.exec(cmd)
         if p.returncode != 0:
             raise RuntimeError(f"{' '.join(cmd[:3])} failed: {p.stderr.strip()[:400]}")
         return p.stdout
+
+    TRANSPORT = ("error sending request", "connection", "badrecordmac", "timed out", "tcp connect", "dns error")
+
+    @staticmethod
+    def exec(cmd: list[str]) -> subprocess.CompletedProcess:
+        """Run a command with a timeout, retrying only transport errors and hung READ calls of the flaky public RPC.
+        Reverts are never retried. A hung `cast send` is not retried either (it may already be on chain): it raises."""
+        import time
+
+        def once() -> subprocess.CompletedProcess:
+            try:
+                return subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+            except subprocess.TimeoutExpired:
+                if len(cmd) > 1 and cmd[1] == "send":
+                    raise RuntimeError(f"cast send timed out (the transaction may be on chain, check Arbiscan): {' '.join(cmd[:4])}")
+                return subprocess.CompletedProcess(cmd, 124, "", "timed out")
+
+        p = once()
+        for _ in range(10):
+            if p.returncode == 0 or not any(t in p.stderr.lower() for t in Cast.TRANSPORT):
+                break
+            time.sleep(2)
+            p = once()
+        return p
 
     def call(self, to: str, sig: str, *args: str, frm: str | None = None) -> str:
         cmd = ["cast", "call", to, sig, *args, "--rpc-url", self.rpc]
@@ -69,7 +93,7 @@ class Cast:
         cmd = ["cast", "call", to, sig, *args, "--rpc-url", self.rpc]
         if frm:
             cmd += ["--from", frm]
-        p = subprocess.run(cmd, capture_output=True, text=True)
+        p = Cast.exec(cmd)
         if p.returncode == 0:
             return True, p.stdout.strip()
         m = re.search(r'data: "(0x[0-9a-fA-F]*)"', p.stderr) or re.search(r"(0x[0-9a-fA-F]{8,})", p.stderr)
@@ -285,7 +309,11 @@ def main() -> None:
     rep.send(liquidator, S, "approve sUSDG", usdg, "approve(address,uint256)", mk["AAPL_control_93"], MAX)
     debt = first_int(cast.call(mk["AAPL_control_93"], "debtOf(address)(uint256)", borrower.address))
     rcpt = rep.send(liquidator, S, f"liquidate {debt // 2 / 1e6:.2f} sUSDG of the control position", mk["AAPL_control_93"], "liquidate(address,uint256,address)", borrower.address, str(debt // 2), liquidator.address)
-    rep.add(S, "liquidator received", f"{first_int(cast.call(stock['AAPL'], 'balanceOf(address)(uint256)', liquidator.address)) / 1e18:.6f} sAAPL (flat 4 % bonus)")
+    got = first_int(cast.call(stock["AAPL"], "balanceOf(address)(uint256)", liquidator.address)) / 1e18
+    repaid_usd = (debt // 2) / 1e6
+    eff = got * p2 / repaid_usd - 1
+    rep.add(S, "liquidator received", f"{got:.6f} sAAPL = {got * p2:.2f} USD for {repaid_usd:.2f} repaid: effective bonus {eff * 100:.2f} % "
+            f"(the flat 4 % bonus, capped by the market's non-worsening rule at collateral value / debt - 1 when the position is close to insolvent)")
     rep.expect_revert(liquidator, S, "liquidate the session-aware market's position (80 % LTV, still healthy at the new price)", mk["AAPL_boosted_93"], "liquidate(address,uint256,address)", borrower.address, "1000000", liquidator.address)
     rep.send(deployer, S, f"SimEquityFeed(AAPL).publish({int(p * 1e8) / 1e8:.2f})  (price restored)", feed["AAPL"], "publish(int256)", str(int(p * 1e8)))
 
