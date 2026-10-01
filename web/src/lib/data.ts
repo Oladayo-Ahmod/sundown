@@ -16,7 +16,7 @@ export const DEPLOY_ASSETS = ["SPY", "AAPL", "NVDA", "TSLA"] as const;
 export type DeployAsset = (typeof DEPLOY_ASSETS)[number];
 
 export const MARKET_RULE = "market rule (deployed)";
-export const OLD_CONVENTION = "M2.2 convention (upper bound)";
+export const OLD_CONVENTION = "older convention, upper bound";
 
 /** Build-time lookup: a missing row means the research export changed shape, so fail loudly. */
 export function must<T>(value: T | undefined, what: string): T {

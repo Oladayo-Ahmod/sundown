@@ -34,13 +34,13 @@ const SRC = {
   params: "deployments/risk_params.json",
   rates: "research/results/morpho_rates_snapshot.json",
   gv: "research/results/static_gapvar.csv",
-  lend: "research/results/static_rule_lender_marketrule.csv",
-  lendOld: "research/results/static_rule_lender.csv",
-  eq: "research/results/static_rule_equal_risk_marketrule.csv",
+  lend: "research/results/static_rule_lender.csv",
+  lendOld: "research/results/older_convention/static_rule_lender.csv",
+  eq: "research/results/static_rule_equal_risk.csv",
   bor: "research/results/static_rule_borrower.csv",
   keep: "research/results/static_rule_keeper.csv",
   cross: "research/results/static_replay_crosscheck.csv",
-  sens: "research/results/static_rule_sensitivity_marketrule.csv",
+  sens: "research/results/static_rule_sensitivity.csv",
 } as const;
 
 const classOrder = ["Short", "Weekend", "Long"] as const;
@@ -184,7 +184,7 @@ export default function RiskPage() {
           Arms: flat market at the tier LLTV; boosted tier with the rule for borrowers who never adjust (naive) and
           for borrowers who repay to the cap before each window (rational); flat market at the weekend-cap level.
           Primary numbers use the deployed market&apos;s liquidation rule (bonus capped so a liquidation never worsens an
-          account); the earlier convention is an upper bound.
+          account); the older convention (full bonus) is an upper bound.
         </p>
         {([MARKET_RULE, OLD_CONVENTION] as const).map((conv) => (
           <Table key={conv} aria-label={`Lender bad debt, ${conv}`}>
@@ -578,7 +578,7 @@ export default function RiskPage() {
           <SimBadge>Research simulation</SimBadge>
         </div>
         <p className="max-w-3xl text-sm text-muted-foreground">
-          <strong>Time-varying research estimator, not the shipped rule.</strong> Annualised bad debt against base LLTV, 2018 to 2026 (liquidation convention: M2.2, an upper bound). Flat markets (orange) against the stress rule with hard
+          <strong>Time-varying research estimator, not the shipped rule.</strong> Annualised bad debt against base LLTV, 2018 to 2026 (deployed market liquidation rule; the older convention gave higher levels). Flat markets (orange) against the stress rule with hard
           pre-window deleveraging (blue). Points above 86% are counterfactual LLTVs, not observed anywhere; the
           benefit exists only if the cap is enforced on existing debt. Bands and intervals: 95%, clustered by window
           date.
@@ -710,8 +710,8 @@ export default function RiskPage() {
                 below 2% are untested with real keepers.
               </li>
               <li>
-                Absolute bad-debt levels depend on the liquidation convention (the deployed market rule gives 30-60%
-                lower values than the earlier convention); they are not forecasts.
+                Absolute bad-debt levels depend on the liquidation convention (the deployed market rule gives roughly 1-100%
+                lower values than the older convention, depending on the cell); they are not forecasts.
               </li>
             </ul>
           </AlertDescription>

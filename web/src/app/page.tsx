@@ -24,11 +24,11 @@ export default function Home() {
     rates: "research/results/morpho_rates_snapshot.json",
     bt: "research/results/backtest_test_chosen.csv",
     stats: "research/results/class_stats.csv",
-    lend: "research/results/static_rule_lender_marketrule.csv",
+    lend: "research/results/static_rule_lender.csv",
     borrower: "research/results/static_rule_borrower.csv",
     cross: "research/results/static_replay_crosscheck_totals.csv",
     replayDoc: "docs/REPLAY_RESULTS.md",
-    sens: "research/results/static_rule_sensitivity_marketrule.csv",
+    sens: "research/results/static_rule_sensitivity.csv",
   };
   const a93 = lender(MARKET_RULE, "AAPL", 93, "uniform", "A flat");
   const n93 = lender(MARKET_RULE, "AAPL", 93, "uniform", "B boosted + rule, naive");
@@ -154,7 +154,7 @@ export default function Home() {
                 <p>
                   Worst single window: <N src={src.credit}>{pct(h.flat.worst_window_pct_86)}</N> of debt.{" "}
                   <N src={src.conc}>{pct(h.flat.mar2020_share_pct_86, 0)}</N> of the 86% loss is one episode, March
-                  2020. These levels use a conservative liquidation convention (upper bounds, see claim 2).
+                  2020. These levels use the deployed market&apos;s liquidation rule; the older full-bonus convention gave about 4.5 bps/yr (an upper bound).
                 </p>
                 <Sources files={[src.credit, src.flat, src.conc]} />
               </CardContent>
@@ -260,7 +260,7 @@ export default function Home() {
               </li>
               <li>
                 That the shipped rule is safer than a flat market at the weekend-cap level, or that the earlier
-                time-varying estimator&apos;s results (+2.6 pp LTV, 41% bad-debt reduction) describe it.
+                time-varying estimator&apos;s results (+2.4 pp LTV, 45% bad-debt reduction) describe it.
               </li>
               <li>
                 That our 99% gap-VaR is calibrated: out of sample it realises{" "}
