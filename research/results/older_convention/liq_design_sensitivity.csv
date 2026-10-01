@@ -1,0 +1,37 @@
+case,lltv,design,bad_bps_yr_mean_deploy4,max_asset,max_asset_bps_yr
+base,0.86,flat 5.5% CF100,12.448,TSLA,22.638
+base,0.86,dutch 60min,12.448,TSLA,22.638
+base,0.86,cap 5% of depth,12.484,TSLA,22.796
+base,0.93,flat 5.5% CF100,119.75,TSLA,202.92
+base,0.93,dutch 60min,119.75,TSLA,202.92
+base,0.93,cap 5% of depth,119.84,TSLA,203.29
+concentration 5.0x,0.86,flat 5.5% CF100,12.386,TSLA,21.873
+concentration 5.0x,0.86,dutch 60min,12.386,TSLA,21.873
+concentration 5.0x,0.86,cap 5% of depth,12.386,TSLA,21.873
+concentration 5.0x,0.93,flat 5.5% CF100,119.57,TSLA,201.57
+concentration 5.0x,0.93,dutch 60min,119.57,TSLA,201.57
+concentration 5.0x,0.93,cap 5% of depth,119.57,TSLA,201.57
+concentration 15.0x,0.86,flat 5.5% CF100,12.386,TSLA,21.873
+concentration 15.0x,0.86,dutch 60min,12.386,TSLA,21.873
+concentration 15.0x,0.86,cap 5% of depth,12.386,TSLA,21.873
+concentration 15.0x,0.93,flat 5.5% CF100,119.57,TSLA,201.57
+concentration 15.0x,0.93,dutch 60min,119.57,TSLA,201.57
+concentration 15.0x,0.93,cap 5% of depth,119.57,TSLA,201.57
+market debt 0.1xTVL,0.86,flat 5.5% CF100,12.386,TSLA,21.873
+market debt 0.1xTVL,0.86,dutch 60min,12.386,TSLA,21.873
+market debt 0.1xTVL,0.86,cap 5% of depth,12.386,TSLA,21.873
+market debt 0.1xTVL,0.93,flat 5.5% CF100,119.57,TSLA,201.57
+market debt 0.1xTVL,0.93,dutch 60min,119.57,TSLA,201.57
+market debt 0.1xTVL,0.93,cap 5% of depth,119.63,TSLA,201.7
+market debt 1.0xTVL,0.86,flat 5.5% CF100,13.57,TSLA,26.72
+market debt 1.0xTVL,0.86,dutch 60min,13.57,TSLA,26.72
+market debt 1.0xTVL,0.86,cap 5% of depth,14.126,TSLA,28.188
+market debt 1.0xTVL,0.93,flat 5.5% CF100,124.06,TSLA,218.8
+market debt 1.0xTVL,0.93,dutch 60min,123.98,TSLA,218.08
+market debt 1.0xTVL,0.93,cap 5% of depth,125.9,TSLA,224.25
+borrowers near max LTV,0.86,flat 5.5% CF100,34.415,TSLA,64.844
+borrowers near max LTV,0.86,dutch 60min,34.415,TSLA,64.844
+borrowers near max LTV,0.86,cap 5% of depth,34.729,TSLA,66.143
+borrowers near max LTV,0.93,flat 5.5% CF100,313.31,TSLA,539.13
+borrowers near max LTV,0.93,dutch 60min,313.4,TSLA,538.5
+borrowers near max LTV,0.93,cap 5% of depth,314.29,TSLA,542.68

@@ -2,342 +2,342 @@ group,case,control,kind,control_bad_debt_pct,treat_bad_debt_pct,control_p99_pct,
 DEPLOY4,baseline,morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,baseline,morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,baseline,morpho_77,in_the_wild,0,0,0,0,0,0,0.00245161,0.00112064,0.000233486
-DEPLOY4,baseline,morpho_86,in_the_wild,0.00155953,0.00124208,0,0,0.423702,0.423702,0.131207,0.0618751,0.0149789
+DEPLOY4,baseline,morpho_86,in_the_wild,0.000937557,0.000723779,0,0,0.423555,0.423555,0.131207,0.0618751,0.0149789
 DEPLOY4,baseline,aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,baseline,aave_79,in_the_wild,0,0,0,0,0,0,0.00830973,0.00396688,0.000815795
-DEPLOY4,baseline,cf_90,counterfactual,0.00436975,0.00301176,0,0,0.961982,0.855406,0.504891,0.238549,0.0596739
-DEPLOY4,baseline,cf_93,counterfactual,0.00793928,0.00408218,0.199971,0,1.3737,0.953814,1.27356,0.599973,0.153449
-DEPLOY4,baseline,cf_95,counterfactual,0.0119785,0.00452698,0.340322,0.0218956,1.73194,0.977809,2.19321,1.02918,0.269194
+DEPLOY4,baseline,cf_90,counterfactual,0.00342183,0.00216065,0,0,0.741853,0.724891,0.504891,0.238549,0.0596739
+DEPLOY4,baseline,cf_93,counterfactual,0.00743628,0.00364153,0.156708,0,1.37191,0.917207,1.27356,0.599973,0.153449
+DEPLOY4,baseline,cf_95,counterfactual,0.0108189,0.00414124,0.340322,0,1.64251,0.970336,2.19321,1.02918,0.269194
 DEPLOY4,VaR quantile 0.95,morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,VaR quantile 0.95,morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,VaR quantile 0.95,morpho_77,in_the_wild,0,0,0,0,0,0,0,0,0
-DEPLOY4,VaR quantile 0.95,morpho_86,in_the_wild,0.00155953,0.00155953,0,0,0.423702,0.423702,0.000749879,0.000451995,7.14171e-05
+DEPLOY4,VaR quantile 0.95,morpho_86,in_the_wild,0.000937557,0.000937558,0,0,0.423555,0.423555,0.000749879,0.000451995,7.14171e-05
 DEPLOY4,VaR quantile 0.95,aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,VaR quantile 0.95,aave_79,in_the_wild,0,0,0,0,0,0,0,0,0
-DEPLOY4,VaR quantile 0.95,cf_90,counterfactual,0.00436975,0.00428173,0,0,0.961982,0.961982,0.0198757,0.0101352,0.00193367
-DEPLOY4,VaR quantile 0.95,cf_93,counterfactual,0.00793928,0.00738151,0.199971,0.187616,1.3737,1.36627,0.150725,0.0741265,0.0148857
-DEPLOY4,VaR quantile 0.95,cf_95,counterfactual,0.0119785,0.00964308,0.340322,0.226185,1.73194,1.60275,0.500027,0.240517,0.0497926
+DEPLOY4,VaR quantile 0.95,cf_90,counterfactual,0.00342183,0.0033338,0,0,0.741853,0.741853,0.0198757,0.0101352,0.00193367
+DEPLOY4,VaR quantile 0.95,cf_93,counterfactual,0.00743628,0.00668169,0.156708,1.13694e-15,1.37191,1.36232,0.150725,0.0741265,0.0148857
+DEPLOY4,VaR quantile 0.95,cf_95,counterfactual,0.0108189,0.00861065,0.340322,0.226185,1.64251,1.59529,0.500027,0.240517,0.0497926
 DEPLOY4,VaR quantile 0.995,morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,VaR quantile 0.995,morpho_62.5,in_the_wild,0,0,0,0,0,0,0.00320077,0.00192929,0.000362171
 DEPLOY4,VaR quantile 0.995,morpho_77,in_the_wild,0,0,0,0,0,0,0.0990113,0.0519087,0.0150239
-DEPLOY4,VaR quantile 0.995,morpho_86,in_the_wild,0.00155953,0.000636979,0,0,0.423702,0.254063,0.758281,0.377843,0.113065
+DEPLOY4,VaR quantile 0.995,morpho_86,in_the_wild,0.000937557,0.000466799,0,0,0.423555,0.0322633,0.758281,0.377843,0.113065
 DEPLOY4,VaR quantile 0.995,aave_65,in_the_wild,0,0,0,0,0,0,0.00507671,0.00306002,0.000719492
 DEPLOY4,VaR quantile 0.995,aave_79,in_the_wild,0,0,0,0,0,0,0.159944,0.0826049,0.0239312
-DEPLOY4,VaR quantile 0.995,cf_90,counterfactual,0.00436975,0.00159099,0,0,0.961982,0.49524,1.69501,0.827294,0.255342
-DEPLOY4,VaR quantile 0.995,cf_93,counterfactual,0.00793928,0.00219952,0.199971,0,1.3737,0.620799,2.94496,1.42264,0.449829
-DEPLOY4,VaR quantile 0.995,cf_95,counterfactual,0.0119785,0.00229468,0.340322,0,1.73194,0.643494,4.22684,2.02695,0.649861
+DEPLOY4,VaR quantile 0.995,cf_90,counterfactual,0.00342183,0.00112014,0,0,0.741853,0.41624,1.69501,0.827294,0.255342
+DEPLOY4,VaR quantile 0.995,cf_93,counterfactual,0.00743628,0.00201328,0.156708,0,1.37191,0.619005,2.94496,1.42264,0.449829
+DEPLOY4,VaR quantile 0.995,cf_95,counterfactual,0.0108189,0.00207713,0.340322,0,1.64251,0.53978,4.22684,2.02695,0.649861
 DEPLOY4,VaR quantile 0.999,morpho_38.5,in_the_wild,0,0,0,0,0,0,0.155625,0.070353,0.0661292
 DEPLOY4,VaR quantile 0.999,morpho_62.5,in_the_wild,0,0,0,0,0,0,1.34706,0.613847,0.452896
 DEPLOY4,VaR quantile 0.999,morpho_77,in_the_wild,0,0,0,0,0,0,4.2771,1.95989,1.31019
-DEPLOY4,VaR quantile 0.999,morpho_86,in_the_wild,0.00155953,0,0,0,0.423702,0,8.06908,3.70213,2.42505
+DEPLOY4,VaR quantile 0.999,morpho_86,in_the_wild,0.000937557,0,0,0,0.423555,0,8.06908,3.70213,2.42505
 DEPLOY4,VaR quantile 0.999,aave_65,in_the_wild,0,0,0,0,0,0,1.64813,0.751791,0.546202
 DEPLOY4,VaR quantile 0.999,aave_79,in_the_wild,0,0,0,0,0,0,4.95474,2.27188,1.5086
-DEPLOY4,VaR quantile 0.999,cf_90,counterfactual,0.00436975,0,0,0,0.961982,0,10.6191,4.87712,3.14858
-DEPLOY4,VaR quantile 0.999,cf_93,counterfactual,0.00793928,0,0.199971,0,1.3737,0,12.9985,5.97847,3.81478
-DEPLOY4,VaR quantile 0.999,cf_95,counterfactual,0.0119785,0,0.340322,0,1.73194,0,14.7323,6.7828,4.31798
+DEPLOY4,VaR quantile 0.999,cf_90,counterfactual,0.00342183,0,0,0,0.741853,0,10.6191,4.87712,3.14858
+DEPLOY4,VaR quantile 0.999,cf_93,counterfactual,0.00743628,0,0.156708,0,1.37191,0,12.9985,5.97847,3.81478
+DEPLOY4,VaR quantile 0.999,cf_95,counterfactual,0.0108189,0,0.340322,0,1.64251,0,14.7323,6.7828,4.31798
 DEPLOY4,adverse oracle staleness 25bps,morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,adverse oracle staleness 25bps,morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,adverse oracle staleness 25bps,morpho_77,in_the_wild,0,0,0,0,0,0,0.00245161,0.00112064,0.000233486
-DEPLOY4,adverse oracle staleness 25bps,morpho_86,in_the_wild,0.00170253,0.00137329,0,0,0.448133,0.448133,0.131207,0.0618751,0.0149789
+DEPLOY4,adverse oracle staleness 25bps,morpho_86,in_the_wild,0.00120122,0.000759013,0,0,0.446249,0.446249,0.131207,0.0618751,0.0149789
 DEPLOY4,adverse oracle staleness 25bps,aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,adverse oracle staleness 25bps,aave_79,in_the_wild,0,0,0,0,0,0,0.00830973,0.00396688,0.000815795
-DEPLOY4,adverse oracle staleness 25bps,cf_90,counterfactual,0.00468717,0.00326111,0.00398511,0,1.0059,0.899105,0.504891,0.238549,0.0596739
-DEPLOY4,adverse oracle staleness 25bps,cf_93,counterfactual,0.00842435,0.00443748,0.223222,0.00997472,1.41823,1.01641,1.27356,0.599973,0.153449
-DEPLOY4,adverse oracle staleness 25bps,cf_95,counterfactual,0.0129305,0.00496352,0.363224,0.0448958,1.79531,1.04132,2.19321,1.02918,0.269194
+DEPLOY4,adverse oracle staleness 25bps,cf_90,counterfactual,0.00371138,0.00226446,0,0,0.76549,0.748531,0.504891,0.238549,0.0596739
+DEPLOY4,adverse oracle staleness 25bps,cf_93,counterfactual,0.0078683,0.00383654,0.223222,0,1.4148,0.960039,1.27356,0.599973,0.153449
+DEPLOY4,adverse oracle staleness 25bps,cf_95,counterfactual,0.0114457,0.00439042,0.363224,0,1.68637,1.03222,2.19321,1.02918,0.269194
 DEPLOY4,adverse oracle staleness 50bps,morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,adverse oracle staleness 50bps,morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,adverse oracle staleness 50bps,morpho_77,in_the_wild,0,0,0,0,0,0,0.00245161,0.00112064,0.000233486
-DEPLOY4,adverse oracle staleness 50bps,morpho_86,in_the_wild,0.00184729,0.00150632,0,0,0.472442,0.472442,0.131207,0.0618751,0.0149789
+DEPLOY4,adverse oracle staleness 50bps,morpho_86,in_the_wild,0.0012598,0.00079407,0,0,0.46883,0.46883,0.131207,0.0618751,0.0149789
 DEPLOY4,adverse oracle staleness 50bps,aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,adverse oracle staleness 50bps,aave_79,in_the_wild,0,0,0,0,0,0,0.00830973,0.00396688,0.000815795
-DEPLOY4,adverse oracle staleness 50bps,cf_90,counterfactual,0.00502219,0.00351885,0.0252408,0,1.04959,0.942587,0.504891,0.238549,0.0596739
-DEPLOY4,adverse oracle staleness 50bps,cf_93,counterfactual,0.00894758,0.00482354,0.246358,0.033641,1.47194,1.07948,1.27356,0.599973,0.153449
-DEPLOY4,adverse oracle staleness 50bps,cf_95,counterfactual,0.0139816,0.00546052,0.386011,0.0718806,1.85836,1.10452,2.19321,1.02918,0.269194
+DEPLOY4,adverse oracle staleness 50bps,cf_90,counterfactual,0.00415072,0.00251458,0,0,1.04959,0.942587,0.504891,0.238549,0.0596739
+DEPLOY4,adverse oracle staleness 50bps,cf_93,counterfactual,0.00830492,0.00403058,0.246358,0,1.45748,1.00266,1.27356,0.599973,0.153449
+DEPLOY4,adverse oracle staleness 50bps,cf_95,counterfactual,0.0123895,0.00478913,0.386011,0,1.85836,1.10452,2.19321,1.02918,0.269194
 DEPLOY4,no oracle buffer in cap (staleness 50bps hits),morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,no oracle buffer in cap (staleness 50bps hits),morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,no oracle buffer in cap (staleness 50bps hits),morpho_77,in_the_wild,0,0,0,0,0,0,0.00168678,0.00076254,0.000160646
-DEPLOY4,no oracle buffer in cap (staleness 50bps hits),morpho_86,in_the_wild,0.00184729,0.00156118,0,0,0.472442,0.472442,0.108566,0.051223,0.0123063
+DEPLOY4,no oracle buffer in cap (staleness 50bps hits),morpho_86,in_the_wild,0.0012598,0.00102247,0,0,0.46883,0.46883,0.108566,0.051223,0.0123063
 DEPLOY4,no oracle buffer in cap (staleness 50bps hits),aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,no oracle buffer in cap (staleness 50bps hits),aave_79,in_the_wild,0,0,0,0,0,0,0.00661285,0.0031502,0.000629795
-DEPLOY4,no oracle buffer in cap (staleness 50bps hits),cf_90,counterfactual,0.00502219,0.00363265,0.0252408,0,1.04959,0.991065,0.427434,0.201738,0.050281
-DEPLOY4,no oracle buffer in cap (staleness 50bps hits),cf_93,counterfactual,0.00894758,0.00524842,0.246358,0.047648,1.47194,1.17351,1.0997,0.518614,0.131628
-DEPLOY4,no oracle buffer in cap (staleness 50bps hits),cf_95,counterfactual,0.0139816,0.00606393,0.386011,0.112833,1.85836,1.20071,1.90632,0.895421,0.232384
+DEPLOY4,no oracle buffer in cap (staleness 50bps hits),cf_90,counterfactual,0.00415072,0.00273373,0,0,1.04959,0.991065,0.427434,0.201738,0.050281
+DEPLOY4,no oracle buffer in cap (staleness 50bps hits),cf_93,counterfactual,0.00830492,0.00450576,0.246358,0,1.45748,1.09677,1.0997,0.518614,0.131628
+DEPLOY4,no oracle buffer in cap (staleness 50bps hits),cf_95,counterfactual,0.0123895,0.00538264,0.386011,0,1.85836,1.20071,1.90632,0.895421,0.232384
 DEPLOY4,oracle buffer 50 + staleness 50 (cap covers it),morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,oracle buffer 50 + staleness 50 (cap covers it),morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,oracle buffer 50 + staleness 50 (cap covers it),morpho_77,in_the_wild,0,0,0,0,0,0,0.00245161,0.00112064,0.000233486
-DEPLOY4,oracle buffer 50 + staleness 50 (cap covers it),morpho_86,in_the_wild,0.00184729,0.00150632,0,0,0.472442,0.472442,0.131207,0.0618751,0.0149789
+DEPLOY4,oracle buffer 50 + staleness 50 (cap covers it),morpho_86,in_the_wild,0.0012598,0.00079407,0,0,0.46883,0.46883,0.131207,0.0618751,0.0149789
 DEPLOY4,oracle buffer 50 + staleness 50 (cap covers it),aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,oracle buffer 50 + staleness 50 (cap covers it),aave_79,in_the_wild,0,0,0,0,0,0,0.00830973,0.00396688,0.000815795
-DEPLOY4,oracle buffer 50 + staleness 50 (cap covers it),cf_90,counterfactual,0.00502219,0.00351885,0.0252408,0,1.04959,0.942587,0.504891,0.238549,0.0596739
-DEPLOY4,oracle buffer 50 + staleness 50 (cap covers it),cf_93,counterfactual,0.00894758,0.00482354,0.246358,0.033641,1.47194,1.07948,1.27356,0.599973,0.153449
-DEPLOY4,oracle buffer 50 + staleness 50 (cap covers it),cf_95,counterfactual,0.0139816,0.00546052,0.386011,0.0718806,1.85836,1.10452,2.19321,1.02918,0.269194
+DEPLOY4,oracle buffer 50 + staleness 50 (cap covers it),cf_90,counterfactual,0.00415072,0.00251458,0,0,1.04959,0.942587,0.504891,0.238549,0.0596739
+DEPLOY4,oracle buffer 50 + staleness 50 (cap covers it),cf_93,counterfactual,0.00830492,0.00403058,0.246358,0,1.45748,1.00266,1.27356,0.599973,0.153449
+DEPLOY4,oracle buffer 50 + staleness 50 (cap covers it),cf_95,counterfactual,0.0123895,0.00478913,0.386011,0,1.85836,1.10452,2.19321,1.02918,0.269194
 DEPLOY4,safety buffer 0bps,morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,safety buffer 0bps,morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,safety buffer 0bps,morpho_77,in_the_wild,0,0,0,0,0,0,0.00101178,0.000457394,9.63602e-05
-DEPLOY4,safety buffer 0bps,morpho_86,in_the_wild,0.00155953,0.0013257,0,0,0.423702,0.423702,0.08989,0.0424504,0.0101679
+DEPLOY4,safety buffer 0bps,morpho_86,in_the_wild,0.000937557,0.000723745,0,0,0.423555,0.423555,0.08989,0.0424504,0.0101679
 DEPLOY4,safety buffer 0bps,aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,safety buffer 0bps,aave_79,in_the_wild,0,0,0,0,0,0,0.00502119,0.00238109,0.000478208
-DEPLOY4,safety buffer 0bps,cf_90,counterfactual,0.00436975,0.00324097,0,0,0.961982,0.952395,0.361655,0.1705,0.0423228
-DEPLOY4,safety buffer 0bps,cf_93,counterfactual,0.00793928,0.00486478,0.199971,0.00452191,1.3737,1.11991,0.942954,0.445108,0.112169
-DEPLOY4,safety buffer 0bps,cf_95,counterfactual,0.0119785,0.00565741,0.340322,0.110361,1.73194,1.17025,1.65765,0.77925,0.200719
+DEPLOY4,safety buffer 0bps,cf_90,counterfactual,0.00342183,0.00243933,0,0,0.741853,0.732982,0.361655,0.1705,0.0423228
+DEPLOY4,safety buffer 0bps,cf_93,counterfactual,0.00743628,0.00434229,0.156708,0,1.37191,1.08336,0.942954,0.445108,0.112169
+DEPLOY4,safety buffer 0bps,cf_95,counterfactual,0.0108189,0.00496202,0.340322,0,1.64251,1.16279,1.65765,0.77925,0.200719
 DEPLOY4,safety buffer 200bps,morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,safety buffer 200bps,morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,safety buffer 200bps,morpho_77,in_the_wild,0,0,0,0,0,0,0.00515161,0.00244294,0.000490629
-DEPLOY4,safety buffer 200bps,morpho_86,in_the_wild,0.00155953,0.00117539,0,0,0.423702,0.423702,0.188817,0.0890387,0.021853
+DEPLOY4,safety buffer 200bps,morpho_86,in_the_wild,0.000937557,0.000723829,0,0,0.423555,0.423555,0.188817,0.0890387,0.021853
 DEPLOY4,safety buffer 200bps,aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,safety buffer 200bps,aave_79,in_the_wild,0,0,0,0,0,0,0.0129357,0.00615729,0.00133216
-DEPLOY4,safety buffer 200bps,cf_90,counterfactual,0.00436975,0.00268307,0,0,0.961982,0.75821,0.704457,0.33295,0.084137
-DEPLOY4,safety buffer 200bps,cf_93,counterfactual,0.00793928,0.00323333,0.199971,0,1.3737,0.792484,1.6933,0.796008,0.206935
-DEPLOY4,safety buffer 200bps,cf_95,counterfactual,0.0119785,0.00344855,0.340322,0,1.73194,0.870556,2.89663,1.35712,0.360714
+DEPLOY4,safety buffer 200bps,cf_90,counterfactual,0.00342183,0.00177899,0,0,0.741853,0.716783,0.704457,0.33295,0.084137
+DEPLOY4,safety buffer 200bps,cf_93,counterfactual,0.00743628,0.00280285,0.156708,0,1.37191,0.792484,1.6933,0.796008,0.206935
+DEPLOY4,safety buffer 200bps,cf_95,counterfactual,0.0108189,0.00307619,0.340322,0,1.64251,0.863075,2.89663,1.35712,0.360714
 DEPLOY4,safety buffer 500bps,morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,safety buffer 500bps,morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,safety buffer 500bps,morpho_77,in_the_wild,0,0,0,0,0,0,0.0192869,0.00913818,0.0021089
-DEPLOY4,safety buffer 500bps,morpho_86,in_the_wild,0.00155953,0.000765014,0,0,0.423702,0.26066,0.528375,0.249645,0.0636307
+DEPLOY4,safety buffer 500bps,morpho_86,in_the_wild,0.000937557,0.000466568,0,0,0.423555,0.0322633,0.528375,0.249645,0.0636307
 DEPLOY4,safety buffer 500bps,aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,safety buffer 500bps,aave_79,in_the_wild,0,0,0,0,0,0,0.0433964,0.0204749,0.00497071
-DEPLOY4,safety buffer 500bps,cf_90,counterfactual,0.00436975,0.00134431,0,0,0.961982,0.365127,1.74974,0.822542,0.216923
-DEPLOY4,safety buffer 500bps,cf_93,counterfactual,0.00793928,0.0014004,0.199971,0,1.3737,0.386996,3.87623,1.81354,0.494719
-DEPLOY4,safety buffer 500bps,cf_95,counterfactual,0.0119785,0.0013389,0.340322,0,1.73194,0.364242,5.87764,2.74174,0.775714
+DEPLOY4,safety buffer 500bps,cf_90,counterfactual,0.00342183,0.000783225,0,0,0.741853,0.0484509,1.74974,0.822542,0.216923
+DEPLOY4,safety buffer 500bps,cf_93,counterfactual,0.00743628,0.00114967,0.156708,0,1.37191,0.318824,3.87623,1.81354,0.494719
+DEPLOY4,safety buffer 500bps,cf_95,counterfactual,0.0108189,0.00111585,0.340322,0,1.64251,0.261424,5.87764,2.74174,0.775714
 DEPLOY4,bonus-aware cap,morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,bonus-aware cap,morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,bonus-aware cap,morpho_77,in_the_wild,0,0,0,0,0,0,0.0363664,0.0171498,0.00408641
-DEPLOY4,bonus-aware cap,morpho_86,in_the_wild,0.00155953,0.000787913,0,0,0.423702,0.293512,0.468825,0.221417,0.0553527
+DEPLOY4,bonus-aware cap,morpho_86,in_the_wild,0.000937557,0.00046653,0,0,0.423555,0.0322633,0.468825,0.221417,0.0553527
 DEPLOY4,bonus-aware cap,aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,bonus-aware cap,aave_79,in_the_wild,0,0,0,0,0,0,0.0477232,0.0225484,0.00538271
-DEPLOY4,bonus-aware cap,cf_90,counterfactual,0.00436975,0.0018777,0,0,0.961982,0.54653,1.1987,0.564981,0.144141
-DEPLOY4,bonus-aware cap,cf_93,counterfactual,0.00793928,0.00261801,0.199971,0,1.3737,0.698639,2.19019,1.02777,0.268811
-DEPLOY4,bonus-aware cap,cf_95,counterfactual,0.0119785,0.00309166,0.340322,0,1.73194,0.80445,3.22281,1.50897,0.4011
+DEPLOY4,bonus-aware cap,cf_90,counterfactual,0.00342183,0.00109845,0,0,0.741853,0.415627,1.1987,0.564981,0.144141
+DEPLOY4,bonus-aware cap,cf_93,counterfactual,0.00743628,0.00219799,0.156708,0,1.37191,0.698639,2.19019,1.02777,0.268811
+DEPLOY4,bonus-aware cap,cf_95,counterfactual,0.0108189,0.00271819,0.340322,0,1.64251,0.796966,3.22281,1.50897,0.4011
 DEPLOY4,liquidation bonus 10.0% (slippage proxy),morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,liquidation bonus 10.0% (slippage proxy),morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,liquidation bonus 10.0% (slippage proxy),morpho_77,in_the_wild,0,0,0,0,0,0,0.00245161,0.00112064,0.000233486
-DEPLOY4,liquidation bonus 10.0% (slippage proxy),morpho_86,in_the_wild,0.00718177,0.00653459,0.16105,0.16105,1.30012,1.30012,0.131207,0.0618751,0.0149789
+DEPLOY4,liquidation bonus 10.0% (slippage proxy),morpho_86,in_the_wild,0.00190055,0.00144508,0,0,0.888153,0.888153,0.131207,0.0618751,0.0149789
 DEPLOY4,liquidation bonus 10.0% (slippage proxy),aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
-DEPLOY4,liquidation bonus 10.0% (slippage proxy),aave_79,in_the_wild,0.000362572,0.000362574,0,0,0.122968,0.122968,0.00830973,0.00396688,0.000815795
-DEPLOY4,liquidation bonus 10.0% (slippage proxy),cf_90,counterfactual,0.0338037,0.0286798,0.678155,0.474314,2.38731,2.33592,0.504891,0.238549,0.0596739
-DEPLOY4,liquidation bonus 10.0% (slippage proxy),cf_93,counterfactual,0.165399,0.122867,1.25536,0.929385,3.18588,2.79102,1.27356,0.599973,0.153449
-DEPLOY4,liquidation bonus 10.0% (slippage proxy),cf_95,counterfactual,0.259103,0.148331,1.61991,1.13258,3.69023,2.94052,2.19321,1.02918,0.269194
+DEPLOY4,liquidation bonus 10.0% (slippage proxy),aave_79,in_the_wild,6.95647e-19,6.95652e-19,0,0,0,0,0.00830973,0.00396688,0.000815795
+DEPLOY4,liquidation bonus 10.0% (slippage proxy),cf_90,counterfactual,0.00690578,0.00477468,1.17484e-15,1.17484e-15,1.33704,1.32014,0.504891,0.238549,0.0596739
+DEPLOY4,liquidation bonus 10.0% (slippage proxy),cf_93,counterfactual,0.0166611,0.00922569,0.669182,1.13954e-15,2.60011,2.14586,1.27356,0.599973,0.153449
+DEPLOY4,liquidation bonus 10.0% (slippage proxy),cf_95,counterfactual,0.0253394,0.0118415,1.04805,1.11503e-15,2.998,2.76273,2.19321,1.02918,0.269194
 DEPLOY4,liquidation bonus 15.0% (slippage proxy),morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,liquidation bonus 15.0% (slippage proxy),morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
-DEPLOY4,liquidation bonus 15.0% (slippage proxy),morpho_77,in_the_wild,0.000979523,0.000979525,0,0,0.298139,0.298139,0.00245161,0.00112064,0.000233486
-DEPLOY4,liquidation bonus 15.0% (slippage proxy),morpho_86,in_the_wild,0.03198,0.0306801,0.660062,0.660062,2.36228,2.36228,0.131207,0.0618751,0.0149789
+DEPLOY4,liquidation bonus 15.0% (slippage proxy),morpho_77,in_the_wild,0,0,0,0,0,0,0.00245161,0.00112064,0.000233486
+DEPLOY4,liquidation bonus 15.0% (slippage proxy),morpho_86,in_the_wild,0.00267879,0.002028,1.22948e-15,1.22948e-15,1.26362,1.26362,0.131207,0.0618751,0.0149789
 DEPLOY4,liquidation bonus 15.0% (slippage proxy),aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
-DEPLOY4,liquidation bonus 15.0% (slippage proxy),aave_79,in_the_wild,0.00235686,0.00235688,0,0,0.587211,0.587211,0.00830973,0.00396688,0.000815795
-DEPLOY4,liquidation bonus 15.0% (slippage proxy),cf_90,counterfactual,0.217004,0.196381,1.45612,1.26361,3.46364,3.40699,0.504891,0.238549,0.0596739
-DEPLOY4,liquidation bonus 15.0% (slippage proxy),cf_93,counterfactual,0.358919,0.27469,2.00823,1.68464,4.22748,3.83117,1.27356,0.599973,0.153449
-DEPLOY4,liquidation bonus 15.0% (slippage proxy),cf_95,counterfactual,0.44855,0.263104,2.35693,1.88128,4.70991,3.96251,2.19321,1.02918,0.269194
+DEPLOY4,liquidation bonus 15.0% (slippage proxy),aave_79,in_the_wild,4.86953e-18,4.86957e-18,0,0,1.33842e-15,1.33842e-15,0.00830973,0.00396688,0.000815795
+DEPLOY4,liquidation bonus 15.0% (slippage proxy),cf_90,counterfactual,0.00916662,0.006471,1.17484e-15,1.17534e-15,1.72328,1.70641,0.504891,0.238549,0.0596739
+DEPLOY4,liquidation bonus 15.0% (slippage proxy),cf_93,counterfactual,0.0218767,0.0123829,0.958927,1.13954e-15,3.29451,2.85434,1.27356,0.599973,0.153449
+DEPLOY4,liquidation bonus 15.0% (slippage proxy),cf_95,counterfactual,0.0329002,0.015851,1.41656,1.11503e-15,3.7038,3.47032,2.19321,1.02918,0.269194
 DEPLOY4,borrowers concentrated near max LTV,morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,borrowers concentrated near max LTV,morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,borrowers concentrated near max LTV,morpho_77,in_the_wild,0,0,0,0,0,0,0.00245161,0.00112064,0.000636094
-DEPLOY4,borrowers concentrated near max LTV,morpho_86,in_the_wild,0.00424316,0.00337915,0,0,1.15423,1.15423,0.131207,0.0618751,0.0394229
+DEPLOY4,borrowers concentrated near max LTV,morpho_86,in_the_wild,0.00255422,0.0019723,0,0,1.1539,1.1539,0.131207,0.0618751,0.0394229
 DEPLOY4,borrowers concentrated near max LTV,aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,borrowers concentrated near max LTV,aave_79,in_the_wild,0,0,0,0,0,0,0.00830973,0.00396688,0.00221017
-DEPLOY4,borrowers concentrated near max LTV,cf_90,counterfactual,0.0115183,0.00788687,0,0,2.49801,2.18392,0.504891,0.238549,0.155927
-DEPLOY4,borrowers concentrated near max LTV,cf_93,counterfactual,0.0207323,0.0105469,0.544787,0,3.51442,2.3639,1.27356,0.599973,0.399206
-DEPLOY4,borrowers concentrated near max LTV,cf_95,counterfactual,0.0310666,0.0114124,0.92715,0.0599987,4.33189,2.43829,2.19321,1.02918,0.697685
+DEPLOY4,borrowers concentrated near max LTV,cf_90,counterfactual,0.00916252,0.00573207,0,0,2.00955,1.9634,0.504891,0.238549,0.155927
+DEPLOY4,borrowers concentrated near max LTV,cf_93,counterfactual,0.0194404,0.00945727,0.426925,0,3.51122,2.29777,1.27356,0.599973,0.399206
+DEPLOY4,borrowers concentrated near max LTV,cf_95,counterfactual,0.0280717,0.0104989,0.92715,0,4.17205,2.42489,2.19321,1.02918,0.697685
 DEPLOY4,enforcement 0 (cap on new borrows only),morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,enforcement 0 (cap on new borrows only),morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,enforcement 0 (cap on new borrows only),morpho_77,in_the_wild,0,0,0,0,0,0,0.00245161,0.00112064,0
-DEPLOY4,enforcement 0 (cap on new borrows only),morpho_86,in_the_wild,0.00155953,0.00155953,0,0,0.423702,0.423702,0.131207,0.0618751,0
+DEPLOY4,enforcement 0 (cap on new borrows only),morpho_86,in_the_wild,0.000937557,0.000937557,0,0,0.423555,0.423555,0.131207,0.0618751,0
 DEPLOY4,enforcement 0 (cap on new borrows only),aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,enforcement 0 (cap on new borrows only),aave_79,in_the_wild,0,0,0,0,0,0,0.00830973,0.00396688,0
-DEPLOY4,enforcement 0 (cap on new borrows only),cf_90,counterfactual,0.00436975,0.00436975,0,0,0.961982,0.961982,0.504891,0.238549,0
-DEPLOY4,enforcement 0 (cap on new borrows only),cf_93,counterfactual,0.00793928,0.00793928,0.199971,0.199971,1.3737,1.3737,1.27356,0.599973,0
-DEPLOY4,enforcement 0 (cap on new borrows only),cf_95,counterfactual,0.0119785,0.0119785,0.340322,0.340322,1.73194,1.73194,2.19321,1.02918,0
+DEPLOY4,enforcement 0 (cap on new borrows only),cf_90,counterfactual,0.00342183,0.00342183,0,0,0.741853,0.741853,0.504891,0.238549,0
+DEPLOY4,enforcement 0 (cap on new borrows only),cf_93,counterfactual,0.00743628,0.00743628,0.156708,0.156708,1.37191,1.37191,1.27356,0.599973,0
+DEPLOY4,enforcement 0 (cap on new borrows only),cf_95,counterfactual,0.0108189,0.0108189,0.340322,0.340322,1.64251,1.64251,2.19321,1.02918,0
 DEPLOY4,enforcement 0.5,morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,enforcement 0.5,morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,enforcement 0.5,morpho_77,in_the_wild,0,0,0,0,0,0,0.00245161,0.00112064,0.000116743
-DEPLOY4,enforcement 0.5,morpho_86,in_the_wild,0.00155953,0.00130977,0,0,0.423702,0.423702,0.131207,0.0618751,0.00748947
+DEPLOY4,enforcement 0.5,morpho_86,in_the_wild,0.000937557,0.000723725,0,0,0.423555,0.423555,0.131207,0.0618751,0.00748947
 DEPLOY4,enforcement 0.5,aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,enforcement 0.5,aave_79,in_the_wild,0,0,0,0,0,0,0.00830973,0.00396688,0.000407898
-DEPLOY4,enforcement 0.5,cf_90,counterfactual,0.00436975,0.00347916,0,0,0.961982,0.95479,0.504891,0.238549,0.029837
-DEPLOY4,enforcement 0.5,cf_93,counterfactual,0.00793928,0.0054401,0.199971,0.0466876,1.3737,1.24416,1.27356,0.599973,0.0767244
-DEPLOY4,enforcement 0.5,cf_95,counterfactual,0.0119785,0.00699802,0.340322,0.107665,1.73194,1.44911,2.19321,1.02918,0.134597
+DEPLOY4,enforcement 0.5,cf_90,counterfactual,0.00342183,0.00254209,0,0,0.741853,0.734661,0.504891,0.238549,0.029837
+DEPLOY4,enforcement 0.5,cf_93,counterfactual,0.00743628,0.0050248,0.156708,0,1.37191,1.20767,1.27356,0.599973,0.0767244
+DEPLOY4,enforcement 0.5,cf_95,counterfactual,0.0108189,0.00644142,0.340322,1.11474e-15,1.64251,1.44164,2.19321,1.02918,0.134597
 DEPLOY4,lookahead 0h,morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,lookahead 0h,morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,lookahead 0h,morpho_77,in_the_wild,0,0,0,0,0,0,0.00245161,0.000751211,0.000233486
-DEPLOY4,lookahead 0h,morpho_86,in_the_wild,0.00155953,0.00124208,0,0,0.423702,0.423702,0.131207,0.0421036,0.0149789
+DEPLOY4,lookahead 0h,morpho_86,in_the_wild,0.000937557,0.000723779,0,0,0.423555,0.423555,0.131207,0.0421036,0.0149789
 DEPLOY4,lookahead 0h,aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,lookahead 0h,aave_79,in_the_wild,0,0,0,0,0,0,0.00830973,0.00271469,0.000815795
-DEPLOY4,lookahead 0h,cf_90,counterfactual,0.00436975,0.00301176,0,0,0.961982,0.855406,0.504891,0.162468,0.0596739
-DEPLOY4,lookahead 0h,cf_93,counterfactual,0.00793928,0.00408218,0.199971,0,1.3737,0.953814,1.27356,0.408061,0.153449
-DEPLOY4,lookahead 0h,cf_95,counterfactual,0.0119785,0.00452698,0.340322,0.0218956,1.73194,0.977809,2.19321,0.698685,0.269194
+DEPLOY4,lookahead 0h,cf_90,counterfactual,0.00342183,0.00216065,0,0,0.741853,0.724891,0.504891,0.162468,0.0596739
+DEPLOY4,lookahead 0h,cf_93,counterfactual,0.00743628,0.00364153,0.156708,0,1.37191,0.917207,1.27356,0.408061,0.153449
+DEPLOY4,lookahead 0h,cf_95,counterfactual,0.0108189,0.00414124,0.340322,0,1.64251,0.970336,2.19321,0.698685,0.269194
 DEPLOY4,lookahead 48h,morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,lookahead 48h,morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,lookahead 48h,morpho_77,in_the_wild,0,0,0,0,0,0,0.00245161,0.00149007,0.000233486
-DEPLOY4,lookahead 48h,morpho_86,in_the_wild,0.00155953,0.00124208,0,0,0.423702,0.423702,0.131207,0.0816466,0.0149789
+DEPLOY4,lookahead 48h,morpho_86,in_the_wild,0.000937557,0.000723779,0,0,0.423555,0.423555,0.131207,0.0816466,0.0149789
 DEPLOY4,lookahead 48h,aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
 DEPLOY4,lookahead 48h,aave_79,in_the_wild,0,0,0,0,0,0,0.00830973,0.00521907,0.000815795
-DEPLOY4,lookahead 48h,cf_90,counterfactual,0.00436975,0.00301176,0,0,0.961982,0.855406,0.504891,0.314631,0.0596739
-DEPLOY4,lookahead 48h,cf_93,counterfactual,0.00793928,0.00408218,0.199971,0,1.3737,0.953814,1.27356,0.791884,0.153449
-DEPLOY4,lookahead 48h,cf_95,counterfactual,0.0119785,0.00452698,0.340322,0.0218956,1.73194,0.977809,2.19321,1.35967,0.269194
+DEPLOY4,lookahead 48h,cf_90,counterfactual,0.00342183,0.00216065,0,0,0.741853,0.724891,0.504891,0.314631,0.0596739
+DEPLOY4,lookahead 48h,cf_93,counterfactual,0.00743628,0.00364153,0.156708,0,1.37191,0.917207,1.27356,0.791884,0.153449
+DEPLOY4,lookahead 48h,cf_95,counterfactual,0.0108189,0.00414124,0.340322,0,1.64251,0.970336,2.19321,1.35967,0.269194
 UNIVERSE12,baseline,morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 UNIVERSE12,baseline,morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,baseline,morpho_77,in_the_wild,1.42195e-05,1.42195e-05,0,0,0,0,0.00112996,0.000514937,0.000107616
-UNIVERSE12,baseline,morpho_86,in_the_wild,0.00080977,0.000703944,0,0,0.313416,0.255213,0.0643815,0.0304346,0.00744566
+UNIVERSE12,baseline,morpho_77,in_the_wild,0,0,0,0,0,0,0.00112996,0.000514937,0.000107616
+UNIVERSE12,baseline,morpho_86,in_the_wild,0.00045545,0.000384183,0,0,1.22948e-15,1.22948e-15,0.0643815,0.0304346,0.00744566
 UNIVERSE12,baseline,aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,baseline,aave_79,in_the_wild,2.67459e-05,2.6746e-05,0,0,0,0,0.00440326,0.002095,0.000427489
-UNIVERSE12,baseline,cf_90,counterfactual,0.00228483,0.0017098,0,0,0.748858,0.474923,0.245882,0.116401,0.0292018
-UNIVERSE12,baseline,cf_93,counterfactual,0.00435612,0.00254527,0,0,1.16375,0.700918,0.618593,0.292271,0.0748038
-UNIVERSE12,baseline,cf_95,counterfactual,0.00668249,0.00313462,0.102595,0,1.44265,0.894039,1.18774,0.559392,0.142575
+UNIVERSE12,baseline,aave_79,in_the_wild,0,0,0,0,0,0,0.00440326,0.002095,0.000427489
+UNIVERSE12,baseline,cf_90,counterfactual,0.00179353,0.00129603,0,0,0.612524,0.428332,0.245882,0.116401,0.0292018
+UNIVERSE12,baseline,cf_93,counterfactual,0.00396585,0.00218251,0,0,1.16375,0.63176,0.618593,0.292271,0.0748038
+UNIVERSE12,baseline,cf_95,counterfactual,0.00604903,0.00279888,0,0,1.42579,0.894039,1.18774,0.559392,0.142575
 UNIVERSE12,VaR quantile 0.95,morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 UNIVERSE12,VaR quantile 0.95,morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,VaR quantile 0.95,morpho_77,in_the_wild,1.42195e-05,1.42195e-05,0,0,0,0,0,0,0
-UNIVERSE12,VaR quantile 0.95,morpho_86,in_the_wild,0.00080977,0.00080977,0,0,0.313416,0.313416,0.000361287,0.000217768,3.44083e-05
+UNIVERSE12,VaR quantile 0.95,morpho_77,in_the_wild,0,0,0,0,0,0,0,0,0
+UNIVERSE12,VaR quantile 0.95,morpho_86,in_the_wild,0.00045545,0.00045545,0,0,1.22948e-15,1.22948e-15,0.000361287,0.000217768,3.44083e-05
 UNIVERSE12,VaR quantile 0.95,aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,VaR quantile 0.95,aave_79,in_the_wild,2.67459e-05,2.67459e-05,0,0,0,0,0,0,0
-UNIVERSE12,VaR quantile 0.95,cf_90,counterfactual,0.00228483,0.00225549,0,0,0.748858,0.718099,0.010356,0.00527589,0.00100084
-UNIVERSE12,VaR quantile 0.95,cf_93,counterfactual,0.00435612,0.00411471,0,0,1.16375,1.04375,0.0743336,0.03666,0.00736793
-UNIVERSE12,VaR quantile 0.95,cf_95,counterfactual,0.00668249,0.00566371,0.102595,0.0937408,1.44265,1.27261,0.242335,0.11716,0.0241976
+UNIVERSE12,VaR quantile 0.95,aave_79,in_the_wild,0,0,0,0,0,0,0,0,0
+UNIVERSE12,VaR quantile 0.95,cf_90,counterfactual,0.00179353,0.00176418,0,0,0.612524,0.556212,0.010356,0.00527589,0.00100084
+UNIVERSE12,VaR quantile 0.95,cf_93,counterfactual,0.00396585,0.00367117,0,0,1.16375,1.04375,0.0743336,0.03666,0.00736793
+UNIVERSE12,VaR quantile 0.95,cf_95,counterfactual,0.00604903,0.00508306,0,0,1.42579,1.2564,0.242335,0.11716,0.0241976
 UNIVERSE12,VaR quantile 0.995,morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 UNIVERSE12,VaR quantile 0.995,morpho_62.5,in_the_wild,0,0,0,0,0,0,0.00158064,0.000952742,0.000169649
-UNIVERSE12,VaR quantile 0.995,morpho_77,in_the_wild,1.42195e-05,1.42206e-05,0,0,0,0,0.0513182,0.0269516,0.00783276
-UNIVERSE12,VaR quantile 0.995,morpho_86,in_the_wild,0.00080977,0.000423211,0,0,0.313416,0.0795025,0.372924,0.186368,0.0561308
+UNIVERSE12,VaR quantile 0.995,morpho_77,in_the_wild,0,0,0,0,0,0,0.0513182,0.0269516,0.00783276
+UNIVERSE12,VaR quantile 0.995,morpho_86,in_the_wild,0.00045545,0.000225123,0,0,1.22948e-15,0,0.372924,0.186368,0.0561308
 UNIVERSE12,VaR quantile 0.995,aave_65,in_the_wild,0,0,0,0,0,0,0.00285254,0.00171939,0.000378341
-UNIVERSE12,VaR quantile 0.995,aave_79,in_the_wild,2.67459e-05,2.67492e-05,0,0,0,0,0.0808564,0.0419283,0.0122811
-UNIVERSE12,VaR quantile 0.995,cf_90,counterfactual,0.00228483,0.000878742,0,0,0.748858,0.257212,0.83091,0.408072,0.125824
-UNIVERSE12,VaR quantile 0.995,cf_93,counterfactual,0.00435612,0.00141785,0,0,1.16375,0.474968,1.576,0.767924,0.233559
-UNIVERSE12,VaR quantile 0.995,cf_95,counterfactual,0.00668249,0.00163467,0.102595,0,1.44265,0.460415,2.5968,1.25528,0.369279
+UNIVERSE12,VaR quantile 0.995,aave_79,in_the_wild,0,0,0,0,0,0,0.0808564,0.0419283,0.0122811
+UNIVERSE12,VaR quantile 0.995,cf_90,counterfactual,0.00179353,0.000625807,0,0,0.612524,0.080697,0.83091,0.408072,0.125824
+UNIVERSE12,VaR quantile 0.995,cf_93,counterfactual,0.00396585,0.00123546,0,0,1.16375,0.472929,1.576,0.767924,0.233559
+UNIVERSE12,VaR quantile 0.995,cf_95,counterfactual,0.00604903,0.00144956,0,0,1.42579,0.460404,2.5968,1.25528,0.369279
 UNIVERSE12,VaR quantile 0.999,morpho_38.5,in_the_wild,0,0,0,0,0,0,0.0825581,0.0373219,0.034883
 UNIVERSE12,VaR quantile 0.999,morpho_62.5,in_the_wild,0,0,0,0,0,0,0.656933,0.299501,0.222864
-UNIVERSE12,VaR quantile 0.999,morpho_77,in_the_wild,1.42195e-05,0,0,0,0,0,2.04738,0.939337,0.633562
-UNIVERSE12,VaR quantile 0.999,morpho_86,in_the_wild,0.00080977,2.95448e-08,0,0,0.313416,0,4.31804,1.98388,1.21783
+UNIVERSE12,VaR quantile 0.999,morpho_77,in_the_wild,0,0,0,0,0,0,2.04738,0.939337,0.633562
+UNIVERSE12,VaR quantile 0.999,morpho_86,in_the_wild,0.00045545,0,0,0,1.22948e-15,0,4.31804,1.98388,1.21783
 UNIVERSE12,VaR quantile 0.999,aave_65,in_the_wild,0,0,0,0,0,0,0.801569,0.36586,0.268069
-UNIVERSE12,VaR quantile 0.999,aave_79,in_the_wild,2.67459e-05,0,0,0,0,0,2.38899,1.09684,0.729734
-UNIVERSE12,VaR quantile 0.999,cf_90,counterfactual,0.00228483,2.08958e-05,0,0,0.748858,0,6.42601,2.95491,1.68053
-UNIVERSE12,VaR quantile 0.999,cf_93,counterfactual,0.00435612,7.23038e-05,0,0,1.16375,0,8.76301,4.03614,2.17235
-UNIVERSE12,VaR quantile 0.999,cf_95,counterfactual,0.00668249,7.48915e-05,0.102595,0,1.44265,0,10.5732,4.8754,2.57332
+UNIVERSE12,VaR quantile 0.999,aave_79,in_the_wild,0,0,0,0,0,0,2.38899,1.09684,0.729734
+UNIVERSE12,VaR quantile 0.999,cf_90,counterfactual,0.00179353,2.0702e-19,0,0,0.612524,0,6.42601,2.95491,1.68053
+UNIVERSE12,VaR quantile 0.999,cf_93,counterfactual,0.00396585,4.31362e-05,0,0,1.16375,0,8.76301,4.03614,2.17235
+UNIVERSE12,VaR quantile 0.999,cf_95,counterfactual,0.00604903,5.60447e-05,0,0,1.42579,0,10.5732,4.8754,2.57332
 UNIVERSE12,adverse oracle staleness 25bps,morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 UNIVERSE12,adverse oracle staleness 25bps,morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,adverse oracle staleness 25bps,morpho_77,in_the_wild,1.82988e-05,1.82988e-05,0,0,0,0,0.00112996,0.000514937,0.000107616
-UNIVERSE12,adverse oracle staleness 25bps,morpho_86,in_the_wild,0.000885313,0.000775556,0,0,0.336385,0.278327,0.0643815,0.0304346,0.00744566
+UNIVERSE12,adverse oracle staleness 25bps,morpho_77,in_the_wild,0,0,0,0,0,0,0.00112996,0.000514937,0.000107616
+UNIVERSE12,adverse oracle staleness 25bps,morpho_86,in_the_wild,0.000547096,0.000399686,0,0,0.0954429,0,0.0643815,0.0304346,0.00744566
 UNIVERSE12,adverse oracle staleness 25bps,aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,adverse oracle staleness 25bps,aave_79,in_the_wild,3.07939e-05,3.07941e-05,0,0,0,0,0.00440326,0.002095,0.000427489
-UNIVERSE12,adverse oracle staleness 25bps,cf_90,counterfactual,0.00245796,0.00185624,0,0,0.793303,0.51931,0.245882,0.116401,0.0292018
-UNIVERSE12,adverse oracle staleness 25bps,cf_93,counterfactual,0.004646,0.00277998,0,0,1.20716,0.745402,0.618593,0.292271,0.0748038
-UNIVERSE12,adverse oracle staleness 25bps,cf_95,counterfactual,0.00723968,0.00346513,0.126089,0.0239004,1.49026,0.937886,1.18774,0.559392,0.142575
+UNIVERSE12,adverse oracle staleness 25bps,aave_79,in_the_wild,2.31882e-19,2.31883e-19,0,0,0,0,0.00440326,0.002095,0.000427489
+UNIVERSE12,adverse oracle staleness 25bps,cf_90,counterfactual,0.00191702,0.0013576,0,0,0.634747,0.450872,0.245882,0.116401,0.0292018
+UNIVERSE12,adverse oracle staleness 25bps,cf_93,counterfactual,0.00421769,0.00234355,0,0,1.20716,0.659021,0.618593,0.292271,0.0748038
+UNIVERSE12,adverse oracle staleness 25bps,cf_95,counterfactual,0.0064339,0.00300195,1.11301e-15,0,1.46854,0.937886,1.18774,0.559392,0.142575
 UNIVERSE12,adverse oracle staleness 50bps,morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 UNIVERSE12,adverse oracle staleness 50bps,morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,adverse oracle staleness 50bps,morpho_77,in_the_wild,2.23578e-05,2.23578e-05,0,0,0,0,0.00112996,0.000514937,0.000107616
-UNIVERSE12,adverse oracle staleness 50bps,morpho_86,in_the_wild,0.0009613,0.000847631,0,0,0.359239,0.301326,0.0643815,0.0304346,0.00744566
+UNIVERSE12,adverse oracle staleness 50bps,morpho_77,in_the_wild,0,0,0,0,0,0,0.00112996,0.000514937,0.000107616
+UNIVERSE12,adverse oracle staleness 50bps,morpho_86,in_the_wild,0.00063829,0.000483044,0,0,0.100631,1.22948e-15,0.0643815,0.0304346,0.00744566
 UNIVERSE12,adverse oracle staleness 50bps,aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,adverse oracle staleness 50bps,aave_79,in_the_wild,3.48218e-05,3.48219e-05,0,0,0,0,0.00440326,0.002095,0.000427489
-UNIVERSE12,adverse oracle staleness 50bps,cf_90,counterfactual,0.00264437,0.00201289,0,0,0.837527,0.563476,0.245882,0.116401,0.0292018
-UNIVERSE12,adverse oracle staleness 50bps,cf_93,counterfactual,0.00495855,0.00303496,0.0061981,0,1.25036,0.789665,0.618593,0.292271,0.0748038
-UNIVERSE12,adverse oracle staleness 50bps,cf_95,counterfactual,0.00786182,0.00383363,0.149466,0.047532,1.55235,0.981516,1.18774,0.559392,0.142575
+UNIVERSE12,adverse oracle staleness 50bps,aave_79,in_the_wild,0,0,0,0,0,0,0.00440326,0.002095,0.000427489
+UNIVERSE12,adverse oracle staleness 50bps,cf_90,counterfactual,0.00214349,0.00146779,0,0,0.656859,0.473299,0.245882,0.116401,0.0292018
+UNIVERSE12,adverse oracle staleness 50bps,cf_93,counterfactual,0.0045458,0.00257816,0,0,1.25036,0.686146,0.618593,0.292271,0.0748038
+UNIVERSE12,adverse oracle staleness 50bps,cf_95,counterfactual,0.00698267,0.00333336,0.149466,0,1.51109,0.981516,1.18774,0.559392,0.142575
 UNIVERSE12,no oracle buffer in cap (staleness 50bps hits),morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 UNIVERSE12,no oracle buffer in cap (staleness 50bps hits),morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,no oracle buffer in cap (staleness 50bps hits),morpho_77,in_the_wild,2.23578e-05,2.23578e-05,0,0,0,0,0.000735061,0.000332297,7.00058e-05
-UNIVERSE12,no oracle buffer in cap (staleness 50bps hits),morpho_86,in_the_wild,0.0009613,0.000865919,0,0,0.359239,0.301326,0.053468,0.0252862,0.00614781
+UNIVERSE12,no oracle buffer in cap (staleness 50bps hits),morpho_77,in_the_wild,0,0,0,0,0,0,0.000735061,0.000332297,7.00058e-05
+UNIVERSE12,no oracle buffer in cap (staleness 50bps hits),morpho_86,in_the_wild,0.00063829,0.000559175,0,0,0.100631,1.22948e-15,0.053468,0.0252862,0.00614781
 UNIVERSE12,no oracle buffer in cap (staleness 50bps hits),aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,no oracle buffer in cap (staleness 50bps hits),aave_79,in_the_wild,3.48218e-05,3.48219e-05,0,0,0,0,0.00339903,0.00160797,0.000323717
-UNIVERSE12,no oracle buffer in cap (staleness 50bps hits),cf_90,counterfactual,0.00264437,0.002071,0,0,0.837527,0.604226,0.208901,0.098814,0.024678
-UNIVERSE12,no oracle buffer in cap (staleness 50bps hits),cf_93,counterfactual,0.00495855,0.00324752,0.0061981,0,1.25036,0.801294,0.530307,0.25078,0.0638122
-UNIVERSE12,no oracle buffer in cap (staleness 50bps hits),cf_95,counterfactual,0.00786182,0.00421203,0.149466,0.0605731,1.55235,1.02354,0.990764,0.466904,0.119252
+UNIVERSE12,no oracle buffer in cap (staleness 50bps hits),aave_79,in_the_wild,0,0,0,0,0,0,0.00339903,0.00160797,0.000323717
+UNIVERSE12,no oracle buffer in cap (staleness 50bps hits),cf_90,counterfactual,0.00214349,0.001561,0,0,0.656859,0.513925,0.208901,0.098814,0.024678
+UNIVERSE12,no oracle buffer in cap (staleness 50bps hits),cf_93,counterfactual,0.0045458,0.00278971,0,0,1.25036,0.730013,0.530307,0.25078,0.0638122
+UNIVERSE12,no oracle buffer in cap (staleness 50bps hits),cf_95,counterfactual,0.00698267,0.00367987,0.149466,0,1.51109,1.02354,0.990764,0.466904,0.119252
 UNIVERSE12,oracle buffer 50 + staleness 50 (cap covers it),morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 UNIVERSE12,oracle buffer 50 + staleness 50 (cap covers it),morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,oracle buffer 50 + staleness 50 (cap covers it),morpho_77,in_the_wild,2.23578e-05,2.23578e-05,0,0,0,0,0.00112996,0.000514937,0.000107616
-UNIVERSE12,oracle buffer 50 + staleness 50 (cap covers it),morpho_86,in_the_wild,0.0009613,0.000847631,0,0,0.359239,0.301326,0.0643815,0.0304346,0.00744566
+UNIVERSE12,oracle buffer 50 + staleness 50 (cap covers it),morpho_77,in_the_wild,0,0,0,0,0,0,0.00112996,0.000514937,0.000107616
+UNIVERSE12,oracle buffer 50 + staleness 50 (cap covers it),morpho_86,in_the_wild,0.00063829,0.000483044,0,0,0.100631,1.22948e-15,0.0643815,0.0304346,0.00744566
 UNIVERSE12,oracle buffer 50 + staleness 50 (cap covers it),aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,oracle buffer 50 + staleness 50 (cap covers it),aave_79,in_the_wild,3.48218e-05,3.48219e-05,0,0,0,0,0.00440326,0.002095,0.000427489
-UNIVERSE12,oracle buffer 50 + staleness 50 (cap covers it),cf_90,counterfactual,0.00264437,0.00201289,0,0,0.837527,0.563476,0.245882,0.116401,0.0292018
-UNIVERSE12,oracle buffer 50 + staleness 50 (cap covers it),cf_93,counterfactual,0.00495855,0.00303496,0.0061981,0,1.25036,0.789665,0.618593,0.292271,0.0748038
-UNIVERSE12,oracle buffer 50 + staleness 50 (cap covers it),cf_95,counterfactual,0.00786182,0.00383363,0.149466,0.047532,1.55235,0.981516,1.18774,0.559392,0.142575
+UNIVERSE12,oracle buffer 50 + staleness 50 (cap covers it),aave_79,in_the_wild,0,0,0,0,0,0,0.00440326,0.002095,0.000427489
+UNIVERSE12,oracle buffer 50 + staleness 50 (cap covers it),cf_90,counterfactual,0.00214349,0.00146779,0,0,0.656859,0.473299,0.245882,0.116401,0.0292018
+UNIVERSE12,oracle buffer 50 + staleness 50 (cap covers it),cf_93,counterfactual,0.0045458,0.00257816,0,0,1.25036,0.686146,0.618593,0.292271,0.0748038
+UNIVERSE12,oracle buffer 50 + staleness 50 (cap covers it),cf_95,counterfactual,0.00698267,0.00333336,0.149466,0,1.51109,0.981516,1.18774,0.559392,0.142575
 UNIVERSE12,safety buffer 0bps,morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 UNIVERSE12,safety buffer 0bps,morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,safety buffer 0bps,morpho_77,in_the_wild,1.42195e-05,1.42195e-05,0,0,0,0,0.00039756,0.000179724,3.78629e-05
-UNIVERSE12,safety buffer 0bps,morpho_86,in_the_wild,0.00080977,0.00073182,0,0,0.313416,0.255213,0.0443422,0.0209825,0.00508573
+UNIVERSE12,safety buffer 0bps,morpho_77,in_the_wild,0,0,0,0,0,0,0.00039756,0.000179724,3.78629e-05
+UNIVERSE12,safety buffer 0bps,morpho_86,in_the_wild,0.00045545,0.000384174,0,0,1.22948e-15,1.22948e-15,0.0443422,0.0209825,0.00508573
 UNIVERSE12,safety buffer 0bps,aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,safety buffer 0bps,aave_79,in_the_wild,2.67459e-05,2.6746e-05,0,0,0,0,0.00242986,0.0011368,0.000231416
-UNIVERSE12,safety buffer 0bps,cf_90,counterfactual,0.00228483,0.00182057,0,0,0.748858,0.556453,0.177285,0.0837984,0.0208247
-UNIVERSE12,safety buffer 0bps,cf_93,counterfactual,0.00435612,0.00294803,0,0,1.16375,0.724186,0.453764,0.21472,0.0542943
-UNIVERSE12,safety buffer 0bps,cf_95,counterfactual,0.00668249,0.00380077,0.102595,0.0248761,1.44265,0.947502,0.835239,0.393859,0.10059
+UNIVERSE12,safety buffer 0bps,aave_79,in_the_wild,0,0,0,0,0,0,0.00242986,0.0011368,0.000231416
+UNIVERSE12,safety buffer 0bps,cf_90,counterfactual,0.00179353,0.00142327,0,0,0.612524,0.491194,0.177285,0.0837984,0.0208247
+UNIVERSE12,safety buffer 0bps,cf_93,counterfactual,0.00396585,0.00254852,0,0,1.16375,0.69297,0.453764,0.21472,0.0542943
+UNIVERSE12,safety buffer 0bps,cf_95,counterfactual,0.00604903,0.00332805,0,0,1.42579,0.947502,0.835239,0.393859,0.10059
 UNIVERSE12,safety buffer 200bps,morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 UNIVERSE12,safety buffer 200bps,morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,safety buffer 200bps,morpho_77,in_the_wild,1.42195e-05,1.42196e-05,0,0,0,0,0.00249298,0.00116632,0.000237426
-UNIVERSE12,safety buffer 200bps,morpho_86,in_the_wild,0.00080977,0.000675383,0,0,0.313416,0.241387,0.09275,0.0438667,0.0108395
+UNIVERSE12,safety buffer 200bps,morpho_77,in_the_wild,0,0,0,0,0,0,0.00249298,0.00116632,0.000237426
+UNIVERSE12,safety buffer 200bps,morpho_86,in_the_wild,0.00045545,0.000377868,0,0,1.22948e-15,2.81552e-16,0.09275,0.0438667,0.0108395
 UNIVERSE12,safety buffer 200bps,aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,safety buffer 200bps,aave_79,in_the_wild,2.67459e-05,2.67461e-05,0,0,0,0,0.00698581,0.00332858,0.000705352
-UNIVERSE12,safety buffer 200bps,cf_90,counterfactual,0.00228483,0.00150792,0,0,0.748858,0.414082,0.34049,0.161255,0.0408818
-UNIVERSE12,safety buffer 200bps,cf_93,counterfactual,0.00435612,0.0021253,0,0,1.16375,0.669197,0.853201,0.402329,0.103677
-UNIVERSE12,safety buffer 200bps,cf_95,counterfactual,0.00668249,0.00239988,0.102595,0,1.44265,0.742683,1.74941,0.82307,0.207763
+UNIVERSE12,safety buffer 200bps,aave_79,in_the_wild,0,0,0,0,0,0,0.00698581,0.00332858,0.000705352
+UNIVERSE12,safety buffer 200bps,cf_90,counterfactual,0.00179353,0.00107346,0,0,0.612524,0.399061,0.34049,0.161255,0.0408818
+UNIVERSE12,safety buffer 200bps,cf_93,counterfactual,0.00396585,0.00175877,0,0,1.16375,0.590937,0.853201,0.402329,0.103677
+UNIVERSE12,safety buffer 200bps,cf_95,counterfactual,0.00604903,0.00209208,0,0,1.42579,0.742683,1.74941,0.82307,0.207763
 UNIVERSE12,safety buffer 500bps,morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 UNIVERSE12,safety buffer 500bps,morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,safety buffer 500bps,morpho_77,in_the_wild,1.42195e-05,1.42197e-05,0,0,0,0,0.0105379,0.00500663,0.00113052
-UNIVERSE12,safety buffer 500bps,morpho_86,in_the_wild,0.00080977,0.000465516,0,0,0.313416,0.122025,0.257318,0.121815,0.031144
+UNIVERSE12,safety buffer 500bps,morpho_77,in_the_wild,0,0,0,0,0,0,0.0105379,0.00500663,0.00113052
+UNIVERSE12,safety buffer 500bps,morpho_86,in_the_wild,0.00045545,0.000234542,0,0,1.22948e-15,2.81552e-16,0.257318,0.121815,0.031144
 UNIVERSE12,safety buffer 500bps,aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,safety buffer 500bps,aave_79,in_the_wild,2.67459e-05,2.67466e-05,0,0,0,0,0.0223055,0.0105416,0.00256331
-UNIVERSE12,safety buffer 500bps,cf_90,counterfactual,0.00228483,0.00079434,0,0,0.748858,0.250524,0.881641,0.41574,0.108644
-UNIVERSE12,safety buffer 500bps,cf_93,counterfactual,0.00435612,0.000923527,0,0,1.16375,0.284653,2.64811,1.24334,0.313022
-UNIVERSE12,safety buffer 500bps,cf_95,counterfactual,0.00668249,0.000856994,0.102595,0,1.44265,0.245123,4.6731,2.18276,0.554469
+UNIVERSE12,safety buffer 500bps,aave_79,in_the_wild,0,0,0,0,0,0,0.0223055,0.0105416,0.00256331
+UNIVERSE12,safety buffer 500bps,cf_90,counterfactual,0.00179353,0.000531783,0,0,0.612524,1.45166e-15,0.881641,0.41574,0.108644
+UNIVERSE12,safety buffer 500bps,cf_93,counterfactual,0.00396585,0.000785639,0,0,1.16375,0.265565,2.64811,1.24334,0.313022
+UNIVERSE12,safety buffer 500bps,cf_95,counterfactual,0.00604903,0.000766216,0,0,1.42579,0.205652,4.6731,2.18276,0.554469
 UNIVERSE12,bonus-aware cap,morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 UNIVERSE12,bonus-aware cap,morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,bonus-aware cap,morpho_77,in_the_wild,1.42195e-05,1.42198e-05,0,0,0,0,0.0188977,0.00892943,0.00212181
-UNIVERSE12,bonus-aware cap,morpho_86,in_the_wild,0.00080977,0.000485573,0,0,0.313416,0.143576,0.228657,0.108214,0.0271206
+UNIVERSE12,bonus-aware cap,morpho_77,in_the_wild,0,0,0,0,0,0,0.0188977,0.00892943,0.00212181
+UNIVERSE12,bonus-aware cap,morpho_86,in_the_wild,0.00045545,0.000241439,0,0,1.22948e-15,2.81552e-16,0.228657,0.108214,0.0271206
 UNIVERSE12,bonus-aware cap,aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,bonus-aware cap,aave_79,in_the_wild,2.67459e-05,2.67466e-05,0,0,0,0,0.0242499,0.0114724,0.00275025
-UNIVERSE12,bonus-aware cap,cf_90,counterfactual,0.00228483,0.00106706,0,0,0.748858,0.376201,0.580032,0.274165,0.0700667
-UNIVERSE12,bonus-aware cap,cf_93,counterfactual,0.00435612,0.0017278,0,0,1.16375,0.559462,1.18555,0.558367,0.142321
-UNIVERSE12,bonus-aware cap,cf_95,counterfactual,0.00668249,0.00212264,0.102595,0,1.44265,0.68435,2.05816,0.96763,0.241611
+UNIVERSE12,bonus-aware cap,aave_79,in_the_wild,0,0,0,0,0,0,0.0242499,0.0114724,0.00275025
+UNIVERSE12,bonus-aware cap,cf_90,counterfactual,0.00179353,0.000688132,0,0,0.612524,0.080697,0.580032,0.274165,0.0700667
+UNIVERSE12,bonus-aware cap,cf_93,counterfactual,0.00396585,0.00140491,0,0,1.16375,0.508218,1.18555,0.558367,0.142321
+UNIVERSE12,bonus-aware cap,cf_95,counterfactual,0.00604903,0.00181312,0,0,1.42579,0.68435,2.05816,0.96763,0.241611
 UNIVERSE12,liquidation bonus 10.0% (slippage proxy),morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 UNIVERSE12,liquidation bonus 10.0% (slippage proxy),morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,liquidation bonus 10.0% (slippage proxy),morpho_77,in_the_wild,5.27142e-05,5.27142e-05,0,0,0,0,0.00112996,0.000514937,0.000107616
-UNIVERSE12,liquidation bonus 10.0% (slippage proxy),morpho_86,in_the_wild,0.00390995,0.0036612,0,0,1.09108,0.980622,0.0643815,0.0304346,0.00744566
+UNIVERSE12,liquidation bonus 10.0% (slippage proxy),morpho_77,in_the_wild,0,0,0,0,0,0,0.00112996,0.000514937,0.000107616
+UNIVERSE12,liquidation bonus 10.0% (slippage proxy),morpho_86,in_the_wild,0.000853388,0.000701547,0,0,1.22948e-15,1.22948e-15,0.0643815,0.0304346,0.00744566
 UNIVERSE12,liquidation bonus 10.0% (slippage proxy),aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,liquidation bonus 10.0% (slippage proxy),aave_79,in_the_wild,0.000224661,0.000224662,0,0,0.0211714,0.0211714,0.00440326,0.002095,0.000427489
-UNIVERSE12,liquidation bonus 10.0% (slippage proxy),cf_90,counterfactual,0.0215012,0.0193131,0.345576,0.339875,2.0877,1.85453,0.245882,0.116401,0.0292018
-UNIVERSE12,liquidation bonus 10.0% (slippage proxy),cf_93,counterfactual,0.150841,0.129707,0.641648,0.621372,2.89593,2.2674,0.618593,0.292271,0.0748038
-UNIVERSE12,liquidation bonus 10.0% (slippage proxy),cf_95,counterfactual,0.244815,0.176015,0.828641,0.757279,3.40639,2.71652,1.18774,0.559392,0.142575
+UNIVERSE12,liquidation bonus 10.0% (slippage proxy),aave_79,in_the_wild,2.31882e-19,2.31883e-19,0,0,0,0,0.00440326,0.002095,0.000427489
+UNIVERSE12,liquidation bonus 10.0% (slippage proxy),cf_90,counterfactual,0.00363393,0.00284638,1.17484e-15,1.17484e-15,1.17209,0.995875,0.245882,0.116401,0.0292018
+UNIVERSE12,liquidation bonus 10.0% (slippage proxy),cf_93,counterfactual,0.009026,0.00569057,1.13694e-15,1.13694e-15,2.40681,1.85465,0.618593,0.292271,0.0748038
+UNIVERSE12,liquidation bonus 10.0% (slippage proxy),cf_95,counterfactual,0.0145856,0.00821185,1.11301e-15,1.11401e-15,2.74712,2.24906,1.18774,0.559392,0.142575
 UNIVERSE12,liquidation bonus 15.0% (slippage proxy),morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 UNIVERSE12,liquidation bonus 15.0% (slippage proxy),morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,liquidation bonus 15.0% (slippage proxy),morpho_77,in_the_wild,0.000516183,0.000516184,0,0,0.186483,0.186483,0.00112996,0.000514937,0.000107616
-UNIVERSE12,liquidation bonus 15.0% (slippage proxy),morpho_86,in_the_wild,0.0201122,0.0195361,0.336296,0.335656,2.06236,1.90387,0.0643815,0.0304346,0.00744566
+UNIVERSE12,liquidation bonus 15.0% (slippage proxy),morpho_77,in_the_wild,0,0,0,0,0,0,0.00112996,0.000514937,0.000107616
+UNIVERSE12,liquidation bonus 15.0% (slippage proxy),morpho_86,in_the_wild,0.00117498,0.000958023,1.22948e-15,1.22948e-15,1.22948e-15,1.2299e-15,0.0643815,0.0304346,0.00744566
 UNIVERSE12,liquidation bonus 15.0% (slippage proxy),aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,liquidation bonus 15.0% (slippage proxy),aave_79,in_the_wild,0.00122502,0.00122502,0,0,0.428898,0.428898,0.00440326,0.002095,0.000427489
-UNIVERSE12,liquidation bonus 15.0% (slippage proxy),cf_90,counterfactual,0.202595,0.191781,0.74463,0.743084,3.17705,2.94246,0.245882,0.116401,0.0292018
-UNIVERSE12,liquidation bonus 15.0% (slippage proxy),cf_93,counterfactual,0.344916,0.301444,1.02783,1.01414,3.95014,3.34768,0.618593,0.292271,0.0748038
-UNIVERSE12,liquidation bonus 15.0% (slippage proxy),cf_95,counterfactual,0.434803,0.317014,1.20669,1.13843,4.43841,3.77485,1.18774,0.559392,0.142575
+UNIVERSE12,liquidation bonus 15.0% (slippage proxy),aave_79,in_the_wild,2.08694e-18,2.08695e-18,0,0,1.33842e-15,1.33842e-15,0.00440326,0.002095,0.000427489
+UNIVERSE12,liquidation bonus 15.0% (slippage proxy),cf_90,counterfactual,0.00482821,0.00385245,1.17484e-15,1.17484e-15,1.53521,1.36417,0.245882,0.116401,0.0292018
+UNIVERSE12,liquidation bonus 15.0% (slippage proxy),cf_93,counterfactual,0.0118869,0.00767397,1.13694e-15,1.13694e-15,3.10962,2.56571,0.618593,0.292271,0.0748038
+UNIVERSE12,liquidation bonus 15.0% (slippage proxy),cf_95,counterfactual,0.0190306,0.0110304,1.11301e-15,1.11401e-15,3.43513,2.95462,1.18774,0.559392,0.142575
 UNIVERSE12,borrowers concentrated near max LTV,morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 UNIVERSE12,borrowers concentrated near max LTV,morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,borrowers concentrated near max LTV,morpho_77,in_the_wild,3.87387e-05,3.87388e-05,0,0,0,0,0.00112996,0.000514937,0.000293181
-UNIVERSE12,borrowers concentrated near max LTV,morpho_86,in_the_wild,0.00217371,0.00188563,0,0,0.853849,0.695286,0.0643815,0.0304346,0.0195589
+UNIVERSE12,borrowers concentrated near max LTV,morpho_77,in_the_wild,0,0,0,0,0,0,0.00112996,0.000514937,0.000293181
+UNIVERSE12,borrowers concentrated near max LTV,morpho_86,in_the_wild,0.0012408,0.00104677,0,0,3.34952e-15,3.34952e-15,0.0643815,0.0304346,0.0195589
 UNIVERSE12,borrowers concentrated near max LTV,aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,borrowers concentrated near max LTV,aave_79,in_the_wild,7.28647e-05,7.28655e-05,0,0,0,0,0.00440326,0.002095,0.00116051
-UNIVERSE12,borrowers concentrated near max LTV,cf_90,counterfactual,0.00600928,0.004465,0,0,1.97124,1.2092,0.245882,0.116401,0.0762139
-UNIVERSE12,borrowers concentrated near max LTV,cf_93,counterfactual,0.0113769,0.00656544,0,0,2.99671,1.84425,0.618593,0.292271,0.194442
-UNIVERSE12,borrowers concentrated near max LTV,cf_95,counterfactual,0.0173806,0.00798906,0.279502,0,3.67452,2.23911,1.18774,0.559392,0.37092
+UNIVERSE12,borrowers concentrated near max LTV,aave_79,in_the_wild,0,0,0,0,0,0,0.00440326,0.002095,0.00116051
+UNIVERSE12,borrowers concentrated near max LTV,cf_90,counterfactual,0.00477767,0.00342389,0,0,1.66872,1.16809,0.245882,0.116401,0.0762139
+UNIVERSE12,borrowers concentrated near max LTV,cf_93,counterfactual,0.0103592,0.00563317,0,0,2.99671,1.69079,0.618593,0.292271,0.194442
+UNIVERSE12,borrowers concentrated near max LTV,cf_95,counterfactual,0.0157189,0.00712758,0,0,3.64438,2.23911,1.18774,0.559392,0.37092
 UNIVERSE12,enforcement 0 (cap on new borrows only),morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 UNIVERSE12,enforcement 0 (cap on new borrows only),morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,enforcement 0 (cap on new borrows only),morpho_77,in_the_wild,1.42195e-05,1.42195e-05,0,0,0,0,0.00112996,0.000514937,0
-UNIVERSE12,enforcement 0 (cap on new borrows only),morpho_86,in_the_wild,0.00080977,0.00080977,0,0,0.313416,0.313416,0.0643815,0.0304346,0
+UNIVERSE12,enforcement 0 (cap on new borrows only),morpho_77,in_the_wild,0,0,0,0,0,0,0.00112996,0.000514937,0
+UNIVERSE12,enforcement 0 (cap on new borrows only),morpho_86,in_the_wild,0.00045545,0.00045545,0,0,1.22948e-15,1.22948e-15,0.0643815,0.0304346,0
 UNIVERSE12,enforcement 0 (cap on new borrows only),aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,enforcement 0 (cap on new borrows only),aave_79,in_the_wild,2.67459e-05,2.67459e-05,0,0,0,0,0.00440326,0.002095,0
-UNIVERSE12,enforcement 0 (cap on new borrows only),cf_90,counterfactual,0.00228483,0.00228483,0,0,0.748858,0.748858,0.245882,0.116401,0
-UNIVERSE12,enforcement 0 (cap on new borrows only),cf_93,counterfactual,0.00435612,0.00435612,0,0,1.16375,1.16375,0.618593,0.292271,0
-UNIVERSE12,enforcement 0 (cap on new borrows only),cf_95,counterfactual,0.00668249,0.00668249,0.102595,0.102595,1.44265,1.44265,1.18774,0.559392,0
+UNIVERSE12,enforcement 0 (cap on new borrows only),aave_79,in_the_wild,0,0,0,0,0,0,0.00440326,0.002095,0
+UNIVERSE12,enforcement 0 (cap on new borrows only),cf_90,counterfactual,0.00179353,0.00179353,0,0,0.612524,0.612524,0.245882,0.116401,0
+UNIVERSE12,enforcement 0 (cap on new borrows only),cf_93,counterfactual,0.00396585,0.00396585,0,0,1.16375,1.16375,0.618593,0.292271,0
+UNIVERSE12,enforcement 0 (cap on new borrows only),cf_95,counterfactual,0.00604903,0.00604903,0,0,1.42579,1.42579,1.18774,0.559392,0
 UNIVERSE12,enforcement 0.5,morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 UNIVERSE12,enforcement 0.5,morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,enforcement 0.5,morpho_77,in_the_wild,1.42195e-05,1.42195e-05,0,0,0,0,0.00112996,0.000514937,5.38078e-05
-UNIVERSE12,enforcement 0.5,morpho_86,in_the_wild,0.00080977,0.000726513,0,0,0.313416,0.255213,0.0643815,0.0304346,0.00372283
+UNIVERSE12,enforcement 0.5,morpho_77,in_the_wild,0,0,0,0,0,0,0.00112996,0.000514937,5.38078e-05
+UNIVERSE12,enforcement 0.5,morpho_86,in_the_wild,0.00045545,0.000384169,0,0,1.22948e-15,2.81552e-16,0.0643815,0.0304346,0.00372283
 UNIVERSE12,enforcement 0.5,aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,enforcement 0.5,aave_79,in_the_wild,2.67459e-05,2.6746e-05,0,0,0,0,0.00440326,0.002095,0.000213745
-UNIVERSE12,enforcement 0.5,cf_90,counterfactual,0.00228483,0.00190416,0,0,0.748858,0.609478,0.245882,0.116401,0.0146009
-UNIVERSE12,enforcement 0.5,cf_93,counterfactual,0.00435612,0.00322067,0,0,1.16375,0.828152,0.618593,0.292271,0.0374019
-UNIVERSE12,enforcement 0.5,cf_95,counterfactual,0.00668249,0.00439833,0.102595,0.0392349,1.44265,0.983169,1.18774,0.559392,0.0712873
+UNIVERSE12,enforcement 0.5,aave_79,in_the_wild,0,0,0,0,0,0,0.00440326,0.002095,0.000213745
+UNIVERSE12,enforcement 0.5,cf_90,counterfactual,0.00179353,0.00146171,0,0,0.612524,0.475594,0.245882,0.116401,0.0146009
+UNIVERSE12,enforcement 0.5,cf_93,counterfactual,0.00396585,0.00284807,0,0,1.16375,0.828152,0.618593,0.292271,0.0374019
+UNIVERSE12,enforcement 0.5,cf_95,counterfactual,0.00604903,0.00395762,0,0,1.42579,0.951463,1.18774,0.559392,0.0712873
 UNIVERSE12,lookahead 0h,morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 UNIVERSE12,lookahead 0h,morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,lookahead 0h,morpho_77,in_the_wild,1.42195e-05,1.42195e-05,0,0,0,0,0.00112996,0.000344664,0.000107616
-UNIVERSE12,lookahead 0h,morpho_86,in_the_wild,0.00080977,0.000703944,0,0,0.313416,0.255213,0.0643815,0.020733,0.00744566
+UNIVERSE12,lookahead 0h,morpho_77,in_the_wild,0,0,0,0,0,0,0.00112996,0.000344664,0.000107616
+UNIVERSE12,lookahead 0h,morpho_86,in_the_wild,0.00045545,0.000384183,0,0,1.22948e-15,1.22948e-15,0.0643815,0.020733,0.00744566
 UNIVERSE12,lookahead 0h,aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,lookahead 0h,aave_79,in_the_wild,2.67459e-05,2.6746e-05,0,0,0,0,0.00440326,0.00143148,0.000427489
-UNIVERSE12,lookahead 0h,cf_90,counterfactual,0.00228483,0.0017098,0,0,0.748858,0.474923,0.245882,0.0793497,0.0292018
-UNIVERSE12,lookahead 0h,cf_93,counterfactual,0.00435612,0.00254527,0,0,1.16375,0.700918,0.618593,0.199055,0.0748038
-UNIVERSE12,lookahead 0h,cf_95,counterfactual,0.00668249,0.00313462,0.102595,0,1.44265,0.894039,1.18774,0.380413,0.142575
+UNIVERSE12,lookahead 0h,aave_79,in_the_wild,0,0,0,0,0,0,0.00440326,0.00143148,0.000427489
+UNIVERSE12,lookahead 0h,cf_90,counterfactual,0.00179353,0.00129603,0,0,0.612524,0.428332,0.245882,0.0793497,0.0292018
+UNIVERSE12,lookahead 0h,cf_93,counterfactual,0.00396585,0.00218251,0,0,1.16375,0.63176,0.618593,0.199055,0.0748038
+UNIVERSE12,lookahead 0h,cf_95,counterfactual,0.00604903,0.00279888,0,0,1.42579,0.894039,1.18774,0.380413,0.142575
 UNIVERSE12,lookahead 48h,morpho_38.5,in_the_wild,0,0,0,0,0,0,0,0,0
 UNIVERSE12,lookahead 48h,morpho_62.5,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,lookahead 48h,morpho_77,in_the_wild,1.42195e-05,1.42195e-05,0,0,0,0,0.00112996,0.000685211,0.000107616
-UNIVERSE12,lookahead 48h,morpho_86,in_the_wild,0.00080977,0.000703944,0,0,0.313416,0.255213,0.0643815,0.0401362,0.00744566
+UNIVERSE12,lookahead 48h,morpho_77,in_the_wild,0,0,0,0,0,0,0.00112996,0.000685211,0.000107616
+UNIVERSE12,lookahead 48h,morpho_86,in_the_wild,0.00045545,0.000384183,0,0,1.22948e-15,1.22948e-15,0.0643815,0.0401362,0.00744566
 UNIVERSE12,lookahead 48h,aave_65,in_the_wild,0,0,0,0,0,0,0,0,0
-UNIVERSE12,lookahead 48h,aave_79,in_the_wild,2.67459e-05,2.6746e-05,0,0,0,0,0.00440326,0.00275852,0.000427489
-UNIVERSE12,lookahead 48h,cf_90,counterfactual,0.00228483,0.0017098,0,0,0.748858,0.474923,0.245882,0.153453,0.0292018
-UNIVERSE12,lookahead 48h,cf_93,counterfactual,0.00435612,0.00254527,0,0,1.16375,0.700918,0.618593,0.385486,0.0748038
-UNIVERSE12,lookahead 48h,cf_95,counterfactual,0.00668249,0.00313462,0.102595,0,1.44265,0.894039,1.18774,0.738371,0.142575
+UNIVERSE12,lookahead 48h,aave_79,in_the_wild,0,0,0,0,0,0,0.00440326,0.00275852,0.000427489
+UNIVERSE12,lookahead 48h,cf_90,counterfactual,0.00179353,0.00129603,0,0,0.612524,0.428332,0.245882,0.153453,0.0292018
+UNIVERSE12,lookahead 48h,cf_93,counterfactual,0.00396585,0.00218251,0,0,1.16375,0.63176,0.618593,0.385486,0.0748038
+UNIVERSE12,lookahead 48h,cf_95,counterfactual,0.00604903,0.00279888,0,0,1.42579,0.894039,1.18774,0.738371,0.142575
