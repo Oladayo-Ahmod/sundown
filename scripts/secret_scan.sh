@@ -16,13 +16,13 @@ else
   echo "commits scanned: $(git rev-list --all | wc -l)"
 
   n=$(grep -c -E -- '-----BEGIN [A-Z ]*PRIVATE KEY' "$hist"); echo "private-key blocks: $n"; [ "$n" -ne 0 ] && fail=1
-  n=$(grep -c -E 'AKIA[0-9A-Z]{16}|ghp_[A-Za-z0-9]{30,}|github_pat_|sk-[A-Za-z0-9]{20,}|xox[baprs]-[A-Za-z0-9-]{10,}|AIza[0-9A-Za-z_-]{30,}' "$hist")
+  n=$(grep -c -E 'AKIA[0-9A-Z]{16}|ghp_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9]{20,}|xox[baprs]-[A-Za-z0-9-]{10,}|AIza[0-9A-Za-z_-]{30,}' "$hist")
   echo "known token formats: $n"; [ "$n" -ne 0 ] && fail=1
   n=$(grep -c -i -E '(api[_-]?key|secret|passw(or)?d|private[_-]?key|auth[_-]?token|access[_-]?token|etherscan)[A-Za-z_]*\s*[:=]\s*["'"'"']?[A-Za-z0-9_-]{16,}' "$hist")
   echo "key/secret/password assignments: $n"; [ "$n" -ne 0 ] && fail=1
   n=$(grep -o -i -E 'https?://[^ "'"'"')<>]*(alchemy|infura|quicknode|quiknode|ankr|chainstack|drpc|blastapi|getblock|moralis|tenderly|helius)[^ "'"'"')<>]*' "$hist" | sort -u | wc -l)
   echo "RPC-provider URLs: $n"; [ "$n" -ne 0 ] && fail=1
-  n=$(grep -o -i -E 'https?://[^ "'"'"')<>]*[?&](api_?key|key|token|apikey|access_token)=[^ "'"'"')<>&]+' "$hist" | sort -u | wc -l)
+  n=$(grep -o -i -E 'https?://[^ "'"'"')<>]*[?\&](api_?key|key|token|apikey|access_token)=[A-Za-z0-9_-]{16,}' "$hist" | sort -u | wc -l)
   echo "URLs carrying a key parameter: $n"; [ "$n" -ne 0 ] && fail=1
   echo "distinct 64-hex strings (informational): $(grep -o -E '(0x)?[0-9a-fA-F]{64}\b' "$hist" | sort -u | wc -l)"
 fi

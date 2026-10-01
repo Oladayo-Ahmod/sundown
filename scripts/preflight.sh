@@ -26,15 +26,15 @@ check() { # name, command...
 
 echo "== Sundown preflight ($(date -u +%FT%TZ))"
 
-check "forge fmt" bash -c 'cd contracts && forge fmt --check'
-check "forge build" bash -c 'cd contracts && forge build 2>&1 | tail -1'
+check "forge fmt" bash -o pipefail -c 'cd contracts && forge fmt --check'
+check "forge build" bash -o pipefail -c 'cd contracts && forge build 2>&1 | tail -1'
 
 if [ $QUICK -eq 0 ]; then
   fork="skipped (ROBINHOOD_MAINNET_RPC_URL not set)"; [ -n "${ROBINHOOD_MAINNET_RPC_URL:-}" ] && fork="fork tests ENABLED"
-  check "forge test ($fork)" bash -c 'cd contracts && forge test 2>&1 | grep -E "^\[FAIL|Ran [0-9]+ test suites" | tail -3; ! forge test 2>&1 | grep -q "^\[FAIL"'
-  check "gas snapshot" bash -c "cd contracts && forge snapshot --check --no-match-test 'testFuzz|invariant|test_replay' 2>&1 | tail -1"
+  check "forge test ($fork)" bash -o pipefail -c 'cd contracts && forge test > /tmp/preflight_forge.log 2>&1; rc=$?; grep -E "^\[FAIL|Ran [0-9]+ test suites" /tmp/preflight_forge.log | tail -3; exit $rc'
+  check "gas snapshot" bash -o pipefail -c "cd contracts && forge snapshot --check --no-match-test 'testFuzz|invariant|test_replay' 2>&1 | tail -1"
   if command -v slither >/dev/null 2>&1; then
-    check "slither (no high/medium)" bash -c 'cd contracts && out=$(slither . --config-file slither.config.json 2>&1); echo "$out" | tail -1; ! echo "$out" | grep -E "Impact: (High|Medium)" '
+    check "slither (no high/medium)" bash -o pipefail -c 'cd contracts && out=$(slither . --config-file slither.config.json 2>&1); echo "$out" | tail -1; ! echo "$out" | grep -E "Impact: (High|Medium)" '
   else record "slither" SKIP "not installed"; fi
 else
   record "forge test / snapshot / slither" SKIP "--quick"
@@ -50,18 +50,18 @@ fi
 # --- calendar fixture: regenerate from the independent oracle and compare byte for byte
 tmp=$(mktemp -d)
 if [ -d research ] && command -v uv >/dev/null 2>&1; then
-  check "calendar fixture reproducible" bash -c "cd research && uv run python calendar_oracle.py --out '$tmp/calendar_cases.json' >/dev/null 2>&1 && cmp '$tmp/calendar_cases.json' ../contracts/test/fixtures/calendar_cases.json && echo identical; rm -f uv.lock"
+  check "calendar fixture reproducible" bash -o pipefail -c "cd research && uv run python calendar_oracle.py --out '$tmp/calendar_cases.json' >/dev/null 2>&1 && cmp '$tmp/calendar_cases.json' ../contracts/test/fixtures/calendar_cases.json && echo identical; rm -f uv.lock"
 else record "calendar fixture reproducible" SKIP "uv not installed"; fi
 
 # --- replay reproducibility: inputs, on-chain run vs the exact-integer reference
 if [ $QUICK -eq 0 ]; then
-  check "replay inputs reproducible" bash -c "cp sim/replay_inputs.json '$tmp/in.json' && python3 sim/prepare_replay.py >/dev/null && cmp sim/replay_inputs.json '$tmp/in.json' && echo identical"
-  check "replay: on-chain vs reference" bash -c "(cd contracts && forge test --match-test test_replayPrintsResults -vv > '$tmp/sol.log' 2>&1) && (cd research && python3 replay_reference.py > '$tmp/ref.csv') && python3 sim/compare_replay.py '$tmp/sol.log' '$tmp/ref.csv' | tail -4"
+  check "replay inputs reproducible" bash -o pipefail -c "cp sim/replay_inputs.json '$tmp/in.json' && python3 sim/prepare_replay.py >/dev/null && cmp sim/replay_inputs.json '$tmp/in.json' && echo identical"
+  check "replay: on-chain vs reference" bash -o pipefail -c "(cd contracts && forge test --match-test test_replayPrintsResults -vv > '$tmp/sol.log' 2>&1) && (cd research && python3 replay_reference.py > '$tmp/ref.csv') && python3 sim/compare_replay.py '$tmp/sol.log' '$tmp/ref.csv' | tail -4"
 else record "replay checks" SKIP "--quick"; fi
 rm -rf "$tmp"
 
 # --- secrets
-check "secret scan (full history)" bash -c "scripts/secret_scan.sh | tail -1"
+check "secret scan (full history)" bash -o pipefail -c "scripts/secret_scan.sh | tail -1"
 
 echo
 echo "== summary: $((${#results[@]} - fails)) not failing, $fails FAILED"
