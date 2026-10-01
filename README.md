@@ -8,9 +8,9 @@ Session-aware credit-risk layer and isolated lending market for tokenized-stock 
 | Repository | {{PENDING:repo_url}} |
 | Demo video | {{PENDING:video_url}} |
 | Team | {{PENDING:team_members}} |
-| License | {{PENDING:license}} |
+| License | MIT |
 
-> **Read this first.** Sundown is a research project with an honest headline: at the loan-to-value limits actually used today, weekend and holiday gaps cost lenders almost nothing, so we do **not** claim to fix them. The measured contribution is a calibrated risk model, a clean isolated lending core whose risk guard is swappable, and a quantified case for a higher-LLTV "boosted tier" on one asset (AAPL at 90%). Everything simulated is labelled as simulation; the list of claims we will not make is in [Evidence](#what-the-evidence-shows).
+> **Read this first.** Sundown is a research project with an honest headline: at the loan-to-value limits actually used today, weekend and holiday gaps cost lenders almost nothing, so we do **not** claim to fix them. The shipped session-aware guard is a *capacity policy* (boosted weekday capacity, tighter weekend capacity) for one boosted tier, AAPL at 93 %; it is not loss prevention, its measured economics are modest, and its benefit does not survive an out-of-sample calibration. Everything simulated is labelled as simulation; the claims we will not make are listed under [Evidence](#what-the-evidence-shows).
 
 ## The problem
 
@@ -29,33 +29,32 @@ Labels follow the repository rule: `contracts/src` is production code, `contract
 
 | Component | What it is | Status |
 |---|---|---|
-| `research/` | Calendar windows (D1), 2010-2026 gap data for 12 equities, gap-VaR estimators (float and integer reference), out-of-sample backtests, credit simulation, liquidation-design and two-tier studies, claims register | Complete; `make test` runs {{PENDING:research_pytest_count}} |
+| `research/` | Calendar windows (D1), 2010-2026 gap data for 12 equities, gap-VaR estimators (float and integer reference), out-of-sample backtests, credit simulation, liquidation-design and two-tier studies, evidence for the shipped static rule, claims register | Complete; `make test` runs {{PENDING:research_pytest_count}} |
 | `contracts/src/lib/UsMarketCalendar.sol`, `MarketCalendar.sol` | Pure O(1) blind-window calendar (D1: trading day opens 20:00 ET the day before, closes 20:00 ET; classes Short / Weekend / Long) plus an ad-hoc closure wrapper | Implemented; differential-tested against an independent Python calendar |
 | `contracts/src/oracle/` | `ChainlinkEquityOracle` (calendar-aware freshness: scheduled blindness vs unexpected staleness) and `WindowCache` | Implemented; "integrated" only after the fork test: {{PENDING:oracle_fork_test_result}} |
-| `contracts/src/SundownMarket.sol`, `SundownMarketFactory.sol` | ERC-4626 supply vault plus isolated single-collateral lending, kinked per-second rate, partial liquidation, per-market collateral cap, issuer-failure halt policy; ERC-1167 clone factory | Implemented; {{PENDING:contracts_forge_test_count}} |
+| `contracts/src/SundownMarket.sol`, `SundownMarketFactory.sol` | ERC-4626 supply vault plus isolated single-collateral lending, kinked per-second rate, partial liquidation with a non-worsening bonus cap, per-market collateral cap, issuer-failure halt policy; ERC-1167 clone factory | Implemented; {{PENDING:contracts_forge_test_count}} |
 | `contracts/src/guards/FlatGuard.sol` | Control guard: static LTV, flat bonus | Implemented |
-| Session-aware guard (boosted tier) | Pre-window deleveraging guard specified by the research | **Not implemented** (listed in `docs/THREAT_MODEL.md` known gaps) |
-| `sim/SimEquityFeed.sol` | AggregatorV3-shaped feed driven by replay data, named and documented as **simulation** | Implemented; never used for Robinhood mainnet |
+| `contracts/src/guards/SundownGuard.sol` | Session-aware guard: static through-the-cycle stress cap from 6 h before a blind window until it ends, 3 h cure window, then permissionless deleveraging to the cap at a fee; standard accounts never touched; timelocked parameters, tighten-only guardian (`docs/GUARD_DESIGN.md`) | Implemented; deployed boosted tier: **AAPL at 93 % only** (SPY at 90/93 % and AAPL at 90 % are not deployed as boosted, D26/D30) |
+| `sim/SimEquityFeed.sol`, `sim/ReplayHarness.sol` | AggregatorV3-shaped feed driven by replay data, and the replay harness, named and documented as **simulation** | Implemented; never used for Robinhood mainnet |
 | `web/` | Research UI: landing, risk evidence, replay (research simulation, no contract calls) | Built, tested; deployed: {{PENDING:vercel_url}} |
-| Arbitrum Sepolia demonstration | Four markets at demonstration scale with the labelled simulated feed | {{PENDING:sepolia_deployment_status}}; addresses {{PENDING:sepolia_market_addresses}}; replay transactions {{PENDING:sepolia_replay_tx_links}} |
+| Arbitrum Sepolia demonstration | Markets at demonstration scale with the labelled simulated feed (SPY, NVDA, TSLA, AAPL standard; AAPL boosted 93 % and AAPL control 93 %) | {{PENDING:sepolia_deployment_status}}; addresses {{PENDING:sepolia_market_addresses}}; replay transactions {{PENDING:sepolia_replay_tx_links}} |
 
 ## What the evidence shows
 
-All numbers: annualised bad debt in basis points of outstanding debt, replaying real 2018-2026 gaps through a **simulated** lending market; 95% bootstrap CIs clustered by window date. Source of every figure: `research/CLAIMS.md` and the files it names under `research/results/`.
+Bad debt below is in basis points of outstanding debt per year from replaying real gaps through a **simulated** lending market, 95% bootstrap CIs clustered by window date; the replay in claim 2 runs in forge's in-process EVM, **not on a public chain**. Sources: `research/CLAIMS.md`, `research/PITCH_EVIDENCE.md`, `docs/REPLAY_RESULTS.md`.
 
-1. **Conventional LLTVs lose almost nothing to weekend gaps.** At 86% (the highest limit in the wild) bad debt is 4.5 bps/yr, CI [0.7, 9.7]; at 77% it is 0.08 bps/yr. The worst single window cost 1.2% of debt, and 63% of the 86% loss is one episode (March 2020). The stress rule changes none of this below about 90%.
-2. **At higher LLTV the session-aware rule works, with enforcement.** At a counterfactual 93% base LLTV, pre-window deleveraging cuts bad debt 41% (24.0 to 14.0 bps/yr; reduction 9.9, CI [1.6, 23.8]); at 95% it cuts 53%. At equal bad debt it buys +2.6 pp of LTV at 93% (CI [0.9, 4.1]). A cap on new borrows only has exactly zero effect. These LLTVs exist in no market today.
-3. **Liquidation design matters more than the guard, and it points to one credible boosted-tier case: AAPL at 90%.** Cutting the flat bonus from 5.5% to 2% lowers bad debt by 8.8 bps/yr at 86% (CI [2.0, 17.7]) and 76 bps/yr at 93% (CI [49, 106]), if liquidators still act at 2%. A Dutch ramp or depth-capped liquidation does not help lenders. For AAPL at 90% the added lender loss is covered at a break-even borrow APR of 1.4% (CI [0.1, 3.3]) for uniform borrowers and 3.7% (CI [0.4, 8.5]) for borrowers clustered near the limit, against a **measured** 7.83% on the AAPL/USDG market. SPY is the secondary case, but its market is idle. TSLA and NVDA are not recommended for a boosted tier: they have the highest break-even APRs and the most forced deleveraging events.
+1. **At today's limits, gaps cost lenders almost nothing.** At 86% (the highest in the wild) bad debt is 4.5 bps/yr, CI [0.7, 9.7]; at 77% it is 0.08 bps/yr; 63% of the 86% loss is March 2020. (Upper bounds: the convention used there overstates losses relative to the deployed market, see claim 2.)
+2. **The shipped rule does what its design says on AAPL at 93%, and two implementations agree.** Session A's replay (20 seeded borrowers, the 10 worst real AAPL gaps, no borrower cures): control at 93% lost $3,824 over 4 events; session-aware $1,224 over 1 event (-68%); a standard 86% market $0 at 7.5% lower capacity; **the 2020-03-16 gap (13.9%) still produced a loss**. My independent Python simulation reproduces these to 0.01% ($3,823.47 and $1,224.26) once it uses the market's liquidation rule; my earlier convention overstated the control by 45% ($5,556), which is why both conventions are reported. Over all 914 AAPL windows 2010-2026 (in-sample for the cap) the rule cuts 93% bad debt from 19.6 to 4.8-6.3 bps/yr (reduction 14.7, CI [3.2, 30.3], for borrowers who never adjust; 13.2, CI [2.2, 27.5], for borrowers who trim before each window).
+3. **Its economics are modest.** SPY: the cap never binds, so a boosted SPY tier is a flat market. AAPL: the rule is not distinguishable from a flat market at the 89.35% weekend-cap level (+2.7 bps/yr, CI [0.0, 8.2], at 93%), offers 3.65 pp more weekday capacity (0.65 pp at 90%), deleverages a never-adjusting near-max borrower on 96% of windows (52 a year, fee 4.3% of debt a year on average and 11.8% for borrowers clustered near the limit) against a measured 7.83% AAPL borrow APR, and does nothing when the cap is calibrated before March 2020.
 
 ### Claims we will not make
 
-- That Sundown is safer than Aave or Morpho, or that it protects conventional LLTV markets.
-- That our 99% gap-VaR is calibrated: out of sample it realises 1.87% exceedances on weekends (target 1%, CI [0.96, 3.09]); March 2020 breaks it; the Short class fails.
-- That weekends are riskier than weeknights, or any exact size of the oracle-blind exposure: the daily proxy is a conservative superset.
-- That the LTV gain generalises beyond 2018-2026, a sample whose tail is mostly one episode.
-- That forced deleveraging is acceptable to borrowers (cure rate and fee are assumptions), that a premium-funded gap reserve works, or that exit liquidity is guaranteed.
-- Anything about TSLA or NVDA beyond "not recommended for a boosted tier".
-- That any on-chain integration is validated by the research, or anything about issuer risks, which no parameter here mitigates.
+- That Sundown is safer than Aave or Morpho, or that it protects conventional LLTV markets or prevents losses.
+- Any enforcement, protection or benefit for SPY at either tier or for AAPL at 90%; anything for TSLA or NVDA beyond "not recommended for a boosted tier".
+- That the shipped rule is safer than a flat market at the weekend-cap level, or that the earlier time-varying estimator's results (+2.6 pp LTV, 41% bad-debt reduction) describe it.
+- That naive borrowers are good customers, that attentive borrowers have no cost, that a keeper will run, or that the boosted tier is profitable for lenders or borrowers.
+- That our 99% gap-VaR is calibrated: out of sample it realises 1.87% exceedances on weekends (target 1%, CI [0.96, 3.09]); March 2020 breaks it.
+- That the replay ran on a public chain, that exit liquidity is guaranteed, or that any on-chain integration, issuer-risk mitigation or oracle security is validated by the research.
 
 ## Architecture
 
@@ -68,25 +67,28 @@ All numbers: annualised bad debt in basis points of outstanding debt, replaying 
               |
               v
   SundownMarket (ERC-4626 vault + isolated lending, one collateral, USDG loan, per-market cap)
-      ^   reads IRiskGuard (FlatGuard today; session-aware guard not implemented)
+      ^   reads IRiskGuard: FlatGuard (control) or SundownGuard (static stress cap, cure window, deleverage)
       |   permissionless reportIssuerFailure() probes of the collateral token and USDG (pause and block state)
       v
   Halted policy: new borrows and withdrawals blocked, accrual frozen, repay stays open, bounded (30-day) freeze
   SundownMarketFactory: ERC-1167 clones with immutable parameters (no upgrade path)
 ```
 
-The market contains no session logic; everything session-related is behind `IRiskGuard`, so a control market (flat) and a treatment market differ only by the guard and a replay can say what the guard is worth. Design, decisions and invariants: `docs/MARKET_DESIGN.md`, `docs/DESIGN.md`; threats and known gaps: `docs/THREAT_MODEL.md`; calendar rules and evidence: `docs/CALENDAR_NOTES.md`; feasibility facts with evidence labels: `docs/DISCOVERY.md`.
+The market contains no session logic; everything session-related is behind `IRiskGuard`, so a control market (flat) and a treatment market differ only by the guard and a replay can say what the guard is worth. Design, decisions and invariants: `docs/MARKET_DESIGN.md`, `docs/GUARD_DESIGN.md`, `docs/DESIGN.md`; threats and known gaps: `docs/THREAT_MODEL.md`; calendar rules and evidence: `docs/CALENDAR_NOTES.md`; replay: `docs/REPLAY_RESULTS.md`; feasibility facts with evidence labels: `docs/DISCOVERY.md`.
 
 ## Limitations
 
 - **Daily proxy.** Risk is measured from the previous regular close to the next regular open, a conservative superset of the oracle-blind exposure. On a two-year hourly subset the extended-hours bracket carried 58% of the proxy's second moment. It is never exact.
+- **The shipped cap is calibrated in-sample.** The static gapVaR is a full-sample number that contains March 2020; a cap calibrated on 2010-2017 would have done nothing on 2018+ windows. Even in-sample, the 2020-03-16 gap produces a loss.
+- **Two liquidation conventions.** Most research bad-debt levels (M2.1-M2.3 default files) charge the full bonus on any liquidation and therefore overstate losses relative to the deployed market's non-worsening bonus cap; the market-rule variants (`*_marketrule.csv`) match Session A's forge replay to 0.01%. Absolute levels are not forecasts.
+- **The replay is a forge in-process simulation**: a fixture window cache, 20 seeded borrowers, one gap at reopen, no exit slippage; not a public-chain run.
 - **One data vendor.** Equity history comes from Yahoo Finance (split-adjusted, not dividend-adjusted); there is no second source for cross-checking (`research/DATA_PROVENANCE.md`).
 - **Limited calendar evidence.** The D1 rule is confirmed on 12 Weekend and 2 Long windows only; 0 Short windows, **no EST (winter) observations and no early-close observations** exist yet. The early-close rule is an unverified one-line configuration.
-- **Exit liquidity is thin and measured at one moment.** Depth was read directly from Uniswap v3 pools on Robinhood Chain; it supports about $0.9M of collateral across four markets under the proposed cap rule (`docs/DISCOVERY.md` section g). It excludes v4 pools and RFQ routing, and weekend depth is unmeasured. The liquidation study additionally used a secondary DexScreener snapshot as a model input; sizing numbers should come from section g.
+- **Exit liquidity is thin and measured at one moment.** Depth was read directly from Uniswap v3 pools on Robinhood Chain; it supports about $0.9M of collateral across four markets under the proposed cap rule (`docs/DISCOVERY.md` section g). It excludes v4 pools and RFQ routing, and weekend depth is unmeasured. Keeper economics at the deployed scale are viable under the 2% default fee, but whether any keeper runs is not established.
 - **Issuer controls are not mitigable.** Pause, blocklist, `adminBurn` and a beacon upgrade for all tokens are held by EOAs. The market detects pause and block and halts; it cannot prevent a burn, which is a direct loss to lenders bounded only by the per-market cap.
 - **Loan token assumption.** USDG is treated as exactly 1 USD; there is no loan-token oracle.
 - **No sequencer-uptime feed** exists for Robinhood Chain; sequencer downtime is modelled as unscheduled blindness.
-- **Simulation scope.** Borrower behaviour is a 20-point utilisation grid; no interest accrual, earnings calendar or issuer actions in the credit simulation; Sepolia demonstrations use a simulated feed and prove integration shape, not oracle security.
+- **Simulation scope.** Borrower behaviour is stylised (a utilisation grid, or a seeded population in the replay); no interest accrual, earnings calendar or issuer actions in the credit simulation; Sepolia demonstrations use a simulated feed and prove integration shape, not oracle security.
 - **Performance.** Lighthouse performance on `/` was measured locally at 73-85 (accessibility, best practices and SEO 100); the deployed-URL measurement is {{PENDING:lighthouse_deployed}}.
 
 ## Reproduce
@@ -98,8 +100,9 @@ Everything below is deterministic (fixed seeds, pinned dependencies) unless mark
 cd research
 make venv && make test
 make backtest      # statistics, estimators, credit sim; writes results/, figures, deployments/risk_params.json
-make m21 && make m22
-# network steps (refresh data / re-read the chain): make data, make intraday, make pools, python morpho_rates.py
+make m21 && make m22 && make m23     # m23: shipped static rule, market-rule variants, forge replay cross-check
+python static_replay_crosscheck.py   # my Python vs Session A's forge replay, same scenario
+# network steps (refresh data / re-read the chain): make data, make intraday, make pools, make exit-liquidity, python morpho_rates.py
 
 # Web app (Node 22, Chrome for the e2e tests); run from the repository root
 npx -y pnpm@12.8.1 install --frozen-lockfile
@@ -116,12 +119,13 @@ cd contracts && forge build && forge test
 
 ## Repository map
 
-`contracts/` Solidity (Foundry, solc 0.8.28, cancun) | `research/` analysis, results, claims | `sim/` simulation-only contracts | `web/` Next.js research UI | `deployments/` parameter and address files | `docs/` design, discovery, threat model, figures | `scripts/` repository checks.
+`contracts/` Solidity (Foundry, solc 0.8.28, cancun) | `research/` analysis, results, claims | `sim/` simulation-only contracts and replay harness | `web/` Next.js research UI | `deployments/` parameter and address files | `docs/` design, discovery, threat model, replay results, figures | `scripts/` repository checks.
 
 ## Pre-existing work and third-party material
 
+- **Attribution.** Original contracts (MIT). Built on OpenZeppelin Contracts v5.7.0 (MIT). Design inspired by Morpho Blue (virtual shares, isolated markets) and Aave/Compound (kinked rates, liquidation parameters); no code copied.
 - **Provenance.** The repository history begins on 2026-10-02 (first commit `c467ccd`, the operating charter); all code, research and documentation here were written in this repository during the buildathon window. Attestation by the team that no earlier code was imported: {{PENDING:team_confirms_no_prior_code}}.
-- **Libraries (exact pins in the named files).** Contracts: OpenZeppelin Contracts and Contracts-Upgradeable v5.7.0 (git submodules; Upgradeable only for clone-safe ERC-4626 and ERC-20 bases, not for upgradeability), forge-std v1.17.0 (`contracts/foundry.lock`). Research: exchange_calendars, pandas, numpy, scipy, yfinance, matplotlib, pytest, ruff (`research/requirements.txt`). Web: Next.js 15.5, React 19, Tailwind CSS 4, wagmi 2, viem, RainbowKit, TanStack Query, next-themes, Radix Slot, class-variance-authority, clsx, tailwind-merge, Playwright, axe-core (`web/package.json`, `pnpm-lock.yaml`). The UI components follow shadcn/ui patterns and are written in this repository.
-- **Contract code attribution.** {{PENDING:contracts_third_party_attribution}}
-- **External data and services.** Yahoo Finance via yfinance (equity history), Chainlink feeds and Morpho Blue and Uniswap v3 pools (on-chain reads), the Robinhood asset registry and the Morpho GraphQL API (enumeration), Sourcify (verified token source), the NYSE holiday page (calendar cross-check), DexScreener (secondary pool discovery in one study only).
+- **Libraries (exact pins in the named files).** Contracts: OpenZeppelin Contracts and Contracts-Upgradeable v5.7.0 (git submodules; Upgradeable only for clone-safe ERC-4626 and ERC-20 bases, not for upgradeability), forge-std v1.17.0 (`contracts/foundry.lock`). Research: exchange_calendars (Apache-2.0), pandas, numpy, scipy, yfinance, matplotlib, pytest, ruff (`research/requirements.txt`). Web: Next.js 15.5, React 19, Tailwind CSS 4, wagmi 2, viem, RainbowKit, TanStack Query, next-themes, Radix Slot, class-variance-authority, clsx, tailwind-merge, Playwright, axe-core (`web/package.json`, `pnpm-lock.yaml`). The UI components follow shadcn/ui patterns and are written in this repository.
+- **Credits.** yfinance (Yahoo Finance data, subject to Yahoo's own terms), exchange_calendars (Apache-2.0), and Chainlink (the AggregatorV3 feed interface and the Robinhood Chain equity feeds read by the oracle adapter).
+- **External data and services.** Chainlink feeds, Morpho Blue and Uniswap v3 pools (on-chain reads), the Robinhood asset registry and the Morpho GraphQL API (enumeration), Sourcify (verified token source), the NYSE holiday page (calendar cross-check), DexScreener (secondary pool discovery in one study only).
 - **Development tooling disclosure.** {{PENDING:development_tooling_disclosure}}
