@@ -29,6 +29,7 @@ from dataclasses import dataclass
 import numpy as np
 
 import credit_sim as cs
+from config import NONWORSENING_DEFAULT
 
 K = cs.K_GRID
 UTIL = cs.UTIL
@@ -64,6 +65,15 @@ DESIGNS = [
 ]
 
 
+def _cap_bonus(b, coll_val, debt, nonworsening):
+    """Deployed market rule: bonus <= collateral/debt - 1 while collateral exceeds debt."""
+    if not nonworsening:
+        return b
+    with np.errstate(divide="ignore", invalid="ignore"):
+        cap = np.where(debt > 1e-12, coll_val / np.maximum(debt, 1e-12) - 1.0, b)
+    return np.where(coll_val > debt, np.minimum(b, cap), b)
+
+
 def capacity(b: np.ndarray | float, y: float) -> np.ndarray:
     """Max seized notional (USD) per round with average slippage + gas <= bonus."""
     m = np.maximum(np.asarray(b, float) - GAS, 0.0)
@@ -81,7 +91,7 @@ class Tier:
 
 def simulate(x_bps: np.ndarray, oc_bps: np.ndarray, tiers: list[Tier], design: Design,
              depth_tvl: float, debt_usd: float, concentration: float = 1.0,
-             round_step: int = ROUND_STEP) -> dict:
+             round_step: int = ROUND_STEP, nonworsening: bool = NONWORSENING_DEFAULT) -> dict:
     n = len(x_bps)
     round_min = np.arange(0, 361, round_step)
     y = HUGE_DEPTH if depth_tvl is None else concentration * depth_tvl / 2.0
@@ -132,6 +142,7 @@ def simulate(x_bps: np.ndarray, oc_bps: np.ndarray, tiers: list[Tier], design: D
                 b = np.where(deep, bmj, ramp)
             else:
                 b = np.full(n, design.bonus)
+            b = _cap_bonus(b, coll_val, Dj, nonworsening)
             avail = np.maximum(capacity(b, y) - sold, 0.0)
             if design.phi is not None:
                 avail = np.minimum(avail, np.maximum(design.phi * y - sold, 0.0))
@@ -149,7 +160,7 @@ def simulate(x_bps: np.ndarray, oc_bps: np.ndarray, tiers: list[Tier], design: D
     coll_val = T * px_last[:, None]
     with np.errstate(divide="ignore", invalid="ignore"):
         ltv = np.where(coll_val > 1e-12, D / coll_val, np.where(D > 1e-12, np.inf, 0.0))
-    b_final = BM if design.kind == "dutch" else design.bonus
+    b_final = _cap_bonus(BM if design.kind == "dutch" else design.bonus, coll_val, D, nonworsening)
     liq = (D > 1e-12) & (ltv >= L)
     bad = np.where(liq, np.maximum(0.0, D - coll_val / (1.0 + b_final)),
                    np.maximum(0.0, D - coll_val)).sum(1)

@@ -20,7 +20,7 @@ import pandas as pd
 import credit_sim as cs
 import frontier as fr
 import static_rule as sr
-from config import RESULTS_DIR, SEED
+from config import OLDER_DIR, RESULTS_DIR, SEED
 from data import load_panel
 
 ASSETS = ("AAPL", "SPY")
@@ -51,7 +51,7 @@ def gv_vector(e: pd.DataFrame, gv: pd.DataFrame, t: str) -> np.ndarray:
     return e.cls.map(m).to_numpy(float)
 
 
-NONWORSENING = False  # set by main(): True = the deployed market's liquidation bonus cap
+NONWORSENING = True  # set by main(): True = the deployed market's liquidation bonus cap
 
 
 def run(e, gvb, t, L, depth, C, **kw):
@@ -316,20 +316,21 @@ def main():
     panel, ev, gv, gv_pre, apr, depth = load_inputs()
     table_binding(gv, gv_pre).drop(columns=["windows_in_class_pct"]).to_csv(
         RESULTS_DIR / "static_rule_binding.csv", index=False, float_format="%.6g")
-    for nonworsening, suffix in ((False, ""), (True, "_marketrule")):
+    OLDER_DIR.mkdir(exist_ok=True)
+    # default = the deployed market's liquidation rule; the older convention (upper bound) goes to
+    # results/older_convention/
+    for nonworsening, out in ((True, RESULTS_DIR), (False, OLDER_DIR)):
         NONWORSENING = nonworsening
         lender, borrower, equal, boot, years = main_tables(ev, gv, apr, depth)
-        lender.to_csv(RESULTS_DIR / f"static_rule_lender{suffix}.csv", index=False, float_format="%.5g")
-        borrower.to_csv(RESULTS_DIR / f"static_rule_borrower{suffix}.csv", index=False,
-                        float_format="%.5g")
-        equal.to_csv(RESULTS_DIR / f"static_rule_equal_risk{suffix}.csv", index=False,
-                     float_format="%.5g")
+        lender.to_csv(out / "static_rule_lender.csv", index=False, float_format="%.5g")
+        borrower.to_csv(out / "static_rule_borrower.csv", index=False, float_format="%.5g")
+        equal.to_csv(out / "static_rule_equal_risk.csv", index=False, float_format="%.5g")
         table_sensitivity(ev, gv, gv_pre, depth, years).to_csv(
-            RESULTS_DIR / f"static_rule_sensitivity{suffix}.csv", index=False, float_format="%.5g")
-        if not nonworsening:
+            out / "static_rule_sensitivity.csv", index=False, float_format="%.5g")
+        if nonworsening:
             table_keeper(ev, gv, depth, years).to_csv(RESULTS_DIR / "static_rule_keeper.csv",
                                                       index=False, float_format="%.5g")
-    NONWORSENING = False
+    NONWORSENING = True
     print("done")
 
 

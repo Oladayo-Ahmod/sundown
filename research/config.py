@@ -1,5 +1,6 @@
 """Central configuration for the M2 research pipeline (offline analysis, not production)."""
 
+import os
 from pathlib import Path
 
 RESEARCH = Path(__file__).resolve().parent
@@ -58,3 +59,13 @@ COUNTERFACTUAL_LLTVS = [0.90, 0.93, 0.95]  # not observed in the wild; labelled 
 
 def morpho_bonus(lltv: float) -> float:
     return min(1.15, 1.0 / (0.3 * lltv + 0.7)) - 1.0
+
+
+# Liquidation convention. "market" (default) is the deployed rule (SundownMarket._planLiquidation):
+# the bonus is capped at collateral/debt - 1 while collateral exceeds debt, so a liquidation never
+# worsens an account. "older" is the M2.2 convention that charges the full bonus on any liquidated
+# account: an UPPER BOUND on lender loss, kept behind SUNDOWN_LIQ_CONVENTION=older (it overwrites
+# results/; archived pre-M2.4 copies are in results/older_convention/).
+LIQ_CONVENTION = os.environ.get("SUNDOWN_LIQ_CONVENTION", "market")
+NONWORSENING_DEFAULT = LIQ_CONVENTION != "older"
+OLDER_DIR = RESULTS_DIR / "older_convention"

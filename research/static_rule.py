@@ -29,7 +29,7 @@ import numpy as np
 
 import credit_sim as cs
 import liquidation as lq
-from config import RESULTS_DIR
+from config import NONWORSENING_DEFAULT, RESULTS_DIR
 
 K = cs.K_GRID
 UTIL = cs.UTIL
@@ -141,7 +141,7 @@ class Result:
 def simulate_book(x_bps, oc_bps, gap_var_bps, tier_lltv, depth, collateral_usd, *,
                   util="uniform", rule=True, behaviour="naive", fee=FEE_FLOOR, bonus=BONUS,
                   lltv_override=None, pre_depth=None, population=None,
-                  nonworsening=False) -> Result:
+                  nonworsening=NONWORSENING_DEFAULT) -> Result:
     """One boosted-tier (or flat) book per window event.
 
     rule=False: flat market at `tier_lltv` (no stress cap, no deleverage). lltv_override lets the
@@ -256,9 +256,9 @@ def simulate_book(x_bps, oc_bps, gap_var_bps, tier_lltv, depth, collateral_usd, 
 
 def _bonus_eff(bonus, coll_val, debt, nonworsening):
     """Market rule (SundownMarket._planLiquidation): when collateral still exceeds debt the bonus is
-    capped at collateral/debt - 1 so a liquidation never raises the loan-to-value. The M2.2/M2.3
-    default (nonworsening=False) charges the full bonus, which overstates losses on accounts that
-    are liquidated between 1/(1+b) and 100 % LTV."""
+    capped at collateral/debt - 1 so a liquidation never raises the loan-to-value (the default since
+    M2.4). nonworsening=False is the older convention: it charges the full bonus and overstates
+    losses on accounts liquidated between 1/(1+b) and 100 % LTV (an upper bound)."""
     if not nonworsening:
         return bonus
     with np.errstate(divide="ignore", invalid="ignore"):

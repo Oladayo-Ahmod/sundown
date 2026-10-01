@@ -92,7 +92,7 @@ def test_static_gapvar_file_matches_class_stats_and_provenance():
 def test_nonworsening_bonus_cap_only_lowers_losses():
     x, oc = _events(300, seed=7)
     gv = np.full_like(x, 915.29)
-    a = sr.simulate_book(x, oc, gv, 0.93, sr.DepthInfinite(), 1e6, rule=False)
+    a = sr.simulate_book(x, oc, gv, 0.93, sr.DepthInfinite(), 1e6, rule=False, nonworsening=False)
     b = sr.simulate_book(x, oc, gv, 0.93, sr.DepthInfinite(), 1e6, rule=False, nonworsening=True)
     assert (b.bad <= a.bad + 1e-9).all() and b.bad.sum() < a.bad.sum()
 
