@@ -1,10 +1,10 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 
 import { N, Sources, SimBadge } from "@/components/provenance";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { gaps, headline } from "@/lib/data";
+import { borrowerRow, gaps, headline, lender, MARKET_RULE, must, staticRule } from "@/lib/data";
 import { ci, fmt, pct } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
@@ -15,20 +15,38 @@ function q99Weekend(ticker: string): number | null {
 
 export default function Home() {
   const h = headline;
-  const s93 = h.stress.cf_93;
-  const s95 = h.stress.cf_95;
+  const m = h.measured_borrow_apr_pct;
+  const t = staticRule.crosscheck.totals;
   const src = {
-    flat: "research/results/credit_frontier_datecluster.csv",
     credit: "research/results/credit_summary.csv",
+    flat: "research/results/credit_frontier_datecluster.csv",
     conc: "research/results/bad_debt_regime_concentration.csv",
-    ci22: "research/results/m22_headline_ci.csv",
     rates: "research/results/morpho_rates_snapshot.json",
     bt: "research/results/backtest_test_chosen.csv",
     stats: "research/results/class_stats.csv",
+    lend: "research/results/static_rule_lender_marketrule.csv",
+    borrower: "research/results/static_rule_borrower.csv",
+    cross: "research/results/static_replay_crosscheck_totals.csv",
+    replayDoc: "docs/REPLAY_RESULTS.md",
+    sens: "research/results/static_rule_sensitivity_marketrule.csv",
   };
-  const spy = h.boosted_breakeven_apr_pct.SPY;
-  const aapl = h.boosted_breakeven_apr_pct.AAPL;
-  const m = h.measured_borrow_apr_pct;
+  const a93 = lender(MARKET_RULE, "AAPL", 93, "uniform", "A flat");
+  const n93 = lender(MARKET_RULE, "AAPL", 93, "uniform", "B boosted + rule, naive");
+  const r93 = lender(MARKET_RULE, "AAPL", 93, "uniform", "B boosted + rule, rational");
+  const dN = lender(MARKET_RULE, "AAPL", 93, "uniform", "DIFF A minus B(naive)");
+  const dR = lender(MARKET_RULE, "AAPL", 93, "uniform", "DIFF A minus B(rational)");
+  const rVsC = lender(MARKET_RULE, "AAPL", 93, "uniform", "DIFF B(rational) minus C");
+  const spy93 = lender(MARKET_RULE, "SPY", 93, "uniform", "A flat");
+  const bNaive = borrowerRow(93, "uniform", "naive");
+  const bNaiveHigh = borrowerRow(93, "clustered near max", "naive");
+  const oos = must(
+    staticRule.hindsight.find((r) => r.tier === 93 && r.case.includes("pre-2018")),
+    "hindsight oos 93",
+  );
+  const eq93 = must(
+    staticRule.equal_risk.find((r) => r.tier === 93),
+    "equal risk 93",
+  );
 
   return (
     <div className="space-y-14">
@@ -111,8 +129,10 @@ export default function Home() {
           <SimBadge>Research simulation</SimBadge>
         </div>
         <p className="max-w-3xl text-muted-foreground">
-          Bad debt is annualised, in basis points of outstanding debt, from replaying real 2018 to 2026 gaps
-          against simulated markets. Intervals are 95% bootstrap CIs clustered by window date.
+          What ships is a <strong>static</strong> through-the-cycle stress rule for one boosted tier, AAPL at 93%:
+          session-aware LLTV, boosted weekday capacity, tighter weekend capacity. It is a capacity policy, not loss
+          prevention. Bad debt is annualised, in basis points of outstanding debt, from replaying real gaps against
+          simulated markets; intervals are 95% bootstrap CIs clustered by window date.
         </p>
         <ol className="grid grid-cols-1 gap-4 lg:grid-cols-3">
           <li>
@@ -121,22 +141,22 @@ export default function Home() {
                 <Badge variant="outline" className="w-fit">
                   Claim 1
                 </Badge>
-                <CardTitle>Conventional LLTVs lose almost nothing to weekend gaps</CardTitle>
+                <CardTitle>Today&apos;s LLTVs lose almost nothing to weekend gaps</CardTitle>
                 <CardDescription>So we do not claim to fix them.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-2 text-sm leading-relaxed">
                 <p>
                   At 86% LLTV (the highest in the wild) bad debt is{" "}
-                  <N src={src.flat}>{fmt(h.flat.bps_yr_86.est, 1)}</N> bps/yr, CI{" "}
+                  <N src={src.credit}>{fmt(h.flat.bps_yr_86.est, 1)}</N> bps/yr, CI{" "}
                   <N src={src.flat}>{ci(h.flat.bps_yr_86.lo, h.flat.bps_yr_86.hi)}</N>. At 77% it is{" "}
                   <N src={src.credit}>{fmt(h.flat.bps_yr_77, 2)}</N> bps/yr.
                 </p>
                 <p>
                   Worst single window: <N src={src.credit}>{pct(h.flat.worst_window_pct_86)}</N> of debt.{" "}
                   <N src={src.conc}>{pct(h.flat.mar2020_share_pct_86, 0)}</N> of the 86% loss is one episode, March
-                  2020. Our stress rule changes none of this below about 90%.
+                  2020. These levels use a conservative liquidation convention (upper bounds, see claim 2).
                 </p>
-                <Sources files={[src.flat, src.credit, src.conc]} />
+                <Sources files={[src.credit, src.flat, src.conc]} />
               </CardContent>
             </Card>
           </li>
@@ -146,24 +166,34 @@ export default function Home() {
                 <Badge variant="outline" className="w-fit">
                   Claim 2
                 </Badge>
-                <CardTitle>At higher LLTV the rule works, with enforcement</CardTitle>
-                <CardDescription>Counterfactual LLTVs: no market uses them today.</CardDescription>
+                <CardTitle>The shipped rule works as designed on AAPL at 93%, and two implementations agree</CardTitle>
+                <CardDescription>Forge in-process EVM replay, not a public chain.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-2 text-sm leading-relaxed">
                 <p>
-                  At 93% base LLTV, pre-window deleveraging cuts bad debt{" "}
-                  <N src={src.flat}>{pct(s93.reduction_pct, 0)}</N> (<N src={src.flat}>{fmt(s93.flat_bps_yr)}</N>{" "}
-                  to <N src={src.flat}>{fmt(s93.stress_bps_yr)}</N> bps/yr; reduction{" "}
-                  <N src={src.flat}>{fmt(s93.reduction_bps_yr)}</N>, CI{" "}
-                  <N src={src.flat}>{ci(s93.reduction_ci[0], s93.reduction_ci[1])}</N>). At 95%:{" "}
-                  <N src={src.flat}>{pct(s95.reduction_pct, 0)}</N>.
+                  Replay of the 10 worst real AAPL gaps on 20 seeded borrowers (no cures): the unprotected 93% control
+                  lost <N src={src.cross}>${fmt(t.forge_control, 0)}</N> over <N src={src.replayDoc}>4</N> events; the
+                  session-aware market <N src={src.cross}>${fmt(t.forge_session_aware, 0)}</N> over{" "}
+                  <N src={src.replayDoc}>1</N>; a standard 86% market{" "}
+                  <N src={src.cross}>${fmt(t.forge_standard_86, 0)}</N> at 7.5% lower capacity. The 2020-03-16 gap
+                  (13.9%) <strong>still produced a loss</strong>.
                 </p>
                 <p>
-                  At equal bad debt it buys <N src={src.flat}>+{fmt(s93.ltv_gain_pp)}</N> pp of LTV at 93%, CI{" "}
-                  <N src={src.flat}>{ci(s93.ltv_gain_ci[0], s93.ltv_gain_ci[1])}</N>. A cap on new borrows only has
-                  exactly zero effect.
+                  My independent Python simulation reproduces this to 0.01% (
+                  <N src={src.cross}>${fmt(t.python_nonworsening_control, 2)}</N> and{" "}
+                  <N src={src.cross}>${fmt(t.python_nonworsening_session_aware, 2)}</N>) once it uses the market&apos;s
+                  liquidation rule; my earlier convention overstated the control by 45% (
+                  <N src={src.cross}>${fmt(t.python_control, 0)}</N>), so both are reported.
                 </p>
-                <Sources files={[src.flat]} />
+                <p>
+                  Over 914 AAPL windows 2010 to 2026 (in-sample for the cap) the rule cuts 93% bad debt from{" "}
+                  <N src={src.lend}>{fmt(a93.bps, 1)}</N> to <N src={src.lend}>{fmt(n93.bps, 1)}</N> to{" "}
+                  <N src={src.lend}>{fmt(r93.bps, 1)}</N> bps/yr: a reduction of{" "}
+                  <N src={src.lend}>{fmt(dN.bps, 1)}</N> (CI <N src={src.lend}>{ci(dN.lo, dN.hi)}</N>) for borrowers
+                  who never adjust and <N src={src.lend}>{fmt(dR.bps, 1)}</N> (CI{" "}
+                  <N src={src.lend}>{ci(dR.lo, dR.hi)}</N>) for borrowers who trim before each window.
+                </p>
+                <Sources files={[src.cross, src.replayDoc, src.lend]} />
               </CardContent>
             </Card>
           </li>
@@ -173,46 +203,44 @@ export default function Home() {
                 <Badge variant="outline" className="w-fit">
                   Claim 3
                 </Badge>
-                <CardTitle>Liquidation design matters more than the guard</CardTitle>
-                <CardDescription>It also shows where a boosted tier is credible: AAPL at 90%.</CardDescription>
+                <CardTitle>Its economics are modest, and we say so</CardTitle>
+                <CardDescription>SPY is inert; AAPL buys little at a real cost.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-2 text-sm leading-relaxed">
                 <p>
-                  Cutting the flat bonus from 5.5% to 2% lowers bad debt by{" "}
-                  <N src={src.ci22}>{fmt(h.bonus.lltv86.reduction.est)}</N> bps/yr at 86%, CI{" "}
-                  <N src={src.ci22}>{ci(h.bonus.lltv86.reduction.lo, h.bonus.lltv86.reduction.hi)}</N>, and{" "}
-                  <N src={src.ci22}>{fmt(h.bonus.lltv93.reduction.est, 0)}</N> bps/yr at 93%, CI{" "}
-                  <N src={src.ci22}>{ci(h.bonus.lltv93.reduction.lo, h.bonus.lltv93.reduction.hi, 0)}</N>, if
-                  liquidators still act at 2%.
+                  <strong>SPY:</strong> the cap never binds, so a &ldquo;boosted&rdquo; SPY tier is a flat market (93%:{" "}
+                  <N src={src.lend}>{fmt(spy93.bps, 1)}</N> bps/yr, unprotected). <strong>AAPL:</strong> the rule is
+                  not distinguishable from a flat market at the 89.35% weekend-cap level (rule minus flat-at-cap{" "}
+                  <N src={src.lend}>+{fmt(rVsC.bps, 1)}</N> bps/yr, CI <N src={src.lend}>{ci(rVsC.lo, rVsC.hi)}</N>)
+                  and offers <N src={src.borrower}>{fmt(eq93.extra_weekday_pp, 2)}</N> pp more weekday capacity.
                 </p>
                 <p>
-                  <strong>Headline boosted-tier case: AAPL at 90%.</strong> The added lender loss is covered at a
-                  break-even borrow APR of <N src={src.ci22}>{fmt(aapl["90"].uniform.est, 1)}</N>% (CI{" "}
-                  <N src={src.ci22}>{ci(aapl["90"].uniform.lo, aapl["90"].uniform.hi)}</N>) for uniform borrowers,{" "}
-                  <N src={src.ci22}>{fmt(aapl["90"].clustered.est, 1)}</N>% (CI{" "}
-                  <N src={src.ci22}>{ci(aapl["90"].clustered.lo, aapl["90"].clustered.hi)}</N>) for borrowers
-                  clustered near the limit. The measured USDG borrow APR on the AAPL market is{" "}
-                  <N src={src.rates}>{fmt(m.AAPL, 2)}</N>% at <N src={src.rates}>{pct(100 * m.aapl_util, 2)}</N>{" "}
-                  utilisation (block <N src={src.rates}>{m.block}</N>).
+                  A borrower who never adjusts is deleveraged{" "}
+                  <N src={src.borrower}>{fmt(bNaive.flagged_per_yr_top_bucket, 0)}</N> times a year; the 2% fee costs{" "}
+                  <N src={src.borrower}>{fmt(bNaive.fee_pct_debt_yr, 1)}</N>% of debt a year on average and{" "}
+                  <N src={src.borrower}>{fmt(bNaiveHigh.fee_pct_debt_yr, 1)}</N>% when clustered near the limit,
+                  against a measured AAPL borrow APR of <N src={src.rates}>{fmt(m.AAPL, 2)}</N>% (
+                  <N src={src.rates}>{pct(100 * m.aapl_util, 2)}</N> utilised, block{" "}
+                  <N src={src.rates}>{m.block}</N>).
                 </p>
                 <p>
-                  Secondary: SPY at 90 to 93% breaks even at <N src={src.ci22}>{fmt(spy["90"].uniform.est, 1)}</N> to{" "}
-                  <N src={src.ci22}>{fmt(spy["93"].clustered.est, 1)}</N>%, but the SPY market is idle (
-                  <N src={src.rates}>{pct(100 * m.spy_util, 0)}</N> utilised, <N src={src.rates}>{fmt(m.SPY, 2)}</N>%
-                  APR). TSLA and NVDA: not recommended for a boosted tier; they have the highest break-even APRs and
-                  the most forced deleveraging events.
+                  Out of sample the rule does nothing: with a cap calibrated before March 2020, 93% bad debt is{" "}
+                  <N src={src.sens}>{fmt(oos.flat, 1)}</N> bps/yr flat and <N src={src.sens}>{fmt(oos.rational, 1)}</N>{" "}
+                  with the rule.
                 </p>
-                <p>
-                  Demand evidence: the AAPL and NVDA stock-collateral markets are{" "}
-                  <N src={src.rates}>{pct(100 * m.nvda_util, 1)}</N> to <N src={src.rates}>{pct(100 * m.aapl_util, 2)}</N>{" "}
-                  utilised at <N src={src.rates}>{fmt(m.AAPL, 1)}</N> to <N src={src.rates}>{fmt(m.NVDA, 1)}</N>% borrow
-                  APR; large USDG markets borrow at <N src={src.rates}>{fmt(m.large_usdg_markets, 2)}</N>%.
-                </p>
-                <Sources files={[src.ci22, src.rates]} />
+                <Sources files={[src.lend, src.borrower, src.rates, src.sens]} />
               </CardContent>
             </Card>
           </li>
         </ol>
+        <p className="max-w-3xl text-sm text-muted-foreground">
+          Context: the AAPL and NVDA stock-collateral markets are <N src={src.rates}>{pct(100 * m.aapl_util, 2)}</N> and{" "}
+          <N src={src.rates}>{pct(100 * m.nvda_util, 1)}</N> utilised at <N src={src.rates}>{fmt(m.AAPL, 2)}</N>% and{" "}
+          <N src={src.rates}>{fmt(m.NVDA, 2)}</N>% borrow APR; the SPY market is idle (
+          <N src={src.rates}>{pct(100 * m.spy_util, 0)}</N> utilised, <N src={src.rates}>{fmt(m.SPY, 2)}</N>% APR).
+          Results for the earlier time-varying research estimator, which is not shipped, are on the risk page and are
+          labelled as such.
+        </p>
       </section>
 
       <section aria-labelledby="not" className="space-y-4">
@@ -222,26 +250,30 @@ export default function Home() {
         <Card>
           <CardContent className="pt-5">
             <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed marker:text-muted-foreground">
-              <li>That Sundown is safer than Aave or Morpho, or that it protects conventional LLTV markets.</li>
+              <li>
+                That Sundown is safer than Aave or Morpho, or that it protects conventional LLTV markets or prevents
+                losses: the 2020-03-16 gap still produced a loss and the benefit disappears out of sample.
+              </li>
+              <li>
+                Any enforcement, protection or benefit for SPY at either tier or for AAPL at 90%; anything for TSLA or
+                NVDA beyond &ldquo;not recommended for a boosted tier&rdquo;.
+              </li>
+              <li>
+                That the shipped rule is safer than a flat market at the weekend-cap level, or that the earlier
+                time-varying estimator&apos;s results (+2.6 pp LTV, 41% bad-debt reduction) describe it.
+              </li>
               <li>
                 That our 99% gap-VaR is calibrated: out of sample it realises{" "}
                 <N src={src.bt}>{fmt(h.var99_weekend.rate_pct, 2)}</N>% on weekends (target 1%, CI{" "}
                 <N src={src.bt}>{ci(h.var99_weekend.ci[0], h.var99_weekend.ci[1], 2)}</N>); March 2020 breaks it.
               </li>
               <li>
-                That weekends are riskier than weeknights, or any exact size of the oracle-blind exposure: the
-                daily proxy is a conservative superset.
+                That naive borrowers are good customers, that attentive borrowers have no cost, that a keeper will run,
+                or that the boosted tier is profitable for lenders or borrowers.
               </li>
               <li>
-                That the LTV gain generalises beyond 2018 to 2026, a sample whose tail is mostly one episode.
-              </li>
-              <li>
-                That forced deleveraging is acceptable to borrowers, that a premium-funded gap reserve works,
-                or that exit liquidity is guaranteed (one pool snapshot, no routing).
-              </li>
-              <li>
-                That any on-chain integration is validated by this work, or anything about issuer risks (pause,
-                blocklist, admin burn), which no parameter here mitigates.
+                That the replay ran on a public chain (it did not), that exit liquidity is guaranteed, or that any
+                on-chain integration, issuer-risk mitigation or oracle security is validated by this work.
               </li>
             </ul>
             <Sources files={[src.bt, "research/PITCH_EVIDENCE.md", "research/CLAIMS.md"]} />

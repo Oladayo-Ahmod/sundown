@@ -231,6 +231,92 @@ def replay() -> dict:
     }
 
 
+def static_rule() -> dict:
+    """Evidence for the shipped static rule (M2.3): AAPL and SPY, tiers 90 and 93."""
+    gv = r("static_gapvar.csv")
+    gv = gv[gv.ticker.isin(["AAPL", "SPY"])]
+    out = {
+        "source": [R + n for n in (
+            "static_gapvar.csv", "static_rule_lender_marketrule.csv", "static_rule_lender.csv",
+            "static_rule_equal_risk_marketrule.csv", "static_rule_borrower.csv",
+            "static_rule_keeper.csv", "static_rule_sensitivity_marketrule.csv",
+            "static_replay_crosscheck.csv", "static_replay_crosscheck_totals.csv",
+            "exit_liquidity.json")] + ["docs/REPLAY_RESULTS.md"],
+        "gapvar": [{"ticker": x.ticker, "cls": x.cls, "n": int(x.n),
+                    "gap_var_bps": num(x.gap_var_bps_q995),
+                    "stress_fraction_pct": num(x.stress_fraction_bps / 100),
+                    "binds_90": bool(x.binds_tier90), "binds_93": bool(x.binds_tier93),
+                    "tightening_pp_93": num(x.tightening_pp_tier93),
+                    "tightening_pp_90": num(x.tightening_pp_tier90)} for x in gv.itertuples()],
+    }
+    lend = []
+    for conv, f in (("market rule (deployed)", "static_rule_lender_marketrule.csv"),
+                    ("M2.2 convention (upper bound)", "static_rule_lender.csv")):
+        d = r(f)
+        d = d[d.ticker.isin(["AAPL", "SPY"]) & d.borrowers.isin(["uniform", "high"])]
+        for x in d.itertuples():
+            lend.append({"convention": conv, "ticker": x.ticker, "tier": int(x.tier_lltv_pct),
+                         "borrowers": "clustered near max" if x.borrowers == "high" else "uniform",
+                         "arm": x.arm, "bps": num(x.bad_debt_bps_yr), "lo": num(x.ci_lo),
+                         "hi": num(x.ci_hi)})
+    out["lender"] = lend
+    eq = r("static_rule_equal_risk_marketrule.csv")
+    eq = eq[(eq.ticker == "AAPL") & (eq.borrowers == "uniform")]
+    out["equal_risk"] = [{"tier": int(x.tier_lltv_pct), "arm": x.arm,
+                          "equivalent_flat_lltv_pct": num(x.equivalent_flat_lltv_pct),
+                          "gain_pp": num(x.ltv_gain_pp_at_equal_bad_debt),
+                          "lo": num(x.gain_ci_lo), "hi": num(x.gain_ci_hi),
+                          "weekend_cap_pct": num(x.weekend_cap_level_pct),
+                          "extra_weekday_pp": num(x.extra_weekday_capacity_vs_weekend_cap_pp)}
+                         for x in eq.itertuples()]
+    bw = r("static_rule_borrower.csv")
+    bw = bw[(bw.ticker == "AAPL") & bw.borrowers.isin(["uniform", "high"])]
+    out["borrower"] = [{"tier": int(x.tier_lltv_pct),
+                        "borrowers": "clustered near max" if x.borrowers == "high" else "uniform",
+                        "behaviour": x.behaviour,
+                        "flagged_per_borrower_yr": num(x.flagged_events_per_borrower_yr_avg),
+                        "flagged_per_yr_top_bucket": num(x.flagged_events_per_yr_top_bucket),
+                        "fee_pct_debt_yr": num(x.fee_cost_pct_of_debt_per_yr_APR_equiv),
+                        "trimmed_pct_debt_yr": num(x.trimmed_notional_pct_of_debt_per_yr),
+                        "offered_extra_pp": num(x.extra_weekday_capacity_offered_pp),
+                        "used_extra_pp": num(x.extra_weekday_capacity_used_pp_of_collateral),
+                        "unused_headroom_pp": num(x.avg_unused_weekday_headroom_pp),
+                        "stress_time_pct": num(x.share_of_time_in_stress_period_pct)}
+                       for x in bw.itertuples()]
+    out["borrow_apr_pct"] = {"AAPL": num(bw.measured_borrow_apr_pct.iloc[0])}
+    k = r("static_rule_keeper.csv")
+    kk = k[(k.row == "position notional sold") & k.ticker.isin(["AAPL", "SPY"])]
+    out["keeper"] = [{"ticker": x.ticker, "notional_usd": num(x.notional_usd),
+                      "slippage_pct": num(x.avg_slippage_pct),
+                      "breakeven_fee_pct": num(x.breakeven_fee_pct),
+                      "default_fee_covers": bool(x.fee_2pct_default_covers)}
+                     for x in kk.itertuples()]
+    cap = k[(k.row == "max notional per round at fee") & (k.breakeven_fee_pct == 2.0)]
+    out["keeper_capacity_at_2pct"] = {x.ticker: num(x.notional_usd) for x in cap.itertuples()
+                                      if x.ticker in ("AAPL", "SPY")}
+    sen = r("static_rule_sensitivity_marketrule.csv")
+    sen = sen[(sen.ticker == "AAPL") & (sen.borrowers == "uniform") & sen.case.str.contains(
+        "base|2018")]
+    out["hindsight"] = [{"case": x.case, "tier": int(x.tier_lltv_pct), "flat": num(x.A_flat_tier),
+                         "naive": num(x.B_naive), "rational": num(x.B_rational),
+                         "flat_at_cap": num(x.C_flat_weekend_cap)} for x in sen.itertuples()]
+    cc = r("static_replay_crosscheck.csv")
+    tt = r("static_replay_crosscheck_totals.csv").iloc[0]
+    out["crosscheck"] = {
+        "events": [{"date": x.date, "cls": x.cls, "gap_loss_pct": num(x.gap_loss_pct),
+                    "forge_control": num(x.forge_control),
+                    "forge_session_aware": num(x.forge_session_aware),
+                    "forge_standard": num(x.forge_standard_86),
+                    "python_market_control": num(x.python_nonworsening_control),
+                    "python_market_session_aware": num(x.python_nonworsening_session_aware),
+                    "python_convention_control": num(x.python_control),
+                    "python_convention_session_aware": num(x.python_session_aware)}
+                   for x in cc.itertuples()],
+        "totals": {k2: num(tt[k2]) for k2 in tt.index},
+    }
+    return out
+
+
 def main() -> None:
     panel = load_panel()
     w("headline.json", headline())
@@ -239,6 +325,7 @@ def main() -> None:
     w("frontier.json", frontier())
     w("params.json", params())
     w("replay.json", replay())
+    w("static.json", static_rule())
     print("wrote", sorted(p.name for p in OUT.glob("*.json")))
 
 

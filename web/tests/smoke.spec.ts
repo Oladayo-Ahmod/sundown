@@ -2,9 +2,9 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Page } from "@playwright/test";
 
 const PAGES = [
-  { path: "/", h1: /Tokenized stocks trade almost around the clock/, minSrc: 12, mustHave: ["Claims we will not make"] },
-  { path: "/risk", h1: /Risk evidence/, minSrc: 80, mustHave: ["Out-of-sample gap-VaR backtest", "Limitations", "Simulation"] },
-  { path: "/replay", h1: /Replay: control versus Sundown/, minSrc: 60, mustHave: ["Research simulation", "On-chain replay", "Not deployed yet"] },
+  { path: "/", h1: /Tokenized stocks trade almost around the clock/, minSrc: 12, mustHave: ["Claims we will not make", "AAPL at 93%", "still produced a loss", "not distinguishable"] },
+  { path: "/risk", h1: /Risk evidence/, minSrc: 80, mustHave: ["The shipped static rule", "Which tiers bind", "Cross-check against Session A", "not the shipped static rule", "Limitations", "Simulation"] },
+  { path: "/replay", h1: /Replay: control versus Sundown/, minSrc: 60, mustHave: ["Research simulation", "not a public chain", "The shipped rule: AAPL at 93%", "On-chain replay", "Not deployed yet"] },
 ] as const;
 
 function collectErrors(page: Page): string[] {

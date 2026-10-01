@@ -15,19 +15,21 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { DEPLOY_ASSETS, replay } from "@/lib/data";
+import { DEPLOY_ASSETS, replay, staticRule } from "@/lib/data";
 import { fmt, pct } from "@/lib/format";
 
 export const metadata: Metadata = {
   title: "Replay",
   description:
-    "Control versus Sundown on real historical weekend and holiday gaps: a research simulation of lending-market bad debt.",
+    "Real historical weekend and holiday gaps replayed against a flat control and the session-aware guard: a forge in-process replay and research simulations of lending-market bad debt.",
 };
 
 const SRC = {
   events: "sim/replay_events.json",
   per: "research/results/per_asset_credit.csv",
   top: "research/results/top_loss_windows.csv",
+  cross: "research/results/static_replay_crosscheck.csv",
+  replayDoc: "docs/REPLAY_RESULTS.md",
 } as const;
 
 const CONTROLS = [
@@ -46,7 +48,7 @@ export default function ReplayPage() {
         <h1 className="text-3xl font-bold tracking-tight">Replay: control versus Sundown</h1>
         <p className="max-w-3xl text-muted-foreground">
           Real historical weekend and holiday gaps, replayed through a <strong>simulated</strong> lending market. The
-          control is a flat LLTV; Sundown adds the session-aware stress cap with hard pre-window deleveraging. Prices
+          control is a flat LLTV; the first section replays the shipped static rule on AAPL at 93%, the later sections use the time-varying research estimator (not shipped). Prices
           are real; the market, borrowers and liquidations are a model. Nothing on this page is an on-chain
           transaction.
         </p>
@@ -64,6 +66,82 @@ export default function ReplayPage() {
         </AlertDescription>
       </Alert>
 
+      {/* ------------------------------------------------------------ forge replay */}
+      <section aria-labelledby="forge" className="space-y-4">
+        <div className="flex flex-wrap items-center gap-3">
+          <h2 id="forge" className="text-2xl font-semibold tracking-tight">
+            The shipped rule: AAPL at 93%, 10 worst real gaps
+          </h2>
+          <SimBadge>Forge in-process EVM, not a public chain</SimBadge>
+        </div>
+        <p className="max-w-3xl text-sm text-muted-foreground">
+          Session A&apos;s replay applies each real gap once at reopen to 20 seeded borrowers (50 tokens at $100,
+          debt 80-99% of the tier cap, no cures), in forge&apos;s in-process EVM with a fixture window cache and a
+          simulated price feed. Three markets per event: a flat control at 93%, the session-aware market, and a
+          standard 86% market. My independent Python simulation of the same scenario is shown beside it.
+        </p>
+        <Table aria-label="Forge replay versus Python simulation per event, AAPL 93 percent">
+          <TableCaption>
+            Lender loss in USDG per event: control / session-aware / standard 86%. Python uses the market&apos;s
+            liquidation rule (bonus capped so a liquidation never worsens an account).
+          </TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Event</TableHead>
+              <TableHead>Gap</TableHead>
+              <TableHead>Forge replay</TableHead>
+              <TableHead>Python (market rule)</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {staticRule.crosscheck.events.map((e) => (
+              <TableRow key={e.date} data-src={SRC.cross}>
+                <TableCell>
+                  {e.date} ({e.cls})
+                </TableCell>
+                <TableCell>{fmt(e.gap_loss_pct, 2)}%</TableCell>
+                <TableCell>
+                  {fmt(e.forge_control, 2)} / {fmt(e.forge_session_aware, 2)} / {fmt(e.forge_standard, 2)}
+                </TableCell>
+                <TableCell>
+                  {fmt(e.python_market_control, 2)} / {fmt(e.python_market_session_aware, 2)} / 0.00
+                </TableCell>
+              </TableRow>
+            ))}
+            <TableRow data-src={SRC.cross}>
+              <TableCell className="font-semibold">Total</TableCell>
+              <TableCell />
+              <TableCell className="font-semibold">
+                {fmt(staticRule.crosscheck.totals.forge_control, 2)} /{" "}
+                {fmt(staticRule.crosscheck.totals.forge_session_aware, 2)} /{" "}
+                {fmt(staticRule.crosscheck.totals.forge_standard_86, 2)}
+              </TableCell>
+              <TableCell className="font-semibold">
+                {fmt(staticRule.crosscheck.totals.python_nonworsening_control, 2)} /{" "}
+                {fmt(staticRule.crosscheck.totals.python_nonworsening_session_aware, 2)} /{" "}
+                {fmt(staticRule.crosscheck.totals.python_nonworsening_standard_86, 2)}
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+        <Alert>
+          <AlertTitle>What this shows, and what it does not</AlertTitle>
+          <AlertDescription>
+            <p>
+              Against the frozen-price control at the same 93% LLTV the session-aware market lost{" "}
+              <N src={SRC.replayDoc}>$1,224 over 1 event</N> instead of <N src={SRC.replayDoc}>$3,824 over 4</N>,
+              at 3.9% lower in-window capacity; a standard 86% market lost nothing at 7.5% lower capacity. The
+              2020-03-16 gap (13.9%) still produced a loss. SPY at 93% and AAPL at 90% do not bind and are not deployed
+              as boosted. The earlier Python convention charged the full liquidation bonus and overstated the control
+              (<N src={SRC.cross}>${fmt(staticRule.crosscheck.totals.python_control, 0)}</N>); with the market&apos;s rule
+              the two implementations agree to 0.01%. They share the authors&apos; reading of the market&apos;s rules, so
+              agreement is not fully independent.
+            </p>
+          </AlertDescription>
+        </Alert>
+        <Sources files={[SRC.cross, SRC.replayDoc]} note="forge replay numbers from docs/REPLAY_RESULTS.md" />
+      </section>
+
       {/* ------------------------------------------------------------ per asset */}
       <section aria-labelledby="per-asset" className="space-y-4">
         <h2 id="per-asset" className="text-2xl font-semibold tracking-tight">
@@ -71,7 +149,7 @@ export default function ReplayPage() {
         </h2>
         <p className="max-w-3xl text-sm text-muted-foreground">
           Annualised bad debt in basis points of outstanding debt for the four deployment assets. Control = flat LLTV;
-          Sundown = stress cap with full enforcement on existing debt.
+          Research estimator = time-varying stress cap with full enforcement on existing debt (not the shipped static rule).
         </p>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {CONTROLS.map((c) => {
@@ -89,17 +167,17 @@ export default function ReplayPage() {
                   <PairedBars
                     items={rows.map((r) => ({ label: r.ticker, a: r.flat_bps_yr ?? 0, b: r.stress_bps_yr ?? 0 }))}
                     aLabel="Control (flat LLTV)"
-                    bLabel="Sundown"
+                    bLabel="Research estimator (not shipped)"
                     yLabel="bps/yr of outstanding debt"
                     label={`Annualised bad debt per asset at ${c.label}`}
-                    description="Paired bars of annualised bad debt in basis points for the control and for Sundown, per asset."
+                    description="Paired bars of annualised bad debt in basis points for the control and for the time-varying research estimator, per asset."
                   />
                   <Table aria-label={`Bad debt table, ${c.label}`} className="mt-3">
                     <TableHeader>
                       <TableRow>
                         <TableHead>Asset</TableHead>
                         <TableHead>Control</TableHead>
-                        <TableHead>Sundown</TableHead>
+                        <TableHead>Research est.</TableHead>
                         <TableHead>Change</TableHead>
                         <TableHead>Windows cap binds</TableHead>
                       </TableRow>
@@ -132,7 +210,7 @@ export default function ReplayPage() {
       <section aria-labelledby="worst" className="space-y-4">
         <div className="flex flex-wrap items-center gap-3">
           <h2 id="worst" className="text-2xl font-semibold tracking-tight">
-            Worst windows: lender loss, control versus Sundown
+            Worst windows: lender loss, control versus the time-varying research estimator
           </h2>
           <SimBadge>Simulation</SimBadge>
         </div>
@@ -152,7 +230,7 @@ export default function ReplayPage() {
                     <TableHead>Gap</TableHead>
                     <TableHead>VaR</TableHead>
                     <TableHead>Control</TableHead>
-                    <TableHead>Sundown</TableHead>
+                    <TableHead>Research est.</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -207,7 +285,7 @@ export default function ReplayPage() {
           <CardContent className="pt-5 text-sm leading-relaxed">
             <p>
               Reserved for the Arbitrum Sepolia demonstration: each event above will link to the transactions that
-              replay it against a flat-LLTV market and a Sundown market, driven by a clearly labelled simulated price
+              replay it against a flat-LLTV market and a session-aware market, driven by a clearly labelled simulated price
               feed. No contracts are connected in this version.
             </p>
           </CardContent>

@@ -14,7 +14,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { backtest, DEPLOY_ASSETS, frontier, gaps, headline, params } from "@/lib/data";
+import { backtest, DEPLOY_ASSETS, frontier, gaps, MARKET_RULE, OLD_CONVENTION, params, staticRule } from "@/lib/data";
 import { ci, fmt, pct, pValue } from "@/lib/format";
 
 export const metadata: Metadata = {
@@ -33,14 +33,20 @@ const SRC = {
   frc: "research/results/credit_frontier_curve_datecluster.csv",
   params: "deployments/risk_params.json",
   rates: "research/results/morpho_rates_snapshot.json",
-  ci22: "research/results/m22_headline_ci.csv",
+  gv: "research/results/static_gapvar.csv",
+  lend: "research/results/static_rule_lender_marketrule.csv",
+  lendOld: "research/results/static_rule_lender.csv",
+  eq: "research/results/static_rule_equal_risk_marketrule.csv",
+  bor: "research/results/static_rule_borrower.csv",
+  keep: "research/results/static_rule_keeper.csv",
+  cross: "research/results/static_replay_crosscheck.csv",
+  sens: "research/results/static_rule_sensitivity_marketrule.csv",
 } as const;
 
 const classOrder = ["Short", "Weekend", "Long"] as const;
 
 export default function RiskPage() {
   const cov = backtest.coverage.filter((c) => c.q === 0.99 || c.q === 0.995 || c.q === 0.999);
-  const m = headline.measured_borrow_apr_pct;
   return (
     <div className="space-y-14">
       <header className="space-y-3">
@@ -128,13 +134,312 @@ export default function RiskPage() {
         <Sources files={[SRC.gaps, SRC.derived]} note="histograms recomputed from the committed derived return series" />
       </section>
 
+      {/* ------------------------------------------------------------ shipped static rule */}
+      <section aria-labelledby="shipped" className="space-y-5">
+        <div className="flex flex-wrap items-center gap-3">
+          <h2 id="shipped" className="text-2xl font-semibold tracking-tight">
+            The shipped static rule (AAPL and SPY, tiers 90% and 93%)
+          </h2>
+          <SimBadge>Research simulation</SimBadge>
+        </div>
+        <p className="max-w-3xl text-sm text-muted-foreground">
+          From 6 h before a blind window until it ends, a boosted account&apos;s cap is the tier LLTV or{" "}
+          1 - gapVaR[class] - 0.5% - 1%, whichever is lower, with gapVaR the static full-sample q99.5 gap (includes
+          March 2020). Accounts above the cap get a 3 h cure window, then anyone can deleverage them to the cap at a
+          2% fee. Standard accounts are never touched. This evaluation is <strong>in-sample for the cap</strong>. Bad
+          debt is bps of outstanding debt per year over 914 windows 2010-2026; 95% CIs clustered by window date.
+        </p>
+
+        <h3 className="text-lg font-semibold">Which tiers bind</h3>
+        <Table aria-label="Static gapVaR and stress cap by asset and class">
+          <TableCaption>The cap binds when the stress fraction is below the tier LLTV. SPY never binds.</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Asset</TableHead>
+              <TableHead>Class</TableHead>
+              <TableHead>n</TableHead>
+              <TableHead>gapVaR q99.5 (bps)</TableHead>
+              <TableHead>Stress fraction</TableHead>
+              <TableHead>Binds 90%</TableHead>
+              <TableHead>Binds 93%</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {staticRule.gapvar.map((g) => (
+              <TableRow key={`${g.ticker}-${g.cls}`} data-src={SRC.gv}>
+                <TableCell className="font-medium">{g.ticker}</TableCell>
+                <TableCell>{g.cls}</TableCell>
+                <TableCell>{g.n}</TableCell>
+                <TableCell>{fmt(g.gap_var_bps, 2)}</TableCell>
+                <TableCell>{pct(g.stress_fraction_pct, 2)}</TableCell>
+                <TableCell>{g.binds_90 ? `yes (${fmt(g.tightening_pp_90, 2)} pp)` : "no"}</TableCell>
+                <TableCell>{g.binds_93 ? `yes (${fmt(g.tightening_pp_93, 2)} pp)` : "no"}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold">Lender outcome: bad debt, bps/yr</h3>
+        <p className="max-w-3xl text-sm text-muted-foreground">
+          Arms: flat market at the tier LLTV; boosted tier with the rule for borrowers who never adjust (naive) and
+          for borrowers who repay to the cap before each window (rational); flat market at the weekend-cap level.
+          Primary numbers use the deployed market&apos;s liquidation rule (bonus capped so a liquidation never worsens an
+          account); the earlier convention is an upper bound.
+        </p>
+        {([MARKET_RULE, OLD_CONVENTION] as const).map((conv) => (
+          <Table key={conv} aria-label={`Lender bad debt, ${conv}`}>
+            <TableCaption>
+              Liquidation convention: {conv}. SPY rows are identical across arms because the cap never binds.
+            </TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Asset</TableHead>
+                <TableHead>Tier</TableHead>
+                <TableHead>Borrowers</TableHead>
+                <TableHead>Flat at tier</TableHead>
+                <TableHead>Boosted + rule, naive</TableHead>
+                <TableHead>Boosted + rule, rational</TableHead>
+                <TableHead>Flat at weekend cap</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {(["AAPL", "SPY"] as const).flatMap((t) =>
+                ([90, 93] as const).flatMap((tier) =>
+                  (["uniform", "clustered near max"] as const).map((b) => {
+                    const row = (prefix: string) => {
+                      const r = staticRule.lender.find(
+                        (x) =>
+                          x.convention === conv &&
+                          x.ticker === t &&
+                          x.tier === tier &&
+                          x.borrowers === b &&
+                          x.arm.startsWith(prefix),
+                      );
+                      return r ? `${fmt(r.bps, 2)} ${ci(r.lo, r.hi, 1)}` : "n/a";
+                    };
+                    return (
+                      <TableRow key={`${t}-${tier}-${b}`} data-src={conv === MARKET_RULE ? SRC.lend : SRC.lendOld}>
+                        <TableCell className="font-medium">{t}</TableCell>
+                        <TableCell>{tier}%</TableCell>
+                        <TableCell>{b}</TableCell>
+                        <TableCell>{row("A flat")}</TableCell>
+                        <TableCell>{row("B boosted + rule, naive")}</TableCell>
+                        <TableCell>{row("B boosted + rule, rational")}</TableCell>
+                        <TableCell>{row("C flat")}</TableCell>
+                      </TableRow>
+                    );
+                  }),
+                ),
+              )}
+            </TableBody>
+          </Table>
+        ))}
+        <Alert>
+          <AlertTitle>Equal-bad-debt comparison, stated plainly</AlertTitle>
+          <AlertDescription>
+            <p>
+              The rule cuts AAPL 93% bad debt against an unprotected flat market at the tier LLTV, but it is{" "}
+              <strong>not distinguishable from simply running a flat market at the 89.35% weekend-cap level</strong>.
+              At equal lender bad debt it buys at most about 3.5 pp of LTV at 93% and nothing distinguishable from zero
+              at 90% (table below). SPY: the rule never binds, so a boosted SPY tier is an unprotected flat market.
+            </p>
+          </AlertDescription>
+        </Alert>
+        <Table aria-label="Equal-bad-debt LTV gain, AAPL, market rule">
+          <TableCaption>AAPL, borrowers uniform, market rule. The weekend-cap level is 89.35%.</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Tier</TableHead>
+              <TableHead>Borrowers</TableHead>
+              <TableHead>Equal-risk flat LLTV</TableHead>
+              <TableHead>LTV gain at equal bad debt (pp)</TableHead>
+              <TableHead>Extra weekday capacity offered (pp)</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {staticRule.equal_risk.map((e) => (
+              <TableRow key={`${e.tier}-${e.arm}`} data-src={SRC.eq}>
+                <TableCell>{e.tier}%</TableCell>
+                <TableCell>{e.arm.includes("naive") ? "naive" : "rational"}</TableCell>
+                <TableCell>{fmt(e.equivalent_flat_lltv_pct, 2)}%</TableCell>
+                <TableCell>
+                  {fmt(e.gain_pp, 2)} {ci(e.lo, e.hi, 2)}
+                </TableCell>
+                <TableCell>{fmt(e.extra_weekday_pp, 2)}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold">Borrower behaviour and cost (AAPL)</h3>
+        <Table aria-label="Borrower economics of the shipped rule, AAPL">
+          <TableCaption>
+            Naive borrowers never adjust; rational borrowers repay to the cap before each window (their funds are
+            assumed at hand, which is the optimistic case). Fee 2%. The measured AAPL borrow APR is 7.83% at 99.99%
+            utilisation (on-chain read).
+          </TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Tier</TableHead>
+              <TableHead>Borrowers</TableHead>
+              <TableHead>Behaviour</TableHead>
+              <TableHead>Forced events per borrower-year (avg)</TableHead>
+              <TableHead>Near-max borrower, per year</TableHead>
+              <TableHead>Fee cost, % of debt per year</TableHead>
+              <TableHead>Extra weekday capacity used (pp)</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {staticRule.borrower.map((b) => (
+              <TableRow key={`${b.tier}-${b.borrowers}-${b.behaviour}`} data-src={SRC.bor}>
+                <TableCell>{b.tier}%</TableCell>
+                <TableCell>{b.borrowers}</TableCell>
+                <TableCell>{b.behaviour}</TableCell>
+                <TableCell>{fmt(b.flagged_per_borrower_yr, 2)}</TableCell>
+                <TableCell>{fmt(b.flagged_per_yr_top_bucket, 0)}</TableCell>
+                <TableCell>{fmt(b.fee_pct_debt_yr, 2)}</TableCell>
+                <TableCell>{fmt(b.used_extra_pp, 2)}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        <p className="max-w-3xl text-sm text-muted-foreground">
+          An account at the cap is in the stress period {fmt(staticRule.borrower[0]?.stress_time_pct ?? null, 1)}% of
+          the time (6 h horizon plus the window). Rational borrowers pay no fee but must repay before every window for
+          at most 3.65 pp of extra weekday capacity at 93% (0.65 pp at 90%).
+        </p>
+
+        <h3 className="text-lg font-semibold">Cross-check against Session A&apos;s forge replay</h3>
+        <p className="max-w-3xl text-sm text-muted-foreground">
+          Same scenario: AAPL 93%, the 10 worst real gaps, 20 seeded borrowers, one gap at reopen, fee 2%, no cures.
+          The forge replay runs in forge&apos;s in-process EVM with a fixture window cache, <strong>not on a public
+          chain</strong>. My earlier convention charged the full liquidation bonus and overstated the control by 45%;
+          with the market&apos;s non-worsening bonus cap the two implementations agree to 0.01%.
+        </p>
+        <Table aria-label="Forge replay versus Python simulation, AAPL 93 percent">
+          <TableCaption>Lender loss in USDG per event (control / session-aware). Events with no loss in either are omitted.</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Event</TableHead>
+              <TableHead>Gap</TableHead>
+              <TableHead>Forge</TableHead>
+              <TableHead>Python, market rule</TableHead>
+              <TableHead>Python, earlier convention</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {staticRule.crosscheck.events
+              .filter((e) => (e.forge_control ?? 0) > 0 || (e.python_convention_control ?? 0) > 0)
+              .map((e) => (
+                <TableRow key={e.date} data-src={SRC.cross}>
+                  <TableCell>
+                    {e.date} ({e.cls})
+                  </TableCell>
+                  <TableCell>{fmt(e.gap_loss_pct, 2)}%</TableCell>
+                  <TableCell>
+                    {fmt(e.forge_control, 2)} / {fmt(e.forge_session_aware, 2)}
+                  </TableCell>
+                  <TableCell>
+                    {fmt(e.python_market_control, 2)} / {fmt(e.python_market_session_aware, 2)}
+                  </TableCell>
+                  <TableCell>
+                    {fmt(e.python_convention_control, 2)} / {fmt(e.python_convention_session_aware, 2)}
+                  </TableCell>
+                </TableRow>
+              ))}
+            <TableRow data-src={SRC.cross}>
+              <TableCell className="font-semibold">Total (10 events)</TableCell>
+              <TableCell />
+              <TableCell>
+                {fmt(staticRule.crosscheck.totals.forge_control, 2)} /{" "}
+                {fmt(staticRule.crosscheck.totals.forge_session_aware, 2)}
+              </TableCell>
+              <TableCell>
+                {fmt(staticRule.crosscheck.totals.python_nonworsening_control, 2)} /{" "}
+                {fmt(staticRule.crosscheck.totals.python_nonworsening_session_aware, 2)}
+              </TableCell>
+              <TableCell>
+                {fmt(staticRule.crosscheck.totals.python_control, 2)} /{" "}
+                {fmt(staticRule.crosscheck.totals.python_session_aware, 2)}
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold">The benefit depends on hindsight</h3>
+        <Table aria-label="In-sample versus out-of-sample cap, AAPL">
+          <TableCaption>
+            AAPL, borrowers uniform, market rule, bad debt bps/yr. The shipped gapVaR contains March 2020; the
+            out-of-sample row applies a gapVaR estimated on 2010-2017 to 2018+ windows.
+          </TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Case</TableHead>
+              <TableHead>Tier</TableHead>
+              <TableHead>Flat at tier</TableHead>
+              <TableHead>Rule, naive</TableHead>
+              <TableHead>Rule, rational</TableHead>
+              <TableHead>Flat at weekend cap</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {staticRule.hindsight.map((h2) => (
+              <TableRow key={`${h2.case}-${h2.tier}`} data-src={SRC.sens}>
+                <TableCell>{h2.case}</TableCell>
+                <TableCell>{h2.tier}%</TableCell>
+                <TableCell>{fmt(h2.flat, 2)}</TableCell>
+                <TableCell>{fmt(h2.naive, 2)}</TableCell>
+                <TableCell>{fmt(h2.rational, 2)}</TableCell>
+                <TableCell>{fmt(h2.flat_at_cap, 2)}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+
+        <h3 className="text-lg font-semibold">Keeper break-even</h3>
+        <Table aria-label="Keeper break-even fee from exact Uniswap v3 depth">
+          <TableCaption>
+            Average slippage to sell the notional (Session A&apos;s direct v3 reads, `docs/DISCOVERY.md` section g) plus 5
+            bps gas. The 2% default fee covers up to about ${fmt(staticRule.keeper_capacity_at_2pct.AAPL ?? null, 0)}{" "}
+            (AAPL) and ${fmt(staticRule.keeper_capacity_at_2pct.SPY ?? null, 0)} (SPY) per round; the deleverage batches
+            in the replay are $0.6k to $15k.
+          </TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Asset</TableHead>
+              <TableHead>Notional sold</TableHead>
+              <TableHead>Average slippage</TableHead>
+              <TableHead>Break-even fee</TableHead>
+              <TableHead>2% covers</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {staticRule.keeper
+              .filter((k) => [10000, 50000, 100000, 150000, 200000].includes(k.notional_usd ?? 0))
+              .map((k) => (
+                <TableRow key={`${k.ticker}-${k.notional_usd}`} data-src={SRC.keep}>
+                  <TableCell className="font-medium">{k.ticker}</TableCell>
+                  <TableCell>${fmt(k.notional_usd, 0)}</TableCell>
+                  <TableCell>{pct(k.slippage_pct, 2)}</TableCell>
+                  <TableCell>{pct(k.breakeven_fee_pct, 2)}</TableCell>
+                  <TableCell>{k.default_fee_covers ? "yes" : "no"}</TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+        <Sources
+          files={[SRC.gv, SRC.lend, SRC.lendOld, SRC.eq, SRC.bor, SRC.cross, SRC.sens, SRC.keep]}
+          note="all bps/yr of outstanding debt; replay numbers from docs/REPLAY_RESULTS.md"
+        />
+      </section>
+
       {/* ------------------------------------------------------------ backtest */}
       <section aria-labelledby="backtest" className="space-y-4">
         <h2 id="backtest" className="text-2xl font-semibold tracking-tight">
-          Out-of-sample gap-VaR backtest (2018 to 2026)
+          Time-varying research estimator: out-of-sample gap-VaR backtest (2018 to 2026)
         </h2>
         <p className="max-w-3xl text-sm text-muted-foreground">
-          Estimator: {backtest.chosen} (pooled-scaled EWMA, one accumulator pair per asset). Chosen on a 2015 to 2017
+          <strong>This is the research estimator, not the shipped static rule.</strong> Estimator: {backtest.chosen} (pooled-scaled EWMA, one accumulator pair per asset). Chosen on a 2015 to 2017
           validation slice; multipliers fit on 2010 to 2017; the test slice was never used to choose anything.
         </p>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -268,12 +573,12 @@ export default function RiskPage() {
       <section aria-labelledby="frontier" className="space-y-4">
         <div className="flex flex-wrap items-center gap-3">
           <h2 id="frontier" className="text-2xl font-semibold tracking-tight">
-            Equal-risk frontier
+            Time-varying research estimator: equal-risk frontier
           </h2>
           <SimBadge>Research simulation</SimBadge>
         </div>
         <p className="max-w-3xl text-sm text-muted-foreground">
-          Annualised bad debt against base LLTV, 2018 to 2026. Flat markets (orange) against the stress rule with hard
+          <strong>Time-varying research estimator, not the shipped rule.</strong> Annualised bad debt against base LLTV, 2018 to 2026 (liquidation convention: M2.2, an upper bound). Flat markets (orange) against the stress rule with hard
           pre-window deleveraging (blue). Points above 86% are counterfactual LLTVs, not observed anywhere; the
           benefit exists only if the cap is enforced on existing debt. Bands and intervals: 95%, clustered by window
           date.
@@ -330,7 +635,7 @@ export default function RiskPage() {
       {/* ------------------------------------------------------------ parameters */}
       <section aria-labelledby="params" className="space-y-4">
         <h2 id="params" className="text-2xl font-semibold tracking-tight">
-          Calibrated parameters
+          Time-varying research estimator: parameters (not shipped)
         </h2>
         <p className="max-w-3xl text-sm text-muted-foreground">
           {params.estimator.name}. Recurrence: <code className="font-mono">{params.estimator.recurrence}</code>.
@@ -377,65 +682,6 @@ export default function RiskPage() {
         <Sources files={[SRC.params]} />
       </section>
 
-      {/* ------------------------------------------------------------ rates */}
-      <section aria-labelledby="rates" className="space-y-4">
-        <h2 id="rates" className="text-2xl font-semibold tracking-tight">
-          Boosted tier versus measured borrow rates
-        </h2>
-        <p className="max-w-3xl text-sm text-muted-foreground">
-          Break-even borrow APR is the rate boosted-tier borrowers must pay for the extra interest to cover the added
-          lender bad debt (30% of debt boosted, pre-window deleveraging on). Rates are one on-chain reading at block{" "}
-          <N src={SRC.rates}>{m.block}</N> (Morpho Blue, Robinhood Chain), not a time series.
-        </p>
-        <Table aria-label="Break-even borrow APR versus measured rates">
-          <TableCaption>
-            Break-even APR % (95% CI, date cluster) for uniform and clustered-near-max borrowers. AAPL at 90% is the headline
-            case; SPY is secondary. TSLA and NVDA are not recommended for a boosted tier (highest break-even APRs, most forced events).
-          </TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Asset</TableHead>
-              <TableHead>Boosted LLTV</TableHead>
-              <TableHead>Uniform borrowers</TableHead>
-              <TableHead>Clustered near max</TableHead>
-              <TableHead>Measured borrow APR</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {(
-              [
-                ["AAPL", "90", m.AAPL],
-                ["SPY", "90", m.SPY],
-                ["SPY", "93", m.SPY],
-              ] as const
-            ).map(([a, l, measured]) => {
-              const b = headline.boosted_breakeven_apr_pct[a][l];
-              return (
-                <TableRow key={`${a}-${l}`}>
-                  <TableCell className="font-medium">{a}</TableCell>
-                  <TableCell>{l}%</TableCell>
-                  <TableCell data-src={SRC.ci22}>
-                    {fmt(b.uniform.est, 2)} {ci(b.uniform.lo, b.uniform.hi, 1)}
-                  </TableCell>
-                  <TableCell data-src={SRC.ci22}>
-                    {fmt(b.clustered.est, 2)} {ci(b.clustered.lo, b.clustered.hi, 1)}
-                  </TableCell>
-                  <TableCell data-src={SRC.rates}>
-                    {fmt(measured, 2)}% ({a} market)
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-        <p className="text-sm text-muted-foreground">
-          Reference: large USDG markets borrow at <N src={SRC.rates}>{fmt(m.large_usdg_markets, 2)}</N>%. The SPY market
-          is idle (<N src={SRC.rates}>{pct(100 * m.spy_util, 0)}</N> utilised) and charges{" "}
-          <N src={SRC.rates}>{fmt(m.SPY, 2)}</N>%, which would not cover the break-even.
-        </p>
-        <Sources files={[SRC.ci22, SRC.rates]} />
-      </section>
-
       {/* ------------------------------------------------------------ limitations */}
       <section aria-labelledby="limits" className="space-y-4">
         <h2 id="limits" className="text-2xl font-semibold tracking-tight">
@@ -446,6 +692,11 @@ export default function RiskPage() {
           <AlertDescription>
             <ul className="list-disc space-y-1.5 pl-5">
               <li>Daily proxy, single data vendor (Yahoo Finance), no on-chain feed comparison yet.</li>
+              <li>
+                The shipped cap is calibrated in-sample (full-sample q99.5 including March 2020) and does nothing when
+                calibrated before March 2020; the 2020-03-16 gap still produced a loss in the forge replay, which runs in
+                an in-process EVM, not on a public chain.
+              </li>
               <li>
                 Borrower behaviour is stylised (a 20-point utilisation grid), with no interest accrual, earnings
                 calendar or issuer actions (pause, blocklist, admin burn).
@@ -459,8 +710,8 @@ export default function RiskPage() {
                 below 2% are untested with real keepers.
               </li>
               <li>
-                Break-even APRs compare expected values at one rate reading; they ignore tail clustering and reserve
-                funding.
+                Absolute bad-debt levels depend on the liquidation convention (the deployed market rule gives 30-60%
+                lower values than the earlier convention); they are not forecasts.
               </li>
             </ul>
           </AlertDescription>
