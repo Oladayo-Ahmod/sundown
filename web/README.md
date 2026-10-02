@@ -1,6 +1,8 @@
 # web/
 
-Research UI for Sundown: `/` (problem, headline claims with CIs, claims we do not make), `/risk` (gap distributions, out-of-sample backtest, equal-risk frontier, calibrated parameters, measured rates, limitations) and `/replay` (control versus Sundown on real historical gaps). **Research simulation only: no contract is called.** The wallet button (RainbowKit, injected wallets, Arbitrum Sepolia) is lazy-loaded on click and makes no calls.
+Research UI for Sundown: `/` (problem, headline claims with CIs, claims we do not make), `/risk` (gap distributions, out-of-sample backtest, equal-risk frontier, calibrated parameters, measured rates, limitations) and `/replay` (control versus Sundown on real historical gaps). `/deployment` (addresses, roles, a recorded live run with transaction links), `/markets` (live read of the six markets, the calendar window and the simulated feeds) and `/preflight` (live on-chain wiring checks plus recorded offline results) show the Arbitrum Sepolia deployment: production Sundown contracts, **simulated tokens and simulated price feeds**, read-only (a public viem client; no wallet, no signature, no transaction). `/`, `/risk` and `/replay` are research simulation. The wallet button (RainbowKit, injected wallets) is lazy-loaded on click and is not used for reads.
+
+Chain data: `scripts/export-abis.mjs` writes typed ABIs to `src/abi/` from forge output (`cd contracts && forge build` first; `--check` fails if stale); `scripts/export-chain-data.mjs` copies `deployments/421614.json` and parses the evidence tables of `docs/SEPOLIA_DEMO.md` into `src/data/`; `pnpm check-chain` runs both checks. The RPC defaults to the public Arbitrum Sepolia endpoint; set `NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC_URL` to override (a public URL only, never a keyed one).
 
 Next.js 15 (App Router), TypeScript strict, Tailwind 4, shadcn-style components, wagmi 2 + viem + RainbowKit + TanStack Query, dependency-free SVG charts.
 

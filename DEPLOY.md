@@ -1,6 +1,6 @@
 # Deploying the web app (steps you do by hand)
 
-Nothing in this repository pushes or deploys on its own. The web app (`web/`) is a static-rendered Next.js 15 site: research pages only, no contract calls, **no environment variables and no secrets are required**.
+Nothing in this repository pushes or deploys on its own. The web app (`web/`) is a static-rendered Next.js 15 site: research pages plus read-only views of the Arbitrum Sepolia deployment (simulated tokens and feeds), **no environment variables and no secrets are required** (the optional `NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC_URL` overrides the public RPC and must never hold a keyed URL).
 
 ## 0. Before you start
 
@@ -33,7 +33,7 @@ git push -u origin <branch>
 
 ## 3. After the first deploy
 
-1. Open `/`, `/risk` and `/replay` on the deployment URL; each must render without console errors.
+1. Open `/`, `/risk`, `/replay`, `/deployment`, `/markets` and `/preflight` on the deployment URL; each must render without console errors. `/markets` and `/preflight` read the public Arbitrum Sepolia RPC from the browser: they must show a block number and `All 10 checks pass`.
 2. Check headers: `curl -sI https://<deployment-url>/ | grep -i -E "x-content-type-options|referrer-policy|x-frame-options"` (all three should appear; they come from `web/vercel.json`).
 3. Measure Lighthouse on the deployed URL (performance is a recorded measurement, not a gate):
    `npx -y lighthouse https://<deployment-url>/ --only-categories=performance,accessibility,best-practices,seo --chrome-flags="--headless=new"`
@@ -41,4 +41,4 @@ git push -u origin <branch>
 
 ## What is not in this version
 
-No wallet connection is exercised and no RPC endpoint is configured; the "Connect wallet" button loads on click and makes no contract calls. Arbitrum Sepolia addresses, replay transaction links and the demo video link are placeholders until Session A's deployment exists.
+No wallet connection is exercised: the "Connect wallet" button loads on click and is not used for reads, and no page sends a transaction or asks for a signature (a Playwright test fails if any non-read JSON-RPC method is sent). The reads use the public Arbitrum Sepolia RPC by default. The Vercel URL and the demo video link remain placeholders.
