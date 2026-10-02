@@ -11,6 +11,8 @@ export default defineConfig({
     baseURL: "http://localhost:3100",
     channel: "chrome",
     trace: "off",
+    reducedMotion: "reduce",
+    launchOptions: { args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist"] },
   },
   webServer: {
     command: "npx next start -p 3100",

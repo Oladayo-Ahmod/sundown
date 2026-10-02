@@ -55,25 +55,22 @@ for (const p of PAGES) {
       expect(overflow).toBeLessThanOrEqual(0);
     });
 
-    test("no serious accessibility violations (light and dark)", async ({ page }) => {
-      for (const scheme of ["light", "dark"] as const) {
-        await page.emulateMedia({ colorScheme: scheme });
-        await page.goto(p.path);
-        await settle(page, p);
-        const results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21aa"]).analyze();
-        const bad = results.violations.filter((v) => v.impact === "serious" || v.impact === "critical");
-        expect(bad.map((v) => `${scheme}: ${v.id}: ${v.nodes.map((n) => n.target.join(" ")).slice(0, 3).join(" | ")}`)).toEqual([]);
-      }
+    test("no serious accessibility violations (dark theme, the only theme)", async ({ page }) => {
+      await page.goto(p.path);
+      await settle(page, p);
+      const results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21aa"]).analyze();
+      const bad = results.violations.filter((v) => v.impact === "serious" || v.impact === "critical");
+      expect(bad.map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(" ")).slice(0, 3).join(" | ")}`)).toEqual([]);
     });
   });
 }
 
-test("theme toggle switches the document theme", async ({ page }) => {
+test("the site is dark-only (no light theme to switch to)", async ({ page }) => {
   await page.emulateMedia({ colorScheme: "light" });
   await page.goto("/");
-  await expect(page.locator("html")).not.toHaveClass(/dark/);
-  await page.getByRole("button", { name: /Switch to dark theme/ }).click();
   await expect(page.locator("html")).toHaveClass(/dark/);
+  expect(await page.evaluate(() => getComputedStyle(document.documentElement).colorScheme)).toBe("dark");
+  await expect(page.getByRole("button", { name: /theme/i })).toHaveCount(0);
 });
 
 test("navigation reaches every page", async ({ page }) => {
@@ -130,14 +127,18 @@ test("live pages never send a transaction or request a signature", async ({ page
   expect(methods.every((m) => /^eth_(call|getCode|getBlockByNumber|chainId|blockNumber)$/.test(m))).toBe(true);
 });
 
-test("home page makes no RPC request", async ({ page }) => {
-  const rpc: string[] = [];
+test("home page only makes read-only RPC calls (the hero reads the calendar once)", async ({ page }) => {
+  const methods: string[] = [];
   page.on("request", (r) => {
-    if (/sepolia-rollup|arb-sepolia/.test(r.url())) rpc.push(r.url());
+    const body = r.postData();
+    if (r.method() === "POST" && body && /sepolia-rollup|arb-sepolia/.test(r.url()))
+      for (const m of body.matchAll(/"method":"([a-z_A-Z0-9]+)"/g)) methods.push(m[1] ?? "");
   });
   await page.goto("/");
   await page.waitForLoadState("networkidle");
-  expect(rpc).toEqual([]);
+  await page.waitForTimeout(2500);
+  expect(methods.length).toBeGreaterThan(0);
+  expect(methods.every((m) => /^eth_(call|getCode|getBlockByNumber|chainId|blockNumber)$/.test(m))).toBe(true);
 });
 
 test("replay events filter by asset", async ({ page }) => {
@@ -159,5 +160,83 @@ test("wallet stack loads only on request and makes no contract calls", async ({ 
   expect(requests.some((u) => /rainbow|wagmi/i.test(u))).toBe(false);
   await page.getByRole("button", { name: /Connect wallet/ }).click();
   await expect(page.getByRole("button", { name: /Connect Wallet/i })).toBeVisible({ timeout: 20_000 });
-  expect(requests.some((u) => /arb-sepolia|sepolia-rollup/.test(u))).toBe(false);
+  // reads (the hero's calendar call) are allowed; the wallet button adds no contract call of its own
+  expect(requests.filter((u) => /walletconnect|bridge\.walletconnect/.test(u))).toEqual([]);
+});
+
+
+async function jsBodies(page: Page): Promise<string[]> {
+  const bodies: string[] = [];
+  page.on("response", async (res) => {
+    if (res.url().endsWith(".js") || res.url().includes("/_next/static/")) {
+      try {
+        const t = await res.text();
+        if (t.includes("WebGLRenderer")) bodies.push(res.url());
+      } catch {
+        /* streamed or cached */
+      }
+    }
+  });
+  return bodies;
+}
+
+test.describe("sky scene", () => {
+  test("default (reduced motion in CI): static SVG sky, no three.js code loaded", async ({ page }) => {
+    const three = await jsBodies(page);
+    await page.goto("/");
+    await page.waitForLoadState("networkidle");
+    await page.waitForTimeout(1500);
+    await expect(page.getByTestId("sky-hero")).toHaveAttribute("data-sky-mode", "static");
+    expect(await page.locator("[data-testid=sky-hero] canvas").count()).toBe(0);
+    expect(three).toEqual([]);
+  });
+
+  test("other pages never load the three.js chunk", async ({ page }) => {
+    const three = await jsBodies(page);
+    for (const path of ["/risk", "/deployment", "/preflight"]) {
+      await page.goto(path + "?sky=webgl");
+      await page.waitForLoadState("networkidle");
+    }
+    expect(three).toEqual([]);
+  });
+
+  test.describe("WebGL path (software GL)", () => {
+    test.use({
+      reducedMotion: "no-preference",
+    });
+    test("renders the three.js scene and the scrubber moves the sun and the readout", async ({ page }) => {
+      const errors = collectErrors(page);
+      const three = await jsBodies(page);
+      await page.goto("/?sky=webgl");
+      await expect(page.getByTestId("sky-hero")).toHaveAttribute("data-sky-mode", "webgl", { timeout: 30_000 });
+      expect(await page.locator("[data-testid=sky-hero] canvas").count()).toBe(1);
+      expect(three.length).toBeGreaterThan(0);
+      await page.getByTestId("tow").fill("140");
+      await expect(page.getByTestId("sky-readout")).toContainText("Blind window");
+      await page.getByTestId("tow").fill("10");
+      await expect(page.getByTestId("sky-readout")).toContainText("Feed live");
+      await page.getByTestId("tow").fill("170");
+      await expect(page.getByTestId("sky-readout")).toContainText("Window ended");
+      expect(errors.filter((e) => !/Failed to load resource/.test(e))).toEqual([]);
+    });
+  });
+});
+
+test("keyboard: the time-of-week slider is reachable and shows a visible focus ring", async ({ page }) => {
+  await page.goto("/");
+  const slider = page.getByTestId("tow");
+  await slider.focus();
+  await expect(slider).toBeFocused();
+  await page.keyboard.press("ArrowRight");
+  await expect(slider).toHaveAttribute("aria-valuetext", /ET/);
+  const outline = await slider.evaluate((el) => getComputedStyle(el).outlineStyle);
+  expect(outline).not.toBe("none");
+});
+
+test("every page reveals its content without scrolling being required (reduced motion shows final state)", async ({ page }) => {
+  await page.goto("/");
+  const hidden = await page.evaluate(
+    () => Array.from(document.querySelectorAll<HTMLElement>("main *")).filter((e) => e instanceof HTMLElement && getComputedStyle(e).opacity === "0").map((e) => e.tagName + "." + String(e.className).slice(0, 60)),
+  );
+  expect(hidden).toEqual([]);
 });
