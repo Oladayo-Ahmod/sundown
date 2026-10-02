@@ -253,7 +253,10 @@ export async function readPreflight(): Promise<PreflightSnapshot> {
     MARKETS.map((m) => c.readContract({ address: m.address, abi: sundownMarketAbi, functionName: "config" })),
   );
   const guards = Object.entries(deployment.contracts).filter(([n]) => /Guard/.test(n)).map(([, a]) => a);
-  const guardOk = cfgs.every((cfg, i) => guards.some((g) => eq(g, cfg.guard)) && eq(cfg.oracle, oracleOf(MARKETS[i].symbol)));
+  const guardOk = cfgs.every((cfg, i) => {
+    const sym = MARKETS[i]?.symbol;
+    return sym !== undefined && guards.some((g) => eq(g, cfg.guard)) && eq(cfg.oracle, oracleOf(sym));
+  });
   checks.push({
     id: "wiring",
     label: "Each market uses a recorded guard and its own symbol's oracle adapter",

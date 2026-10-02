@@ -5,8 +5,7 @@
  * public client over HTTP. The deployment record is copied from `deployments/421614.json` by
  * `scripts/export-chain-data.mjs`; the ABIs are generated from forge output by `scripts/export-abis.mjs`.
  */
-import { createPublicClient, http, type Address, type PublicClient } from "viem";
-import { arbitrumSepolia } from "viem/chains";
+import { createPublicClient, defineChain, http, type Address, type PublicClient } from "viem";
 
 import deployment from "@/data/deployment.json";
 
@@ -17,7 +16,18 @@ export const CHAIN_NAME = "Arbitrum Sepolia";
 export const EXPLORER = "https://sepolia.arbiscan.io";
 export const RPC_URL = process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC_URL ?? "https://sepolia-rollup.arbitrum.io/rpc";
 
-export type ContractName = keyof typeof deployment.contracts;
+/** Defined locally instead of importing the `viem/chains` barrel (it pulls every chain into the bundle). */
+const arbitrumSepolia = defineChain({
+  id: CHAIN_ID,
+  name: CHAIN_NAME,
+  nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
+  rpcUrls: { default: { http: [RPC_URL] } },
+  blockExplorers: { default: { name: "Arbiscan", url: EXPLORER } },
+  contracts: { multicall3: { address: "0xca11bde05977b3631167028862be2a173976ca11", blockCreated: 81930 } },
+  testnet: true,
+});
+
+export type ContractName =keyof typeof deployment.contracts;
 export type ContractKind = "production" | "simulation";
 
 export function addr(name: ContractName): Address {

@@ -19,7 +19,7 @@ export function useLive<T>(load: () => Promise<T>): [LiveState<T>, () => void] {
         setState({ status: "ok", data });
       },
       (e: unknown) =>
-        setState({ status: "error", data: last.current, error: e instanceof Error ? e.message.split("\n")[0] : String(e) }),
+        setState({ status: "error", data: last.current, error: e instanceof Error ? (e.message.split("\n")[0] ?? "unknown error") : String(e) }),
     );
   }, [load]);
   useEffect(run, [run]);

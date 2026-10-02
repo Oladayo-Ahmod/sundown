@@ -120,7 +120,7 @@ test("live pages never send a transaction or request a signature", async ({ page
   const methods: string[] = [];
   page.on("request", (r) => {
     const body = r.postData();
-    if (r.method() === "POST" && body) for (const m of body.matchAll(/"method":"([a-z_A-Z0-9]+)"/g)) methods.push(m[1]);
+    if (r.method() === "POST" && body) for (const m of body.matchAll(/"method":"([a-z_A-Z0-9]+)"/g)) methods.push(m[1] ?? "");
   });
   for (const path of ["/deployment", "/markets", "/preflight"]) {
     await page.goto(path);
