@@ -1,11 +1,10 @@
 {
-  "command": "cd contracts && forge test (fork tests skipped: ROBINHOOD_MAINNET_RPC_URL not set)",
-  "suites": 18,
+  "command": "cd contracts && forge test (fork tests skip unless ROBINHOOD_MAINNET_RPC_URL is set)",
+  "suites": 19,
   "passed": 231,
   "failed": 0,
-  "skipped": 1,
-  "total": 232,
+  "skipped": 4,
+  "total": 235,
   "recorded_on": "2026-10-03",
-  "recorded_at_commit": "aa332a8 (main) merged into m2-research",
-  "note": "Re-run for the Part 2 handoff on the merged tree: 231 passed, 0 failed, 1 skipped (232 total). The skipped test is the Chainlink fork test against Robinhood mainnet; the adapter is not claimed integrated until it passes."
+  "note": "4 skipped: fork tests that need ROBINHOOD_MAINNET_RPC_URL. One live run passed 4 of 4 on 2026-10-03 (docs/ORACLE_LIVE_VALIDATION.md); a later run failed on a transport error."
 }

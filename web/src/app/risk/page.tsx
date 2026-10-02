@@ -143,9 +143,9 @@ export default function RiskPage() {
           <SimBadge>Research simulation</SimBadge>
         </div>
         <p className="max-w-3xl text-sm text-muted-foreground">
-          From 6 h before a blind window until it ends, a boosted account&apos;s cap is the tier LLTV or{" "}
+          From 6 h before a blind window until the window has ended and a fresh price has arrived, a boosted account&apos;s cap is the tier LLTV or{" "}
           1 - gapVaR[class] - 0.5% - 1%, whichever is lower, with gapVaR the static full-sample q99.5 gap (includes
-          March 2020). Accounts above the cap get a 3 h cure window, then anyone can deleverage them to the cap at a
+          March 2020). Accounts above the cap get a 3 h cure window, then anyone can deleverage them to the cap minus a 0.5% margin at a
           2% fee. Standard accounts are never touched. This evaluation is <strong>in-sample for the cap</strong>. Bad
           debt is bps of outstanding debt per year over 914 windows 2010-2026; 95% CIs clustered by window date.
         </p>
@@ -309,12 +309,12 @@ export default function RiskPage() {
           at most 3.65 pp of extra weekday capacity at 93% (0.65 pp at 90%).
         </p>
 
-        <h3 className="text-lg font-semibold">Cross-check against Session A&apos;s forge replay</h3>
+        <h3 className="text-lg font-semibold">Cross-check against the forge replay</h3>
         <p className="max-w-3xl text-sm text-muted-foreground">
           Same scenario: AAPL 93%, the 10 worst real gaps, 20 seeded borrowers, one gap at reopen, fee 2%, no cures.
           The forge replay runs in forge&apos;s in-process EVM with a fixture window cache, <strong>not on a public
-          chain</strong>. My earlier convention charged the full liquidation bonus and overstated the control by 45%;
-          with the market&apos;s non-worsening bonus cap the two implementations agree to 0.01%.
+          chain</strong>. The earlier liquidation convention charged the full bonus and overstated the control by 45%;
+          with the market&apos;s non-worsening bonus cap the two implementations agree to 0.01% (they share the authors&apos; reading of the market&apos;s rules, so the agreement is not fully independent).
         </p>
         <Table aria-label="Forge replay versus Python simulation, AAPL 93 percent">
           <TableCaption>Lender loss in USDG per event (control / session-aware). Events with no loss in either are omitted.</TableCaption>
@@ -399,7 +399,7 @@ export default function RiskPage() {
         <h3 className="text-lg font-semibold">Keeper break-even</h3>
         <Table aria-label="Keeper break-even fee from exact Uniswap v3 depth">
           <TableCaption>
-            Average slippage to sell the notional (Session A&apos;s direct v3 reads, `docs/DISCOVERY.md` section g) plus 5
+            Average slippage to sell the notional (direct Uniswap v3 reads, `docs/DISCOVERY.md` section g) plus 5
             bps gas. The 2% default fee covers up to about ${fmt(staticRule.keeper_capacity_at_2pct.AAPL ?? null, 0)}{" "}
             (AAPL) and ${fmt(staticRule.keeper_capacity_at_2pct.SPY ?? null, 0)} (SPY) per round; the deleverage batches
             in the replay are $0.6k to $15k.

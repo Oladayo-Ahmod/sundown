@@ -23,26 +23,27 @@ const RECORDED = [
   },
   {
     check: "Chainlink fork test against Robinhood mainnet",
-    result: "Not run",
-    note: "Skipped because ROBINHOOD_MAINNET_RPC_URL was not set. The oracle adapter is therefore not claimed integrated with real Chainlink feeds; on Sepolia it reads a simulated feed.",
-    source: "contracts/test/OracleFork.t.sol",
+    result:
+      "Passed once (2026-10-03 19:16 UTC, 4 of 4 fork tests, real feeds); a later full-suite run failed on a dropped connection. Optional; skipped without the RPC variable.",
+    note: "Only the blind-window branch was exercised on real data; the adapter has no on-chain asset-identity check. On Sepolia it reads simulated feeds.",
+    source: "contracts/test/OracleForkLive.t.sol, contracts/test/OracleFork.t.sol, docs/ORACLE_LIVE_VALIDATION.md",
   },
   {
-    check: "Deployed code present at all 27 recorded addresses",
-    result: "Pass: 27 addresses checked",
-    note: "Arbiscan source verification was not checked in this run (no explorer API key); the script reports it as skipped.",
+    check: "Deployed code present at all 27 recorded addresses (21 contracts and 6 market clones)",
+    result: "Pass: 27 addresses checked, 21 verified",
+    note: "Every non-clone contract (21) is verified on Arbiscan; the 6 markets are EIP-1167 clones of the verified implementation (scripts/check_deployed.py, 2026-10-03).",
     source: "scripts/check_deployed.py deployments/421614.json",
   },
   {
     check: "Research tests (pytest)",
     result: "63 passed, 1 skipped",
-    note: "Includes the regression test that reproduces the forge replay under the deployed liquidation rule. The skipped test needs Session A's calendar fixture.",
+    note: "Includes the regression test that reproduces the forge replay under the deployed liquidation rule. The skipped test is a placeholder for a Python-side comparison against the committed calendar fixture; that comparison runs in the on-chain differential tests (8 tests, all passing).",
     source: "research/tests/",
   },
   {
     check: "Research lint (ruff)",
-    result: "13 findings, all in Session A's replay_reference.py and market_reference.py",
-    note: "No findings in the research code owned by this track; Session A's files were left untouched.",
+    result: "All checks passed",
+    note: "Run on research/ after the line-length fixes in the two reference files.",
     source: "research/",
   },
 ] as const;

@@ -76,10 +76,10 @@ export default function ReplayPage() {
           <SimBadge>Forge in-process EVM, not a public chain</SimBadge>
         </div>
         <p className="max-w-3xl text-sm text-muted-foreground">
-          Session A&apos;s replay applies each real gap once at reopen to 20 seeded borrowers (50 tokens at $100,
+          The forge replay (docs/REPLAY_RESULTS.md) applies each real gap once at reopen to 20 seeded borrowers (50 tokens at $100,
           debt 80-99% of the tier cap, no cures), in forge&apos;s in-process EVM with a fixture window cache and a
           simulated price feed. Three markets per event: a flat control at 93%, the session-aware market, and a
-          standard 86% market. My independent Python simulation of the same scenario is shown beside it.
+          standard 86% market. A separate Python implementation of the same scenario is shown beside it.
         </p>
         <Table aria-label="Forge replay versus Python simulation per event, AAPL 93 percent">
           <TableCaption>
@@ -201,7 +201,7 @@ export default function ReplayPage() {
           })}
         </div>
         <p className="max-w-3xl text-sm text-muted-foreground">
-          At the in-the-wild 86% limit the benefit comes from TSLA and NVDA only; SPY and AAPL show none. The 93% panel
+          At the in-the-wild 86% limit the measured reduction comes from TSLA alone (NVDA none under the deployed liquidation rule), and it is not distinguishable from zero (95% CI includes 0); SPY and AAPL show none. The 93% panel
           is a counterfactual market that does not exist today.
         </p>
         <Sources files={[SRC.per]} />
@@ -288,8 +288,7 @@ export default function ReplayPage() {
               These historical events were <strong>not</strong> replayed on a public chain: the replay above runs in
               forge&apos;s in-process EVM. What is on Arbitrum Sepolia is a separate scripted run against the deployed
               markets with <strong>simulated tokens and a simulated price feed</strong> (a control market that lets a 92%
-              borrow through and then liquidates it after a 5% simulated price move, against the session-aware market that
-              refused that borrow level), with every transaction linked on{" "}
+              borrow through and then liquidates it after a 5% simulated price move, against the AAPL boosted-tier market, which inside a window applies its 86% standard-tier cap because boosted entry is closed during a window: it refused a 90% borrow. The stress cap, the cure window and deleveraging are not exercised on the deployment, see docs/SEPOLIA_DEMO.md), with every transaction linked on{" "}
               <Link className="underline" href="/deployment" prefetch={false}>
                 /deployment
               </Link>

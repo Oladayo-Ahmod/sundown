@@ -85,8 +85,8 @@ export default function Home() {
               </CardHeader>
               <CardContent className="text-sm leading-relaxed">
                 Chainlink&apos;s 24/5 equity feeds publish from Sunday 20:00 ET to Friday 20:00 ET and hold the
-                last value across weekends and NYSE holidays. On Robinhood Chain both holidays we checked
-                reopened at exactly 20:00 ET on the evening before the next trading day.
+                last value across weekends and NYSE holidays. On Robinhood Chain the first update after each of the two holidays we
+                checked arrived within 85 seconds after 20:00 ET on the evening before the next trading day.
                 <Sources files={["docs/DISCOVERY.md"]} note="documented and verified-onchain labels" />
               </CardContent>
             </Card>
@@ -179,10 +179,10 @@ export default function Home() {
                   (13.9%) <strong>still produced a loss</strong>.
                 </p>
                 <p>
-                  My independent Python simulation reproduces this to 0.01% (
+                  A separate Python implementation reproduces this to 0.01% (
                   <N src={src.cross}>${fmt(t.python_nonworsening_control, 2)}</N> and{" "}
                   <N src={src.cross}>${fmt(t.python_nonworsening_session_aware, 2)}</N>) once it uses the market&apos;s
-                  liquidation rule; my earlier convention overstated the control by 45% (
+                  liquidation rule (it shares the authors&apos; reading of the market&apos;s rules, so the agreement is not fully independent); the earlier liquidation convention overstated the control by 45% (
                   <N src={src.cross}>${fmt(t.python_control, 0)}</N>), so both are reported.
                 </p>
                 <p>
@@ -215,10 +215,11 @@ export default function Home() {
                   and offers <N src={src.borrower}>{fmt(eq93.extra_weekday_pp, 2)}</N> pp more weekday capacity.
                 </p>
                 <p>
-                  A borrower who never adjusts is deleveraged{" "}
-                  <N src={src.borrower}>{fmt(bNaive.flagged_per_yr_top_bucket, 0)}</N> times a year; the 2% fee costs{" "}
-                  <N src={src.borrower}>{fmt(bNaive.fee_pct_debt_yr, 1)}</N>% of debt a year on average and{" "}
-                  <N src={src.borrower}>{fmt(bNaiveHigh.fee_pct_debt_yr, 1)}</N>% when clustered near the limit,
+                  A never-adjusting borrower sitting at the maximum is deleveraged about{" "}
+                  <N src={src.borrower}>{fmt(bNaive.flagged_per_yr_top_bucket, 0)}</N> times a year. Averaged over a
+                  uniform population of never-adjusting borrowers the 2% fee costs{" "}
+                  <N src={src.borrower}>{fmt(bNaive.fee_pct_debt_yr, 1)}</N>% of debt a year; for a population clustered
+                  near the limit, <N src={src.borrower}>{fmt(bNaiveHigh.fee_pct_debt_yr, 1)}</N>%,
                   against a measured AAPL borrow APR of <N src={src.rates}>{fmt(m.AAPL, 2)}</N>% (
                   <N src={src.rates}>{pct(100 * m.aapl_util, 2)}</N> utilised, block{" "}
                   <N src={src.rates}>{m.block}</N>).

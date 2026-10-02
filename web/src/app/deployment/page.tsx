@@ -46,7 +46,7 @@ export default function DeploymentPage() {
         </div>
         <h1 className="text-3xl font-bold tracking-tight">Deployment on Arbitrum Sepolia</h1>
         <p className="max-w-3xl text-muted-foreground">
-          {names.length} contracts: the Sundown production code, and the test fixtures (tokens, price feeds, issuer
+          {names.length} deployed addresses (21 contracts and 6 market clones): the Sundown production code, and the test fixtures (tokens, price feeds, issuer
           registry) it runs against on a testnet. The addresses below are the recorded deployment; the evidence table is a
           scripted live run against it.
         </p>
@@ -208,16 +208,17 @@ export default function DeploymentPage() {
             <p>
               <strong>Simulated:</strong> every token (SimUSDG, SimStock for SPY, AAPL, NVDA and TSLA, SimIssuerRegistry)
               and every price feed (SimEquityFeed). The oracle adapter is the production contract pointed at a simulated
-              feed; it is not validated against real Chainlink feeds. The replay evidence on{" "}
+              feed. The same adapter was validated once against the real Robinhood Chain feeds (docs/ORACLE_LIVE_VALIDATION.md). The replay evidence on{" "}
               <code className="font-mono">/replay</code> runs in forge&apos;s in-process EVM, not on a public chain.
             </p>
             <p>
-              <strong>Cannot be shown live before the 2026-10-04 20:00 ET window end:</strong> a borrow denied by the
+              <strong>Not demonstrable before the submission deadline (Sun 2026-10-04 08:59 WAT):</strong> a borrow denied by the
               stress cap of a boosted account (boosted entry is closed during a window, and the stress period starts 6 h
               before the next one, Friday 2026-10-09 14:00 ET); the pre-window horizon, cure window and deleveraging (next
               window Friday 2026-10-09 20:00 ET); and the <code className="font-mono">Stale</code> price status (the
-              adapter reports ScheduledBlind inside a window). Section 4 shows the in-window capacity instead: the boosted
-              market refuses a borrow at 90% where the 93% frozen-price control allows 92%.
+              adapter reports ScheduledBlind inside a window). The current window ends Sun 20:00 ET. Section 4 shows the in-window capacity instead: the AAPL boosted-tier market, which
+              applies its 86% standard-tier cap inside a window because boosted entry is closed, refuses a 90% borrow where
+              the 93% frozen-price control allowed 92%.
             </p>
           </CardContent>
         </Card>
