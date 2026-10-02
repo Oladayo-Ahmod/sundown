@@ -370,7 +370,7 @@ production contract pointed at a simulated feed; validation against the real Cha
 against Robinhood mainnet and is not part of this run. The replay evidence (`docs/REPLAY_RESULTS.md`) runs in forge's in-process
 EVM with a fixture window cache, not on a public chain.
 
-**Cannot be shown live before the 2026-10-04 20:00 ET window end:**
+**Not demonstrable before the submission deadline (Sun 2026-10-04 08:59 WAT).** The blind window itself only ends Sun 2026-10-04 20:00 ET (Mon 01:00 WAT) and the next window starts Fri 2026-10-09 20:00 ET, both after the deadline, so this evidence is final and was not rerun:
 
 - *Boosted-tier stress cap.* A boosted account can only be created outside the stress period (`enterBoosted()` is refused while the price
   is not Fresh or a stress period is on, which section 4 shows live). The stress period starts 6 h before the next window, Fri 2026-10-09
