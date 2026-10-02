@@ -66,3 +66,13 @@ Scope: `SundownMarket` (vault + isolated lending market), `SundownMarketFactory`
 ## 7. Known gaps (not mitigated in v1)
 
 Phantom collateral loss; token-code upgrades after deployment; closures announced under 72 h; EST/early-close/Short-window behaviour unobserved; no sequencer feed on Robinhood Chain; boosted-tier guard (M4a) not implemented; stateful suite does not cover I6-insolvent, I9, I10 monotonicity, I12, I13, I14.
+
+## 8. Static-analysis baseline (Slither, reviewed 2026-10-03)
+
+`scripts/check_slither.py` (run by `scripts/preflight.sh`) reads the Slither JSON report and fails on any High finding and on any Medium finding beyond the baseline in `scripts/slither_baseline.json`. The 11 accepted Medium findings:
+
+- **incorrect-equality (2):** `SundownMarket.healthFactor` and `_planLiquidation` compare a debt to the sentinel `0` (no debt). The strict comparison is the intent.
+- **reentrancy-no-eth (3):** `liquidate` reads the oracle and guard before writing state (governance-fixed, trust-bounded, T3); `reportIssuerFailure` and `resume` call the collateral and loan tokens (gas-capped probes) before writing the halt state. Every state-changing market function is `nonReentrant`, so a token or oracle callback cannot re-enter one; callbacks can only call views.
+- **unused-return (6):** deliberate tuple destructuring of `latestRoundData`, `blindWindowAt` and `nextBlindWindow`, where only some components are needed and every used component is validated.
+
+Low and informational findings (timestamp comparisons, naming of immutables, low-level calls with a gas cap in the probes) are expected: the system is time-based by design.

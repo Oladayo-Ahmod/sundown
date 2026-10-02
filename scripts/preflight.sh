@@ -34,7 +34,7 @@ if [ $QUICK -eq 0 ]; then
   check "forge test ($fork)" bash -o pipefail -c 'cd contracts && forge test > /tmp/preflight_forge.log 2>&1; rc=$?; grep -E "^\[FAIL|Ran [0-9]+ test suites" /tmp/preflight_forge.log | tail -3; exit $rc'
   check "gas snapshot" bash -o pipefail -c "cd contracts && forge snapshot --check --no-match-test 'testFuzz|invariant|test_replay' 2>&1 | tail -1"
   if command -v slither >/dev/null 2>&1; then
-    check "slither (no high/medium)" bash -o pipefail -c 'cd contracts && out=$(slither . --config-file slither.config.json 2>&1); echo "$out" | tail -1; ! echo "$out" | grep -E "Impact: (High|Medium)" '
+    check "slither (no High, no Medium beyond the triaged baseline)" python3 scripts/check_slither.py
   else record "slither" SKIP "not installed"; fi
 else
   record "forge test / snapshot / slither" SKIP "--quick"
