@@ -3,11 +3,11 @@ import { expect, test, type Page } from "@playwright/test";
 
 const PAGES = [
   { path: "/", h1: /Tokenized stocks trade almost around the clock/, minSrc: 12, mustHave: ["Claims we will not make", "AAPL at 93%", "still produced a loss", "not distinguishable"] },
-  { path: "/risk", h1: /Risk evidence/, minSrc: 80, mustHave: ["The shipped static rule", "Which tiers bind", "Cross-check against Session A", "not the shipped static rule", "Limitations", "Simulation"] },
+  { path: "/risk", h1: /Risk evidence/, minSrc: 80, mustHave: ["The shipped static rule", "Which tiers bind", "Cross-check against the forge replay", "not the shipped static rule", "Limitations", "Simulation"] },
   { path: "/replay", h1: /Replay: control versus Sundown/, minSrc: 60, mustHave: ["Research simulation", "not a public chain", "The shipped rule: AAPL at 93%", "On-chain replay", "None (forge in-process only)", "not replayed on a public chain"] },
   { path: "/deployment", h1: /Deployment on Arbitrum Sepolia/, minSrc: 0, mustHave: ["Test fixture (simulation)", "Production", "Recorded live run", "Simulated tokens and feeds", "SundownMarketFactory", "Cannot be shown live"] },
   { path: "/markets", h1: /Markets on Arbitrum Sepolia/, minSrc: 0, ready: "[data-testid=live-markets][aria-busy=false]", mustHave: ["Simulated tokens and feeds", "Simulated prices", "Read-only"] },
-  { path: "/preflight", h1: /^Preflight$/, minSrc: 0, ready: "[data-testid=live-preflight][aria-busy=false]", mustHave: ["Live on-chain checks", "Recorded offline results", "231 passed, 0 failed, 1 skipped", "Not run"] },
+  { path: "/preflight", h1: /^Preflight$/, minSrc: 0, ready: "[data-testid=live-preflight][aria-busy=false]", mustHave: ["Live on-chain checks", "Recorded offline results", "231 passed, 0 failed, 4 skipped", "Passed once"] },
 ] as readonly PageSpec[];
 
 interface PageSpec {
