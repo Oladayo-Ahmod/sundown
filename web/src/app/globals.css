@@ -1,55 +1,53 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
+/*
+ * Sundown design system. One theme, dark: the site is about the hours the oracle goes dark, so the light theme was
+ * dropped (keeping both cost more than the 20-minute budget set for it). Every colour below is checked against
+ * WCAG AA on the opaque-enough glass panels (panel fill alpha >= 0.72 over a near-black sky).
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a;
-  --card: #ffffff;
-  --muted: #f1f5f9;
-  --muted-foreground: #475569;
-  --border: #cbd5e1;
-  --primary: #1d4ed8;
-  --primary-foreground: #ffffff;
-  --accent: #e2e8f0;
-  --warn-bg: #fef3c7;
-  --warn-fg: #78350f;
-  --warn-border: #b45309;
-  --danger: #b91c1c;
-  --ring: #1d4ed8;
-  --chart-1: #0072b2;
-  --chart-2: #b97700;
-  --chart-3: #00785a;
-  --chart-4: #c2410c;
-  --chart-grid: #e2e8f0;
-  --chart-text: #475569;
-}
-
-.dark {
-  --background: #0b1220;
-  --foreground: #e5e7eb;
-  --card: #0f172a;
-  --muted: #111a2e;
-  --muted-foreground: #a3adbd;
-  --border: #334155;
-  --primary: #7db4ff;
-  --primary-foreground: #0b1220;
-  --accent: #1e293b;
-  --warn-bg: #3a2a07;
-  --warn-fg: #fde68a;
-  --warn-border: #b45309;
-  --danger: #fca5a5;
-  --ring: #93c5fd;
-  --chart-1: #56b4e9;
-  --chart-2: #f0c040;
-  --chart-3: #3ddc97;
-  --chart-4: #ff8f5a;
-  --chart-grid: #26334a;
-  --chart-text: #a3adbd;
+  /* surfaces */
+  --background: #07060f; /* night indigo */
+  --background-raised: #0d0a1c;
+  --card: rgb(19 15 38 / 0.78); /* glass fill */
+  --muted: rgb(255 255 255 / 0.05);
+  --accent: rgb(255 255 255 / 0.08);
+  --border: rgb(255 255 255 / 0.12);
+  /* text */
+  --foreground: #ece6da; /* bone */
+  --muted-foreground: #b9b0c9;
+  /* brand */
+  --primary: #ff9a4d; /* ember */
+  --primary-foreground: #1a0b03;
+  --ember: #ff7a2f;
+  --amber: #ffc46b;
+  --dusk: #8b5cf6; /* dusk violet */
+  --magenta: #d946a8;
+  --steel: #86a9dc; /* blind-window */
+  --steel-bg: rgb(134 169 220 / 0.12);
+  /* semantic */
+  --warn-bg: rgb(255 196 107 / 0.12);
+  --warn-fg: #ffd89a;
+  --warn-border: rgb(255 196 107 / 0.55);
+  --allow: #62d9a4;
+  --deny: #ff8f8f;
+  --danger: #ff8f8f;
+  --ring: #ffc46b;
+  /* charts (CVD-distinct on dark) */
+  --chart-1: #7db8ff;
+  --chart-2: #ffc46b;
+  --chart-3: #62d9a4;
+  --chart-4: #ff7f5f;
+  --chart-grid: rgb(255 255 255 / 0.1);
+  --chart-text: #b9b0c9;
+  /* radii and shadows */
+  --radius-panel: 1.25rem;
+  --radius-control: 0.75rem;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-background-raised: var(--background-raised);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-muted: var(--muted);
@@ -63,44 +61,240 @@
   --color-warn-border: var(--warn-border);
   --color-danger: var(--danger);
   --color-ring: var(--ring);
-  --font-sans: system-ui, sans-serif;
-  --font-mono: ui-monospace, monospace;
+  --color-ember: var(--ember);
+  --color-amber: var(--amber);
+  --color-dusk: var(--dusk);
+  --color-magenta: var(--magenta);
+  --color-steel: var(--steel);
+  --color-steel-bg: var(--steel-bg);
+  --color-allow: var(--allow);
+  --color-deny: var(--deny);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --radius-panel: 1.25rem;
 }
 
 html {
-  color-scheme: light;
-}
-html.dark {
   color-scheme: dark;
+  background: var(--background);
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  background: transparent;
   color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family: var(--font-geist-sans), ui-sans-serif, sans-serif;
+  font-feature-settings: "ss01", "cv11";
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ------------------------------------------------------------------ type */
+.font-display {
+  font-family: var(--font-fraunces), ui-serif, serif;
+  font-optical-sizing: auto;
+  font-variation-settings: "SOFT" 40, "WONK" 0;
+  letter-spacing: -0.028em;
+  line-height: 1.02;
+  font-weight: 380;
+}
+.font-display em,
+.font-display .ital {
+  font-style: italic;
+  font-weight: 340;
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+  color: var(--amber);
+  letter-spacing: -0.034em;
+}
+.t-eyebrow {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+.t-section {
+  font-family: var(--font-fraunces), ui-serif, serif;
+  font-size: clamp(1.9rem, 1.3rem + 2vw, 3rem);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  font-weight: 380;
+  font-variation-settings: "SOFT" 40;
+}
+.t-section em {
+  font-style: italic;
+  font-weight: 340;
+  color: var(--amber);
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+}
+.num,
+code,
+kbd {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums slashed-zero;
+  font-feature-settings: "tnum", "zero";
+}
+code {
+  font-size: 0.88em;
+}
+strong {
+  font-weight: 600;
+  color: #f6f0e4;
 }
 
 :focus-visible {
   outline: 2px solid var(--ring);
-  outline-offset: 2px;
-  border-radius: 2px;
+  outline-offset: 3px;
+  border-radius: 6px;
 }
 
+::selection {
+  background: rgb(255 154 77 / 0.35);
+  color: #fff;
+}
+
+/* ------------------------------------------------------------------ sky backdrop (CSS only, always present) */
+.sky-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 70% at 50% 108%, rgb(255 122 47 / 0.22), transparent 55%),
+    radial-gradient(90% 60% at 18% 0%, rgb(139 92 246 / 0.2), transparent 60%),
+    radial-gradient(70% 50% at 92% 22%, rgb(217 70 168 / 0.12), transparent 62%),
+    linear-gradient(180deg, #07060f 0%, #0b0818 55%, #130b22 100%);
+}
+.sky-noise {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* ------------------------------------------------------------------ glass */
+.glass {
+  position: relative;
+  isolation: isolate;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.06), rgb(255 255 255 / 0.015) 42%, rgb(255 255 255 / 0)),
+    var(--card);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+  border-radius: var(--radius-panel);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.09),
+    inset 0 0 0 1px rgb(255 255 255 / 0.02),
+    0 24px 60px -28px rgb(0 0 0 / 0.8),
+    0 2px 6px rgb(0 0 0 / 0.35);
+}
+.glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    140deg,
+    rgb(255 255 255 / 0.34),
+    rgb(255 255 255 / 0.05) 38%,
+    rgb(139 92 246 / 0.16) 62%,
+    rgb(255 154 77 / 0.38)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+/* pointer spotlight (set by the Spotlight hook; static centre otherwise) */
+.glass-spot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(
+    320px circle at var(--mx, 50%) var(--my, -20%),
+    rgb(255 190 120 / 0.1),
+    transparent 60%
+  );
+  opacity: var(--spot, 0);
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.glass-spot:hover {
+  --spot: 1;
+}
+.glass-strong {
+  --card: rgb(17 13 33 / 0.9);
+}
+
+/* ------------------------------------------------------------------ motion */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
   * {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
 }
 
-/* Charts */
+/* ------------------------------------------------------------------ charts */
 .chart-text {
   fill: var(--chart-text);
   font-size: 13px;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
 }
 .chart-grid {
   stroke: var(--chart-grid);
   stroke-width: 1;
+}
+
+/* ------------------------------------------------------------------ hero range input */
+input[type="range"].sun-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 2.75rem;
+  background: transparent;
+  cursor: grab;
+}
+input[type="range"].sun-range::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--sun-track, linear-gradient(90deg, #ffc46b, #ff7a2f 70%, #86a9dc 71%, #86a9dc));
+}
+input[type="range"].sun-range::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--sun-track, linear-gradient(90deg, #ffc46b, #ff7a2f 70%, #86a9dc 71%, #86a9dc));
+}
+input[type="range"].sun-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 26px;
+  width: 26px;
+  margin-top: -10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff4dc, #ffc46b 60%, #ff7a2f);
+  box-shadow: 0 0 0 4px rgb(255 196 107 / 0.18), 0 4px 16px rgb(255 122 47 / 0.55);
+  border: 0;
+}
+input[type="range"].sun-range::-moz-range-thumb {
+  height: 26px;
+  width: 26px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff4dc, #ffc46b 60%, #ff7a2f);
+  box-shadow: 0 0 0 4px rgb(255 196 107 / 0.18), 0 4px 16px rgb(255 122 47 / 0.55);
+  border: 0;
 }

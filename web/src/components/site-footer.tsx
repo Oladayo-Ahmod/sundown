@@ -1,7 +1,7 @@
-﻿export function SiteFooter() {
+export function SiteFooter() {
   return (
-    <footer className="mt-16 border-t border-border">
-      <div className="mx-auto max-w-6xl space-y-2 px-4 py-6 text-sm text-muted-foreground">
+    <footer className="mx-auto mt-10 max-w-6xl px-4 pb-10 sm:px-6">
+      <div className="glass space-y-3 p-5 text-sm leading-relaxed text-muted-foreground sm:p-6">
         <p>
           <strong className="text-foreground">Research simulation and a testnet demonstration.</strong> The risk and
           replay numbers are produced offline from historical equity data (a daily proxy for the oracle-blind
@@ -11,8 +11,7 @@
         </p>
         <p>
           Full evidence, confidence intervals and the list of claims we do not make:{" "}
-          <code className="font-mono">research/CLAIMS.md</code>,{" "}
-          <code className="font-mono">research/PITCH_EVIDENCE.md</code>.
+          <code>research/CLAIMS.md</code>, <code>research/PITCH_EVIDENCE.md</code>.
         </p>
       </div>
     </footer>

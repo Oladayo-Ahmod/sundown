@@ -3,16 +3,18 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-const alertVariants = cva("relative w-full rounded-lg border p-4 text-sm", {
+const alertVariants = cva("glass relative w-full p-4 text-sm sm:p-5", {
   variants: {
     variant: {
-      default: "border-border bg-muted text-foreground",
-      simulation: "border-warn-border bg-warn-bg text-warn-fg",
+      default: "",
+      simulation:
+        "[--card:rgb(40_28_12/0.88)] border-l-[3px] border-l-warn-border text-warn-fg [&_strong]:text-[#ffe9c2] [&_code]:text-[#ffe0ad]",
     },
   },
   defaultVariants: { variant: "default" },
 });
 
+/** Callout. The `simulation` variant is the amber label for anything simulated: never restyled away. */
 function Alert({
   className,
   variant,
