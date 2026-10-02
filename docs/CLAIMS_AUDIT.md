@@ -10,6 +10,8 @@ Verdicts: **supported**; **stale** (was true, no longer); **overclaim**; **unsup
 
 The numbers are in good shape: every headline figure traced to a committed result (section 3), all 51 addresses and 85 transaction hashes quoted across the files match `deployments/421614.json` and `docs/SEPOLIA_DEMO.md`, and no file claims loss prevention, "production-ready", an audit, or a live pre-window / cure / deleveraging demonstration. What needs fixing is mostly **stale** state (counts and statuses that moved after Session B wrote them) and a few precision problems.
 
+**Tally of section 2 (27 corrections):** 11 stale, 8 mislabeled, 3 overclaim, 1 unsupported, 2 unverified, 2 placeholders to fill. Section 3 lists 22 groups of statements checked and supported.
+
 Fix first (all in section 2): **A1** test counts ("1 skipped"), **A2** the oracle fork-test status, **A3** reversed blind-window sentence, **A4** the "52 a year / 4.3 % fee" blend, **A5** "exactly 20:00 ET", **A6** the on-chain card that credits the wrong mechanism, **A7** the unqualified word "independent".
 
 ## 2. Corrections (statement, location, evidence, verdict, exact corrected wording)
