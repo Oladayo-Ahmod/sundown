@@ -1,7 +1,9 @@
 import { MagneticLink, Reveal, StaggerText, W } from "@/components/motion";
 import { N, Sources, SimBadge } from "@/components/provenance";
+import { OutwardLinks } from "@/components/outward-links";
 import { SkyHero } from "@/components/sky/sky-hero";
 import { Stat } from "@/components/stat";
+import { WindowStepper, type Step } from "@/components/window-stepper";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -26,6 +28,34 @@ function SectionHead({ n, eyebrow, children, extra }: { n: string; eyebrow: stri
     </header>
   );
 }
+
+const STEPS: readonly Step[] = [
+  {
+    when: "Fri 14:00 ET",
+    title: "The 6 h pre-window horizon opens",
+    body: "The stress period starts 6 h before a blind window. Eligibility is a pure function of the position, the price status, the window state and the time: nothing has to be executed to start it.",
+  },
+  {
+    when: "Fri 14:00 ET",
+    title: "The stress cap applies",
+    body: "A boosted account's cap becomes the lower of its tier LLTV and the stress fraction. For AAPL at 93% the weekend cap is 89.35%, 3.65 pp lower. Standard accounts are never touched.",
+  },
+  {
+    when: "Fri 14:00 to 17:00 ET",
+    title: "A 3 h cure window",
+    body: "Accounts above the cap are flagged and can cure by repaying or adding collateral.",
+  },
+  {
+    when: "Fri 17:00 to 20:00 ET",
+    title: "Anyone may deleverage to the cap",
+    body: "Accounts still above the cap become eligible: anyone may deleverage them to the cap minus a 0.5% margin, earning the deleverage fee (2% in the replay).",
+  },
+  {
+    when: "Sun 20:00 ET",
+    title: "The window ends and capacity returns",
+    body: "The stress period also covers the Reopening status, so the cap lifts once the window has ended and a fresh price has arrived; boosted weekday capacity returns.",
+  },
+];
 
 export default function Home() {
   const h = headline;
@@ -65,16 +95,16 @@ export default function Home() {
   return (
     <div className="space-y-24 sm:space-y-32">
       {/* ------------------------------------------------------------ hero */}
-      <section aria-labelledby="hero" className="space-y-10 pt-6 sm:pt-10">
-        <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
-          <div className="space-y-6 lg:col-span-8">
+      <section aria-labelledby="hero">
+        <SkyHero>
+          <div className="space-y-5">
             <div className="flex flex-wrap gap-2">
               <Badge variant="outline">Research phase</Badge>
               <SimBadge>Simulation results</SimBadge>
             </div>
             <h1
               id="hero"
-              className="font-display text-[clamp(2.3rem,1.1rem+4.2vw,4.5rem)] leading-[0.96] text-balance"
+              className="font-display text-[clamp(2.1rem,1rem+3.6vw,4.1rem)] leading-[0.97] text-balance"
             >
               <StaggerText>
                 <W>Tokenized</W> <W>stocks</W> <W>trade</W> <W>almost</W> <W>around</W> <W>the</W> <W>clock.</W>{" "}
@@ -82,9 +112,7 @@ export default function Home() {
                 <W em>once.</W>
               </StaggerText>
             </h1>
-          </div>
-          <div className="space-y-5 lg:col-span-4 lg:pb-3">
-            <p className="text-base leading-relaxed text-muted-foreground">
+            <p className="hidden max-w-lg text-[0.95rem] leading-relaxed text-muted-foreground sm:block sm:text-base">
               Sundown is a research project on a session-aware credit-risk layer for tokenized-stock collateral on
               Arbitrum and Robinhood Chain. This site shows what the evidence supports, with confidence intervals, and
               what it does not.
@@ -97,9 +125,18 @@ export default function Home() {
                 Replay real gaps
               </MagneticLink>
             </div>
+            <div className="hidden sm:block">
+              <OutwardLinks />
+            </div>
           </div>
+        </SkyHero>
+        <div className="space-y-4 pt-8 sm:hidden">
+          <p className="text-[0.95rem] leading-relaxed text-muted-foreground">
+            Sundown is a research project on a session-aware credit-risk layer for tokenized-stock collateral on Arbitrum and
+            Robinhood Chain. This site shows what the evidence supports, with confidence intervals, and what it does not.
+          </p>
+          <OutwardLinks />
         </div>
-        <SkyHero />
       </section>
 
       {/* ------------------------------------------------------------ 01 problem */}
@@ -204,9 +241,31 @@ export default function Home() {
         </ul>
       </section>
 
+      {/* ------------------------------------------------------------ 03 how a window plays out */}
+      <section aria-labelledby="window" className="space-y-8">
+        <SectionHead n="03" eyebrow="The shipped rule, in time" extra={<Badge variant="outline">Illustrative</Badge>}>
+          <h2 id="window" className="t-section max-w-2xl">
+            How a window <em>plays out</em>
+          </h2>
+        </SectionHead>
+        <Reveal>
+          <Card>
+            <CardContent className="pt-6">
+              <WindowStepper steps={STEPS} />
+              <p className="mt-6 max-w-3xl text-xs leading-relaxed text-muted-foreground">
+                Illustrative timeline of the shipped static rule for a boosted AAPL account at 93% before a Friday 20:00 ET
+                window (times are ET). The 89.35% figure is AAPL&apos;s through-the-cycle weekend cap. Standard-tier accounts
+                are never capped or deleveraged. This describes the contract&apos;s rules; it is not a measurement.
+              </p>
+              <Sources files={["docs/GUARD_DESIGN.md", "docs/REPLAY_RESULTS.md"]} />
+            </CardContent>
+          </Card>
+        </Reveal>
+      </section>
+
       {/* ------------------------------------------------------------ 03 evidence */}
       <section aria-labelledby="claims" className="space-y-8">
-        <SectionHead n="03" eyebrow="Evidence" extra={<SimBadge>Research simulation</SimBadge>}>
+        <SectionHead n="04" eyebrow="Evidence" extra={<SimBadge>Research simulation</SimBadge>}>
           <h2 id="claims" className="t-section max-w-2xl">
             Three claims we can <em>defend</em>
           </h2>
@@ -271,7 +330,18 @@ export default function Home() {
                 <CardTitle>Today&apos;s LLTVs lose almost nothing to weekend gaps</CardTitle>
                 <CardDescription>So we do not claim to fix them.</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-2 text-sm leading-relaxed">
+              <CardContent className="space-y-3 text-sm leading-relaxed">
+                <p className="text-[0.95rem] leading-relaxed">
+                  At the highest LLTV in the wild (86%), weekend gaps cost lenders about{" "}
+                  <N src={src.credit}>{fmt(h.flat.bps_yr_86.est, 1)}</N> bps a year (95% CI{" "}
+                  <N src={src.flat}>{ci(h.flat.bps_yr_86.lo, h.flat.bps_yr_86.hi)}</N>), so we do not claim to fix them.
+                </p>
+                <details className="group mt-1 rounded-xl border border-border/70 bg-white/[0.03] open:bg-white/[0.05]">
+                  <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-2 rounded-xl px-3 py-2 font-mono text-[0.72rem] tracking-wide text-amber uppercase marker:hidden [&::-webkit-details-marker]:hidden">
+                    Evidence and caveats
+                    <span aria-hidden="true" className="transition-transform group-open:rotate-45">+</span>
+                  </summary>
+                  <div className="space-y-2 px-3 pb-3">
                 <p>
                   At 86% LLTV (the highest in the wild) bad debt is{" "}
                   <N src={src.credit}>{fmt(h.flat.bps_yr_86.est, 1)}</N> bps/yr, CI{" "}
@@ -284,6 +354,8 @@ export default function Home() {
                   2020. These levels use the deployed market&apos;s liquidation rule; the older full-bonus convention gave about 4.5 bps/yr (an upper bound).
                 </p>
                 <Sources files={[src.credit, src.flat, src.conc]} />
+                  </div>
+                </details>
               </CardContent>
             </Card>
           </Reveal>
@@ -296,7 +368,19 @@ export default function Home() {
                 <CardTitle>The shipped rule works as designed on AAPL at 93%, and two implementations agree</CardTitle>
                 <CardDescription>Forge in-process EVM replay, not a public chain.</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-2 text-sm leading-relaxed">
+              <CardContent className="space-y-3 text-sm leading-relaxed">
+                <p className="text-[0.95rem] leading-relaxed">
+                  In a forge replay of the 10 worst AAPL gaps the unprotected 93% control lost{" "}
+                  <N src={src.cross}>${fmt(t.forge_control, 0)}</N> over 4 events and the session-aware market{" "}
+                  <N src={src.cross}>${fmt(t.forge_session_aware, 0)}</N> over 1; the 2020-03-16 gap{" "}
+                  <strong>still produced a loss</strong>.
+                </p>
+                <details className="group mt-1 rounded-xl border border-border/70 bg-white/[0.03] open:bg-white/[0.05]">
+                  <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-2 rounded-xl px-3 py-2 font-mono text-[0.72rem] tracking-wide text-amber uppercase marker:hidden [&::-webkit-details-marker]:hidden">
+                    Evidence and caveats
+                    <span aria-hidden="true" className="transition-transform group-open:rotate-45">+</span>
+                  </summary>
+                  <div className="space-y-2 px-3 pb-3">
                 <p>
                   Replay of the 10 worst real AAPL gaps on 20 seeded borrowers (no cures): the unprotected 93% control
                   lost <N src={src.cross}>${fmt(t.forge_control, 0)}</N> over <N src={src.replayDoc}>4</N> events; the
@@ -321,6 +405,8 @@ export default function Home() {
                   <N src={src.lend}>{ci(dR.lo, dR.hi)}</N>) for borrowers who trim before each window.
                 </p>
                 <Sources files={[src.cross, src.replayDoc, src.lend]} />
+                  </div>
+                </details>
               </CardContent>
             </Card>
           </Reveal>
@@ -333,7 +419,19 @@ export default function Home() {
                 <CardTitle>Its economics are modest, and we say so</CardTitle>
                 <CardDescription>SPY is inert; AAPL buys little at a real cost.</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-2 text-sm leading-relaxed">
+              <CardContent className="space-y-3 text-sm leading-relaxed">
+                <p className="text-[0.95rem] leading-relaxed">
+                  At 93% the rule is <strong>not distinguishable</strong> from a flat market at the weekend-cap level; it
+                  adds <N src={src.borrower}>{fmt(eq93.extra_weekday_pp, 2)}</N> pp of weekday capacity and costs a
+                  never-adjusting borrower real fees, against a measured{" "}
+                  <N src={src.rates}>{fmt(m.AAPL, 2)}</N>% AAPL borrow APR.
+                </p>
+                <details className="group mt-1 rounded-xl border border-border/70 bg-white/[0.03] open:bg-white/[0.05]">
+                  <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-2 rounded-xl px-3 py-2 font-mono text-[0.72rem] tracking-wide text-amber uppercase marker:hidden [&::-webkit-details-marker]:hidden">
+                    Evidence and caveats
+                    <span aria-hidden="true" className="transition-transform group-open:rotate-45">+</span>
+                  </summary>
+                  <div className="space-y-2 px-3 pb-3">
                 <p>
                   <strong>SPY:</strong> the cap never binds, so a &ldquo;boosted&rdquo; SPY tier is a flat market (93%:{" "}
                   <N src={src.lend}>{fmt(spy93.bps, 1)}</N> bps/yr, unprotected). <strong>AAPL:</strong> the rule is
@@ -357,6 +455,8 @@ export default function Home() {
                   with the rule.
                 </p>
                 <Sources files={[src.lend, src.borrower, src.rates, src.sens]} />
+                  </div>
+                </details>
               </CardContent>
             </Card>
           </Reveal>
@@ -373,7 +473,7 @@ export default function Home() {
 
       {/* ------------------------------------------------------------ 04 limits and non-claims */}
       <section aria-labelledby="not" className="space-y-8">
-        <SectionHead n="04" eyebrow="Limits">
+        <SectionHead n="05" eyebrow="Limits">
           <h2 id="not" className="t-section max-w-2xl">
             Claims we will <em>not</em> make
           </h2>

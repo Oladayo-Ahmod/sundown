@@ -1,3 +1,5 @@
+import { OutwardLinks } from "@/components/outward-links";
+
 export function SiteFooter() {
   return (
     <footer className="mx-auto mt-10 max-w-6xl px-4 pb-10 sm:px-6">
@@ -13,6 +15,7 @@ export function SiteFooter() {
           Full evidence, confidence intervals and the list of claims we do not make:{" "}
           <code>research/CLAIMS.md</code>, <code>research/PITCH_EVIDENCE.md</code>.
         </p>
+        <OutwardLinks variant="inline" className="pt-1 text-foreground" />
       </div>
     </footer>
   );
