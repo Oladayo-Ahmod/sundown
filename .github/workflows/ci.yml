@@ -15,9 +15,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: recursive
+      # Pinned, not "stable": every recorded result (231 passed, 0 failed, 4 skipped; the gas snapshot; the gas
+      # targets) was produced with Foundry v1.4.4. "stable" moved to v1.8.4, which reports each invariant suite as
+      # one campaign (219 tests instead of 235) and measures the oracle read at 63,897 gas against the 60,000 target.
       - uses: foundry-rs/foundry-toolchain@v1
         with:
-          version: stable
+          version: v1.4.4
       - name: Format
         run: forge fmt --check
       - name: Build

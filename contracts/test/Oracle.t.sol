@@ -373,6 +373,7 @@ contract ChainlinkEquityOracleTest is OracleBase {
         uint256 g = gasleft();
         oracle.price();
         uint256 used = g - gasleft();
+        emit log_named_uint("gas of oracle.price() with a warm window cache (target < 60,000)", used);
         assertLt(used, 60_000, "oracle read with a warm window cache");
     }
 
