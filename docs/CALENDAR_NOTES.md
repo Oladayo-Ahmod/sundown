@@ -135,7 +135,7 @@ Method: `research/observed_rounds.py` walked every proxy phase with `getRoundDat
 
 ## 12. Verification summary
 
-- `forge test`: **60 passed, 0 failed**: 30 named, 8 differential (incl. rules-only), 7 property/fuzz (256 runs each, incl. the gas report), 13 wrapper (incl. 1 fuzz), 2 observed-feed. `forge fmt --check`, `forge build --sizes` and `ruff check` are clean; `.gas-snapshot` holds the 52 non-fuzz entries (CI checks it with `--no-match-test testFuzz`). Deployed sizes: `MarketCalendar` 6,855 B runtime (library is inlined).
+- `forge test` at the M1 milestone (historical; the current totals are in `THREAT_MODEL.md` section 9): **60 passed, 0 failed**: 30 named, 8 differential (incl. rules-only), 7 property/fuzz (256 runs each, incl. the gas report), 13 wrapper (incl. 1 fuzz), 2 observed-feed. `forge fmt --check`, `forge build --sizes` and `ruff check` are clean; `.gas-snapshot` holds the 52 non-fuzz entries (CI checks it with `--no-match-test testFuzz`). Deployed sizes: `MarketCalendar` 6,855 B runtime (library is inlined).
 - Coverage (`forge coverage --ir-minimum`): `src/lib/UsMarketCalendar.sol` **100 % lines / 100 % statements / 100 % branches / 100 % functions**; `src/MarketCalendar.sol` **100 % / 100 % / 100 % / 100 %**. (Foundry's `--ir-minimum` mode, needed because the library hits "stack too deep" under unoptimised coverage builds, can mis-attribute lines; one such attribution glitch on `_classOf` was resolved by simplifying the function.)
 - Gas (from `test_gasReport`, includes ~2.6k external-call overhead from the harness). All lookups are O(1) apart from bounded scans.
 

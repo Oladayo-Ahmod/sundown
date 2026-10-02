@@ -32,10 +32,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Slither
+      - name: Slither (no High, no Medium beyond the triaged baseline)
         run: |
           pip install slither-analyzer==0.11.6
-          slither . --config-file slither.config.json
+          python3 ../scripts/check_slither.py
 
   research:
     runs-on: ubuntu-latest
