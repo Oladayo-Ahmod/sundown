@@ -82,7 +82,7 @@ Low and informational findings (timestamp comparisons, naming of immutables, low
 | Run | Result |
 |---|---|
 | `forge test` (default profile, no fork variable), 19 suites | **231 passed, 0 failed, 4 skipped** (235 total). The 4 skipped are the fork tests: 1 pre-existing (`OracleForkTest`) and 3 live-feed (`OracleForkLiveTest`), which need `ROBINHOOD_MAINNET_RPC_URL` |
-| `FOUNDRY_PROFILE=ci forge test` (1,000 fuzz runs, 256 invariant runs), run before the 3 live tests were added | 231 passed, 0 failed, 1 skipped (232 total), exit 0 |
+| `FOUNDRY_PROFILE=ci forge test` (1,000 fuzz runs, 256 invariant runs), run before the 3 live-feed tests were added | exit 0, 231 passed, 0 failed (the final totals are in the first row) |
 | Fork tests against the real Robinhood Chain feeds (`docs/ORACLE_LIVE_VALIDATION.md`) | Recorded run: 4 of 4 passed. A later full-suite run with the variable set: 1 failed on a dropped TLS connection (transport error), 234 passed; the fork tests are optional and intermittently flaky on the public RPC |
 | Python (`research`, `uv run pytest`) | 47 passed, 1 skipped |
 | Replay cross-check (`sim/compare_replay.py`) | 120 of 120 rows within tolerance, 111 exact; unchanged after the lint-only edits to the references |
