@@ -1,0 +1,696 @@
+{
+  "source": "docs/SEPOLIA_DEMO.md",
+  "run_started_utc": "2026-10-03 18:10:17Z",
+  "chain_id": 421614,
+  "sections": [
+    {
+      "n": 0,
+      "title": "Setup",
+      "rows": [
+        {
+          "utc": "2026-10-03 18:10:17Z",
+          "et": "Sat 14:10:17 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "chain and fixtures",
+          "result": "chain id 421614, sUSDG decimals 6; fixtures are SIMULATION; actors this run: lender 0xe27bE9d3Abfd4fCC706B9eF83665A9c832C5eEaA, borrower 0x067098073E84d0b5067a4841313adCe7392E4372, liquidator 0x472aB1cb24154E6A9f62e9CE2DeF525e8A0522BF",
+          "tx": null
+        },
+        {
+          "utc": "2026-10-03 18:10:31Z",
+          "et": "Sat 14:10:31 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "fund throwaway actors",
+          "result": "0.002 ETH each from the deployer",
+          "tx": null
+        }
+      ]
+    },
+    {
+      "n": 1,
+      "title": "Faucet",
+      "rows": [
+        {
+          "utc": "2026-10-03 18:10:36Z",
+          "et": "Sat 14:10:36 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "lender: sUSDG.faucet(100,000)",
+          "result": "success",
+          "tx": {
+            "hash": "0x81bb9d94af823948cb0c24d560e0b98f29d0f05c156d5ee6d2fb0c924b2f3cde",
+            "url": "https://sepolia.arbiscan.io/tx/0x81bb9d94af823948cb0c24d560e0b98f29d0f05c156d5ee6d2fb0c924b2f3cde"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:10:45Z",
+          "et": "Sat 14:10:45 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "borrower: sUSDG.faucet(2,000)",
+          "result": "success",
+          "tx": {
+            "hash": "0xf31fe277f9aa2daa1a0f5ae49ebc2129d945298afba5fffe577ab8b4b20ebb5d",
+            "url": "https://sepolia.arbiscan.io/tx/0xf31fe277f9aa2daa1a0f5ae49ebc2129d945298afba5fffe577ab8b4b20ebb5d"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:10:52Z",
+          "et": "Sat 14:10:52 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "liquidator: sUSDG.faucet(20,000)",
+          "result": "success",
+          "tx": {
+            "hash": "0x9c4af631ab136ec35717f34c71cd2786359c09b6fa3fab31cbdd012dacca5fff",
+            "url": "https://sepolia.arbiscan.io/tx/0x9c4af631ab136ec35717f34c71cd2786359c09b6fa3fab31cbdd012dacca5fff"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:10:59Z",
+          "et": "Sat 14:10:59 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "borrower: sAAPL.faucet(10)",
+          "result": "success",
+          "tx": {
+            "hash": "0x1ac3e11c106643d8e2c25bab5df84c3e8d55f4be8a57a75525f28303c5cbfdd7",
+            "url": "https://sepolia.arbiscan.io/tx/0x1ac3e11c106643d8e2c25bab5df84c3e8d55f4be8a57a75525f28303c5cbfdd7"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:11:05Z",
+          "et": "Sat 14:11:05 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "borrower: sNVDA.faucet(10)",
+          "result": "success",
+          "tx": {
+            "hash": "0xb7b3495bb16e591e5f01c2d9b697af292c8e977157c101508d9456453d7e2977",
+            "url": "https://sepolia.arbiscan.io/tx/0xb7b3495bb16e591e5f01c2d9b697af292c8e977157c101508d9456453d7e2977"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:11:11Z",
+          "et": "Sat 14:11:11 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "borrower: sTSLA.faucet(4)",
+          "result": "success",
+          "tx": {
+            "hash": "0x33c8ff79f4177277fdc7dccfc5b722e1eb2fd6fd492f0c61eee42522c183c072",
+            "url": "https://sepolia.arbiscan.io/tx/0x33c8ff79f4177277fdc7dccfc5b722e1eb2fd6fd492f0c61eee42522c183c072"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:11:16Z",
+          "et": "Sat 14:11:16 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "borrower: eth_call sAAPL.faucet(1) again (per-address limit is 10)",
+          "result": "REVERTS: FaucetLimit(uint256=10000000000000000000, uint256=1000000000000000000, uint256=10000000000000000000)  [revert data 0xf5d85e05…89e80000]",
+          "tx": null
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "Supply",
+      "rows": [
+        {
+          "utc": "2026-10-03 18:11:21Z",
+          "et": "Sat 14:11:21 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "lender: approve sUSDG to AAPL_standard",
+          "result": "success",
+          "tx": {
+            "hash": "0xd96991726b0316489b58e2a84ea0d7a1eec2b1038999ebf10b04075834b341b4",
+            "url": "https://sepolia.arbiscan.io/tx/0xd96991726b0316489b58e2a84ea0d7a1eec2b1038999ebf10b04075834b341b4"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:11:29Z",
+          "et": "Sat 14:11:29 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "lender: deposit 15,000 sUSDG into AAPL_standard",
+          "result": "success",
+          "tx": {
+            "hash": "0x805742b6c237600d1f39621514b3b6e7e6c511932c0bfc93b3c1c4addcc6bb59",
+            "url": "https://sepolia.arbiscan.io/tx/0x805742b6c237600d1f39621514b3b6e7e6c511932c0bfc93b3c1c4addcc6bb59"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:11:34Z",
+          "et": "Sat 14:11:34 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "lender: approve sUSDG to AAPL_boosted_93",
+          "result": "success",
+          "tx": {
+            "hash": "0x7a6fb14c38b3812358390e1da4db3b5a85d47846bae169ffd52a19dffbf2063e",
+            "url": "https://sepolia.arbiscan.io/tx/0x7a6fb14c38b3812358390e1da4db3b5a85d47846bae169ffd52a19dffbf2063e"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:11:40Z",
+          "et": "Sat 14:11:40 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "lender: deposit 15,000 sUSDG into AAPL_boosted_93",
+          "result": "success",
+          "tx": {
+            "hash": "0x11b24157c90c599704ab8d0b0110e2fb9bab969ed816198a87c1edc2d5a6080d",
+            "url": "https://sepolia.arbiscan.io/tx/0x11b24157c90c599704ab8d0b0110e2fb9bab969ed816198a87c1edc2d5a6080d"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:11:45Z",
+          "et": "Sat 14:11:45 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "lender: approve sUSDG to AAPL_control_93",
+          "result": "success",
+          "tx": {
+            "hash": "0xc6fdb47ba9a561e5d91609b7f8489cbdc15672a268d7d246e2c8ae9ac4b34d0e",
+            "url": "https://sepolia.arbiscan.io/tx/0xc6fdb47ba9a561e5d91609b7f8489cbdc15672a268d7d246e2c8ae9ac4b34d0e"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:11:51Z",
+          "et": "Sat 14:11:51 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "lender: deposit 15,000 sUSDG into AAPL_control_93",
+          "result": "success",
+          "tx": {
+            "hash": "0x39de980918a6f0b4c84c3121b4eed6e4f4fe665b2efed69dc3abcdda4bf7ffa4",
+            "url": "https://sepolia.arbiscan.io/tx/0x39de980918a6f0b4c84c3121b4eed6e4f4fe665b2efed69dc3abcdda4bf7ffa4"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:11:56Z",
+          "et": "Sat 14:11:56 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "lender: approve sUSDG to NVDA_standard",
+          "result": "success",
+          "tx": {
+            "hash": "0xd555d3b72ee44f765d3f51248efa92d45aa6cd62347ccf56b56738586275c54e",
+            "url": "https://sepolia.arbiscan.io/tx/0xd555d3b72ee44f765d3f51248efa92d45aa6cd62347ccf56b56738586275c54e"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:12:02Z",
+          "et": "Sat 14:12:02 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "lender: deposit 15,000 sUSDG into NVDA_standard",
+          "result": "success",
+          "tx": {
+            "hash": "0xae62f7118413d1d4ecb56bf1aed1dd108f839a252446ce1db6fdff7ccc606f1d",
+            "url": "https://sepolia.arbiscan.io/tx/0xae62f7118413d1d4ecb56bf1aed1dd108f839a252446ce1db6fdff7ccc606f1d"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:12:08Z",
+          "et": "Sat 14:12:08 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "lender: approve sUSDG to TSLA_standard",
+          "result": "success",
+          "tx": {
+            "hash": "0xa583151bef43d8edb97a9bcfc219b925ccae4d3354b44770bebc65f43f5b4d0e",
+            "url": "https://sepolia.arbiscan.io/tx/0xa583151bef43d8edb97a9bcfc219b925ccae4d3354b44770bebc65f43f5b4d0e"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:12:13Z",
+          "et": "Sat 14:12:13 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "lender: deposit 15,000 sUSDG into TSLA_standard",
+          "result": "success",
+          "tx": {
+            "hash": "0xca06a22f7e83f5a8bc16c27f122ecc206bf21273e8cee86b3a695e0a338f74df",
+            "url": "https://sepolia.arbiscan.io/tx/0xca06a22f7e83f5a8bc16c27f122ecc206bf21273e8cee86b3a695e0a338f74df"
+          }
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "Collateral and a standard borrow (AAPL standard, 86 %)",
+      "rows": [
+        {
+          "utc": "2026-10-03 18:12:17Z",
+          "et": "Sat 14:12:17 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "oracle",
+          "result": "AAPL feed (SimEquityFeed) 333.82 USD, adapter status ScheduledBlind",
+          "tx": null
+        },
+        {
+          "utc": "2026-10-03 18:12:22Z",
+          "et": "Sat 14:12:22 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "borrower: approve sAAPL",
+          "result": "success",
+          "tx": {
+            "hash": "0xcb792584d98f55940346e0f5a187eadd7acc65ea5179caeda4d4d193f4a7b6f0",
+            "url": "https://sepolia.arbiscan.io/tx/0xcb792584d98f55940346e0f5a187eadd7acc65ea5179caeda4d4d193f4a7b6f0"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:12:27Z",
+          "et": "Sat 14:12:27 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "borrower: deposit 4 sAAPL as collateral",
+          "result": "success",
+          "tx": {
+            "hash": "0xe9add7206569ceac97121925e780a95719d7deed0d2ea8c1ae8f02e5459e3bfa",
+            "url": "https://sepolia.arbiscan.io/tx/0xe9add7206569ceac97121925e780a95719d7deed0d2ea8c1ae8f02e5459e3bfa"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:12:32Z",
+          "et": "Sat 14:12:32 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "borrower: borrow 1,000 sUSDG",
+          "result": "success",
+          "tx": {
+            "hash": "0x28c197d7d5b46f6734fd34e8dc5dd541c3f37099497f1b3f9fedb807b2bfdba5",
+            "url": "https://sepolia.arbiscan.io/tx/0x28c197d7d5b46f6734fd34e8dc5dd541c3f37099497f1b3f9fedb807b2bfdba5"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:12:37Z",
+          "et": "Sat 14:12:37 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "position",
+          "result": "debtOf = 1000.000001 sUSDG, collateral value 1335.28 USD",
+          "tx": null
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "Session-aware capacity inside the window (AAPL boosted market)",
+      "rows": [
+        {
+          "utc": "2026-10-03 18:12:41Z",
+          "et": "Sat 14:12:41 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "guard parameters",
+          "result": "stress fraction for the Weekend class = 89.35 % (1 - gapVaR - 0.5 % - 1 %); standard LLTV 86 %, boosted 93 %",
+          "tx": null
+        },
+        {
+          "utc": "2026-10-03 18:12:46Z",
+          "et": "Sat 14:12:46 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "borrower: approve sAAPL",
+          "result": "success",
+          "tx": {
+            "hash": "0x9d58eea70464cad9100d1c52ffec05da089fbfac777ad2141de57c246ab286a7",
+            "url": "https://sepolia.arbiscan.io/tx/0x9d58eea70464cad9100d1c52ffec05da089fbfac777ad2141de57c246ab286a7"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:12:52Z",
+          "et": "Sat 14:12:52 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "borrower: deposit 3 sAAPL as collateral",
+          "result": "success",
+          "tx": {
+            "hash": "0x3bb00860cf6905784d480b1120d455f8649b9f21115f26d5842cfa29974b5ba6",
+            "url": "https://sepolia.arbiscan.io/tx/0x3bb00860cf6905784d480b1120d455f8649b9f21115f26d5842cfa29974b5ba6"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:12:55Z",
+          "et": "Sat 14:12:55 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "borrower: eth_call enterBoosted() (the boosted tier is closed while the window is on)",
+          "result": "REVERTS: EntryNotAllowed(bytes32=price)  [revert data 0x82ce1398…00000000]",
+          "tx": null
+        },
+        {
+          "utc": "2026-10-03 18:12:58Z",
+          "et": "Sat 14:12:58 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "borrower: eth_call borrow 901.31 sUSDG (90 % of $1001.46; standard cap is 86 % = 861.26)",
+          "result": "REVERTS: ExceedsCapacity(uint256=901314001, uint256=861255600)  [revert data 0x47b381a9…3355b7b0]",
+          "tx": null
+        },
+        {
+          "utc": "2026-10-03 18:13:03Z",
+          "et": "Sat 14:13:03 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "borrower: borrow 801.17 sUSDG (80 %, below the cap)",
+          "result": "success",
+          "tx": {
+            "hash": "0xcaa8080504e39c3b109756960f5e5243f498756d8564aca21048ca36edf6e1b8",
+            "url": "https://sepolia.arbiscan.io/tx/0xcaa8080504e39c3b109756960f5e5243f498756d8564aca21048ca36edf6e1b8"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:13:06Z",
+          "et": "Sat 14:13:06 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "quoteDeleverage(borrower)",
+          "result": "eligible = false (no deleveraging in a blind window; standard-tier accounts are never deleveraged)",
+          "tx": null
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "title": "Frozen-price control (FlatGuard 93 %): a price move and a liquidation",
+      "rows": [
+        {
+          "utc": "2026-10-03 18:13:11Z",
+          "et": "Sat 14:13:11 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "borrower: approve sAAPL",
+          "result": "success",
+          "tx": {
+            "hash": "0x555a5bf5050a9240229bc723e00f6d8cffe75a19f8b98b3c24a5b27a87db7f0f",
+            "url": "https://sepolia.arbiscan.io/tx/0x555a5bf5050a9240229bc723e00f6d8cffe75a19f8b98b3c24a5b27a87db7f0f"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:13:17Z",
+          "et": "Sat 14:13:17 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "borrower: deposit 3 sAAPL as collateral",
+          "result": "success",
+          "tx": {
+            "hash": "0x7e17fb40aabdc911ff583e38b9c71667d37bc85a37dc5efe08bfd63dd8d3bb05",
+            "url": "https://sepolia.arbiscan.io/tx/0x7e17fb40aabdc911ff583e38b9c71667d37bc85a37dc5efe08bfd63dd8d3bb05"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:13:22Z",
+          "et": "Sat 14:13:22 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "borrower: borrow 921.34 sUSDG (92 % LTV: the control allows what the session-aware market refuses)",
+          "result": "success",
+          "tx": {
+            "hash": "0x7b866c400c2465c74f010c39e436142df27e9512ac88fc1efbc55b14aeda8994",
+            "url": "https://sepolia.arbiscan.io/tx/0x7b866c400c2465c74f010c39e436142df27e9512ac88fc1efbc55b14aeda8994"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:13:26Z",
+          "et": "Sat 14:13:26 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "deployer: SimEquityFeed(AAPL).publish(317.13)  (price -5 %)",
+          "result": "success",
+          "tx": {
+            "hash": "0x95dfa2dea301f5f59d61c71bf95ae6624bcc13c34f4c513c08307d9c88041cda",
+            "url": "https://sepolia.arbiscan.io/tx/0x95dfa2dea301f5f59d61c71bf95ae6624bcc13c34f4c513c08307d9c88041cda"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:13:30Z",
+          "et": "Sat 14:13:30 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "oracle after the move",
+          "result": "317.13 USD, status ScheduledBlind",
+          "tx": null
+        },
+        {
+          "utc": "2026-10-03 18:13:36Z",
+          "et": "Sat 14:13:36 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "liquidator: approve sUSDG",
+          "result": "success",
+          "tx": {
+            "hash": "0x7b11fa1c07f7b22f3b754a2170601774187fa916129b8533a3758e9911c5e3ed",
+            "url": "https://sepolia.arbiscan.io/tx/0x7b11fa1c07f7b22f3b754a2170601774187fa916129b8533a3758e9911c5e3ed"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:13:45Z",
+          "et": "Sat 14:13:45 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "liquidator: liquidate 460.67 sUSDG of the control position",
+          "result": "success",
+          "tx": {
+            "hash": "0x5f4c95968d4f20d31306441c708248c4095c0f66118278f80bf1d39dfc6afb1f",
+            "url": "https://sepolia.arbiscan.io/tx/0x5f4c95968d4f20d31306441c708248c4095c0f66118278f80bf1d39dfc6afb1f"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:13:48Z",
+          "et": "Sat 14:13:48 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "liquidator received",
+          "result": "1.500000 sAAPL = 475.69 USD for 460.67 repaid: effective bonus 3.26 % (the flat 4 % bonus, capped by the market's non-worsening rule at collateral value / debt - 1 when the position is close to insolvent)",
+          "tx": null
+        },
+        {
+          "utc": "2026-10-03 18:13:52Z",
+          "et": "Sat 14:13:52 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "liquidator: eth_call liquidate the session-aware market's position (80 % LTV, still healthy at the new price)",
+          "result": "REVERTS: NotLiquidatable()  [revert data 0xddeb79ba]",
+          "tx": null
+        },
+        {
+          "utc": "2026-10-03 18:13:58Z",
+          "et": "Sat 14:13:58 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "deployer: SimEquityFeed(AAPL).publish(333.82)  (price restored)",
+          "result": "success",
+          "tx": {
+            "hash": "0xcfcef99780420e72160eb4d41ca81275a44dc5fef578335ef02640749539f36b",
+            "url": "https://sepolia.arbiscan.io/tx/0xcfcef99780420e72160eb4d41ca81275a44dc5fef578335ef02640749539f36b"
+          }
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "title": "Issuer failure: pause, report, Halted, repay still works, unpause, resume (NVDA standard)",
+      "rows": [
+        {
+          "utc": "2026-10-03 18:14:04Z",
+          "et": "Sat 14:14:04 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "borrower: approve sNVDA",
+          "result": "success",
+          "tx": {
+            "hash": "0x4be4d3ef7fac2b68f2a53b4902a90bac5a421d7912d0d10049e6808cf1639f6c",
+            "url": "https://sepolia.arbiscan.io/tx/0x4be4d3ef7fac2b68f2a53b4902a90bac5a421d7912d0d10049e6808cf1639f6c"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:14:09Z",
+          "et": "Sat 14:14:09 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "borrower: deposit 10 sNVDA",
+          "result": "success",
+          "tx": {
+            "hash": "0x67cafbb4bba18305947605fdedddf0adc6356ece1910d2d12aff7d772b886662",
+            "url": "https://sepolia.arbiscan.io/tx/0x67cafbb4bba18305947605fdedddf0adc6356ece1910d2d12aff7d772b886662"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:14:15Z",
+          "et": "Sat 14:14:15 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "borrower: borrow 1,200 sUSDG",
+          "result": "success",
+          "tx": {
+            "hash": "0x3254102760fc81d2ccbe1fe565e2dcdcd181367bb3d09774dbcc91a8171104c9",
+            "url": "https://sepolia.arbiscan.io/tx/0x3254102760fc81d2ccbe1fe565e2dcdcd181367bb3d09774dbcc91a8171104c9"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:14:20Z",
+          "et": "Sat 14:14:20 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "borrower: approve sUSDG (for repay)",
+          "result": "success",
+          "tx": {
+            "hash": "0xb3c38e91eb6f9ffd18a05b6930fa2dc873eab8afc2bd55c3c7d5f03a38425b2a",
+            "url": "https://sepolia.arbiscan.io/tx/0xb3c38e91eb6f9ffd18a05b6930fa2dc873eab8afc2bd55c3c7d5f03a38425b2a"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:14:26Z",
+          "et": "Sat 14:14:26 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "deployer: sNVDA.setTokenPaused(true)  (the issuer pauses the stock token)",
+          "result": "success",
+          "tx": {
+            "hash": "0x7441f5da32ac18fa401473760141e3782fc6f829eb9313aeb828547429239fd0",
+            "url": "https://sepolia.arbiscan.io/tx/0x7441f5da32ac18fa401473760141e3782fc6f829eb9313aeb828547429239fd0"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:14:32Z",
+          "et": "Sat 14:14:32 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "liquidator: market.reportIssuerFailure()  (permissionless)",
+          "result": "success",
+          "tx": {
+            "hash": "0x857bbd67b3a5fcb4c2c1f28800b96678062aaccb823a6f56976807ea88d75e3e",
+            "url": "https://sepolia.arbiscan.io/tx/0x857bbd67b3a5fcb4c2c1f28800b96678062aaccb823a6f56976807ea88d75e3e"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:14:38Z",
+          "et": "Sat 14:14:38 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "market state",
+          "result": "state = Halted, reason = CollateralPaused",
+          "tx": null
+        },
+        {
+          "utc": "2026-10-03 18:14:42Z",
+          "et": "Sat 14:14:42 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "borrower: eth_call borrow while Halted",
+          "result": "REVERTS: NotActive()  [revert data 0x80cb55e2]",
+          "tx": null
+        },
+        {
+          "utc": "2026-10-03 18:14:45Z",
+          "et": "Sat 14:14:45 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "guardian: eth_call guardian resume() while the token is still paused",
+          "result": "REVERTS: ProbesFailing()  [revert data 0x1bffced5]",
+          "tx": null
+        },
+        {
+          "utc": "2026-10-03 18:14:52Z",
+          "et": "Sat 14:14:52 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "borrower: repay 400 sUSDG while Halted (repay is never blockable)",
+          "result": "success",
+          "tx": {
+            "hash": "0x79f1722f460e5b98e5ed0ffcf52c8f3d21fc048c781e7d2bf1bc103adda6b833",
+            "url": "https://sepolia.arbiscan.io/tx/0x79f1722f460e5b98e5ed0ffcf52c8f3d21fc048c781e7d2bf1bc103adda6b833"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:14:57Z",
+          "et": "Sat 14:14:57 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "deployer: sNVDA.setTokenPaused(false)  (unpause)",
+          "result": "success",
+          "tx": {
+            "hash": "0xb08e0633a230aad4d6a758d26a393d657b9a2c2db88067ca9066a2fc417f0081",
+            "url": "https://sepolia.arbiscan.io/tx/0xb08e0633a230aad4d6a758d26a393d657b9a2c2db88067ca9066a2fc417f0081"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:15:02Z",
+          "et": "Sat 14:15:02 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "guardian: guardian resume() (probes pass again)",
+          "result": "success",
+          "tx": {
+            "hash": "0x90089fd43de91bbc79c2597340b91b9e1b734ac05391d5cb12427c32a70a90cf",
+            "url": "https://sepolia.arbiscan.io/tx/0x90089fd43de91bbc79c2597340b91b9e1b734ac05391d5cb12427c32a70a90cf"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:15:05Z",
+          "et": "Sat 14:15:05 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "market state",
+          "result": "state = Active",
+          "tx": null
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "title": "Oracle adapter rejects a stale and an invalid answer (TSLA)",
+      "rows": [
+        {
+          "utc": "2026-10-03 18:15:08Z",
+          "et": "Sat 14:15:08 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "before",
+          "result": "370.45 USD, status ScheduledBlind",
+          "tx": null
+        },
+        {
+          "utc": "2026-10-03 18:15:13Z",
+          "et": "Sat 14:15:13 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "borrower: approve sTSLA",
+          "result": "success",
+          "tx": {
+            "hash": "0xd44f302a226489e11ead57f632164a45ae7b9405f36d5cefca0deeeedda5ab44",
+            "url": "https://sepolia.arbiscan.io/tx/0xd44f302a226489e11ead57f632164a45ae7b9405f36d5cefca0deeeedda5ab44"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:15:18Z",
+          "et": "Sat 14:15:18 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "borrower: deposit 4 sTSLA",
+          "result": "success",
+          "tx": {
+            "hash": "0x4bfff5ac81b9dd6172f4a37fada9c0fa980b5e423f6e43b256b3c62f5ef02fe6",
+            "url": "https://sepolia.arbiscan.io/tx/0x4bfff5ac81b9dd6172f4a37fada9c0fa980b5e423f6e43b256b3c62f5ef02fe6"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:15:24Z",
+          "et": "Sat 14:15:24 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "deployer: SimEquityFeed(TSLA).publishAt(price, now - 26 h)  (an old answer)",
+          "result": "success",
+          "tx": {
+            "hash": "0xd0541dc89a94a94afe01cd9b2074273bdb356c3e7a6fd730ed41a95de40fc09d",
+            "url": "https://sepolia.arbiscan.io/tx/0xd0541dc89a94a94afe01cd9b2074273bdb356c3e7a6fd730ed41a95de40fc09d"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:15:28Z",
+          "et": "Sat 14:15:28 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "adapter reading",
+          "result": "370.45 USD, status ScheduledBlind  (inside a blind window the adapter reports ScheduledBlind and masks staleness; Stale is reported outside windows: rerun this script after the window to show it)",
+          "tx": null
+        },
+        {
+          "utc": "2026-10-03 18:15:35Z",
+          "et": "Sat 14:15:35 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "deployer: SimEquityFeed(TSLA).publishAt(0, now)  (a broken feed)",
+          "result": "success",
+          "tx": {
+            "hash": "0xceafb5b562763d990b15581deca37ae6eb919df14e22d487dd0a56da2f376e7e",
+            "url": "https://sepolia.arbiscan.io/tx/0xceafb5b562763d990b15581deca37ae6eb919df14e22d487dd0a56da2f376e7e"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:15:38Z",
+          "et": "Sat 14:15:38 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "adapter reading",
+          "result": "0.00 USD, status Invalid",
+          "tx": null
+        },
+        {
+          "utc": "2026-10-03 18:15:41Z",
+          "et": "Sat 14:15:41 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "borrower: eth_call borrow 100 sUSDG against the invalid answer",
+          "result": "REVERTS: PriceUnusable(uint8=4)  [revert data 0xa2f2ad59…00000004]",
+          "tx": null
+        },
+        {
+          "utc": "2026-10-03 18:15:45Z",
+          "et": "Sat 14:15:45 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "deployer: SimEquityFeed(TSLA).publish(price)  (restored)",
+          "result": "success",
+          "tx": {
+            "hash": "0x7531fd9bcf470c2e800f1bc9f2e3704e7f8c1add7d6d0925cdfb4d90038fce29",
+            "url": "https://sepolia.arbiscan.io/tx/0x7531fd9bcf470c2e800f1bc9f2e3704e7f8c1add7d6d0925cdfb4d90038fce29"
+          }
+        },
+        {
+          "utc": "2026-10-03 18:15:48Z",
+          "et": "Sat 14:15:48 ET",
+          "window": "BLIND until Sun 2026-10-04 20:00 ET (Weekend window)",
+          "action": "adapter reading",
+          "result": "370.45 USD, status ScheduledBlind",
+          "tx": null
+        }
+      ]
+    }
+  ]
+}

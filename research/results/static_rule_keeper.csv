@@ -1,0 +1,47 @@
+ticker,row,notional_usd,avg_slippage_pct,breakeven_fee_pct,fee_2pct_default_covers,within_5_5pct_cap,note
+AAPL,position notional sold,5000,0.05826,0.10826,True,True,
+AAPL,position notional sold,10000,0.11652,0.16652,True,True,
+AAPL,position notional sold,25000,0.2913,0.3413,True,True,
+AAPL,position notional sold,50000,0.5826,0.6326,True,True,
+AAPL,position notional sold,1e+05,1.256,1.306,True,True,
+AAPL,position notional sold,1.5e+05,2.1588,2.2088,False,True,
+AAPL,position notional sold,2e+05,3.2907,3.3407,False,True,
+AAPL,max notional per round at fee,1.3844e+05,,2,,True,
+AAPL,max notional per round at fee,1.9382e+05,,3,,True,
+AAPL,max notional per round at fee,2.0773e+05,,4,,True,
+AAPL,max notional per round at fee,2.2005e+05,,5.5,,True,
+AAPL,"sim: tier 90 % naive uniform, fee 2.0%",616.42,,2,,True,"flagged windows 83%; median/p95/max pre-window notional $616/$616/$616; per-round capacity $138,437; flagged excess not trimmed 0.0%"
+AAPL,"sim: tier 90 % naive uniform, fee 4.0%",775.48,,4,,True,"flagged windows 83%; median/p95/max pre-window notional $775/$775/$775; per-round capacity $207,733; flagged excess not trimmed 0.0%"
+AAPL,"sim: tier 90 % naive uniform, fee 5.5%",953.97,,5.5,,True,"flagged windows 83%; median/p95/max pre-window notional $954/$954/$954; per-round capacity $220,049; flagged excess not trimmed 0.0%"
+AAPL,"sim: tier 90 % naive high, fee 2.0%",2729.5,,2,,True,"flagged windows 83%; median/p95/max pre-window notional $2,730/$2,730/$2,730; per-round capacity $138,437; flagged excess not trimmed 0.0%"
+AAPL,"sim: tier 90 % naive high, fee 4.0%",3433.9,,4,,True,"flagged windows 83%; median/p95/max pre-window notional $3,434/$3,434/$3,434; per-round capacity $207,733; flagged excess not trimmed 0.0%"
+AAPL,"sim: tier 90 % naive high, fee 5.5%",4224.2,,5.5,,True,"flagged windows 83%; median/p95/max pre-window notional $4,224/$4,224/$4,224; per-round capacity $220,049; flagged excess not trimmed 0.0%"
+AAPL,"sim: tier 93 % naive uniform, fee 2.0%",2220.4,,2,,True,"flagged windows 96%; median/p95/max pre-window notional $2,220/$2,220/$2,220; per-round capacity $138,437; flagged excess not trimmed 0.0%"
+AAPL,"sim: tier 93 % naive uniform, fee 4.0%",2793.4,,4,,True,"flagged windows 96%; median/p95/max pre-window notional $2,793/$2,793/$2,793; per-round capacity $207,733; flagged excess not trimmed 0.0%"
+AAPL,"sim: tier 93 % naive uniform, fee 5.5%",3436.3,,5.5,,True,"flagged windows 96%; median/p95/max pre-window notional $3,436/$3,436/$3,436; per-round capacity $220,049; flagged excess not trimmed 0.0%"
+AAPL,"sim: tier 93 % naive high, fee 2.0%",9832.2,,2,,True,"flagged windows 96%; median/p95/max pre-window notional $9,832/$9,832/$9,832; per-round capacity $138,437; flagged excess not trimmed 0.0%"
+AAPL,"sim: tier 93 % naive high, fee 4.0%",12369,,4,,True,"flagged windows 96%; median/p95/max pre-window notional $12,369/$12,369/$12,369; per-round capacity $207,733; flagged excess not trimmed 0.0%"
+AAPL,"sim: tier 93 % naive high, fee 5.5%",15216,,5.5,,True,"flagged windows 96%; median/p95/max pre-window notional $15,216/$15,216/$15,216; per-round capacity $220,049; flagged excess not trimmed 0.0%"
+SPY,position notional sold,5000,0.034809,0.084809,True,True,
+SPY,position notional sold,10000,0.069618,0.11962,True,True,
+SPY,position notional sold,25000,0.17404,0.22404,True,True,
+SPY,position notional sold,50000,0.34809,0.39809,True,True,
+SPY,position notional sold,1e+05,0.69618,0.74618,True,True,
+SPY,position notional sold,1.5e+05,1.1196,1.1696,True,True,
+SPY,position notional sold,2e+05,2.0605,2.1105,False,True,
+SPY,max notional per round at fee,1.9413e+05,,2,,True,
+SPY,max notional per round at fee,2.4727e+05,,3,,True,
+SPY,max notional per round at fee,2.5021e+05,,4,,True,
+SPY,max notional per round at fee,2.5052e+05,,5.5,,True,
+SPY,"sim: tier 90 % naive uniform, fee 2.0%",0,,2,,True,never flagged
+SPY,"sim: tier 90 % naive uniform, fee 4.0%",0,,4,,True,never flagged
+SPY,"sim: tier 90 % naive uniform, fee 5.5%",0,,5.5,,True,never flagged
+SPY,"sim: tier 90 % naive high, fee 2.0%",0,,2,,True,never flagged
+SPY,"sim: tier 90 % naive high, fee 4.0%",0,,4,,True,never flagged
+SPY,"sim: tier 90 % naive high, fee 5.5%",0,,5.5,,True,never flagged
+SPY,"sim: tier 93 % naive uniform, fee 2.0%",0,,2,,True,never flagged
+SPY,"sim: tier 93 % naive uniform, fee 4.0%",0,,4,,True,never flagged
+SPY,"sim: tier 93 % naive uniform, fee 5.5%",0,,5.5,,True,never flagged
+SPY,"sim: tier 93 % naive high, fee 2.0%",0,,2,,True,never flagged
+SPY,"sim: tier 93 % naive high, fee 4.0%",0,,4,,True,never flagged
+SPY,"sim: tier 93 % naive high, fee 5.5%",0,,5.5,,True,never flagged

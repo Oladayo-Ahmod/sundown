@@ -18,13 +18,28 @@ def test_gain_event_no_liquidation_no_bad_debt():
     assert r["liq_debt"][0] == 0 and r["bad"][0] == 0
 
 
-def test_hand_computed_bad_debt():
-    # x = -1500 bps -> S = exp(-0.15) = 0.860708. Liquidated iff u >= S: u = .90,.95,1.0.
-    # Bad debt = d - S/1.044 = d - 0.824433 > 0 only for u=1.0: 0.86 - 0.824433 = 0.035567
-    r = _run(-1500)
+def test_hand_computed_bad_debt_older_convention():
+    # older convention (full bonus): x = -1500 bps -> S = exp(-0.15) = 0.860708.
+    # Liquidated iff u >= S: u = .90, .95, 1.0.
+    # Bad debt = d - S/1.044 = d - 0.824433 > 0 only for u = 1.0: 0.86 - 0.824433.
+    r = _run(-1500, nonworsening=False)
     s = np.exp(-0.15)
     assert r["bad"][0] == pytest.approx(0.05 * (0.86 - s / 1.044), rel=1e-9)
     assert r["liq_debt"][0] == pytest.approx(0.05 * 0.86 * (0.90 + 0.95 + 1.0), rel=1e-9)
+
+
+def test_hand_computed_bad_debt_market_rule():
+    # market rule (default): at x = -1500 the u = 1.0 account has collateral 0.860708 > debt
+    # 0.86, so the bonus is capped at S/d - 1 and liquidation repays the whole debt: no bad
+    # debt at all.
+    r = _run(-1500)
+    assert r["bad"][0] == pytest.approx(0.0, abs=1e-12)
+    # x = -2000: S = 0.818731 < d = 0.86: collateral cannot cover debt, full bonus applies.
+    r2 = _run(-2000)
+    s = np.exp(-0.20)
+    assert r2["bad"][0] == pytest.approx(0.05 * (0.86 - s / 1.044), rel=1e-9)
+    # the market rule never charges more than the older convention
+    assert r2["bad"][0] <= _run(-2000, nonworsening=False)["bad"][0] + 1e-15
 
 
 def test_liquidated_share_is_scale_invariant_in_lltv():
@@ -58,8 +73,8 @@ def test_cap_never_exceeds_lltv_nor_negative():
 
 
 def test_adverse_staleness_increases_losses():
-    base = _run(-1400)
-    stale = _run(-1400, noise_bps=50)
+    base = _run(-1900)
+    stale = _run(-1900, noise_bps=50)
     assert stale["bad"][0] > base["bad"][0]
 
 

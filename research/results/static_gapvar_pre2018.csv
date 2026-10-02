@@ -1,0 +1,13 @@
+ticker,cls,n,gap_var_bps_q995,q995_resolvable,stress_fraction_bps,sample,sample_first_window,sample_last_window,tier90_cap_bps,binds_tier90,tightening_pp_tier90,tier93_cap_bps,binds_tier93,tightening_pp_tier93
+TSLA,Short,17,154.9,False,9695.1,"pre-2018 (2010-2017, excludes March 2020; sensitivity only)",2010-07-06,2017-12-26,9000,False,0,9300,False,0
+TSLA,Weekend,341,481.72,True,9368.28,"pre-2018 (2010-2017, excludes March 2020; sensitivity only)",2010-07-06,2017-12-26,9000,False,0,9300,False,0
+TSLA,Long,50,712.74,False,9137.26,"pre-2018 (2010-2017, excludes March 2020; sensitivity only)",2010-07-06,2017-12-26,9000,False,0,9137.26,True,1.63
+NVDA,Short,17,132.45,False,9717.55,"pre-2018 (2010-2017, excludes March 2020; sensitivity only)",2010-01-11,2017-12-26,9000,False,0,9300,False,0
+NVDA,Weekend,362,498.72,True,9351.28,"pre-2018 (2010-2017, excludes March 2020; sensitivity only)",2010-01-11,2017-12-26,9000,False,0,9300,False,0
+NVDA,Long,54,333.23,False,9516.77,"pre-2018 (2010-2017, excludes March 2020; sensitivity only)",2010-01-11,2017-12-26,9000,False,0,9300,False,0
+AAPL,Short,17,95.64,False,9754.36,"pre-2018 (2010-2017, excludes March 2020; sensitivity only)",2010-01-11,2017-12-26,9000,False,0,9300,False,0
+AAPL,Weekend,362,344.52,True,9505.48,"pre-2018 (2010-2017, excludes March 2020; sensitivity only)",2010-01-11,2017-12-26,9000,False,0,9300,False,0
+AAPL,Long,54,559.44,False,9290.56,"pre-2018 (2010-2017, excludes March 2020; sensitivity only)",2010-01-11,2017-12-26,9000,False,0,9290.56,True,0.09
+SPY,Short,17,86.9,False,9763.1,"pre-2018 (2010-2017, excludes March 2020; sensitivity only)",2010-01-11,2017-12-26,9000,False,0,9300,False,0
+SPY,Weekend,362,267.54,True,9582.46,"pre-2018 (2010-2017, excludes March 2020; sensitivity only)",2010-01-11,2017-12-26,9000,False,0,9300,False,0
+SPY,Long,54,297.99,False,9552.01,"pre-2018 (2010-2017, excludes March 2020; sensitivity only)",2010-01-11,2017-12-26,9000,False,0,9300,False,0

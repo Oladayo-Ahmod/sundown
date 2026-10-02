@@ -1,0 +1,25 @@
+ticker,tier_lltv_pct,borrowers,arm,bad_debt_bps_yr,equivalent_flat_lltv_pct,equiv_ci_lo,equiv_ci_hi,ltv_gain_pp_at_equal_bad_debt,gain_ci_lo,gain_ci_hi,weekend_cap_level_pct,extra_weekday_capacity_vs_weekend_cap_pp,flat_curve_clamped_at_grid_top
+AAPL,90,uniform,"B boosted + rule, naive borrowers",2.8913,88.169,88.169,91,1.8312,-1,1.8312,89.347,0.6529,False
+AAPL,90,uniform,"B boosted + rule, rational borrowers",3.582,89.062,89,91,0.93784,-1,1,89.347,0.6529,False
+AAPL,90,high,"B boosted + rule, naive borrowers",8.0602,88.279,88.279,90,1.7208,0,1.7208,89.347,0.6529,False
+AAPL,90,high,"B boosted + rule, rational borrowers",9.7703,89.064,89,90,0.9364,0,1,89.347,0.6529,False
+AAPL,90,conservative,"B boosted + rule, naive borrowers",0.0029459,88.107,88,90.954,1.8929,-0.95432,2,89.347,0.6529,False
+AAPL,90,conservative,"B boosted + rule, rational borrowers",0.0036951,89.061,88,90,0.93867,0,2,89.347,0.6529,False
+AAPL,93,uniform,"B boosted + rule, naive borrowers",4.802,89.473,89,91.079,3.5268,1.9209,4,89.347,3.6529,False
+AAPL,93,uniform,"B boosted + rule, rational borrowers",6.3409,89.992,89,91.616,3.0083,1.3838,4,89.347,3.6529,False
+AAPL,93,high,"B boosted + rule, naive borrowers",12.605,89.414,89,91.021,3.5859,1.979,4,89.347,3.6529,False
+AAPL,93,high,"B boosted + rule, rational borrowers",15.931,89.825,89,91.521,3.1745,1.4785,4,89.347,3.6529,False
+AAPL,93,conservative,"B boosted + rule, naive borrowers",0.02535,91.639,88.907,92.209,1.3606,0.79135,4.0926,89.347,3.6529,False
+AAPL,93,conservative,"B boosted + rule, rational borrowers",0.027137,91.716,88,92.554,1.2844,0.44614,5,89.347,3.6529,False
+SPY,90,uniform,"B boosted + rule, naive borrowers",2.465,90,90,94,0,-4,0,90,0,False
+SPY,90,uniform,"B boosted + rule, rational borrowers",2.465,90,90,94,0,-4,0,90,0,False
+SPY,90,high,"B boosted + rule, naive borrowers",6.7154,90,90,94,0,-4,0,90,0,False
+SPY,90,high,"B boosted + rule, rational borrowers",6.7154,90,90,94,0,-4,0,90,0,False
+SPY,90,conservative,"B boosted + rule, naive borrowers",0.0025445,90,90,94,0,-4,0,90,0,False
+SPY,90,conservative,"B boosted + rule, rational borrowers",0.0025445,90,90,94,0,-4,0,90,0,False
+SPY,93,uniform,"B boosted + rule, naive borrowers",6.6806,93,93,94,0,-1,0,93,0,False
+SPY,93,uniform,"B boosted + rule, rational borrowers",6.6806,93,93,94,0,-1,0,93,0,False
+SPY,93,high,"B boosted + rule, naive borrowers",18.2,93,93,94,0,-1,0,93,0,False
+SPY,93,high,"B boosted + rule, rational borrowers",18.2,93,93,94,0,-1,0,93,0,False
+SPY,93,conservative,"B boosted + rule, naive borrowers",0.0068962,93,91,94,0,-1,2,93,0,False
+SPY,93,conservative,"B boosted + rule, rational borrowers",0.0068962,93,91,94,0,-1,2,93,0,False

@@ -19,8 +19,8 @@ def test_equivalent_lltv_interpolates_and_clamps():
 
 
 def test_slippage_increases_bad_debt_by_hand_value():
-    x = np.array([-1500.0])
-    s = np.exp(-0.15)
+    x = np.array([-1900.0])
+    s = np.exp(-0.19)
     base = cs.run_events(x, None, CTL, cs.Params())
     slip = cs.run_events(x, None, CTL, cs.Params(slippage=0.03))
     # u=1.0: bad = d - S(1-s)/(1+b); also u=.95 turns insolvent for large enough slippage

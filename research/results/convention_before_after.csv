@@ -1,0 +1,121 @@
+claim,metric,older_upper_bound,market_rule,change,rel_change_pct,reading
+7 flat (UNIVERSE12),morpho_86 flat bad debt bps/yr,4.4569,2.5068,-1.9501,-43.756,lower loss
+7 flat (UNIVERSE12),morpho_86 flat CI high,9.7092,5.5821,-4.127,-42.507,lower loss
+8/9 time-varying rule (UNIVERSE12),morpho_86 rule bad debt bps/yr,3.8744,2.1144,-1.76,-45.427,lower loss
+8/9 time-varying rule (UNIVERSE12),morpho_86 reduction bps/yr,0.58255,0.39241,-0.19015,-32.64,weakened
+8/9 time-varying rule (UNIVERSE12),morpho_86 reduction CI low,0,0,0,,unchanged
+9/10 counterfactual (UNIVERSE12),cf_90 flat bad debt bps/yr,12.575,9.8714,-2.7041,-21.503,lower loss
+9/10 counterfactual (UNIVERSE12),cf_90 flat CI high,26.585,21.397,-5.1872,-19.512,lower loss
+8/9 time-varying rule (UNIVERSE12),cf_90 rule bad debt bps/yr,9.4188,7.1391,-2.2797,-24.204,lower loss
+8/9 time-varying rule (UNIVERSE12),cf_90 reduction bps/yr,3.1568,2.7324,-0.42438,-13.443,weakened
+8/9 time-varying rule (UNIVERSE12),cf_90 reduction CI low,0.037951,8.8818e-16,-0.037951,-100,weakened
+10 equal-risk gain (UNIVERSE12),cf_90 LTV gain pp,1.239,0.90292,-0.33606,-27.124,weakened
+9/10 counterfactual (UNIVERSE12),cf_93 flat bad debt bps/yr,23.976,21.828,-2.1479,-8.9587,lower loss
+9/10 counterfactual (UNIVERSE12),cf_93 flat CI high,47.962,45.077,-2.8847,-6.0146,lower loss
+8/9 time-varying rule (UNIVERSE12),cf_93 rule bad debt bps/yr,14.032,12.032,-1.9998,-14.252,lower loss
+8/9 time-varying rule (UNIVERSE12),cf_93 reduction bps/yr,9.9439,9.7956,-0.14824,-1.4908,unchanged
+8/9 time-varying rule (UNIVERSE12),cf_93 reduction CI low,1.6144,1.1529,-0.46154,-28.588,weakened
+10 equal-risk gain (UNIVERSE12),cf_93 LTV gain pp,2.5543,2.3558,-0.19854,-7.7727,weakened
+9/10 counterfactual (UNIVERSE12),cf_95 flat bad debt bps/yr,36.78,33.293,-3.4865,-9.4794,lower loss
+9/10 counterfactual (UNIVERSE12),cf_95 flat CI high,69.028,65.412,-3.6161,-5.2386,lower loss
+8/9 time-varying rule (UNIVERSE12),cf_95 rule bad debt bps/yr,17.288,15.438,-1.85,-10.701,lower loss
+8/9 time-varying rule (UNIVERSE12),cf_95 reduction bps/yr,19.492,17.855,-1.6365,-8.3958,weakened
+8/9 time-varying rule (UNIVERSE12),cf_95 reduction CI low,6.0129,4.2905,-1.7223,-28.644,weakened
+10 equal-risk gain (UNIVERSE12),cf_95 LTV gain pp,3.6113,3.3551,-0.25619,-7.0941,weakened
+7 flat (DEPLOY4),morpho_86 flat bad debt bps/yr,8.5835,5.1602,-3.4233,-39.882,lower loss
+7 flat (DEPLOY4),morpho_86 flat CI high,16.577,10.44,-6.1368,-37.021,lower loss
+8/9 time-varying rule (DEPLOY4),morpho_86 rule bad debt bps/yr,6.8358,3.983,-2.8528,-41.733,lower loss
+8/9 time-varying rule (DEPLOY4),morpho_86 reduction bps/yr,1.7477,1.1772,-0.57045,-32.641,weakened
+8/9 time-varying rule (DEPLOY4),morpho_86 reduction CI low,0,0,0,,unchanged
+9/10 counterfactual (DEPLOY4),cf_90 flat bad debt bps/yr,24.051,18.834,-5.2172,-21.693,lower loss
+9/10 counterfactual (DEPLOY4),cf_90 flat CI high,45.945,36.77,-9.1752,-19.97,lower loss
+8/9 time-varying rule (DEPLOY4),cf_90 rule bad debt bps/yr,16.583,11.894,-4.689,-28.277,lower loss
+8/9 time-varying rule (DEPLOY4),cf_90 reduction bps/yr,7.4681,6.9398,-0.52826,-7.0736,weakened
+8/9 time-varying rule (DEPLOY4),cf_90 reduction CI low,0.11385,3.5527e-15,-0.11385,-100,weakened
+10 equal-risk gain (DEPLOY4),cf_90 LTV gain pp,1.6299,1.5957,-0.03422,-2.0996,unchanged
+9/10 counterfactual (DEPLOY4),cf_93 flat bad debt bps/yr,43.697,40.929,-2.7685,-6.3356,lower loss
+9/10 counterfactual (DEPLOY4),cf_93 flat CI high,80.063,76.72,-3.3431,-4.1756,unchanged
+8/9 time-varying rule (DEPLOY4),cf_93 rule bad debt bps/yr,22.482,20.049,-2.4332,-10.823,lower loss
+8/9 time-varying rule (DEPLOY4),cf_93 reduction bps/yr,21.215,20.88,-0.3353,-1.5805,unchanged
+8/9 time-varying rule (DEPLOY4),cf_93 reduction CI low,4.4075,3.3611,-1.0463,-23.74,weakened
+10 equal-risk gain (DEPLOY4),cf_93 LTV gain pp,3.3171,2.8218,-0.49532,-14.932,weakened
+9/10 counterfactual (DEPLOY4),cf_95 flat bad debt bps/yr,65.929,59.546,-6.3824,-9.6808,lower loss
+9/10 counterfactual (DEPLOY4),cf_95 flat CI high,114.33,106.18,-8.15,-7.1284,lower loss
+8/9 time-varying rule (DEPLOY4),cf_95 rule bad debt bps/yr,24.943,22.814,-2.1285,-8.5336,lower loss
+8/9 time-varying rule (DEPLOY4),cf_95 reduction bps/yr,40.986,36.732,-4.2539,-10.379,weakened
+8/9 time-varying rule (DEPLOY4),cf_95 reduction CI low,15.722,11.127,-4.5952,-29.228,weakened
+10 equal-risk gain (DEPLOY4),cf_95 LTV gain pp,4.8473,4.4164,-0.43091,-8.8897,weakened
+7 flat,77% flat bad debt bps/yr,0.078263,0,-0.078263,-100,lower loss
+7 flat,86% worst window loss %,1.1738,0.825,-0.34881,-29.716,lower loss
+7 flat,86% share of loss in March 2020 %,63.303,47.036,-16.267,-25.697,lower loss
+12 hard deleveraging,morpho_86 control bps/yr,4.4569,2.5068,-1.9501,-43.755,lower loss
+12 hard deleveraging,morpho_86 deleveraged bps/yr,3.8744,2.1144,-1.76,-45.426,lower loss
+12 hard deleveraging,cf_93 control bps/yr,23.976,21.828,-2.148,-8.959,lower loss
+12 hard deleveraging,cf_93 deleveraged bps/yr,14.032,12.032,-2,-14.253,lower loss
+13 priced premium,morpho_86 break-even bps of excess per window,1087.6,611.7,-475.9,-43.757,cost lower
+13 priced premium,morpho_86 P(reserve exhausted 10y) at 25x,0.33687,0.065625,-0.27125,-80.519,cost lower
+13 priced premium,cf_93 break-even bps of excess per window,582.34,530.17,-52.17,-8.9587,cost lower
+13 priced premium,cf_93 P(reserve exhausted 10y) at 25x,0.19604,0.16458,-0.03146,-16.048,cost lower
+13b reserve on all debt,morpho_86 seed reserve p95 bps of debt,200.44,144.01,-56.43,-28.153,cost lower
+13b reserve on all debt,cf_93 seed reserve p95 bps of debt,659.11,646.38,-12.73,-1.9314,unchanged
+14 bonus x slippage,flat 86% b=4.4% s=0% bps/yr,4.4823,2.5133,-1.969,-43.928,lower loss
+14 bonus x slippage,stress 86% b=4.4% s=0% bps/yr,3.8984,2.1196,-1.7788,-45.629,lower loss
+14 bonus x slippage,flat 86% b=4.4% s=5% bps/yr,20.988,19.117,-1.871,-8.9146,lower loss
+14 bonus x slippage,stress 86% b=4.4% s=5% bps/yr,19.63,17.94,-1.69,-8.6093,lower loss
+14 bonus x slippage,flat 86% b=10.0% s=3% bps/yr,53.979,37.66,-16.319,-30.232,lower loss
+14 bonus x slippage,stress 86% b=10.0% s=3% bps/yr,52.001,36.197,-15.804,-30.392,lower loss
+14 bonus x slippage,flat 86% b=15.0% s=0% bps/yr,110.7,6.467,-104.23,-94.158,lower loss
+14 bonus x slippage,stress 86% b=15.0% s=0% bps/yr,107.54,5.2725,-102.27,-95.097,lower loss
+14 bonus x slippage,flat 77% b=8.0% s=3% bps/yr,0.51224,0.38873,-0.12351,-24.112,lower loss
+14 bonus x slippage,stress 77% b=8.0% s=3% bps/yr,0.51224,0.38873,-0.12351,-24.112,lower loss
+14 bonus x slippage,flat 77% b=15.0% s=0% bps/yr,2.841,0,-2.841,-100,lower loss
+14 bonus x slippage,stress 77% b=15.0% s=0% bps/yr,2.841,0,-2.841,-100,lower loss
+16-18 designs (DEPLOY4 mean),flat 5.5% CF100 at 86% bps/yr,12.448,6.3662,-6.0818,-48.858,lower loss
+16-18 designs (DEPLOY4 mean),flat 5.5% CF100 at 90% bps/yr,43.512,27.327,-16.185,-37.197,lower loss
+16-18 designs (DEPLOY4 mean),flat 5.5% CF100 at 93% bps/yr,119.75,66.295,-53.455,-44.639,lower loss
+16-18 designs (DEPLOY4 mean),flat 4.4% CF100 at 86% bps/yr,8.7884,5.2659,-3.5225,-40.081,lower loss
+16-18 designs (DEPLOY4 mean),flat 4.4% CF100 at 90% bps/yr,33.881,23.96,-9.921,-29.282,lower loss
+16-18 designs (DEPLOY4 mean),flat 4.4% CF100 at 93% bps/yr,81.397,58.622,-22.775,-27.98,lower loss
+16-18 designs (DEPLOY4 mean),dutch 60min at 86% bps/yr,12.448,6.3662,-6.0818,-48.858,lower loss
+16-18 designs (DEPLOY4 mean),dutch 60min at 90% bps/yr,43.566,27.327,-16.239,-37.274,lower loss
+16-18 designs (DEPLOY4 mean),dutch 60min at 93% bps/yr,119.75,66.295,-53.455,-44.639,lower loss
+16-18 designs (DEPLOY4 mean),cap 5% of depth at 86% bps/yr,12.484,6.3662,-6.1178,-49.005,lower loss
+16-18 designs (DEPLOY4 mean),cap 5% of depth at 90% bps/yr,43.615,27.348,-16.267,-37.297,lower loss
+16-18 designs (DEPLOY4 mean),cap 5% of depth at 93% bps/yr,119.84,66.345,-53.495,-44.639,lower loss
+16-18 designs (DEPLOY4 mean),UNCONSTRAINED depth (flat 5.5%) at 86% bps/yr,12.386,6.2583,-6.1277,-49.473,lower loss
+16-18 designs (DEPLOY4 mean),UNCONSTRAINED depth (flat 5.5%) at 90% bps/yr,43.201,25.801,-17.4,-40.277,lower loss
+16-18 designs (DEPLOY4 mean),UNCONSTRAINED depth (flat 5.5%) at 93% bps/yr,119.57,63.539,-56.031,-46.86,lower loss
+19 bonus sweep,flat 86% bonus ~1% bps/yr,2.2924,2.1501,-0.1423,-6.2075,lower loss
+19 bonus sweep,flat 86% bonus ~2% bps/yr,3.6457,2.8201,-0.8256,-22.646,lower loss
+19 bonus sweep,flat 86% bonus ~6% bps/yr,12.448,6.3662,-6.0818,-48.858,lower loss
+19 bonus sweep,flat 86% bonus ~8% bps/yr,24.829,8.7871,-16.042,-64.61,lower loss
+19 bonus sweep,flat 93% bonus ~1% bps/yr,37.302,37.248,-0.054,-0.14476,unchanged
+19 bonus sweep,flat 93% bonus ~2% bps/yr,43.459,42.284,-1.175,-2.7037,unchanged
+19 bonus sweep,flat 93% bonus ~6% bps/yr,119.75,66.295,-53.455,-44.639,lower loss
+19 bonus sweep,flat 93% bonus ~8% bps/yr,499.11,82.698,-416.41,-83.431,lower loss
+19 bonus 5.5% to 2%,86% reduction bps/yr,8.803,3.546,-5.257,-59.718,weakened
+19 bonus 5.5% to 2%,86% reduction CI low,2.025,0.8027,-1.2223,-60.36,weakened
+19 bonus 5.5% to 2%,93% reduction bps/yr,76.3,24.01,-52.29,-68.532,weakened
+19 bonus 5.5% to 2%,93% reduction CI low,49.39,9.062,-40.328,-81.652,weakened
+21/23 break-even APR (time-varying),AAPL 90% uniform %,1.412,0.3875,-1.0245,-72.557,cost lower
+21/23 break-even APR (time-varying),AAPL 90% high %,3.72,1.057,-2.663,-71.586,cost lower
+21/23 break-even APR (time-varying),AAPL 93% uniform %,3.319,1.449,-1.87,-56.342,cost lower
+21/23 break-even APR (time-varying),AAPL 93% high %,8.642,3.795,-4.847,-56.087,cost lower
+21/23 break-even APR (time-varying),SPY 90% uniform %,0.6714,0.429,-0.2424,-36.104,cost lower
+21/23 break-even APR (time-varying),SPY 90% high %,1.806,1.169,-0.637,-35.271,cost lower
+21/23 break-even APR (time-varying),SPY 93% uniform %,1.358,0.7139,-0.6441,-47.43,cost lower
+21/23 break-even APR (time-varying),SPY 93% high %,3.564,1.946,-1.618,-45.398,cost lower
+21/23 break-even APR (time-varying),TSLA 90% uniform %,2.628,1.444,-1.184,-45.053,cost lower
+21/23 break-even APR (time-varying),TSLA 90% high %,6.788,3.758,-3.03,-44.638,cost lower
+21/23 break-even APR (time-varying),TSLA 93% uniform %,4.721,1.773,-2.948,-62.444,cost lower
+21/23 break-even APR (time-varying),TSLA 93% high %,12.01,4.968,-7.042,-58.634,cost lower
+21/23 break-even APR (time-varying),NVDA 90% uniform %,4.189,2.479,-1.71,-40.821,cost lower
+21/23 break-even APR (time-varying),NVDA 90% high %,10.88,6.552,-4.328,-39.779,cost lower
+21/23 break-even APR (time-varying),NVDA 93% uniform %,7.238,3.899,-3.339,-46.132,cost lower
+21/23 break-even APR (time-varying),NVDA 93% high %,18.45,9.93,-8.52,-46.179,cost lower
+7/8 per asset at 86%,TSLA flat bps/yr,15.807,10.376,-5.431,-34.358,lower loss
+7/8 per asset at 86%,TSLA reduction bps/yr,5.2818,4.7089,-0.5729,-10.847,weakened
+7/8 per asset at 86%,NVDA flat bps/yr,14.949,10.265,-4.684,-31.333,lower loss
+7/8 per asset at 86%,NVDA reduction bps/yr,1.7088,-1.5987e-14,-1.7088,-100,weakened
+7/8 per asset at 86%,JPM flat bps/yr,13.941,9.4402,-4.5008,-32.285,lower loss
+7/8 per asset at 86%,JPM reduction bps/yr,0,0,0,,unchanged

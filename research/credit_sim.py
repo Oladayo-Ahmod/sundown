@@ -34,6 +34,7 @@ from config import (
     COUNTERFACTUAL_LLTVS,
     LOOKAHEAD_HOURS,
     MORPHO_LLTVS,
+    NONWORSENING_DEFAULT,
     ORACLE_DEVIATION_BPS,
     SAFETY_BUFFER_BPS,
     morpho_bonus,
@@ -71,6 +72,9 @@ class Params:
     bonus_aware_cap: bool = False  # cap = (1 - VaR - buffers) / (1 + bonus)
     bonus_override: float | None = None
     slippage: float = 0.0  # liquidation proceeds = post-gap price * (1 - slippage)
+    # market rule (default): bonus capped at collateral/debt - 1 while collateral > debt;
+    # False = older convention (full bonus), an upper bound on lender loss
+    nonworsening: bool = NONWORSENING_DEFAULT
     lookahead_h: float = float(LOOKAHEAD_HOURS)
 
 
@@ -105,7 +109,12 @@ def run_events(x_bps: np.ndarray, var_bps: np.ndarray | None, ctl: Control, p: P
         d = d0 - p.enforcement * np.maximum(0.0, d0 - cap[:, None])
     s = (np.exp(x_bps / 1e4) / (1.0 + p.noise_bps / 1e4))[:, None]
     liq = (d / s >= ctl.lltv) & (d > 0)
-    bad = np.where(liq, np.maximum(0.0, d - s * (1.0 - p.slippage) / (1.0 + bonus)), 0.0)
+    if p.nonworsening:
+        with np.errstate(divide="ignore", invalid="ignore"):
+            b_eff = np.where(s > d, np.minimum(bonus, s / np.maximum(d, 1e-12) - 1.0), bonus)
+    else:
+        b_eff = bonus
+    bad = np.where(liq, np.maximum(0.0, d - s * (1.0 - p.slippage) / (1.0 + b_eff)), 0.0)
     debt = (w * d).sum(1)
     base_debt = (w * d0).sum(1)
     liq_debt = (w * np.where(liq, d, 0.0)).sum(1)

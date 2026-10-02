@@ -10,10 +10,12 @@ Offline analysis only. Nothing here is deployed or imported by `contracts/src`. 
 ```bash
 cd research
 make venv        # uv venv + pinned install (once)
-make test        # 41 unit tests (+1 skipped until contracts/test/fixtures/calendar_cases.json exists)
+make test        # 46 unit tests (+1 skipped until contracts/test/fixtures/calendar_cases.json exists)
 make backtest    # offline, deterministic (fixed seeds): results/, figures, risk_params.json, replay_events.json
 # network steps, only when refreshing data:
 make m21         # M2.1: per-asset, mechanisms, slippage grid, clustered frontier (offline)
+make m22         # M2.2: liquidation designs under depth-driven slippage, market caps, two-tier (needs pool snapshot)
+# older full-bonus liquidation convention (upper bound): SUNDOWN_LIQ_CONVENTION=older make m22
 make data        # re-download daily history, rewrite data/derived
 make intraday    # re-download ~730 days of hourly bars, rewrite results/intraday_*
 make pools       # snapshot Robinhood Chain pool depth (DexScreener + RPC via cast)

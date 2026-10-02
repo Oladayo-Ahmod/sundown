@@ -1,0 +1,1812 @@
+{
+ "source": [
+  "research/results/static_gapvar.csv",
+  "research/results/static_rule_lender.csv",
+  "research/results/older_convention/static_rule_lender.csv",
+  "research/results/static_rule_equal_risk.csv",
+  "research/results/static_rule_borrower.csv",
+  "research/results/static_rule_keeper.csv",
+  "research/results/static_rule_sensitivity.csv",
+  "research/results/static_replay_crosscheck.csv",
+  "research/results/static_replay_crosscheck_totals.csv",
+  "research/results/exit_liquidity.json",
+  "docs/REPLAY_RESULTS.md"
+ ],
+ "gapvar": [
+  {
+   "ticker": "AAPL",
+   "cls": "Short",
+   "n": 41,
+   "gap_var_bps": 282.99,
+   "stress_fraction_pct": 95.6701,
+   "binds_90": false,
+   "binds_93": false,
+   "tightening_pp_93": 0.0,
+   "tightening_pp_90": 0.0
+  },
+  {
+   "ticker": "AAPL",
+   "cls": "Weekend",
+   "n": 758,
+   "gap_var_bps": 915.29,
+   "stress_fraction_pct": 89.3471,
+   "binds_90": true,
+   "binds_93": true,
+   "tightening_pp_93": 3.65,
+   "tightening_pp_90": 0.65
+  },
+  {
+   "ticker": "AAPL",
+   "cls": "Long",
+   "n": 115,
+   "gap_var_bps": 597.0,
+   "stress_fraction_pct": 92.53,
+   "binds_90": false,
+   "binds_93": true,
+   "tightening_pp_93": 0.47,
+   "tightening_pp_90": 0.0
+  },
+  {
+   "ticker": "SPY",
+   "cls": "Short",
+   "n": 41,
+   "gap_var_bps": 161.52,
+   "stress_fraction_pct": 96.8848,
+   "binds_90": false,
+   "binds_93": false,
+   "tightening_pp_93": 0.0,
+   "tightening_pp_90": 0.0
+  },
+  {
+   "ticker": "SPY",
+   "cls": "Weekend",
+   "n": 758,
+   "gap_var_bps": 407.13,
+   "stress_fraction_pct": 94.4287,
+   "binds_90": false,
+   "binds_93": false,
+   "tightening_pp_93": 0.0,
+   "tightening_pp_90": 0.0
+  },
+  {
+   "ticker": "SPY",
+   "cls": "Long",
+   "n": 115,
+   "gap_var_bps": 297.99,
+   "stress_fraction_pct": 95.5201,
+   "binds_90": false,
+   "binds_93": false,
+   "tightening_pp_93": 0.0,
+   "tightening_pp_90": 0.0
+  }
+ ],
+ "lender": [
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "A flat at tier LLTV",
+   "bps": 6.3656,
+   "lo": 0.0,
+   "hi": 16.724
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "B boosted + rule, naive borrowers",
+   "bps": 2.8913,
+   "lo": 0.0,
+   "hi": 8.674
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "B boosted + rule, rational borrowers",
+   "bps": 3.582,
+   "lo": 0.0,
+   "hi": 10.746
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "C flat at weekend-cap level",
+   "bps": 3.6057,
+   "lo": 0.0,
+   "hi": 10.817
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "DIFF A minus B(naive)",
+   "bps": 3.4743,
+   "lo": 0.0,
+   "hi": 9.3254
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "DIFF A minus B(rational)",
+   "bps": 2.7836,
+   "lo": 0.0,
+   "hi": 7.9398
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "DIFF B(naive) minus C",
+   "bps": -0.7144,
+   "lo": -2.1432,
+   "hi": 0.0
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "DIFF B(rational) minus C",
+   "bps": -0.0237,
+   "lo": -0.071,
+   "hi": 0.0
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "A flat at tier LLTV",
+   "bps": 17.342,
+   "lo": 0.0,
+   "hi": 45.562
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "B boosted + rule, naive borrowers",
+   "bps": 8.0602,
+   "lo": 0.0,
+   "hi": 24.181
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "B boosted + rule, rational borrowers",
+   "bps": 9.7703,
+   "lo": 0.0,
+   "hi": 29.311
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "C flat at weekend-cap level",
+   "bps": 9.8232,
+   "lo": 0.0,
+   "hi": 29.469
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "DIFF A minus B(naive)",
+   "bps": 9.2819,
+   "lo": 0.0,
+   "hi": 25.048
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "DIFF A minus B(rational)",
+   "bps": 7.5717,
+   "lo": 0.0,
+   "hi": 21.607
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "DIFF B(naive) minus C",
+   "bps": -1.763,
+   "lo": -5.289,
+   "hi": 0.0
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "DIFF B(rational) minus C",
+   "bps": -0.0529,
+   "lo": -0.1586,
+   "hi": 0.0
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "A flat at tier LLTV",
+   "bps": 19.545,
+   "lo": 3.2209,
+   "hi": 42.207
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "B boosted + rule, naive borrowers",
+   "bps": 4.802,
+   "lo": 0.0,
+   "hi": 14.406
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "B boosted + rule, rational borrowers",
+   "bps": 6.3409,
+   "lo": 0.0,
+   "hi": 19.023
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "C flat at weekend-cap level",
+   "bps": 3.6057,
+   "lo": 0.0,
+   "hi": 10.817
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "DIFF A minus B(naive)",
+   "bps": 14.743,
+   "lo": 3.2209,
+   "hi": 30.281
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "DIFF A minus B(rational)",
+   "bps": 13.204,
+   "lo": 2.2147,
+   "hi": 27.529
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "DIFF B(naive) minus C",
+   "bps": 1.1963,
+   "lo": 0.0,
+   "hi": 3.5888
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "DIFF B(rational) minus C",
+   "bps": 2.7352,
+   "lo": 0.0,
+   "hi": 8.2055
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "A flat at tier LLTV",
+   "bps": 51.804,
+   "lo": 8.7749,
+   "hi": 112.39
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "B boosted + rule, naive borrowers",
+   "bps": 12.605,
+   "lo": 0.0,
+   "hi": 37.814
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "B boosted + rule, rational borrowers",
+   "bps": 15.931,
+   "lo": 0.0,
+   "hi": 47.792
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "C flat at weekend-cap level",
+   "bps": 9.8232,
+   "lo": 0.0,
+   "hi": 29.469
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "DIFF A minus B(naive)",
+   "bps": 39.199,
+   "lo": 8.7749,
+   "hi": 80.254
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "DIFF A minus B(rational)",
+   "bps": 35.873,
+   "lo": 5.9358,
+   "hi": 74.847
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "DIFF B(naive) minus C",
+   "bps": 2.7814,
+   "lo": 0.0,
+   "hi": 8.3443
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "DIFF B(rational) minus C",
+   "bps": 6.1075,
+   "lo": 0.0,
+   "hi": 18.322
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "A flat at tier LLTV",
+   "bps": 2.465,
+   "lo": 0.0,
+   "hi": 7.3949
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "B boosted + rule, naive borrowers",
+   "bps": 2.465,
+   "lo": 0.0,
+   "hi": 7.3949
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "B boosted + rule, rational borrowers",
+   "bps": 2.465,
+   "lo": 0.0,
+   "hi": 7.3949
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "C flat at weekend-cap level",
+   "bps": 2.465,
+   "lo": 0.0,
+   "hi": 7.3949
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "DIFF A minus B(naive)",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "DIFF A minus B(rational)",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "DIFF B(naive) minus C",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "DIFF B(rational) minus C",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "A flat at tier LLTV",
+   "bps": 6.7154,
+   "lo": 0.0,
+   "hi": 20.146
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "B boosted + rule, naive borrowers",
+   "bps": 6.7154,
+   "lo": 0.0,
+   "hi": 20.146
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "B boosted + rule, rational borrowers",
+   "bps": 6.7154,
+   "lo": 0.0,
+   "hi": 20.146
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "C flat at weekend-cap level",
+   "bps": 6.7154,
+   "lo": 0.0,
+   "hi": 20.146
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "DIFF A minus B(naive)",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "DIFF A minus B(rational)",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "DIFF B(naive) minus C",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "DIFF B(rational) minus C",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "A flat at tier LLTV",
+   "bps": 6.6806,
+   "lo": 0.0,
+   "hi": 17.585
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "B boosted + rule, naive borrowers",
+   "bps": 6.6806,
+   "lo": 0.0,
+   "hi": 17.585
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "B boosted + rule, rational borrowers",
+   "bps": 6.6806,
+   "lo": 0.0,
+   "hi": 17.585
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "C flat at weekend-cap level",
+   "bps": 6.6806,
+   "lo": 0.0,
+   "hi": 17.585
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "DIFF A minus B(naive)",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "DIFF A minus B(rational)",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "DIFF B(naive) minus C",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "DIFF B(rational) minus C",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "A flat at tier LLTV",
+   "bps": 18.2,
+   "lo": 0.0,
+   "hi": 47.907
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "B boosted + rule, naive borrowers",
+   "bps": 18.2,
+   "lo": 0.0,
+   "hi": 47.907
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "B boosted + rule, rational borrowers",
+   "bps": 18.2,
+   "lo": 0.0,
+   "hi": 47.907
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "C flat at weekend-cap level",
+   "bps": 18.2,
+   "lo": 0.0,
+   "hi": 47.907
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "DIFF A minus B(naive)",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "DIFF A minus B(rational)",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "DIFF B(naive) minus C",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "market rule (deployed)",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "DIFF B(rational) minus C",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "A flat at tier LLTV",
+   "bps": 10.793,
+   "lo": 1.4287,
+   "hi": 23.867
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "B boosted + rule, naive borrowers",
+   "bps": 7.1215,
+   "lo": 0.6191,
+   "hi": 16.758
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "B boosted + rule, rational borrowers",
+   "bps": 9.1456,
+   "lo": 1.016,
+   "hi": 20.938
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "C flat at weekend-cap level",
+   "bps": 8.8105,
+   "lo": 1.0227,
+   "hi": 19.923
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "DIFF A minus B(naive)",
+   "bps": 3.6714,
+   "lo": 0.8096,
+   "hi": 7.5725
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "DIFF A minus B(rational)",
+   "bps": 1.6474,
+   "lo": 0.4102,
+   "hi": 3.2963
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "DIFF B(naive) minus C",
+   "bps": -1.6889,
+   "lo": -3.504,
+   "hi": -0.312
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "DIFF B(rational) minus C",
+   "bps": 0.3352,
+   "lo": -0.0556,
+   "hi": 1.0836
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "A flat at tier LLTV",
+   "bps": 28.826,
+   "lo": 3.8922,
+   "hi": 63.287
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "B boosted + rule, naive borrowers",
+   "bps": 19.254,
+   "lo": 1.7258,
+   "hi": 45.132
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "B boosted + rule, rational borrowers",
+   "bps": 24.366,
+   "lo": 2.7711,
+   "hi": 55.493
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "C flat at weekend-cap level",
+   "bps": 23.62,
+   "lo": 2.7861,
+   "hi": 52.748
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "DIFF A minus B(naive)",
+   "bps": 9.5721,
+   "lo": 2.1664,
+   "hi": 19.597
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "DIFF A minus B(rational)",
+   "bps": 4.4593,
+   "lo": 1.1031,
+   "hi": 8.9295
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "DIFF B(naive) minus C",
+   "bps": -4.3668,
+   "lo": -9.0196,
+   "hi": -0.8104
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "DIFF B(rational) minus C",
+   "bps": 0.746,
+   "lo": -0.1242,
+   "hi": 2.4124
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "A flat at tier LLTV",
+   "bps": 28.312,
+   "lo": 8.2209,
+   "hi": 53.796
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "B boosted + rule, naive borrowers",
+   "bps": 10.432,
+   "lo": 1.5489,
+   "hi": 22.496
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "B boosted + rule, rational borrowers",
+   "bps": 15.061,
+   "lo": 2.5256,
+   "hi": 31.467
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "C flat at weekend-cap level",
+   "bps": 8.8105,
+   "lo": 1.0227,
+   "hi": 19.923
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "DIFF A minus B(naive)",
+   "bps": 17.88,
+   "lo": 6.0366,
+   "hi": 32.302
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "DIFF A minus B(rational)",
+   "bps": 13.251,
+   "lo": 4.6267,
+   "hi": 24.271
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "DIFF B(naive) minus C",
+   "bps": 1.6217,
+   "lo": -0.2751,
+   "hi": 3.8666
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "DIFF B(rational) minus C",
+   "bps": 6.2507,
+   "lo": 1.5029,
+   "hi": 12.314
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "A flat at tier LLTV",
+   "bps": 74.522,
+   "lo": 22.069,
+   "hi": 140.5
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "B boosted + rule, naive borrowers",
+   "bps": 27.768,
+   "lo": 4.3431,
+   "hi": 59.492
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "B boosted + rule, rational borrowers",
+   "bps": 38.63,
+   "lo": 6.7314,
+   "hi": 80.062
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "C flat at weekend-cap level",
+   "bps": 23.62,
+   "lo": 2.7861,
+   "hi": 52.748
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "DIFF A minus B(naive)",
+   "bps": 46.754,
+   "lo": 16.042,
+   "hi": 84.593
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "DIFF A minus B(rational)",
+   "bps": 35.892,
+   "lo": 12.527,
+   "hi": 65.712
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "DIFF B(naive) minus C",
+   "bps": 4.1472,
+   "lo": -0.8603,
+   "hi": 10.273
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "AAPL",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "DIFF B(rational) minus C",
+   "bps": 15.009,
+   "lo": 3.4109,
+   "hi": 29.335
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "A flat at tier LLTV",
+   "bps": 3.1041,
+   "lo": 0.0,
+   "hi": 8.6731
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "B boosted + rule, naive borrowers",
+   "bps": 3.1041,
+   "lo": 0.0,
+   "hi": 8.6731
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "B boosted + rule, rational borrowers",
+   "bps": 3.1041,
+   "lo": 0.0,
+   "hi": 8.6731
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "C flat at weekend-cap level",
+   "bps": 3.1041,
+   "lo": 0.0,
+   "hi": 8.6731
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "DIFF A minus B(naive)",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "DIFF A minus B(rational)",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "DIFF B(naive) minus C",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "uniform",
+   "arm": "DIFF B(rational) minus C",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "A flat at tier LLTV",
+   "bps": 8.4566,
+   "lo": 0.0,
+   "hi": 23.628
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "B boosted + rule, naive borrowers",
+   "bps": 8.4566,
+   "lo": 0.0,
+   "hi": 23.628
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "B boosted + rule, rational borrowers",
+   "bps": 8.4566,
+   "lo": 0.0,
+   "hi": 23.628
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "C flat at weekend-cap level",
+   "bps": 8.4566,
+   "lo": 0.0,
+   "hi": 23.628
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "DIFF A minus B(naive)",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "DIFF A minus B(rational)",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "DIFF B(naive) minus C",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "arm": "DIFF B(rational) minus C",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "A flat at tier LLTV",
+   "bps": 9.5841,
+   "lo": 0.3821,
+   "hi": 23.237
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "B boosted + rule, naive borrowers",
+   "bps": 9.5841,
+   "lo": 0.3821,
+   "hi": 23.237
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "B boosted + rule, rational borrowers",
+   "bps": 9.5841,
+   "lo": 0.3821,
+   "hi": 23.237
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "C flat at weekend-cap level",
+   "bps": 9.5841,
+   "lo": 0.3821,
+   "hi": 23.237
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "DIFF A minus B(naive)",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "DIFF A minus B(rational)",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "DIFF B(naive) minus C",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "uniform",
+   "arm": "DIFF B(rational) minus C",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "A flat at tier LLTV",
+   "bps": 25.416,
+   "lo": 1.0409,
+   "hi": 61.222
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "B boosted + rule, naive borrowers",
+   "bps": 25.416,
+   "lo": 1.0409,
+   "hi": 61.222
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "B boosted + rule, rational borrowers",
+   "bps": 25.416,
+   "lo": 1.0409,
+   "hi": 61.222
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "C flat at weekend-cap level",
+   "bps": 25.416,
+   "lo": 1.0409,
+   "hi": 61.222
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "DIFF A minus B(naive)",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "DIFF A minus B(rational)",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "DIFF B(naive) minus C",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  {
+   "convention": "older convention, upper bound",
+   "ticker": "SPY",
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "arm": "DIFF B(rational) minus C",
+   "bps": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  }
+ ],
+ "equal_risk": [
+  {
+   "tier": 90,
+   "arm": "B boosted + rule, naive borrowers",
+   "equivalent_flat_lltv_pct": 88.169,
+   "gain_pp": 1.8312,
+   "lo": -1.0,
+   "hi": 1.8312,
+   "weekend_cap_pct": 89.347,
+   "extra_weekday_pp": 0.6529
+  },
+  {
+   "tier": 90,
+   "arm": "B boosted + rule, rational borrowers",
+   "equivalent_flat_lltv_pct": 89.062,
+   "gain_pp": 0.9378,
+   "lo": -1.0,
+   "hi": 1.0,
+   "weekend_cap_pct": 89.347,
+   "extra_weekday_pp": 0.6529
+  },
+  {
+   "tier": 93,
+   "arm": "B boosted + rule, naive borrowers",
+   "equivalent_flat_lltv_pct": 89.473,
+   "gain_pp": 3.5268,
+   "lo": 1.9209,
+   "hi": 4.0,
+   "weekend_cap_pct": 89.347,
+   "extra_weekday_pp": 3.6529
+  },
+  {
+   "tier": 93,
+   "arm": "B boosted + rule, rational borrowers",
+   "equivalent_flat_lltv_pct": 89.992,
+   "gain_pp": 3.0083,
+   "lo": 1.3838,
+   "hi": 4.0,
+   "weekend_cap_pct": 89.347,
+   "extra_weekday_pp": 3.6529
+  }
+ ],
+ "borrower": [
+  {
+   "tier": 90,
+   "borrowers": "uniform",
+   "behaviour": "naive",
+   "flagged_per_borrower_yr": 2.2679,
+   "flagged_per_yr_top_bucket": 45.357,
+   "fee_pct_debt_yr": 1.1804,
+   "trimmed_pct_debt_yr": 59.019,
+   "offered_extra_pp": 0.6529,
+   "used_extra_pp": 0.0326,
+   "unused_headroom_pp": 42.75,
+   "stress_time_pct": 34.919
+  },
+  {
+   "tier": 90,
+   "borrowers": "uniform",
+   "behaviour": "rational",
+   "flagged_per_borrower_yr": 0.0,
+   "flagged_per_yr_top_bucket": 0.0,
+   "fee_pct_debt_yr": 0.0,
+   "trimmed_pct_debt_yr": 0.0,
+   "offered_extra_pp": 0.6529,
+   "used_extra_pp": 0.0326,
+   "unused_headroom_pp": 42.75,
+   "stress_time_pct": 34.919
+  },
+  {
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "behaviour": "naive",
+   "flagged_per_borrower_yr": 10.042,
+   "flagged_per_yr_top_bucket": 45.357,
+   "fee_pct_debt_yr": 3.2157,
+   "trimmed_pct_debt_yr": 160.79,
+   "offered_extra_pp": 0.6529,
+   "used_extra_pp": 0.1446,
+   "unused_headroom_pp": 13.201,
+   "stress_time_pct": 34.919
+  },
+  {
+   "tier": 90,
+   "borrowers": "clustered near max",
+   "behaviour": "rational",
+   "flagged_per_borrower_yr": 0.0,
+   "flagged_per_yr_top_bucket": 0.0,
+   "fee_pct_debt_yr": 0.0,
+   "trimmed_pct_debt_yr": 0.0,
+   "offered_extra_pp": 0.6529,
+   "used_extra_pp": 0.1446,
+   "unused_headroom_pp": 13.201,
+   "stress_time_pct": 34.919
+  },
+  {
+   "tier": 93,
+   "borrowers": "uniform",
+   "behaviour": "naive",
+   "flagged_per_borrower_yr": 2.6119,
+   "flagged_per_yr_top_bucket": 52.238,
+   "fee_pct_debt_yr": 4.3377,
+   "trimmed_pct_debt_yr": 216.89,
+   "offered_extra_pp": 3.6529,
+   "used_extra_pp": 0.1827,
+   "unused_headroom_pp": 44.175,
+   "stress_time_pct": 34.919
+  },
+  {
+   "tier": 93,
+   "borrowers": "uniform",
+   "behaviour": "rational",
+   "flagged_per_borrower_yr": 0.0,
+   "flagged_per_yr_top_bucket": 0.0,
+   "fee_pct_debt_yr": 0.0,
+   "trimmed_pct_debt_yr": 0.0,
+   "offered_extra_pp": 3.6529,
+   "used_extra_pp": 0.1827,
+   "unused_headroom_pp": 44.175,
+   "stress_time_pct": 34.919
+  },
+  {
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "behaviour": "naive",
+   "flagged_per_borrower_yr": 11.566,
+   "flagged_per_yr_top_bucket": 52.238,
+   "fee_pct_debt_yr": 11.817,
+   "trimmed_pct_debt_yr": 590.87,
+   "offered_extra_pp": 3.6529,
+   "used_extra_pp": 0.8088,
+   "unused_headroom_pp": 13.641,
+   "stress_time_pct": 34.919
+  },
+  {
+   "tier": 93,
+   "borrowers": "clustered near max",
+   "behaviour": "rational",
+   "flagged_per_borrower_yr": 0.0,
+   "flagged_per_yr_top_bucket": 0.0,
+   "fee_pct_debt_yr": 0.0,
+   "trimmed_pct_debt_yr": 0.0,
+   "offered_extra_pp": 3.6529,
+   "used_extra_pp": 0.8088,
+   "unused_headroom_pp": 13.641,
+   "stress_time_pct": 34.919
+  }
+ ],
+ "borrow_apr_pct": {
+  "AAPL": 7.8329
+ },
+ "keeper": [
+  {
+   "ticker": "AAPL",
+   "notional_usd": 5000.0,
+   "slippage_pct": 0.0583,
+   "breakeven_fee_pct": 0.1083,
+   "default_fee_covers": true
+  },
+  {
+   "ticker": "AAPL",
+   "notional_usd": 10000.0,
+   "slippage_pct": 0.1165,
+   "breakeven_fee_pct": 0.1665,
+   "default_fee_covers": true
+  },
+  {
+   "ticker": "AAPL",
+   "notional_usd": 25000.0,
+   "slippage_pct": 0.2913,
+   "breakeven_fee_pct": 0.3413,
+   "default_fee_covers": true
+  },
+  {
+   "ticker": "AAPL",
+   "notional_usd": 50000.0,
+   "slippage_pct": 0.5826,
+   "breakeven_fee_pct": 0.6326,
+   "default_fee_covers": true
+  },
+  {
+   "ticker": "AAPL",
+   "notional_usd": 100000.0,
+   "slippage_pct": 1.256,
+   "breakeven_fee_pct": 1.306,
+   "default_fee_covers": true
+  },
+  {
+   "ticker": "AAPL",
+   "notional_usd": 150000.0,
+   "slippage_pct": 2.1588,
+   "breakeven_fee_pct": 2.2088,
+   "default_fee_covers": false
+  },
+  {
+   "ticker": "AAPL",
+   "notional_usd": 200000.0,
+   "slippage_pct": 3.2907,
+   "breakeven_fee_pct": 3.3407,
+   "default_fee_covers": false
+  },
+  {
+   "ticker": "SPY",
+   "notional_usd": 5000.0,
+   "slippage_pct": 0.0348,
+   "breakeven_fee_pct": 0.0848,
+   "default_fee_covers": true
+  },
+  {
+   "ticker": "SPY",
+   "notional_usd": 10000.0,
+   "slippage_pct": 0.0696,
+   "breakeven_fee_pct": 0.1196,
+   "default_fee_covers": true
+  },
+  {
+   "ticker": "SPY",
+   "notional_usd": 25000.0,
+   "slippage_pct": 0.174,
+   "breakeven_fee_pct": 0.224,
+   "default_fee_covers": true
+  },
+  {
+   "ticker": "SPY",
+   "notional_usd": 50000.0,
+   "slippage_pct": 0.3481,
+   "breakeven_fee_pct": 0.3981,
+   "default_fee_covers": true
+  },
+  {
+   "ticker": "SPY",
+   "notional_usd": 100000.0,
+   "slippage_pct": 0.6962,
+   "breakeven_fee_pct": 0.7462,
+   "default_fee_covers": true
+  },
+  {
+   "ticker": "SPY",
+   "notional_usd": 150000.0,
+   "slippage_pct": 1.1196,
+   "breakeven_fee_pct": 1.1696,
+   "default_fee_covers": true
+  },
+  {
+   "ticker": "SPY",
+   "notional_usd": 200000.0,
+   "slippage_pct": 2.0605,
+   "breakeven_fee_pct": 2.1105,
+   "default_fee_covers": false
+  }
+ ],
+ "keeper_capacity_at_2pct": {
+  "AAPL": 138440.0,
+  "SPY": 194130.0
+ },
+ "hindsight": [
+  {
+   "case": "base (full sample, v3 depth, fee 2%, bonus 4%)",
+   "tier": 90,
+   "flat": 6.3656,
+   "naive": 2.8913,
+   "rational": 3.582,
+   "flat_at_cap": 3.6057
+  },
+  {
+   "case": "2018+ windows, shipped full-sample gapVaR (in-sample cap)",
+   "tier": 90,
+   "flat": 7.6381,
+   "naive": 5.5308,
+   "rational": 6.852,
+   "flat_at_cap": 6.8973
+  },
+  {
+   "case": "2018+ windows, pre-2018 gapVaR (out-of-sample cap)",
+   "tier": 90,
+   "flat": 7.6381,
+   "naive": 7.6381,
+   "rational": 7.6381,
+   "flat_at_cap": 7.6381
+  },
+  {
+   "case": "base (full sample, v3 depth, fee 2%, bonus 4%)",
+   "tier": 93,
+   "flat": 19.545,
+   "naive": 4.802,
+   "rational": 6.3409,
+   "flat_at_cap": 3.6057
+  },
+  {
+   "case": "2018+ windows, shipped full-sample gapVaR (in-sample cap)",
+   "tier": 93,
+   "flat": 29.478,
+   "naive": 9.1856,
+   "rational": 12.129,
+   "flat_at_cap": 6.8973
+  },
+  {
+   "case": "2018+ windows, pre-2018 gapVaR (out-of-sample cap)",
+   "tier": 93,
+   "flat": 29.478,
+   "naive": 29.478,
+   "rational": 29.478,
+   "flat_at_cap": 29.478
+  }
+ ],
+ "crosscheck": {
+  "events": [
+   {
+    "date": "2020-03-16",
+    "cls": "Weekend",
+    "gap_loss_pct": 12.96,
+    "forge_control": 1923.95,
+    "forge_session_aware": 1224.37,
+    "forge_standard": 0.0,
+    "python_market_control": 1923.8,
+    "python_market_session_aware": 1224.26,
+    "python_convention_control": 2224.66,
+    "python_convention_session_aware": 1525.13
+   },
+   {
+    "date": "2015-08-24",
+    "cls": "Weekend",
+    "gap_loss_pct": 10.3,
+    "forge_control": 967.17,
+    "forge_session_aware": 0.0,
+    "forge_standard": 0.0,
+    "python_market_control": 967.07,
+    "python_market_session_aware": 0.0,
+    "python_convention_control": 1156.11,
+    "python_convention_session_aware": 581.36
+   },
+   {
+    "date": "2024-08-05",
+    "cls": "Weekend",
+    "gap_loss_pct": 9.45,
+    "forge_control": 500.03,
+    "forge_session_aware": 0.0,
+    "forge_standard": 0.0,
+    "python_market_control": 499.97,
+    "python_market_session_aware": 0.0,
+    "python_convention_control": 910.92,
+    "python_convention_session_aware": 376.03
+   },
+   {
+    "date": "2020-03-09",
+    "cls": "Weekend",
+    "gap_loss_pct": 8.75,
+    "forge_control": 432.68,
+    "forge_session_aware": 0.0,
+    "forge_standard": 0.0,
+    "python_market_control": 432.62,
+    "python_market_session_aware": 0.0,
+    "python_convention_control": 708.87,
+    "python_convention_session_aware": 206.82
+   },
+   {
+    "date": "2025-04-07",
+    "cls": "Weekend",
+    "gap_loss_pct": 5.93,
+    "forge_control": 0.0,
+    "forge_session_aware": 0.0,
+    "forge_standard": 0.0,
+    "python_market_control": 0.0,
+    "python_market_session_aware": 0.0,
+    "python_convention_control": 162.27,
+    "python_convention_session_aware": 0.0
+   },
+   {
+    "date": "2020-09-08",
+    "cls": "Long",
+    "gap_loss_pct": 5.8,
+    "forge_control": 0.0,
+    "forge_session_aware": 0.0,
+    "forge_standard": 0.0,
+    "python_market_control": 0.0,
+    "python_market_session_aware": 0.0,
+    "python_convention_control": 148.86,
+    "python_convention_session_aware": 148.86
+   },
+   {
+    "date": "2011-01-18",
+    "cls": "Long",
+    "gap_loss_pct": 5.44,
+    "forge_control": 0.0,
+    "forge_session_aware": 0.0,
+    "forge_standard": 0.0,
+    "python_market_control": 0.0,
+    "python_market_session_aware": 0.0,
+    "python_convention_control": 114.73,
+    "python_convention_session_aware": 114.73
+   },
+   {
+    "date": "2020-02-24",
+    "cls": "Weekend",
+    "gap_loss_pct": 5.04,
+    "forge_control": 0.0,
+    "forge_session_aware": 0.0,
+    "forge_standard": 0.0,
+    "python_market_control": 0.0,
+    "python_market_session_aware": 0.0,
+    "python_convention_control": 76.61,
+    "python_convention_session_aware": 0.0
+   },
+   {
+    "date": "2019-05-13",
+    "cls": "Weekend",
+    "gap_loss_pct": 4.8,
+    "forge_control": 0.0,
+    "forge_session_aware": 0.0,
+    "forge_standard": 0.0,
+    "python_market_control": 0.0,
+    "python_market_session_aware": 0.0,
+    "python_convention_control": 53.42,
+    "python_convention_session_aware": 0.0
+   },
+   {
+    "date": "2019-05-06",
+    "cls": "Weekend",
+    "gap_loss_pct": 3.52,
+    "forge_control": 0.0,
+    "forge_session_aware": 0.0,
+    "forge_standard": 0.0,
+    "python_market_control": 0.0,
+    "python_market_session_aware": 0.0,
+    "python_convention_control": 0.0,
+    "python_convention_session_aware": 0.0
+   }
+  ],
+  "totals": {
+   "python_control": 5556.45,
+   "python_session_aware": 2952.93,
+   "python_standard_86": 144.6,
+   "python_nonworsening_control": 3823.47,
+   "python_nonworsening_session_aware": 1224.26,
+   "python_nonworsening_standard_86": 0.0,
+   "python_nonworsening_events_with_loss_control": 4.0,
+   "python_nonworsening_events_with_loss_session_aware": 1.0,
+   "python_events_with_loss_control": 9.0,
+   "python_events_with_loss_session_aware": 6.0,
+   "forge_control": 3823.83,
+   "forge_session_aware": 1224.37,
+   "forge_standard_86": 0.0,
+   "forge_events_with_loss_control": 4.0,
+   "forge_events_with_loss_session_aware": 1.0
+  }
+ },
+ "generated_utc": "2026-10-03T17:52:00+00:00"
+}

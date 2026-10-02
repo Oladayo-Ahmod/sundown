@@ -1,0 +1,97 @@
+ticker,tier_lltv_pct,borrowers,arm,arm_lltv_pct,bad_debt_bps_yr,ci_lo,ci_hi,windows_with_bad_debt,worst_window_loss_pct,rule_binds_in_some_class
+AAPL,90,uniform,A flat at tier LLTV,90,6.3656,0,16.724,2,0.6673,True
+AAPL,90,uniform,"B boosted + rule, naive borrowers",90,2.8913,0,8.674,1,0.48319,True
+AAPL,90,uniform,"B boosted + rule, rational borrowers",90,3.582,0,10.746,1,0.59862,True
+AAPL,90,uniform,C flat at weekend-cap level,89.347,3.6057,0,10.817,1,0.60258,True
+AAPL,90,uniform,DIFF A minus B(naive),,3.4743,0,9.3254,,,True
+AAPL,90,uniform,DIFF A minus B(rational),,2.7836,0,7.9398,,,True
+AAPL,90,uniform,DIFF B(naive) minus C,,-0.71439,-2.1432,0,,,True
+AAPL,90,uniform,DIFF B(rational) minus C,,-0.023683,-0.071048,0,,,True
+AAPL,90,high,A flat at tier LLTV,90,17.342,0,45.562,2,1.8179,True
+AAPL,90,high,"B boosted + rule, naive borrowers",90,8.0602,0,24.181,1,1.347,True
+AAPL,90,high,"B boosted + rule, rational borrowers",90,9.7703,0,29.311,1,1.6328,True
+AAPL,90,high,C flat at weekend-cap level,89.347,9.8232,0,29.469,1,1.6416,True
+AAPL,90,high,DIFF A minus B(naive),,9.2819,0,25.048,,,True
+AAPL,90,high,DIFF A minus B(rational),,7.5717,0,21.607,,,True
+AAPL,90,high,DIFF B(naive) minus C,,-1.763,-5.289,0,,,True
+AAPL,90,high,DIFF B(rational) minus C,,-0.052872,-0.15861,0,,,True
+AAPL,90,conservative,A flat at tier LLTV,90,0.0065711,0,0.017264,2,0.00068884,True
+AAPL,90,conservative,"B boosted + rule, naive borrowers",90,0.0029459,0,0.0088376,1,0.00049231,True
+AAPL,90,conservative,"B boosted + rule, rational borrowers",90,0.0036951,0,0.011085,1,0.00061752,True
+AAPL,90,conservative,C flat at weekend-cap level,89.347,0.0037221,0,0.011166,1,0.00062203,True
+AAPL,90,conservative,DIFF A minus B(naive),,0.0036252,-1.1985e-17,0.0097021,,,True
+AAPL,90,conservative,DIFF A minus B(rational),,0.002876,0,0.0082012,,,True
+AAPL,90,conservative,DIFF B(naive) minus C,,-0.00077624,-0.0023287,2.5527e-17,,,True
+AAPL,90,conservative,DIFF B(rational) minus C,,-2.6999e-05,-8.0997e-05,0,,,True
+AAPL,93,uniform,A flat at tier LLTV,93,19.545,3.2209,42.207,4,1.4298,True
+AAPL,93,uniform,"B boosted + rule, naive borrowers",93,4.802,0,14.406,1,0.8025,True
+AAPL,93,uniform,"B boosted + rule, rational borrowers",93,6.3409,0,19.023,1,1.0597,True
+AAPL,93,uniform,C flat at weekend-cap level,89.347,3.6057,0,10.817,1,0.60258,True
+AAPL,93,uniform,DIFF A minus B(naive),,14.743,3.2209,30.281,,,True
+AAPL,93,uniform,DIFF A minus B(rational),,13.204,2.2147,27.529,,,True
+AAPL,93,uniform,DIFF B(naive) minus C,,1.1963,0,3.5888,,,True
+AAPL,93,uniform,DIFF B(rational) minus C,,2.7352,0,8.2055,,,True
+AAPL,93,high,A flat at tier LLTV,93,51.804,8.7749,112.39,4,3.6543,True
+AAPL,93,high,"B boosted + rule, naive borrowers",93,12.605,0,37.814,1,2.1065,True
+AAPL,93,high,"B boosted + rule, rational borrowers",93,15.931,0,47.792,1,2.6623,True
+AAPL,93,high,C flat at weekend-cap level,89.347,9.8232,0,29.469,1,1.6416,True
+AAPL,93,high,DIFF A minus B(naive),,39.199,8.7749,80.254,,,True
+AAPL,93,high,DIFF A minus B(rational),,35.873,5.9358,74.847,,,True
+AAPL,93,high,DIFF B(naive) minus C,,2.7814,0,8.3443,,,True
+AAPL,93,high,DIFF B(rational) minus C,,6.1075,0,18.322,,,True
+AAPL,93,conservative,A flat at tier LLTV,93,0.040792,0.0033249,0.10635,4,0.0049213,True
+AAPL,93,conservative,"B boosted + rule, naive borrowers",93,0.02535,0,0.076049,1,0.0042364,True
+AAPL,93,conservative,"B boosted + rule, rational borrowers",93,0.027137,0,0.081412,1,0.0045352,True
+AAPL,93,conservative,C flat at weekend-cap level,89.347,0.0037221,0,0.011166,1,0.00062203,True
+AAPL,93,conservative,DIFF A minus B(naive),,0.015442,0.0033249,0.03166,,,True
+AAPL,93,conservative,DIFF A minus B(rational),,0.013654,0.0023106,0.02842,,,True
+AAPL,93,conservative,DIFF B(naive) minus C,,0.021627,0,0.064882,,,True
+AAPL,93,conservative,DIFF B(rational) minus C,,0.023415,0,0.070246,,,True
+SPY,90,uniform,A flat at tier LLTV,90,2.465,0,7.3949,1,0.41194,False
+SPY,90,uniform,"B boosted + rule, naive borrowers",90,2.465,0,7.3949,1,0.41194,False
+SPY,90,uniform,"B boosted + rule, rational borrowers",90,2.465,0,7.3949,1,0.41194,False
+SPY,90,uniform,C flat at weekend-cap level,90,2.465,0,7.3949,1,0.41194,False
+SPY,90,uniform,DIFF A minus B(naive),,0,0,0,,,False
+SPY,90,uniform,DIFF A minus B(rational),,0,0,0,,,False
+SPY,90,uniform,DIFF B(naive) minus C,,0,0,0,,,False
+SPY,90,uniform,DIFF B(rational) minus C,,0,0,0,,,False
+SPY,90,high,A flat at tier LLTV,90,6.7154,0,20.146,1,1.1223,False
+SPY,90,high,"B boosted + rule, naive borrowers",90,6.7154,0,20.146,1,1.1223,False
+SPY,90,high,"B boosted + rule, rational borrowers",90,6.7154,0,20.146,1,1.1223,False
+SPY,90,high,C flat at weekend-cap level,90,6.7154,0,20.146,1,1.1223,False
+SPY,90,high,DIFF A minus B(naive),,0,0,0,,,False
+SPY,90,high,DIFF A minus B(rational),,0,0,0,,,False
+SPY,90,high,DIFF B(naive) minus C,,0,0,0,,,False
+SPY,90,high,DIFF B(rational) minus C,,0,0,0,,,False
+SPY,90,conservative,A flat at tier LLTV,90,0.0025445,0,0.0076336,1,0.00042524,False
+SPY,90,conservative,"B boosted + rule, naive borrowers",90,0.0025445,0,0.0076336,1,0.00042524,False
+SPY,90,conservative,"B boosted + rule, rational borrowers",90,0.0025445,0,0.0076336,1,0.00042524,False
+SPY,90,conservative,C flat at weekend-cap level,90,0.0025445,0,0.0076336,1,0.00042524,False
+SPY,90,conservative,DIFF A minus B(naive),,0,0,0,,,False
+SPY,90,conservative,DIFF A minus B(rational),,0,0,0,,,False
+SPY,90,conservative,DIFF B(naive) minus C,,0,0,0,,,False
+SPY,90,conservative,DIFF B(rational) minus C,,0,0,0,,,False
+SPY,93,uniform,A flat at tier LLTV,93,6.6806,0,17.585,2,0.70587,False
+SPY,93,uniform,"B boosted + rule, naive borrowers",93,6.6806,0,17.585,2,0.70587,False
+SPY,93,uniform,"B boosted + rule, rational borrowers",93,6.6806,0,17.585,2,0.70587,False
+SPY,93,uniform,C flat at weekend-cap level,93,6.6806,0,17.585,2,0.70587,False
+SPY,93,uniform,DIFF A minus B(naive),,0,0,0,,,False
+SPY,93,uniform,DIFF A minus B(rational),,0,0,0,,,False
+SPY,93,uniform,DIFF B(naive) minus C,,0,0,0,,,False
+SPY,93,uniform,DIFF B(rational) minus C,,0,0,0,,,False
+SPY,93,high,A flat at tier LLTV,93,18.2,0,47.907,2,1.923,False
+SPY,93,high,"B boosted + rule, naive borrowers",93,18.2,0,47.907,2,1.923,False
+SPY,93,high,"B boosted + rule, rational borrowers",93,18.2,0,47.907,2,1.923,False
+SPY,93,high,C flat at weekend-cap level,93,18.2,0,47.907,2,1.923,False
+SPY,93,high,DIFF A minus B(naive),,0,0,0,,,False
+SPY,93,high,DIFF A minus B(rational),,0,0,0,,,False
+SPY,93,high,DIFF B(naive) minus C,,0,0,0,,,False
+SPY,93,high,DIFF B(rational) minus C,,0,0,0,,,False
+SPY,93,conservative,A flat at tier LLTV,93,0.0068962,0,0.018153,2,0.00072866,False
+SPY,93,conservative,"B boosted + rule, naive borrowers",93,0.0068962,0,0.018153,2,0.00072866,False
+SPY,93,conservative,"B boosted + rule, rational borrowers",93,0.0068962,0,0.018153,2,0.00072866,False
+SPY,93,conservative,C flat at weekend-cap level,93,0.0068962,0,0.018153,2,0.00072866,False
+SPY,93,conservative,DIFF A minus B(naive),,0,0,0,,,False
+SPY,93,conservative,DIFF A minus B(rational),,0,0,0,,,False
+SPY,93,conservative,DIFF B(naive) minus C,,0,0,0,,,False
+SPY,93,conservative,DIFF B(rational) minus C,,0,0,0,,,False

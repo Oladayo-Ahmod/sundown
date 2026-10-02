@@ -1,0 +1,156 @@
+{
+ "source": [
+  "research/results/credit_frontier_datecluster.csv",
+  "research/results/credit_summary.csv",
+  "research/results/bad_debt_regime_concentration.csv",
+  "research/results/backtest_test_chosen.csv",
+  "research/results/m22_headline_ci.csv",
+  "research/results/morpho_rates_snapshot.json"
+ ],
+ "flat": {
+  "bps_yr_86": {
+   "est": 2.5068,
+   "lo": 0.3995,
+   "hi": 5.5821
+  },
+  "bps_yr_77": 0.0,
+  "worst_window_pct_86": 0.825,
+  "mar2020_share_pct_86": 47.036,
+  "ci_cluster": "date (window open date), 2,000 resamples"
+ },
+ "stress": {
+  "morpho_86": {
+   "flat_bps_yr": 2.5068,
+   "stress_bps_yr": 2.1144,
+   "reduction_bps_yr": 0.3924,
+   "reduction_ci": [
+    0.0,
+    1.1772
+   ],
+   "reduction_pct": 15.6538,
+   "ltv_gain_pp": 0.2191,
+   "ltv_gain_ci": [
+    0.0,
+    0.8462
+   ],
+   "ltv_gain_ci_month": [
+    0.0,
+    0.8462
+   ]
+  },
+  "cf_90": {
+   "flat_bps_yr": 9.8714,
+   "stress_bps_yr": 7.1391,
+   "reduction_bps_yr": 2.7324,
+   "reduction_ci": [
+    0.0,
+    7.2971
+   ],
+   "reduction_pct": 27.6797,
+   "ltv_gain_pp": 0.9029,
+   "ltv_gain_ci": [
+    0.0,
+    1.544
+   ],
+   "ltv_gain_ci_month": [
+    0.0,
+    1.48
+   ]
+  },
+  "cf_93": {
+   "flat_bps_yr": 21.8278,
+   "stress_bps_yr": 12.0321,
+   "reduction_bps_yr": 9.7956,
+   "reduction_ci": [
+    1.1529,
+    23.8969
+   ],
+   "reduction_pct": 44.877,
+   "ltv_gain_pp": 2.3558,
+   "ltv_gain_ci": [
+    0.5837,
+    3.5057
+   ],
+   "ltv_gain_ci_month": [
+    0.4411,
+    3.2455
+   ]
+  },
+  "cf_95": {
+   "flat_bps_yr": 33.2934,
+   "stress_bps_yr": 15.4381,
+   "reduction_bps_yr": 17.8553,
+   "reduction_ci": [
+    4.2905,
+    39.3322
+   ],
+   "reduction_pct": 53.6302,
+   "ltv_gain_pp": 3.3551,
+   "ltv_gain_ci": [
+    1.6455,
+    5.0054
+   ],
+   "ltv_gain_ci_month": [
+    1.3329,
+    4.514
+   ]
+  }
+ },
+ "bonus": {
+  "lltv86": {
+   "reduction": {
+    "est": 3.546,
+    "lo": 0.8027,
+    "hi": 7.222
+   },
+   "at_5_5": {
+    "est": 6.366,
+    "lo": 1.474,
+    "hi": 12.84
+   },
+   "at_2": {
+    "est": 2.82,
+    "lo": 0.4985,
+    "hi": 5.87
+   }
+  },
+  "lltv93": {
+   "reduction": {
+    "est": 24.01,
+    "lo": 9.062,
+    "hi": 42.64
+   },
+   "at_5_5": {
+    "est": 66.3,
+    "lo": 21.74,
+    "hi": 120.7
+   },
+   "at_2": {
+    "est": 42.28,
+    "lo": 12.53,
+    "hi": 79.52
+   }
+  }
+ },
+ "measured_borrow_apr_pct": {
+  "block": 78552299,
+  "retrieved_utc": "2026-10-02T21:28:23+00:00",
+  "AAPL": 7.8329,
+  "SPY": 0.0602,
+  "NVDA": 10.9164,
+  "large_usdg_markets": 4.0663,
+  "spy_util": 0.4224,
+  "aapl_util": 0.9999,
+  "nvda_util": 0.9849
+ },
+ "var99_weekend": {
+  "rate_pct": 1.8729,
+  "ci": [
+   0.9558,
+   3.0867
+  ],
+  "n": 4752,
+  "target_pct": 1.0
+ },
+ "generated_utc": "2026-10-03T17:51:54+00:00"
+}

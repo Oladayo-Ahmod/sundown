@@ -1,0 +1,37 @@
+case,lltv,design,bad_bps_yr_mean_deploy4,max_asset,max_asset_bps_yr
+base,0.86,flat 5.5% CF100,6.3662,NVDA,12.894
+base,0.86,dutch 60min,6.3662,NVDA,12.894
+base,0.86,cap 5% of depth,6.3662,NVDA,12.894
+base,0.93,flat 5.5% CF100,66.295,NVDA,113.92
+base,0.93,dutch 60min,66.295,NVDA,113.92
+base,0.93,cap 5% of depth,66.345,NVDA,113.96
+concentration 5.0x,0.86,flat 5.5% CF100,6.2583,TSLA,12.571
+concentration 5.0x,0.86,dutch 60min,6.2583,TSLA,12.571
+concentration 5.0x,0.86,cap 5% of depth,6.2583,TSLA,12.571
+concentration 5.0x,0.93,flat 5.5% CF100,64.804,NVDA,113.71
+concentration 5.0x,0.93,dutch 60min,64.804,NVDA,113.71
+concentration 5.0x,0.93,cap 5% of depth,64.804,NVDA,113.71
+concentration 15.0x,0.86,flat 5.5% CF100,6.2583,TSLA,12.571
+concentration 15.0x,0.86,dutch 60min,6.2583,TSLA,12.571
+concentration 15.0x,0.86,cap 5% of depth,6.2583,TSLA,12.571
+concentration 15.0x,0.93,flat 5.5% CF100,64.483,NVDA,113.71
+concentration 15.0x,0.93,dutch 60min,64.483,NVDA,113.71
+concentration 15.0x,0.93,cap 5% of depth,64.483,NVDA,113.71
+market debt 0.1xTVL,0.86,flat 5.5% CF100,6.2583,TSLA,12.571
+market debt 0.1xTVL,0.86,dutch 60min,6.2583,TSLA,12.571
+market debt 0.1xTVL,0.86,cap 5% of depth,6.2583,TSLA,12.571
+market debt 0.1xTVL,0.93,flat 5.5% CF100,65.05,NVDA,113.71
+market debt 0.1xTVL,0.93,dutch 60min,65.05,NVDA,113.71
+market debt 0.1xTVL,0.93,cap 5% of depth,65.05,NVDA,113.71
+market debt 1.0xTVL,0.86,flat 5.5% CF100,9.8295,NVDA,20.753
+market debt 1.0xTVL,0.86,dutch 60min,9.8295,NVDA,20.753
+market debt 1.0xTVL,0.86,cap 5% of depth,9.9827,NVDA,20.689
+market debt 1.0xTVL,0.93,flat 5.5% CF100,75.933,NVDA,127.24
+market debt 1.0xTVL,0.93,dutch 60min,75.997,NVDA,127.5
+market debt 1.0xTVL,0.93,cap 5% of depth,76.843,TSLA,128.97
+borrowers near max LTV,0.86,flat 5.5% CF100,22.906,NVDA,52.174
+borrowers near max LTV,0.86,dutch 60min,22.906,NVDA,52.174
+borrowers near max LTV,0.86,cap 5% of depth,23.458,NVDA,51.964
+borrowers near max LTV,0.93,flat 5.5% CF100,181.73,NVDA,303.47
+borrowers near max LTV,0.93,dutch 60min,181.73,NVDA,303.47
+borrowers near max LTV,0.93,cap 5% of depth,182.94,NVDA,305.4
