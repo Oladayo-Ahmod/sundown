@@ -9,6 +9,9 @@ const LINKS = [
   { href: "/", label: "Overview" },
   { href: "/risk", label: "Risk" },
   { href: "/replay", label: "Replay" },
+  { href: "/deployment", label: "Deployment" },
+  { href: "/markets", label: "Markets" },
+  { href: "/preflight", label: "Preflight" },
 ] as const;
 
 export function NavLinks() {

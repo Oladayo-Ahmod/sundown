@@ -8,6 +8,9 @@ const PAGES = [
   { name: "home", path: "/" },
   { name: "risk", path: "/risk" },
   { name: "replay", path: "/replay" },
+  { name: "deployment", path: "/deployment" },
+  { name: "markets", path: "/markets" },
+  { name: "preflight", path: "/preflight" },
 ];
 const WIDTHS = [1280, 390];
 

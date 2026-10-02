@@ -72,7 +72,7 @@ export function EventsTable({ events }: { events: readonly ReplayEvent[] }) {
             <TableHead>Prev close</TableHead>
             <TableHead>Open</TableHead>
             <TableHead>Gap</TableHead>
-            <TableHead>On-chain replay tx</TableHead>
+            <TableHead>Public-chain replay</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -90,7 +90,7 @@ export function EventsTable({ events }: { events: readonly ReplayEvent[] }) {
               <TableCell className="whitespace-nowrap">
                 {fmt(-e.loss_pct, 2)}% ({fmt(e.gap_bps, 0)} bps)
               </TableCell>
-              <TableCell className="text-muted-foreground">Not deployed yet</TableCell>
+              <TableCell className="text-muted-foreground">None (forge in-process only)</TableCell>
             </TableRow>
           ))}
         </TableBody>

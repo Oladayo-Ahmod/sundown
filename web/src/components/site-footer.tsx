@@ -3,10 +3,11 @@
     <footer className="mt-16 border-t border-border">
       <div className="mx-auto max-w-6xl space-y-2 px-4 py-6 text-sm text-muted-foreground">
         <p>
-          <strong className="text-foreground">Research simulation.</strong> Every number on these pages is
-          produced offline from historical equity data (a daily proxy for the oracle-blind exposure) or read
-          once from Robinhood Chain. Nothing here is investment advice, and no contract is connected yet:
-          the wallet button prepares Arbitrum Sepolia but makes no calls.
+          <strong className="text-foreground">Research simulation and a testnet demonstration.</strong> The risk and
+          replay numbers are produced offline from historical equity data (a daily proxy for the oracle-blind
+          exposure) or read once from Robinhood Chain. The deployment, markets and preflight pages show the production
+          contracts on Arbitrum Sepolia running against simulated tokens and simulated price feeds (read-only: the
+          site never sends a transaction). Nothing here is investment advice.
         </p>
         <p>
           Full evidence, confidence intervals and the list of claims we do not make:{" "}

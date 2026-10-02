@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import { EventsTable } from "@/components/events-table";
 import { PairedBars } from "@/components/charts";
@@ -264,7 +265,7 @@ export default function ReplayPage() {
           The most severe real gaps
         </h2>
         <p className="max-w-3xl text-sm text-muted-foreground">
-          {replay.events_meta.selection}. These are the inputs for the future on-chain replay.
+          {replay.events_meta.selection}. These are the inputs of the forge in-process replay.
         </p>
         <EventsTable events={replay.events} />
         <Sources
@@ -282,11 +283,17 @@ export default function ReplayPage() {
           On-chain replay
         </h2>
         <Card>
-          <CardContent className="pt-5 text-sm leading-relaxed">
+          <CardContent className="space-y-2 pt-5 text-sm leading-relaxed">
             <p>
-              Reserved for the Arbitrum Sepolia demonstration: each event above will link to the transactions that
-              replay it against a flat-LLTV market and a session-aware market, driven by a clearly labelled simulated price
-              feed. No contracts are connected in this version.
+              These historical events were <strong>not</strong> replayed on a public chain: the replay above runs in
+              forge&apos;s in-process EVM. What is on Arbitrum Sepolia is a separate scripted run against the deployed
+              markets with <strong>simulated tokens and a simulated price feed</strong> (a control market that lets a 92%
+              borrow through and then liquidates it after a 5% simulated price move, against the session-aware market that
+              refused that borrow level), with every transaction linked on{" "}
+              <Link className="underline" href="/deployment" prefetch={false}>
+                /deployment
+              </Link>
+              . Its prices are not these historical gaps.
             </p>
           </CardContent>
         </Card>

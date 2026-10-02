@@ -22,7 +22,7 @@ export function WalletButton() {
       variant="outline"
       size="sm"
       onClick={() => setArmed(true)}
-      aria-label="Connect wallet (Arbitrum Sepolia, no contract calls yet)"
+      aria-label="Connect wallet (Arbitrum Sepolia; the site is read-only and never asks for a signature)"
     >
       Connect wallet
     </Button>

@@ -5,7 +5,8 @@ import { arbitrumSepolia } from "wagmi/chains";
 
 /**
  * Wallet wiring for Arbitrum Sepolia (the demo chain). Injected wallets only: no WalletConnect
- * project id is configured, so no relay connection is made. No contract is read or written yet.
+ * project id is configured, so no relay connection is made. The wallet is not used for reads (those use the read-only client in
+ * lib/chain.ts) and nothing in this app writes to a contract.
  */
 const connectors = connectorsForWallets(
   [{ groupName: "Browser wallets", wallets: [injectedWallet] }],
