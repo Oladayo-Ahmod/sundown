@@ -11,11 +11,18 @@ import type { SkyScene } from "@/lib/sky/scene";
 export default function SkyCanvas({
   t,
   low,
+  layout,
+  startT,
+  snap,
   onReady,
   onFail,
 }: {
   t: number;
   low: boolean;
+  layout: "hero" | "compact";
+  startT: number;
+  /** change this number to jump the scene to `t` without easing (loop restart) */
+  snap: number;
   onReady: () => void;
   onFail: () => void;
 }) {
@@ -51,7 +58,7 @@ export default function SkyCanvas({
     import("@/lib/sky/scene")
       .then(({ SkyScene }) => {
         if (cancelled) return;
-        scene = new SkyScene({ canvas, low });
+        scene = new SkyScene({ canvas, low, layout, startT });
         sceneRef.current = scene;
         const parent = canvas.parentElement ?? canvas;
         const size = () => scene?.setSize(parent.clientWidth, parent.clientHeight);
@@ -90,9 +97,12 @@ export default function SkyCanvas({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [low]);
 
+  const snapRef = useRef(snap);
   useEffect(() => {
-    sceneRef.current?.setTarget(t);
-  }, [t]);
+    const jump = snapRef.current !== snap;
+    snapRef.current = snap;
+    sceneRef.current?.setTarget(t, jump);
+  }, [t, snap]);
 
   return <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" aria-hidden="true" />;
 }

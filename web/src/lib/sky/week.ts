@@ -159,4 +159,4 @@ export function liveT(w: LiveWindow, nowSec: number): number | null {
   return null;
 }
 
-export const DEFAULT_T = 116; // an illustrative Friday dusk: used until (and unless) the chain answers
+export const DEFAULT_T = 119; // static frame: the sun on the horizon at the start of the window (also used until the scene loads)

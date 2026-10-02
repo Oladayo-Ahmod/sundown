@@ -136,6 +136,11 @@ function fmtNum(v: number, digits: number) {
   return v.toLocaleString("en-US", { minimumFractionDigits: digits, maximumFractionDigits: digits });
 }
 
+/** "1,224.5" as HTML with the thousands separator in a narrow span; textContent stays the exact string. */
+function figureHtml(s: string): string {
+  return s.replace(/,/g, '<span class="sep">,</span>');
+}
+
 /** Tabular mono number that counts up when it scrolls into view. The final value is server-rendered. */
 export function CountUp({
   value,
@@ -153,12 +158,13 @@ export function CountUp({
   src?: string;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
+  const finalText = `${prefix}${fmtNum(value, digits)}${suffix}`;
   useEffect(() => {
     const el = ref.current;
     if (!el || prefersReducedMotion()) return;
     if (el.getBoundingClientRect().top < window.innerHeight * 0.9) return;
     const write = (v: number) => {
-      el.textContent = `${prefix}${fmtNum(v, digits)}${suffix}`;
+      el.innerHTML = figureHtml(`${prefix}${fmtNum(v, digits)}${suffix}`);
     };
     write(0);
     let done = false;
@@ -196,11 +202,13 @@ export function CountUp({
     };
   }, [value, digits, prefix, suffix]);
   return (
-    <span ref={ref} className={cn("num", className)} data-src={src}>
-      {prefix}
-      {fmtNum(value, digits)}
-      {suffix}
-    </span>
+    <span
+      ref={ref}
+      className={cn("num", className)}
+      data-src={src}
+      data-final={finalText}
+      dangerouslySetInnerHTML={{ __html: figureHtml(finalText) }}
+    />
   );
 }
 

@@ -298,3 +298,13 @@ input[type="range"].sun-range::-moz-range-thumb {
   box-shadow: 0 0 0 4px rgb(255 196 107 / 0.18), 0 4px 16px rgb(255 122 47 / 0.55);
   border: 0;
 }
+
+/* thousands separator inside a mono figure: pull the comma in so "1,224" does not read "1 ,224" */
+.sep {
+  display: inline-block;
+  margin-inline: -0.17em -0.12em;
+}
+html,
+body {
+  overflow-x: clip;
+}

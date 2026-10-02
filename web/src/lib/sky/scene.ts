@@ -15,6 +15,10 @@ export interface SkyOptions {
   canvas: HTMLCanvasElement;
   /** fewer particles, no antialiasing: phones and low-memory devices */
   low: boolean;
+  /** hero: full-bleed with the content shifted right of the headline; compact: centred accent */
+  layout?: "hero" | "compact";
+  /** model hour to start at (the first frame is drawn there) */
+  startT?: number;
 }
 
 const X0 = -6.6;
@@ -192,8 +196,12 @@ export class SkyScene {
   private running = false;
   private last = 0;
   private clock = 0;
-  private shown = 70; // displayed t; eases toward `target`
-  private target = 116;
+  private shown = 102;
+  private target = 102;
+  private offX = 0;
+  private offY = 0;
+  private sunU0 = 0.3;
+  private sunSpan = 0.42;
   private px = 1;
   private width = 1;
   private height = 1;
@@ -206,6 +214,7 @@ export class SkyScene {
       powerPreference: "high-performance",
     });
     this.renderer.setClearColor(0x07060f, 1);
+    this.shown = this.target = opts.startT ?? 102;
     this.camera.position.set(0, 1.5, 11);
 
     // sky: a full-screen quad drawn first
@@ -365,10 +374,23 @@ export class SkyScene {
     this.renderer.setSize(this.width, this.height, false);
     const aspect = this.width / this.height;
     this.camera.aspect = aspect;
-    // fit the ribbon's width on narrow screens by backing the camera off
-    const fit = 7.1 / (Math.tan((this.camera.fov * Math.PI) / 360) * aspect);
-    this.camera.position.z = Math.min(Math.max(fit, 11), 30);
+    const hero = (this.opts.layout ?? "hero") === "hero";
+    const wide = hero && this.width >= 900 && aspect > 1.2;
+    const portrait = hero && aspect < 0.9;
+    this.offX = wide ? 0.24 : 0;
+    this.offY = portrait ? 0.3 : 0;
+    this.sunU0 = wide ? 0.5 : 0.3;
+    this.sunSpan = wide ? 0.32 : 0.42;
+    // half-width of the scene that must fit: the ribbon spans about 13 units
+    const half = wide ? 11.4 : portrait ? 7.6 : 7.1;
+    const fit = half / (Math.tan((this.camera.fov * Math.PI) / 360) * aspect);
+    this.camera.position.z = Math.min(Math.max(fit, 11), 34);
     this.camera.lookAt(0, 1.35, 0);
+    if (this.offX || this.offY) {
+      this.camera.setViewOffset(this.width, this.height, -this.width * this.offX, -this.height * this.offY, this.width, this.height);
+    } else {
+      this.camera.clearViewOffset();
+    }
     this.camera.updateProjectionMatrix();
     this.skyMat.uniforms.uAspect!.value = aspect;
     this.starMat.uniforms.uPx!.value = dpr;
@@ -402,7 +424,7 @@ export class SkyScene {
     u.uHorizon!.value = horizon;
     u.uAlt!.value = alt;
     u.uTime!.value = this.clock;
-    const sunU = 0.3 + 0.42 * (t / T_END);
+    const sunU = this.sunU0 + this.sunSpan * (t / T_END);
     const sunV = horizon + alt * 0.4;
     (u.uSun!.value as THREE.Vector2).set(sunU, sunV);
 
@@ -413,7 +435,7 @@ export class SkyScene {
     (gu.uCam!.value as THREE.Vector3).copy(this.camera.position);
     // world x of the sun on the ground (screen u mapped through the camera at z = 0)
     const halfW = Math.tan((this.camera.fov * Math.PI) / 360) * this.camera.position.z * this.camera.aspect;
-    gu.uSunX!.value = (sunU - 0.5) * 2 * halfW;
+    gu.uSunX!.value = (sunU - 0.5 - this.offX) * 2 * halfW;
 
     for (const m of this.ribbonMats) {
       m.uniforms.uProgress!.value = t;
