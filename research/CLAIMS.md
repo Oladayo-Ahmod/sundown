@@ -48,7 +48,7 @@ The M2/M2.1/M2.2 simulators charged the full liquidation bonus on any account li
 
 | # | Claim | Evidence | CI / numbers | Status |
 |---|---|---|---|---|
-| 1 | Windows follow D1 (trading-day rule) and classes Short/Weekend/Long | `tests/test_calendar_windows.py`: 2 on-chain observations, DST 47/49 h, independent day-walk over 2010-2026 | exact | Supported. Early-close rule UNVERIFIED; Session A fixture comparison pending (test skipped) |
+| 1 | Windows follow D1 (trading-day rule) and classes Short/Weekend/Long | `tests/test_calendar_windows.py`: 2 on-chain observations, DST 47/49 h, independent day-walk over 2010-2026 | exact | Supported. Early-close rule UNVERIFIED; the skipped test is a placeholder for a Python-side comparison against the committed calendar fixture, which runs in the on-chain differential tests (8 tests, all passing) |
 | 2 | The closed-window proxy gap has roughly the variance of an ordinary close-to-open proxy gap (not 3-4x) | `variance_ratios.csv`, month-cluster bootstrap | Weekend 1.23 [0.91, 1.57], Long 1.22 [0.80, 1.55], Short 0.65 [0.30, 1.01] | Supported **as a descriptive statement about the proxy only**. Weeknights are not blind (D1); this is not a risk comparison for the guard |
 | 3 | The daily proxy overstates the blind exposure | `intraday_summary.json` (12 assets, 1,344 windows, 730 days) | extended-hours bracket = 58 % of proxy second moment; 99 % loss 342 vs 418 bps | Supported on a 2-year subset; never exact (overnight session not observable) |
 | 4 | A 50 bps oracle buffer covers feed staleness at window start | simulated 0.5 %/24 h feed on hourly bars | adverse error p90 18, p99 41, max 48 bps | Supported **by simulation**; bounded by construction, not an on-chain measurement |

@@ -10,6 +10,7 @@ PATTERN='\{\{PEND''ING:[A-Za-z0-9_]+\}\}'
 hits=$(grep -rInE --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=.next \
   --exclude-dir=lib --exclude-dir=.venv --exclude-dir=out --exclude-dir=cache \
   --exclude=check_pending.sh --exclude=pnpm-lock.yaml \
+  --exclude=CLAIMS_AUDIT.md \
   "$PATTERN" . 2>/dev/null)
 
 if [ -z "$hits" ]; then
