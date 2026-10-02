@@ -235,7 +235,7 @@ class Market:
         bonus: int | None = None,
         force: bool = False,
     ) -> tuple[int, int]:
-        """`bonus`/`force` let a guard model override the flat bonus and the allowed test (deleverage)."""
+        """`bonus`/`force` let a guard model override the flat bonus and the allowed test."""
         if repay_assets <= 0:
             raise Invalid
         self.accrue()

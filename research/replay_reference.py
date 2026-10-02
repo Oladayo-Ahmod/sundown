@@ -1,18 +1,19 @@
 """Exact-integer reference of the on-chain replay harness (sim/ReplayHarness.sol).
 
-SIMULATION. Replays the worst real AAPL/SPY gaps (`sim/replay_inputs.json`) through three markets built from
-the integer market model in `market_reference.py`:
+SIMULATION. Replays the worst real AAPL/SPY gaps (`sim/replay_inputs.json`) through three markets
+built from the integer market model in `market_reference.py`:
 
   control   FlatGuard at the boosted LLTV (a conventional market that keeps using the frozen price)
-  sundown   session-aware LLTV: boosted weekday capacity, tighter weekend capacity (SundownGuard rules)
+  sundown   session-aware LLTV: boosted weekday capacity, tighter weekend capacity (SundownGuard)
   standard  FlatGuard at the standard LLTV (the status quo)
 
-Timeline per event (seconds): t=0 borrow; t=S-H stress period starts; t=S-H+C deleverage zone opens and the
-keeper deleverages every eligible account; t=S window starts (price frozen); t=S+W reopening at the gapped
-price; the keeper liquidates everything unhealthy (up to 5 rounds) and bad debt is realized.
+Timeline per event (seconds): t=0 borrow; t=S-H stress period starts; t=S-H+C deleverage zone opens
+and the keeper deleverages every eligible account; t=S window starts (price frozen); t=S+W
+reopening at the gapped price; the keeper liquidates everything unhealthy (up to 5 rounds) and bad
+debt is realized.
 
-Output rows are CSV and are compared to the Solidity harness by `sim/compare_replay.py`. The guard rules are
-re-implemented here from docs/GUARD_DESIGN.md, not imported from the contract.
+Output rows are CSV and are compared to the Solidity harness by `sim/compare_replay.py`. The guard
+rules are re-implemented here from docs/GUARD_DESIGN.md, not imported from the contract.
 """
 
 from __future__ import annotations
@@ -41,7 +42,8 @@ LENDER_DEPOSIT = 5_000_000 * 10**6
 GAS_USD_PER_TX = 0.5  # ASSUMPTION: cost of one deleverage transaction, USD (Orbit-class fees)
 FEE_BOUND = 55_000_000_000_000_000
 
-# D26: full-sample empirical q99.5 downside gap (bps), research/results/class_stats.csv, 2010-01-04..2026-10-01
+# D26: full-sample empirical q99.5 downside gap (bps), research/results/class_stats.csv,
+# sample 2010-01-04..2026-10-01
 GAP_BPS = {
     "AAPL": {0: 282.99, 1: 915.29, 2: 597.0},
     "SPY": {0: 161.52, 1: 407.13, 2: 297.99},
@@ -77,8 +79,9 @@ def make_market(lltv: int, ltv: int) -> Market:
 
 
 def borrower_debt(ltv_cap: int, i: int) -> int:
-    # leverage-seeking population: debt is 80 %..99 % of the tier cap, spread evenly over (i mod 10); a borrower
-    # exactly at the cap would drift over the threshold from interest alone, so none sits at 100 %
+    # leverage-seeking population: debt is 80 %..99 % of the tier cap, spread over (i mod 10);
+    # a borrower exactly at the cap would drift over the threshold from interest alone, so none sits
+    # at 100 %
     f = 800_000_000_000_000_000 + 190_000_000_000_000_000 * (i % 10) // 9
     cv = COLLATERAL * (100 * WAD) // 10**30
     return cv * ltv_cap // WAD * f // WAD
@@ -96,7 +99,10 @@ def populate(m: Market, ltv_cap: int) -> int:
 
 
 def reopen_and_liquidate(m: Market, threshold: int) -> tuple[int, int]:
-    """Keeper liquidates everything unhealthy (5 rounds), then bad debt is realized. Returns (liq calls, loss)."""
+    """Keeper liquidates everything unhealthy (5 rounds), then bad debt is realized.
+
+    Returns (liquidation calls, loss).
+    """
     liqs = 0
     for _ in range(5):
         progressed = False
@@ -158,7 +164,10 @@ def run_event(asset: str, tier: int, ev: dict) -> list[Row]:
         liqs, loss = reopen_and_liquidate(m, lltv)
         cv0 = COLLATERAL * (100 * WAD) // 10**30
         cap = cv0 * lltv // WAD * N_BORROWERS
-        rows.append(Row(asset, tier * 10**4 // WAD, ev["date"], variant, loss, liqs, 0, 0, 0, cap, cap, borrowed))
+        tier_bps = tier * 10**4 // WAD
+        rows.append(
+            Row(asset, tier_bps, ev["date"], variant, loss, liqs, 0, 0, 0, cap, cap, borrowed)
+        )
 
     # ---- session-aware market
     m = make_market(tier, tier)
@@ -198,20 +207,23 @@ def run_event(asset: str, tier: int, ev: dict) -> list[Row]:
     m.now = S + ev["windowSeconds"]
     m.price = p1
     liqs, loss = reopen_and_liquidate(m, tier)
+    tier_bps = tier * 10**4 // WAD
     rows.append(
-        Row(asset, tier * 10**4 // WAD, ev["date"], "sundown", loss, liqs, calls, delev_debt, notional,
-            cap_weekday, cap_window, borrowed)
+        Row(
+            asset, tier_bps, ev["date"], "sundown", loss, liqs, calls, delev_debt, notional,
+            cap_weekday, cap_window, borrowed,
+        )
     )  # fmt: skip
     return rows
 
 
 def slippage_wad(notional_usd: float, d1: int, d3: int, d5: int) -> float | None:
-    """Average slippage (fraction) for selling `notional_usd`, piecewise linear through the depth table;
-    None beyond the 5 % point (the table does not resolve it)."""
+    """Average slippage (fraction) for selling `notional_usd`, piecewise linear through the depth
+    table; None beyond the 5 % point (the table does not resolve it)."""
     pts = [(0.0, 0.0), (float(d1), 0.01), (float(d3), 0.03), (float(d5), 0.05)]
     if notional_usd > pts[-1][0]:
         return None
-    for (x0, y0), (x1, y1) in zip(pts, pts[1:]):
+    for (x0, y0), (x1, y1) in zip(pts, pts[1:], strict=False):
         if notional_usd <= x1:
             return y0 if x1 == x0 else y0 + (y1 - y0) * (notional_usd - x0) / (x1 - x0)
     return None
