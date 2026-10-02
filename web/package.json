@@ -2,7 +2,7 @@
   "name": "@sundown/web",
   "private": true,
   "version": "0.0.0",
-  "description": "Sundown research UI: risk evidence and replay (research simulation, no contract calls yet)",
+  "description": "Sundown UI: risk evidence and replay (research simulation) plus read-only views of the Arbitrum Sepolia deployment (simulated tokens and feeds)",
   "engines": {
     "node": ">=20.19.0"
   },
@@ -13,7 +13,10 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test:e2e": "playwright test",
-    "export-data": "cd ../research && .venv/bin/python export_web_data.py"
+    "export-data": "cd ../research && .venv/bin/python export_web_data.py",
+    "export-abis": "node scripts/export-abis.mjs",
+    "export-chain": "node scripts/export-chain-data.mjs",
+    "check-chain": "node scripts/export-abis.mjs --check && node scripts/export-chain-data.mjs --check"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.0",
