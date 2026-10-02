@@ -15,6 +15,10 @@ Recorded run: `block.timestamp` 1791054971 (2026-10-03 19:16:11 UTC). RPC reliab
 
 Calendar at that block (read directly from `MarketCalendar`): inside a blind window, class Weekend, start 1790985600 (Fri 2026-10-02 20:00 ET) and end 1791158400 (Sun 2026-10-04 20:00 ET).
 
+## Reproducibility caveat (measured, not smoothed over)
+
+The recorded run above passed all four fork tests (about 18 s per suite). The public RPC is intermittently unreliable under fork load: in a later full-suite run with the variable set, the pre-existing `test_adapterReadsRealFeedsAndTokens` failed with a dropped TLS connection (`received fatal alert: BadRecordMac` while fetching a feed's storage), a transport error, not an assertion failure; the same test had passed minutes earlier. A repeated-run measurement (five runs per setting, with default and with raised `--fork-retries`) did not finish within 15 minutes, so **no reliability rate is claimed and no claim is made that raising the retries fixes it**. A fork run can therefore need to be repeated, and the tests stay optional (skipped without the variable) and out of the default CI. The tests read the latest block (D4), so the values above are a dated observation, not a pinned fixture.
+
 ## What the run proves
 
 1. **Decimals normalization.** Every live feed reports 8 decimals; the adapter's scale is 1e10; `priceWad` equals the raw answer times 1e10 exactly, and the adapter reports the feed's own `updatedAt`. Each feed's `description()` names the asset it is wired to.

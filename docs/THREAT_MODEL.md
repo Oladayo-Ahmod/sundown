@@ -76,3 +76,20 @@ Phantom collateral loss; token-code upgrades after deployment; closures announce
 - **unused-return (6):** deliberate tuple destructuring of `latestRoundData`, `blindWindowAt` and `nextBlindWindow`, where only some components are needed and every used component is validated.
 
 Low and informational findings (timestamp comparisons, naming of immutables, low-level calls with a gas cap in the probes) are expected: the system is time-based by design.
+
+## 9. Test evidence (final, from runs on 2026-10-03)
+
+| Run | Result |
+|---|---|
+| `forge test` (default profile, no fork variable), 19 suites | **231 passed, 0 failed, 4 skipped** (235 total). The 4 skipped are the fork tests: 1 pre-existing (`OracleForkTest`) and 3 live-feed (`OracleForkLiveTest`), which need `ROBINHOOD_MAINNET_RPC_URL` |
+| `FOUNDRY_PROFILE=ci forge test` (1,000 fuzz runs, 256 invariant runs), run before the 3 live tests were added | 231 passed, 0 failed, 1 skipped (232 total), exit 0 |
+| Fork tests against the real Robinhood Chain feeds (`docs/ORACLE_LIVE_VALIDATION.md`) | Recorded run: 4 of 4 passed. A later full-suite run with the variable set: 1 failed on a dropped TLS connection (transport error), 234 passed; the fork tests are optional and intermittently flaky on the public RPC |
+| Python (`research`, `uv run pytest`) | 47 passed, 1 skipped |
+| Replay cross-check (`sim/compare_replay.py`) | 120 of 120 rows within tolerance, 111 exact; unchanged after the lint-only edits to the references |
+| Slither | 80 findings, 0 High, 11 Medium all reviewed (section 8); enforced by `scripts/check_slither.py` against `scripts/slither_baseline.json` |
+
+Suite sizes (default profile): `SundownMarketTest` 45, `SundownGuardTest` 43, `UsMarketCalendarNamedTest` 30, `IssuerFailureTest` 19, `ChainlinkEquityOracleTest` 14, `MarketCalendarTest` 13, `MarketInvariantsTest` 10, `SimFixturesTest` 9, `GuardInvariantsTest` 8, `MarketReferenceTest` 8, `UsMarketCalendarDifferentialTest` 8, `UsMarketCalendarPropertyTest` 7, `WindowCacheTest` 7, `OracleMarketTest` 6, `OracleForkLiveTest` 3 (skipped without the variable), `ObservedFeedTest` 2, plus the optional fork test.
+
+Mutation checks of the test suites (scratch edits, source restored): the guard was mutated 15 ways and all 15 were caught by the unit tests, the stateful invariants or both; the market mutation run caught 12 mutants, with the remaining non-baseline mutant an equivalent change (`maxWithdraw` is defined through `maxRedeem` in OpenZeppelin v5). The invariant and unit suites have a mutant each that only one of them can see, which is why both exist.
+
+Not tested live or on real feeds: the `Fresh`, `Stale` and `Reopening` branches of the adapter against real data (unit tests with mock feeds cover them), the boosted stress cap and deleveraging on a public chain (the forge tests and the replay cover them), and any Sundown market on Robinhood Chain.
