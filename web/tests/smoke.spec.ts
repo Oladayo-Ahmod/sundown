@@ -240,3 +240,83 @@ test("every page reveals its content without scrolling being required (reduced m
   );
   expect(hidden).toEqual([]);
 });
+
+test.describe("home: claims, links, stepper", () => {
+  test("claim cards: takeaway first, full evidence in a keyboard-operable disclosure (text stays in the DOM)", async ({ page }) => {
+    await page.goto("/");
+    const cards = page.locator("details", { hasText: "Evidence and caveats" });
+    await expect(cards).toHaveCount(3);
+    // the full text is in the DOM even while closed
+    const all = (await cards.allTextContents()).join(" ");
+    for (const t of ["Out of sample the rule does nothing", "shares the authors", "older full-bonus convention", "never-adjusting borrower sitting at the maximum"]) {
+      expect(all).toContain(t);
+    }
+    // keyboard: focus the summary and open it with Enter
+    const first = cards.first().locator("summary");
+    await first.focus();
+    await page.keyboard.press("Enter");
+    await expect(cards.first()).toHaveAttribute("open", "");
+    await expect(cards.first().getByText("Source", { exact: true }).first()).toBeVisible();
+    // the three claim headlines stay
+    for (const h of ["Today's LLTVs lose almost nothing to weekend gaps", "The shipped rule works as designed on AAPL at 93%", "Its economics are modest, and we say so"]) {
+      await expect(page.getByText(h, { exact: false }).first()).toBeVisible();
+    }
+  });
+
+  test("outward links: source, live deployment, factory; no dead demo-video link while the video is pending", async ({ page }) => {
+    await page.goto("/");
+    const links = page.getByTestId("outward-links").first();
+    await expect(links.getByRole("link", { name: "View source" })).toHaveAttribute("href", "https://github.com/Oladayo-Ahmod/sundown");
+    await expect(links.getByRole("link", { name: "Live on Arbitrum Sepolia" })).toHaveAttribute("href", "/deployment");
+    await expect(links.getByRole("link", { name: "Factory on Arbiscan" })).toHaveAttribute("href", /sepolia\.arbiscan\.io\/address\/0xfb2aA26a47736A0739BB6336C881638E23522A5D/);
+    await expect(page.getByRole("link", { name: "Demo video" })).toHaveCount(0);
+    await expect(page.locator("footer").getByRole("link", { name: "View source" })).toBeVisible();
+  });
+
+  test("How a window plays out: five steps, illustrative, sourced", async ({ page }) => {
+    await page.goto("/");
+    const sec = page.locator("section[aria-labelledby=window]");
+    await expect(sec.getByRole("heading", { level: 2 })).toContainText("How a window plays out");
+    await expect(sec.locator("[data-step]")).toHaveCount(5);
+    await expect(sec.getByText("Illustrative").first()).toBeVisible();
+    await expect(sec.getByText("89.35%").first()).toBeVisible();
+    await expect(sec.getByText("docs/GUARD_DESIGN.md")).toBeVisible();
+  });
+});
+
+test.describe("home with motion on", () => {
+  test.use({ reducedMotion: "no-preference" });
+
+  test("every count-up ends on the exact string in the source", async ({ page }) => {
+    await page.goto("/");
+    await page.waitForLoadState("networkidle");
+    const h = await page.evaluate(() => document.documentElement.scrollHeight);
+    for (let y = 0; y < h; y += 500) {
+      await page.evaluate((yy) => window.scrollTo(0, yy), y);
+      await page.waitForTimeout(200);
+    }
+    await page.waitForTimeout(2200);
+    const rows = await page.$$eval("[data-final]", (els) => els.map((e) => [e.textContent ?? "", e.getAttribute("data-final") ?? ""]));
+    expect(rows.length).toBeGreaterThanOrEqual(4);
+    for (const [text, final] of rows) expect(text).toBe(final);
+    expect(rows.map((r) => r[1])).toContain("$1,224");
+    // no stray whitespace inside a figure
+    for (const [text] of rows) expect(text).not.toMatch(/\s/);
+  });
+
+  test("the opening loop plays by itself until the slider is touched", async ({ page }) => {
+    await page.goto("/?sky=webgl");
+    await expect(page.getByTestId("sky-hero")).toHaveAttribute("data-sky-mode", "webgl", { timeout: 30_000 });
+    const readout = page.getByTestId("sky-readout");
+    const seen = new Set<string>();
+    for (let i = 0; i < 9; i++) {
+      seen.add((await readout.textContent()) ?? "");
+      await page.waitForTimeout(1000);
+    }
+    expect(seen.size).toBeGreaterThanOrEqual(3); // golden hour, horizon, blind night at least
+    await page.getByTestId("tow").fill("30");
+    const frozen = await readout.textContent();
+    await page.waitForTimeout(2500);
+    expect(await readout.textContent()).toBe(frozen); // the visitor now controls it
+  });
+});

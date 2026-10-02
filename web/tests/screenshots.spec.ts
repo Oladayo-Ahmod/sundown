@@ -43,3 +43,19 @@ for (const p of PAGES) {
     });
   }
 }
+
+// Real scroll-position captures (viewport only, not full page) of the home page, with the WebGL sky.
+const SCROLL_OUT = process.env.SCROLL_DIR ?? OUT;
+for (const [w, h] of [[1440, 900], [390, 844]] as const) {
+  test(`home scroll positions ${w}px`, async ({ page }) => {
+    await page.setViewportSize({ width: w, height: h });
+    await page.goto("/?sky=webgl");
+    await page.locator("[data-sky-mode=webgl]").first().waitFor({ timeout: 30_000 });
+    await page.waitForTimeout(1200);
+    for (const y of [0, 900, 1800]) {
+      await page.evaluate((yy) => window.scrollTo(0, yy), y);
+      await page.waitForTimeout(y === 0 ? 300 : 1600);
+      await page.screenshot({ path: path.join(SCROLL_OUT, `home-${w}-scroll${y}.png`), fullPage: false });
+    }
+  });
+}
