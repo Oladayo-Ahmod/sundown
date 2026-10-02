@@ -19,8 +19,8 @@ import {SimEquityFeed} from "sim/SimEquityFeed.sol";
 /// `sim/replay_events.json`) through three markets built from the same implementation: a control (FlatGuard at
 /// the boosted LLTV), a session-aware market (SundownGuard) and a standard-tier control (FlatGuard at the standard
 /// LLTV). Prices come from `SimEquityFeed` through the production `ChainlinkEquityOracle`; the blind windows are a
-/// window-cache fixture placed at synthetic times with the event's class and length (the on-chain calendar covers
-/// 2024 onward, most worst events are older). The keeper is this contract. Nothing here is a live integration.
+/// window-cache fixture placed at synthetic times with the event's class and length (the on-chain calendar
+/// accepts 2020-2040 but is differentially validated only for 2024-2035; most worst events are older). The keeper is this contract. Nothing here is a live integration.
 /// Timeline and population are specified in research/replay_reference.py, which re-implements them in exact
 /// integers for comparison (`sim/compare_replay.py`).
 abstract contract ReplayHarness is Test {

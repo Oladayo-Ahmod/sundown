@@ -35,6 +35,8 @@ contract SimEquityFeed {
     error NotKeeper();
     /// @notice The first answer must be positive.
     error InvalidAnswer();
+    /// @notice `updatedAt` is in the future.
+    error FutureTimestamp();
 
     /// @param keeper Replay driver address.
     /// @param description_ Description, for example "SIM TSLA / USD (simulation)".
@@ -51,6 +53,22 @@ contract SimEquityFeed {
     function publish(int256 answer) external {
         if (msg.sender != KEEPER) revert NotKeeper();
         _publish(answer);
+    }
+
+    /// @notice Publish a simulated answer with a caller-chosen `updatedAt` (never in the future). Exists so a live
+    /// demonstration can show how the oracle adapter treats an old answer without waiting a heartbeat; a real
+    /// feed cannot do this. `answer <= 0` is accepted on purpose: it lets the demonstration show the adapter
+    /// rejecting an invalid answer.
+    /// @param answer New answer, 8 decimals (may be zero or negative to simulate a broken feed).
+    /// @param updatedAt Timestamp to report, at most `block.timestamp`.
+    function publishAt(int256 answer, uint256 updatedAt) external {
+        if (msg.sender != KEEPER) revert NotKeeper();
+        if (updatedAt > block.timestamp) revert FutureTimestamp();
+        ++_roundId;
+        _answer = answer;
+        _startedAt = updatedAt;
+        _updatedAt = updatedAt;
+        emit SimAnswerUpdated(answer, _roundId, updatedAt);
     }
 
     /// @notice Latest simulated round, in the Chainlink AggregatorV3 shape.

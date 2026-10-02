@@ -1,0 +1,8 @@
+{
+  "reviewed": "2026-10-03, docs/THREAT_MODEL.md section 8",
+  "medium": {
+    "incorrect-equality": 2,
+    "reentrancy-no-eth": 3,
+    "unused-return": 6
+  }
+}
