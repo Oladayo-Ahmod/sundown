@@ -3,6 +3,8 @@ import Link from "next/link";
 
 import { EventsTable } from "@/components/events-table";
 import { PairedBars } from "@/components/charts";
+import { SkyHero } from "@/components/sky/sky-hero";
+import { WindowTimeline } from "@/components/window-timeline";
 import { N, SimBadge, Sources } from "@/components/provenance";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
@@ -38,6 +40,8 @@ const CONTROLS = [
   { id: "cf_93", label: "93% LLTV (counterfactual)", note: "counterfactual" },
 ] as const;
 
+const EVENT_0316 = staticRule.crosscheck.events.find((e) => e.date === "2020-03-16");
+
 export default function ReplayPage() {
   return (
     <div className="space-y-14">
@@ -54,6 +58,8 @@ export default function ReplayPage() {
           transaction.
         </p>
       </header>
+
+      <SkyHero variant="compact" />
 
       <Alert variant="simulation">
         <AlertTitle>How to read this page</AlertTitle>
@@ -81,6 +87,33 @@ export default function ReplayPage() {
           simulated price feed. Three markets per event: a flat control at 93%, the session-aware market, and a
           standard 86% market. A separate Python implementation of the same scenario is shown beside it.
         </p>
+        <Card>
+          <CardHeader>
+            <CardTitle>One window, two markets</CardTitle>
+            <CardDescription>
+              AAPL at 93%, the 2020-03-16 event of the replay below. It draws itself when it scrolls into view.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <WindowTimeline
+              n={{
+                event: "AAPL, 2020-03-16",
+                gapPct: 13.9, // REPLAY_RESULTS.md: the 2020-03-16 gap
+                controlLoss: `$${fmt(EVENT_0316?.forge_control ?? null, 2)}`,
+                sessionLoss: `$${fmt(EVENT_0316?.forge_session_aware ?? null, 2)}`,
+                standardLoss: `$${fmt(EVENT_0316?.forge_standard ?? null, 2)}`,
+                tierLltvPct: 93,
+                capPct: 89.35,
+                deleverageToPct: 88.85,
+                weekdayCap: "93,000 USDG",
+                controlWindowCap: "93,000 USDG",
+                sessionWindowCap: "89,347 USDG",
+                standardWindowCap: "86,000 USDG",
+              }}
+            />
+            <Sources files={[SRC.replayDoc, SRC.cross]} note="levels and losses from docs/REPLAY_RESULTS.md" />
+          </CardContent>
+        </Card>
         <Table aria-label="Forge replay versus Python simulation per event, AAPL 93 percent">
           <TableCaption>
             Lender loss in USDG per event: control / session-aware / standard 86%. Python uses the market&apos;s
@@ -215,7 +248,7 @@ export default function ReplayPage() {
           </h2>
           <SimBadge>Simulation</SimBadge>
         </div>
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
           {CONTROLS.map((c) => {
             const rows = replay.top_windows.filter((w) => w.control === c.id).slice(0, 8);
             return (
@@ -266,6 +299,12 @@ export default function ReplayPage() {
         </h2>
         <p className="max-w-3xl text-sm text-muted-foreground">
           {replay.events_meta.selection}. These are the inputs of the forge in-process replay.
+        </p>
+        <p className="flex flex-wrap items-center gap-2 text-sm">
+          <Badge variant="outline">Public-chain replay: None (forge in-process only)</Badge>
+          <span className="text-muted-foreground">
+            None of these events was replayed on a public chain; they ran in forge&apos;s in-process EVM.
+          </span>
         </p>
         <EventsTable events={replay.events} />
         <Sources
