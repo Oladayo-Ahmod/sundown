@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 
 import { KindBadge, SimulatedChainNotice } from "@/components/chain-ui";
+import { CopyButton } from "@/components/copy-button";
+import { Disclosure } from "@/components/disclosure";
 import { SimBadge } from "@/components/provenance";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -32,6 +34,18 @@ const SRC = {
   demo: "docs/SEPOLIA_DEMO.md",
   doc: "docs/SEPOLIA_DEPLOYMENT.md",
 } as const;
+
+/** One line per recorded step, read off the rows of docs/SEPOLIA_DEMO.md (the rows themselves are in each disclosure). */
+const STEP_RESULT: Record<number, string> = {
+  0: "Chain 421614; the throwaway actors are funded; every fixture is a simulation.",
+  1: "Faucet tokens are issued; a repeat claim over the per-address limit reverts (FaucetLimit).",
+  2: "15,000 sUSDG is supplied to each of five markets.",
+  3: "A standard 1,000 sUSDG borrow against AAPL succeeds; the adapter reports ScheduledBlind.",
+  4: "Boosted entry is refused inside the window; a 90% borrow reverts (ExceedsCapacity), an 80% borrow succeeds.",
+  5: "The control allows a 92% borrow and liquidates it after a simulated -5% price move; the session-aware position stays healthy (NotLiquidatable).",
+  6: "A reported issuer pause halts the market (CollateralPaused); repay still works; the guardian resumes only once the probes pass.",
+  7: "A zero answer makes the adapter report Invalid and a borrow reverts (PriceUnusable); a stale answer is masked as ScheduledBlind inside the window.",
+};
 
 export default function DeploymentPage() {
   const withTx = evidence.sections.reduce((a, s) => a + s.rows.filter((r) => r.tx).length, 0);
@@ -116,10 +130,13 @@ export default function DeploymentPage() {
                   <TableCell>
                     <KindBadge kind={kindOf(n)} />
                   </TableCell>
-                  <TableCell className="font-mono text-xs break-all">
-                    <a className="underline underline-offset-2" href={explorerAddress(deployment.contracts[n])}>
-                      {deployment.contracts[n]}
-                    </a>
+                  <TableCell className="font-mono text-xs">
+                    <span className="flex flex-wrap items-center gap-2">
+                      <a className="break-all underline underline-offset-2" href={explorerAddress(deployment.contracts[n])}>
+                        {deployment.contracts[n]}
+                      </a>
+                      <CopyButton value={deployment.contracts[n]} label={`${n} address`} />
+                    </span>
                   </TableCell>
                   <TableCell className="font-mono text-xs">
                     {t ? (
@@ -148,12 +165,17 @@ export default function DeploymentPage() {
           action (custom error), not a transaction. Prices come from the simulated feed. Every row carries the
           calendar&apos;s blind-window state at that moment.
         </p>
-        {evidence.sections.map((s) => (
-          <div key={s.n} className="space-y-2">
-            <h3 className="text-lg font-semibold">
-              {s.n}. {s.title}
-            </h3>
-            <Table aria-label={`Recorded run, section ${s.n}: ${s.title}`}>
+        {evidence.sections.map((s) => {
+          const txs = s.rows.filter((r) => r.tx).length;
+          const refused = s.rows.filter((r) => r.result.startsWith("REVERTS")).length;
+          return (
+            <Disclosure
+              key={s.n}
+              title={`${s.n}. ${s.title}`}
+              note={STEP_RESULT[s.n]}
+              count={`${txs} tx · ${refused} refused`}
+            >
+              <Table aria-label={`Recorded run, section ${s.n}: ${s.title}`}>
               <TableHeader>
                 <TableRow>
                   <TableHead>Time</TableHead>
@@ -185,8 +207,9 @@ export default function DeploymentPage() {
                 ))}
               </TableBody>
             </Table>
-          </div>
-        ))}
+            </Disclosure>
+          );
+        })}
         <p className="text-xs text-muted-foreground">
           <span className="font-semibold">Source:</span> <code className="font-mono">{SRC.demo}</code> (written by{" "}
           <code className="font-mono">scripts/sepolia_demo.py</code>), parsed by{" "}

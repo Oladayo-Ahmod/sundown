@@ -35,7 +35,7 @@ function MarketCard({ m }: { m: MarketView }) {
         </CardDescription>
         <div className="flex flex-wrap gap-2 pt-1">
           <KindBadge kind="production" />
-          <Badge variant={halted ? "simulation" : "outline"}>
+          <Badge variant={halted ? "deny" : "allow"}>
             {halted ? `Halted: ${m.haltReason}` : "Active"}
           </Badge>
         </div>

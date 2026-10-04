@@ -19,7 +19,7 @@ export default function LivePreflight() {
         </Button>
         {snap ? (
           <>
-            <Badge variant={failed ? "simulation" : "default"} data-testid="live-verdict">
+            <Badge variant={failed ? "deny" : "allow"} data-testid="live-verdict">
               {failed ? `${failed} check(s) FAILED` : `All ${snap.checks.length} checks pass`}
             </Badge>
             <span className="text-muted-foreground">
@@ -51,7 +51,7 @@ export default function LivePreflight() {
               <TableRow key={c.id} data-testid="check-row">
                 <TableCell className="font-medium">{c.label}</TableCell>
                 <TableCell>
-                  <Badge variant={c.ok ? "default" : "simulation"}>{c.ok ? "PASS" : "FAIL"}</Badge>
+                  <Badge variant={c.ok ? "allow" : "deny"}>{c.ok ? "PASS" : "FAIL"}</Badge>
                 </TableCell>
                 <TableCell className="break-all text-muted-foreground">{c.detail}</TableCell>
               </TableRow>
