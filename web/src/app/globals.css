@@ -308,3 +308,28 @@ html,
 body {
   overflow-x: clip;
 }
+
+/* ------------------------------------------------------------------ nested glass and tables */
+.glass .glass {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  background: rgb(255 255 255 / 0.025);
+  box-shadow: none;
+}
+.glass .glass::before {
+  opacity: 0.45;
+}
+/* first column stays visible while a wide table scrolls sideways */
+.glass table :is(th, td):first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: #14102a;
+  box-shadow: 1px 0 0 rgb(255 255 255 / 0.08);
+}
+.glass table thead th:first-child {
+  background: #1a1634;
+}
+.glass table tbody tr:hover td:first-child {
+  background: #1b1736;
+}
