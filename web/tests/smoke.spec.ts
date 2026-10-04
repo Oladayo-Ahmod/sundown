@@ -320,3 +320,105 @@ test.describe("home with motion on", () => {
     expect(await readout.textContent()).toBe(frozen); // the visitor now controls it
   });
 });
+
+test.describe("risk: summary first, tables folded", () => {
+  test("headline charts and figures on top; every table inside a details with a row count", async ({ page }) => {
+    await page.goto("/risk");
+    const summary = page.locator("section[aria-labelledby=summary]");
+    await expect(summary.locator("svg[role=img]")).toHaveCount(3);
+    await expect(summary.locator("[data-final]")).toHaveCount(4);
+    const discs = page.getByTestId("disclosure");
+    expect(await discs.count()).toBeGreaterThanOrEqual(14);
+    // no <table> outside a closed-by-default disclosure
+    expect(await page.locator("main table:not(details table)").count()).toBe(0);
+    // every disclosure that holds a table says how many rows
+    const heads = await discs.evaluateAll((els) =>
+      els.filter((e) => e.querySelector("table")).map((e) => e.querySelector("summary")?.textContent ?? ""),
+    );
+    for (const h of heads) expect(h).toMatch(/\d+ rows?/);
+    // keyboard: open one, the table is then visible; Limitations stay visible without opening anything
+    const first = discs.filter({ has: page.locator("table") }).first();
+    await first.locator("summary").focus();
+    await page.keyboard.press("Enter");
+    await expect(first.locator("table")).toBeVisible();
+    await expect(page.getByText("Read before quoting any number")).toBeVisible();
+  });
+
+  test("tables: first column sticks while a wide table scrolls, and nothing is clipped at 1440 or 390", async ({ page }) => {
+    for (const w of [1440, 390]) {
+      await page.setViewportSize({ width: w, height: 900 });
+      await page.goto("/risk");
+      await page.evaluate(() => document.querySelectorAll("details").forEach((d) => d.setAttribute("open", "")));
+      const pos = await page.locator("main table th:first-child").first().evaluate((el) => getComputedStyle(el).position);
+      expect(pos).toBe("sticky");
+      const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+      expect(overflow).toBeLessThanOrEqual(0);
+      // every table region either fits or scrolls on its own (focusable): nothing is cut off silently
+      const bad = await page.$$eval("main [role=region]", (els) =>
+        els.filter((e) => e.scrollWidth > e.clientWidth + 1 && getComputedStyle(e).overflowX === "hidden").length,
+      );
+      expect(bad).toBe(0);
+    }
+  });
+});
+
+test.describe("replay: timeline and tables", () => {
+  test("the repeated 'None' column is gone and stated once; timeline is present with a text alternative", async ({ page }) => {
+    await page.goto("/replay");
+    const table = page.getByRole("table", { name: "Most severe real weekend and holiday gaps" });
+    await expect(table.getByText("None (forge in-process only)")).toHaveCount(0);
+    await expect(page.getByText("None (forge in-process only)")).toHaveCount(1);
+    const tl = page.getByTestId("window-timeline");
+    await expect(tl).toBeVisible();
+    const text = await page.locator("figure", { has: tl }).textContent();
+    for (const t of ["13.9% gap", "1,923.95", "1,224.37", "89.35%", "88.85%", "89,347", "docs/REPLAY_RESULTS.md"]) expect(text).toContain(t);
+  });
+
+  test("worst-window tables stack below 1280 px", async ({ page }) => {
+    await page.setViewportSize({ width: 1100, height: 900 });
+    await page.goto("/replay");
+    const a = await page.getByRole("region", { name: /Worst windows at 86%/ }).boundingBox();
+    const b = await page.getByRole("region", { name: /Worst windows at 93%/ }).boundingBox();
+    expect(a && b && b.y > a.y + a.height - 1).toBe(true);
+  });
+
+  test.describe("small WebGL accent", () => {
+    test.use({ reducedMotion: "no-preference" });
+    test("renders on /replay (three.js chunk loads here)", async ({ page }) => {
+      const three = await jsBodies(page);
+      await page.goto("/replay?sky=webgl");
+      await expect(page.getByTestId("sky-hero")).toHaveAttribute("data-sky-mode", "webgl", { timeout: 30_000 });
+      expect(three.length).toBeGreaterThan(0);
+    });
+  });
+});
+
+test.describe("deployment: disclosures and copy buttons", () => {
+  test("one disclosure per live-run step with a summary line", async ({ page }) => {
+    await page.goto("/deployment");
+    const steps = page.getByTestId("disclosure");
+    await expect(steps).toHaveCount(8);
+    const s5 = steps.nth(5).locator("summary");
+    await expect(s5).toContainText("5. Frozen-price control");
+    await expect(s5).toContainText(/\d+ tx · \d+ refused/);
+    await expect(s5).toContainText("liquidates it after a simulated -5% price move");
+    await s5.focus();
+    await page.keyboard.press("Enter");
+    await expect(steps.nth(5).locator("table")).toBeVisible();
+  });
+
+  test("address table: Arbiscan link and a working copy button per row; chips stay", async ({ page, context }) => {
+    await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+    await page.goto("/deployment");
+    const rows = page.getByTestId("contract-row");
+    await expect(rows).toHaveCount(27);
+    const first = rows.first();
+    await expect(first.locator("a[href^='https://sepolia.arbiscan.io/address/']")).toBeVisible();
+    await first.getByRole("button", { name: /^Copy / }).click();
+    await expect(first.getByRole("button", { name: /^Copy / })).toContainText("Copied");
+    const copied = await page.evaluate(() => navigator.clipboard.readText());
+    expect(copied).toMatch(/^0x[0-9a-fA-F]{40}$/);
+    expect(await page.getByText("Test fixture (simulation)").count()).toBeGreaterThanOrEqual(10);
+    expect(await page.getByText("Production", { exact: true }).count()).toBeGreaterThanOrEqual(10);
+  });
+});

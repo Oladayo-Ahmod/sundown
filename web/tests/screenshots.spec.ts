@@ -8,7 +8,7 @@ const OUT = process.env.SCREENSHOT_DIR ?? path.resolve(__dirname, "../../docs/fi
 const PAGES = [
   { name: "home", path: "/?sky=webgl", webgl: true },
   { name: "risk", path: "/risk" },
-  { name: "replay", path: "/replay" },
+  { name: "replay", path: "/replay?sky=webgl", webgl: true },
   { name: "deployment", path: "/deployment" },
   { name: "markets", path: "/markets" },
   { name: "preflight", path: "/preflight" },
