@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 
 import { FrontierChart, GapHistogram, VarSeries } from "@/components/charts";
+import { Disclosure } from "@/components/disclosure";
 import { N, SimBadge, Sources } from "@/components/provenance";
+import { Stat } from "@/components/stat";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -14,7 +16,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { backtest, DEPLOY_ASSETS, frontier, gaps, MARKET_RULE, OLD_CONVENTION, params, staticRule } from "@/lib/data";
+import { backtest, DEPLOY_ASSETS, frontier, gaps, headline, MARKET_RULE, OLD_CONVENTION, params, staticRule } from "@/lib/data";
 import { ci, fmt, pct, pValue } from "@/lib/format";
 
 export const metadata: Metadata = {
@@ -44,6 +46,7 @@ const SRC = {
 } as const;
 
 const classOrder = ["Short", "Weekend", "Long"] as const;
+const AAPL_WEEKEND = staticRule.gapvar.find((g) => g.ticker === "AAPL" && g.cls === "Weekend");
 
 export default function RiskPage() {
   const cov = backtest.coverage.filter((c) => c.q === 0.99 || c.q === 0.995 || c.q === 0.999);
@@ -63,6 +66,117 @@ export default function RiskPage() {
         </p>
       </header>
 
+
+      {/* ------------------------------------------------------------ summary first */}
+      <section aria-labelledby="summary" className="space-y-5">
+        <h2 id="summary" className="t-section max-w-2xl">
+          The short <em>version</em>
+        </h2>
+        <p className="max-w-3xl text-sm text-muted-foreground">
+          Three charts and four figures. Every table behind them is below, folded into sections that show their row count;
+          open any of them with the keyboard (Enter or Space on its title).
+        </p>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <Card>
+            <CardHeader>
+              <CardTitle>AAPL: how big are the gaps?</CardTitle>
+              <CardDescription>Share of windows by gap size (log scale), 2010 to 2026. Overnights shown for scale only.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <GapHistogram
+                edges={gaps.bin_edges_bps}
+                series={[
+                  { name: "Overnight", color: "var(--chart-1)", density: gaps.hist.AAPL.Overnight.density },
+                  { name: "Weekend", color: "var(--chart-2)", density: gaps.hist.AAPL.Weekend.density },
+                  { name: "Long weekend", color: "var(--chart-4)", density: gaps.hist.AAPL.Long.density },
+                ]}
+                label="AAPL gap distribution by window class"
+                description="Step histogram of AAPL gaps in basis points for overnight, weekend and long-weekend windows on a log scale."
+              />
+              <Sources files={[SRC.gaps, SRC.derived]} />
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <div className="flex flex-wrap items-center gap-2">
+                <CardTitle>Where the stress rule helps (time-varying estimator)</CardTitle>
+                <SimBadge>Research simulation</SimBadge>
+              </div>
+              <CardDescription>
+                Not the shipped rule. Bad debt against base LLTV, 12 research assets; points above 86% are counterfactual.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <FrontierChart
+                curve={frontier.groups.UNIVERSE12.curve}
+                points={frontier.groups.UNIVERSE12.points}
+                label="Equal-risk frontier, 12 research assets"
+                description="Annualised bad debt in basis points against base LLTV for flat markets with a 95 percent band, and for the stress rule with deleveraging with 95 percent intervals."
+              />
+              <Sources files={[SRC.fr, SRC.frc]} />
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <div className="flex flex-wrap items-center gap-2">
+                <CardTitle>TSLA weekend windows against the 99% gap-VaR</CardTitle>
+                <SimBadge>Research simulation</SimBadge>
+              </div>
+              <CardDescription>
+                Research estimator, out of sample: {backtest.series.TSLA.loss_bps.filter((l, i) => l > (backtest.series.TSLA.var99_bps[i] ?? Infinity)).length} exceedances of{" "}
+                {backtest.series.TSLA.loss_bps.length} (target 1%).
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <VarSeries
+                dates={backtest.series.TSLA.date}
+                loss={backtest.series.TSLA.loss_bps}
+                varBps={backtest.series.TSLA.var99_bps}
+                label="TSLA weekend realised loss against the 99% gap-VaR"
+                description="Realised weekend gap losses in bps with the out-of-sample 99% VaR forecast and exceedances for TSLA."
+              />
+              <Sources files={[SRC.bt]} />
+            </CardContent>
+          </Card>
+          <div className="grid grid-cols-2 gap-4">
+            <Stat
+              label="AAPL weekend gapVaR, q99.5"
+              value={AAPL_WEEKEND?.gap_var_bps ?? 0}
+              digits={0}
+              unit="bps"
+              note="Static, full-sample; the shipped rule's input."
+              source={SRC.gv}
+            />
+            <Stat
+              label="AAPL weekend stress cap"
+              value={AAPL_WEEKEND?.stress_fraction_pct ?? 0}
+              digits={2}
+              suffix="%"
+              note="Binds a 93% boosted account by 3.65 pp."
+              source={SRC.gv}
+              tone="steel"
+            />
+            <Stat
+              label="99% VaR exceedance, weekends"
+              value={headline.var99_weekend.rate_pct}
+              digits={2}
+              suffix="%"
+              note="Target 1%: not calibrated out of sample."
+              source={SRC.bt}
+              tone="ember"
+            />
+            <Stat
+              label="Flat 86% LLTV, bad debt"
+              value={headline.flat.bps_yr_86.est}
+              digits={1}
+              unit="bps/yr"
+              note={`95% CI ${ci(headline.flat.bps_yr_86.lo, headline.flat.bps_yr_86.hi)}`}
+              source="research/results/credit_summary.csv"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* ------------------------------------------------------------ gap distributions */}
       <section aria-labelledby="gaps" className="space-y-4">
         <h2 id="gaps" className="text-2xl font-semibold tracking-tight">
@@ -72,8 +186,9 @@ export default function RiskPage() {
           Share of windows by gap size (log scale), 2010 to 2026. Ordinary overnights are shown for scale only: under the
           trading-day rule weeknights are not blind.
         </p>
+        <Disclosure title="Gap distributions for SPY, NVDA and TSLA (AAPL is in the summary above)" count="3 charts">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          {DEPLOY_ASSETS.map((t) => {
+          {DEPLOY_ASSETS.filter((t) => t !== "AAPL").map((t) => {
             const h = gaps.hist[t];
             return (
               <Card key={t}>
@@ -99,7 +214,9 @@ export default function RiskPage() {
             );
           })}
         </div>
-        <Table aria-label="Gap statistics by asset and class">
+        </Disclosure>
+        <Disclosure title="Gap statistics by asset and class">
+<Table aria-label="Gap statistics by asset and class">
           <TableCaption>Downside quantiles are losses in bps (positive = price fell). n = number of windows.</TableCaption>
           <TableHeader>
             <TableRow>
@@ -131,6 +248,7 @@ export default function RiskPage() {
               ))}
           </TableBody>
         </Table>
+</Disclosure>
         <Sources files={[SRC.gaps, SRC.derived]} note="histograms recomputed from the committed derived return series" />
       </section>
 
@@ -151,7 +269,8 @@ export default function RiskPage() {
         </p>
 
         <h3 className="text-lg font-semibold">Which tiers bind</h3>
-        <Table aria-label="Static gapVaR and stress cap by asset and class">
+        <Disclosure title="Static gapVaR and stress cap by asset and class">
+<Table aria-label="Static gapVaR and stress cap by asset and class">
           <TableCaption>The cap binds when the stress fraction is below the tier LLTV. SPY never binds.</TableCaption>
           <TableHeader>
             <TableRow>
@@ -178,6 +297,7 @@ export default function RiskPage() {
             ))}
           </TableBody>
         </Table>
+</Disclosure>
 
         <h3 className="text-lg font-semibold">Lender outcome: bad debt, bps/yr</h3>
         <p className="max-w-3xl text-sm text-muted-foreground">
@@ -187,7 +307,8 @@ export default function RiskPage() {
           account); the older convention (full bonus) is an upper bound.
         </p>
         {([MARKET_RULE, OLD_CONVENTION] as const).map((conv) => (
-          <Table key={conv} aria-label={`Lender bad debt, ${conv}`}>
+          <Disclosure key={conv} title={`Lender bad debt, ${conv}`}>
+          <Table aria-label={`Lender bad debt, ${conv}`}>
             <TableCaption>
               Liquidation convention: {conv}. SPY rows are identical across arms because the cap never binds.
             </TableCaption>
@@ -233,6 +354,7 @@ export default function RiskPage() {
               )}
             </TableBody>
           </Table>
+          </Disclosure>
         ))}
         <Alert>
           <AlertTitle>Equal-bad-debt comparison, stated plainly</AlertTitle>
@@ -245,7 +367,8 @@ export default function RiskPage() {
             </p>
           </AlertDescription>
         </Alert>
-        <Table aria-label="Equal-bad-debt LTV gain, AAPL, market rule">
+        <Disclosure title="Equal-bad-debt LTV gain, AAPL, market rule">
+<Table aria-label="Equal-bad-debt LTV gain, AAPL, market rule">
           <TableCaption>AAPL, borrowers uniform, market rule. The weekend-cap level is 89.35%.</TableCaption>
           <TableHeader>
             <TableRow>
@@ -270,9 +393,11 @@ export default function RiskPage() {
             ))}
           </TableBody>
         </Table>
+</Disclosure>
 
         <h3 className="text-lg font-semibold">Borrower behaviour and cost (AAPL)</h3>
-        <Table aria-label="Borrower economics of the shipped rule, AAPL">
+        <Disclosure title="Borrower economics of the shipped rule, AAPL">
+<Table aria-label="Borrower economics of the shipped rule, AAPL">
           <TableCaption>
             Naive borrowers never adjust; rational borrowers repay to the cap before each window (their funds are
             assumed at hand, which is the optimistic case). Fee 2%. The measured AAPL borrow APR is 7.83% at 99.99%
@@ -303,6 +428,7 @@ export default function RiskPage() {
             ))}
           </TableBody>
         </Table>
+</Disclosure>
         <p className="max-w-3xl text-sm text-muted-foreground">
           An account at the cap is in the stress period {fmt(staticRule.borrower[0]?.stress_time_pct ?? null, 1)}% of
           the time (6 h horizon plus the window). Rational borrowers pay no fee but must repay before every window for
@@ -316,7 +442,8 @@ export default function RiskPage() {
           chain</strong>. The earlier liquidation convention charged the full bonus and overstated the control by 45%;
           with the market&apos;s non-worsening bonus cap the two implementations agree to 0.01% (they share the authors&apos; reading of the market&apos;s rules, so the agreement is not fully independent).
         </p>
-        <Table aria-label="Forge replay versus Python simulation, AAPL 93 percent">
+        <Disclosure title="Forge replay versus Python simulation, AAPL 93 percent">
+<Table aria-label="Forge replay versus Python simulation, AAPL 93 percent">
           <TableCaption>Lender loss in USDG per event (control / session-aware). Events with no loss in either are omitted.</TableCaption>
           <TableHeader>
             <TableRow>
@@ -365,9 +492,11 @@ export default function RiskPage() {
             </TableRow>
           </TableBody>
         </Table>
+</Disclosure>
 
         <h3 className="text-lg font-semibold">The benefit depends on hindsight</h3>
-        <Table aria-label="In-sample versus out-of-sample cap, AAPL">
+        <Disclosure title="In-sample versus out-of-sample cap, AAPL">
+<Table aria-label="In-sample versus out-of-sample cap, AAPL">
           <TableCaption>
             AAPL, borrowers uniform, market rule, bad debt bps/yr. The shipped gapVaR contains March 2020; the
             out-of-sample row applies a gapVaR estimated on 2010-2017 to 2018+ windows.
@@ -395,9 +524,11 @@ export default function RiskPage() {
             ))}
           </TableBody>
         </Table>
+</Disclosure>
 
         <h3 className="text-lg font-semibold">Keeper break-even</h3>
-        <Table aria-label="Keeper break-even fee from exact Uniswap v3 depth">
+        <Disclosure title="Keeper break-even fee from exact Uniswap v3 depth">
+<Table aria-label="Keeper break-even fee from exact Uniswap v3 depth">
           <TableCaption>
             Average slippage to sell the notional (direct Uniswap v3 reads, `docs/DISCOVERY.md` section g) plus 5
             bps gas. The 2% default fee covers up to about ${fmt(staticRule.keeper_capacity_at_2pct.AAPL ?? null, 0)}{" "}
@@ -427,6 +558,7 @@ export default function RiskPage() {
               ))}
           </TableBody>
         </Table>
+</Disclosure>
         <Sources
           files={[SRC.gv, SRC.lend, SRC.lendOld, SRC.eq, SRC.bor, SRC.cross, SRC.sens, SRC.keep]}
           note="all bps/yr of outstanding debt; replay numbers from docs/REPLAY_RESULTS.md"
@@ -442,8 +574,9 @@ export default function RiskPage() {
           <strong>This is the research estimator, not the shipped static rule.</strong> Estimator: {backtest.chosen} (pooled-scaled EWMA, one accumulator pair per asset). Chosen on a 2015 to 2017
           validation slice; multipliers fit on 2010 to 2017; the test slice was never used to choose anything.
         </p>
+        <Disclosure title="SPY weekend windows against the 99% gap-VaR (TSLA is in the summary above)" count="1 chart">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          {(["SPY", "TSLA"] as const).map((t) => {
+          {(["SPY"] as const).map((t) => {
             const s = backtest.series[t];
             const exc = s.loss_bps.filter((l, i) => l > (s.var99_bps[i] ?? Infinity)).length;
             return (
@@ -468,7 +601,9 @@ export default function RiskPage() {
             );
           })}
         </div>
-        <Table aria-label="Coverage tests by class and quantile">
+        </Disclosure>
+        <Disclosure title="Coverage tests by class and quantile">
+<Table aria-label="Coverage tests by class and quantile">
           <TableCaption>
             Pooled over 12 assets. Kupiec p-values ignore cross-asset dependence and are anti-conservative; read the
             cluster-bootstrap interval. Christoffersen tests independence of exceedances.
@@ -508,8 +643,10 @@ export default function RiskPage() {
             )}
           </TableBody>
         </Table>
+</Disclosure>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <Table aria-label="99% exceedance rate by regime">
+          <Disclosure title="99% exceedance rate by regime">
+<Table aria-label="99% exceedance rate by regime">
             <TableCaption>99% VaR exceedance rate by named stress regime (test slice).</TableCaption>
             <TableHeader>
               <TableRow>
@@ -532,7 +669,9 @@ export default function RiskPage() {
                 ))}
             </TableBody>
           </Table>
-          <Table aria-label="Weekend exceedance rate by asset">
+</Disclosure>
+          <Disclosure title="Weekend exceedance rate by asset">
+<Table aria-label="Weekend exceedance rate by asset">
             <TableCaption>Weekend 99% exceedance rate by asset: one pooled scale hides heterogeneity.</TableCaption>
             <TableHeader>
               <TableRow>
@@ -555,6 +694,7 @@ export default function RiskPage() {
                 ))}
             </TableBody>
           </Table>
+</Disclosure>
         </div>
         <Alert>
           <AlertTitle>What this says</AlertTitle>
@@ -592,13 +732,18 @@ export default function RiskPage() {
                   <CardTitle>{g === "UNIVERSE12" ? "All 12 research assets" : "SPY, AAPL, NVDA, TSLA"}</CardTitle>
                 </CardHeader>
                 <CardContent>
+                  {g === "UNIVERSE12" ? (
+                    <p className="text-sm text-muted-foreground">The 12-asset chart is in the summary above.</p>
+                  ) : (
                   <FrontierChart
                     curve={f.curve}
                     points={f.points}
                     label={`Equal-risk frontier, ${g}`}
                     description="Annualised bad debt in basis points against base LLTV for flat markets with a 95 percent band, and for the stress rule with deleveraging with 95 percent intervals."
                   />
-                  <Table aria-label={`Frontier values, ${g}`} className="mt-3">
+                  )}
+                  <Disclosure title={`Frontier values, ${g}`}>
+<Table aria-label={`Frontier values, ${g}`} className="mt-3">
                     <TableHeader>
                       <TableRow>
                         <TableHead>Base LLTV</TableHead>
@@ -624,6 +769,7 @@ export default function RiskPage() {
                       ))}
                     </TableBody>
                   </Table>
+</Disclosure>
                 </CardContent>
               </Card>
             );
@@ -644,7 +790,8 @@ export default function RiskPage() {
           <N src={SRC.params}>{params.global.oracle_buffer_bps}</N> bps, safety buffer{" "}
           <N src={SRC.params}>{params.global.safety_buffer_bps}</N> bps.
         </p>
-        <Table aria-label="Calibrated gap-risk parameters for the deployed markets">
+        <Disclosure title="Calibrated gap-risk parameters for the deployed markets">
+<Table aria-label="Calibrated gap-risk parameters for the deployed markets">
           <TableCaption>
             Research output, not an audited or governance-approved parameter set. VaR in log bps used as a loss
             fraction (conservative). Stress cap = 1 - VaR - oracle buffer - safety buffer, capped at the LLTV.
@@ -679,6 +826,7 @@ export default function RiskPage() {
             )}
           </TableBody>
         </Table>
+</Disclosure>
         <Sources files={[SRC.params]} />
       </section>
 
